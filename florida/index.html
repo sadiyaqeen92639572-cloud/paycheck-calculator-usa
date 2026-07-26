@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Florida Paycheck Calculator — Take-Home Pay 2026</title>
+<meta name="description" content="Free Florida paycheck calculator. Estimate your 2026 take-home pay after federal tax, FICA, and Florida state tax — updated 2026-07-26.">
+<link rel="canonical" href="https://paycheck-calculator-usa.pages.dev/florida/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Florida Paycheck Calculator — Take-Home Pay 2026">
+<meta property="og:description" content="Free Florida paycheck calculator. Estimate your 2026 take-home pay after federal tax, FICA, and Florida state tax — updated 2026-07-26.">
+<meta property="og:url" content="https://paycheck-calculator-usa.pages.dev/florida/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Florida Paycheck Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-26","version":"2026-FL-v1","author":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}},"publisher":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Florida have a state income tax?","acceptedAnswer":{"@type":"Answer","text":"No. Florida's constitution (art. VII, § 5) has barred a state personal income tax since 1924. Only federal income tax and FICA are withheld from Florida paychecks."}},{"@type":"Question","name":"How much is take-home pay on $65,000 in Florida?","acceptedAnswer":{"@type":"Answer","text":"On a $65,000 gross salary, a single filer in Florida takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA — no state tax is withheld."}},{"@type":"Question","name":"Why does Florida have no income tax?","acceptedAnswer":{"@type":"Answer","text":"Florida funds state government primarily through sales tax and tourism-related revenue instead of a personal income tax, a structure protected by its state constitution."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://paycheck-calculator-usa.pages.dev/"},{"@type":"ListItem","position":2,"name":"Florida","item":"https://paycheck-calculator-usa.pages.dev/florida/"}]},{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}]}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a></p>
+  <h1>Florida Paycheck Calculator</h1>
+  <p class="badge">Estimate your 2026 take-home pay after federal tax, FICA</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Single-filer assumption, based on standard federal/state calculations. See methodology below for source and last-verified date. For your exact withholding, consult a tax professional or your payroll department.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      
+      <label>Gross Annual Salary ($)
+        <input type="number" id="grossIncome" min="0" step="100" value="65000" required>
+      </label>
+      <label>Pay Frequency
+        <select id="payFrequency">
+          <option value="annual">Annual</option>
+          <option value="monthly">Monthly</option>
+          <option value="semimonthly">Semi-Monthly (24/yr)</option>
+          <option value="biweekly" selected>Bi-Weekly (26/yr)</option>
+          <option value="weekly">Weekly</option>
+        </select>
+      </label>
+      <button type="submit">Calculate Take-Home Pay →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
+        <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
+        <div class="result-item"><span class="label">Florida State Tax</span><span class="value" id="result-state"></span></div>
+        <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+      </div>
+      
+    </div>
+  </section>
+
+  
+    <section id="worksheet" class="seo-section">
+      <h2>How to Calculate Your Florida Take-Home Pay</h2>
+      <ol><li>Start with your gross annual salary.</li><li>Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).</li><li>Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).</li><li>Florida charges no state income tax — your paycheck stops there. What's left is your net take-home pay.</li></ol>
+      <h3>Example: $65,000/year gross salary, single filer, Florida resident.</h3>
+      <ol><li>Federal taxable income: $65,000 - $16,100 = $48,900 → federal tax = $1,240 + ($48,900 - $12,400) × 12% = $5,620</li><li>FICA: $65,000 × 7.65% = $4,972.50</li><li>Florida state tax: $0</li><li>Net annual pay: $65,000 - $5,620 - $4,972.50 = $54,407.50 (≈$4,533.96/month)</li></ol>
+    </section>
+  
+    <section id="formula" class="seo-section formula-section">
+      <h2>How Florida Paycheck Tax Is Calculated (2026)</h2>
+      <span class="source-line">Source: Florida Department of Revenue</span>
+      <p>Florida charges <strong>no state income tax</strong>. Only federal income tax and FICA are withheld from your paycheck.</p>
+      
+      <h3>Federal Tax &amp; FICA (shared across all states)</h3>
+      <table>
+        <tr><th>Federal standard deduction (single)</th><td>$16,100</td></tr>
+        <tr><th>Federal brackets</th><td>10% / 12% / 22% / 24% / 32% / 35% / 37%</td></tr>
+        <tr><th>Social Security</th><td>6.2% up to $184,500 wage base</td></tr>
+        <tr><th>Medicare</th><td>1.45% on all wages, +0.9% above $200,000</td></tr>
+      </table>
+      
+      <p class="formula-footnote">Guideline version 2026-FL-v1 · Last verified 2026-07-26</p>
+    </section>
+  
+    <section id="faq" class="seo-section">
+      <h2>Florida Paycheck Calculator FAQ</h2>
+      
+      <details class="faq-item">
+        <summary>Does Florida have a state income tax?</summary>
+        <p>No. Florida's constitution (art. VII, § 5) has barred a state personal income tax since 1924. Only federal income tax and FICA are withheld from Florida paychecks.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How much is take-home pay on $65,000 in Florida?</summary>
+        <p>On a $65,000 gross salary, a single filer in Florida takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA — no state tax is withheld.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Why does Florida have no income tax?</summary>
+        <p>Florida funds state government primarily through sales tax and tourism-related revenue instead of a personal income tax, a structure protected by its state constitution.</p>
+      </details>
+    </section>
+  
+    <section id="methodology" class="methodology">
+      <h2>Methodology &amp; Source</h2>
+      <p>Florida state tax figures sourced from <strong>Florida Department of Revenue</strong> (<a href="https://floridarevenue.com/" target="_blank" rel="nofollow noopener">https://floridarevenue.com/</a>), citing Fla. Const. art. VII, § 5 (constitutional ban on a state income tax). Federal brackets and FICA constants sourced from the IRS (Revenue Procedure 2025-32).</p>
+      <p class="deviation-note">This is an estimate based on standard single-filer federal and FICA calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions (401k, health insurance), and other factors.</p>
+      <p>Guideline version: 2026-FL-v1 · Effective: 1924-01-01 · Last verified: 2026-07-26</p>
+    </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+
+    <script src="/assets/calc-engine.js"></script>
+    <script>
+    const STATE_ENTRY = {"name":"Florida","abbr":"FL","slug":"florida","formula_model":"no_income_tax","effective_date":"1924-01-01","last_verified":"2026-07-26","guideline_version":"2026-FL-v1","source":{"agency_name":"Florida Department of Revenue","url":"https://floridarevenue.com/","statute_ref":"Fla. Const. art. VII, § 5 (constitutional ban on a state income tax)"},"params":{},"worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Florida charges no state income tax — your paycheck stops there. What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Florida resident.","calculation":["Federal taxable income: $65,000 - $16,100 = $48,900 → federal tax = $1,240 + ($48,900 - $12,400) × 12% = $5,620","FICA: $65,000 × 7.65% = $4,972.50","Florida state tax: $0","Net annual pay: $65,000 - $5,620 - $4,972.50 = $54,407.50 (≈$4,533.96/month)"]}},"faq_extra":[{"q":"Does Florida have a state income tax?","a":"No. Florida's constitution (art. VII, § 5) has barred a state personal income tax since 1924. Only federal income tax and FICA are withheld from Florida paychecks."},{"q":"How much is take-home pay on $65,000 in Florida?","a":"On a $65,000 gross salary, a single filer in Florida takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA — no state tax is withheld."},{"q":"Why does Florida have no income tax?","a":"Florida funds state government primarily through sales tax and tourism-related revenue instead of a personal income tax, a structure protected by its state constitution."}]};
+    const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal and FICA calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions (401k, health insurance), and other factors."};
+
+    function runCalculation(e) {
+        e.preventDefault();
+        const gross = parseFloat(document.getElementById('grossIncome').value) || 0;
+        const freq = document.getElementById('payFrequency').value;
+        const r = calculatePaycheck(STATE_ENTRY, RULES, gross, freq);
+        const freqLabel = { annual: 'Annual', monthly: 'Monthly', semimonthly: 'Semi-Monthly', biweekly: 'Bi-Weekly', weekly: 'Weekly' }[freq];
+
+        document.getElementById('result-amount').textContent = fmtMoney(r.netPerPeriod) + ' / ' + freqLabel.toLowerCase();
+        document.getElementById('result-net-annual').textContent = fmtMoney(r.netAnnual);
+        document.getElementById('result-federal').textContent = fmtMoney(r.federalTax);
+        document.getElementById('result-fica').textContent = fmtMoney(r.fica.total);
+        document.getElementById('result-state').textContent = fmtMoney(r.stateTax);
+        const extraRow = document.getElementById('result-extra-row');
+        if (r.extraPayrollTax.amount > 0) {
+            extraRow.hidden = false;
+            document.getElementById('result-extra-label').textContent = r.extraPayrollTax.name;
+            document.getElementById('result-extra').textContent = fmtMoney(r.extraPayrollTax.amount);
+        } else {
+            extraRow.hidden = true;
+        }
+        document.getElementById('results-block').hidden = false;
+    }
+    document.getElementById('calc-form').addEventListener('submit', runCalculation);
+    document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+    </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_cent",
+  "extra_payroll_tax": null,
+  "local_tax_note": "This estimate excludes Michigan city income tax. Several cities, including Detroit (2.4% for residents), Grand Rapids, Lansing, and others, levy an additional local income tax not computed here.",
+  "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and MI state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, local city tax, and other factors."
+}

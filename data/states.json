@@ -1,0 +1,417 @@
+{
+  "tx": {
+    "name": "Texas",
+    "abbr": "TX",
+    "slug": "texas",
+    "formula_model": "no_income_tax",
+    "effective_date": "2019-01-01",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-TX-v1",
+    "source": {
+      "agency_name": "Texas Comptroller of Public Accounts",
+      "url": "https://comptroller.texas.gov/",
+      "statute_ref": "Tex. Const. art. VIII, § 24 (voter-approved 2019 ban on a state personal income tax)"
+    },
+    "params": {},
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Texas charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Texas resident.",
+        "calculation": [
+          "Federal taxable income: $65,000 - $16,100 = $48,900 → federal tax = $1,240 + ($48,900 - $12,400) × 12% = $5,620",
+          "FICA: $65,000 × 7.65% = $4,972.50",
+          "Texas state tax: $0",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 = $54,407.50 (≈$4,533.96/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      { "q": "Does Texas have a state income tax?", "a": "No. Texas is one of nine states with no personal income tax, a status enshrined in the Texas Constitution since a 2019 voter-approved amendment (art. VIII, § 24). Your paycheck only has federal income tax and FICA withheld." },
+      { "q": "How much is take-home pay on $65,000 in Texas?", "a": "On a $65,000 gross salary, a single filer in Texas takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA — no state tax is withheld." },
+      { "q": "Are there any hidden state or local income taxes in Texas?", "a": "No Texas city or county levies a local income tax. Texas instead relies more heavily on sales tax and property tax to fund state and local government." }
+    ]
+  },
+  "fl": {
+    "name": "Florida",
+    "abbr": "FL",
+    "slug": "florida",
+    "formula_model": "no_income_tax",
+    "effective_date": "1924-01-01",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-FL-v1",
+    "source": {
+      "agency_name": "Florida Department of Revenue",
+      "url": "https://floridarevenue.com/",
+      "statute_ref": "Fla. Const. art. VII, § 5 (constitutional ban on a state income tax)"
+    },
+    "params": {},
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Florida charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Florida resident.",
+        "calculation": [
+          "Federal taxable income: $65,000 - $16,100 = $48,900 → federal tax = $1,240 + ($48,900 - $12,400) × 12% = $5,620",
+          "FICA: $65,000 × 7.65% = $4,972.50",
+          "Florida state tax: $0",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 = $54,407.50 (≈$4,533.96/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      { "q": "Does Florida have a state income tax?", "a": "No. Florida's constitution (art. VII, § 5) has barred a state personal income tax since 1924. Only federal income tax and FICA are withheld from Florida paychecks." },
+      { "q": "How much is take-home pay on $65,000 in Florida?", "a": "On a $65,000 gross salary, a single filer in Florida takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA — no state tax is withheld." },
+      { "q": "Why does Florida have no income tax?", "a": "Florida funds state government primarily through sales tax and tourism-related revenue instead of a personal income tax, a structure protected by its state constitution." }
+    ]
+  },
+  "pa": {
+    "name": "Pennsylvania",
+    "abbr": "PA",
+    "slug": "pennsylvania",
+    "formula_model": "flat_tax",
+    "effective_date": "2004-01-01",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-PA-v1",
+    "source": {
+      "agency_name": "Pennsylvania Department of Revenue",
+      "url": "https://www.revenue.pa.gov/",
+      "statute_ref": "72 P.S. § 7302 — flat 3.07% Personal Income Tax rate, unchanged since 2004"
+    },
+    "params": { "rate": 0.0307, "standard_deduction": 0, "personal_exemption": 0 },
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).",
+        "Subtract Pennsylvania's flat 3.07% state tax — applied to gross wages, with no standard deduction or personal exemption.",
+        "What's left is your net take-home pay before any local Earned Income Tax (EIT)."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Pennsylvania resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $65,000 × 7.65% = $4,972.50",
+          "PA state tax: $65,000 × 3.07% = $1,995.50",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $1,995.50 = $52,412 (≈$4,367.67/month, before local EIT)"
+        ]
+      }
+    },
+    "faq_extra": [
+      { "q": "What is Pennsylvania's state income tax rate?", "a": "Pennsylvania charges a flat 3.07% Personal Income Tax on gross wages, a rate that has not changed since 2004. There is no standard deduction or personal exemption." },
+      { "q": "Does this calculator include Philadelphia or other local wage taxes?", "a": "No. This estimate covers only the state's 3.07% flat tax. Pennsylvania municipalities and school districts levy an additional local Earned Income Tax (EIT), commonly 1%-3.9%+, with Philadelphia at the high end. Check your municipality's EIT rate separately." },
+      { "q": "How much is take-home pay on $65,000 in Pennsylvania?", "a": "On a $65,000 gross salary, a single filer in Pennsylvania takes home roughly $52,444/year (about $4,370/month) after federal tax, FICA, and the state's 3.07% flat tax — before any local EIT." }
+    ]
+  },
+  "il": {
+    "name": "Illinois",
+    "abbr": "IL",
+    "slug": "illinois",
+    "formula_model": "flat_tax",
+    "effective_date": "2017-07-01",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-IL-v1",
+    "source": {
+      "agency_name": "Illinois Department of Revenue",
+      "url": "https://tax.illinois.gov/",
+      "statute_ref": "35 ILCS 5/201 — flat 4.95% rate (Illinois Constitution art. IX, § 3 prohibits graduated rates)"
+    },
+    "params": { "rate": 0.0495, "standard_deduction": 0, "personal_exemption": 2425 },
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).",
+        "Subtract Illinois's $2,425 personal exemption from gross wages, then apply the flat 4.95% state rate to the remainder.",
+        "What's left is your net take-home pay — Illinois has no local income tax."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Illinois resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $65,000 × 7.65% = $4,972.50",
+          "IL taxable wages: $65,000 - $2,425 = $62,575 → IL tax: $62,575 × 4.95% = $3,097.46",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $3,097.46 = $51,310.04 (≈$4,275.84/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      { "q": "What is Illinois's state income tax rate?", "a": "Illinois charges a flat 4.95% income tax rate on all taxable income — the Illinois Constitution (art. IX, § 3) prohibits graduated rates. Each filer gets a $2,425 personal exemption in 2026." },
+      { "q": "Does Illinois tax retirement income?", "a": "No — Illinois does not tax Social Security, pension income, or 401(k)/IRA withdrawals, making it comparatively favorable for retirees despite the flat wage tax." },
+      { "q": "Does Illinois have local income tax?", "a": "No. Unlike Pennsylvania or Ohio, no Illinois city or county adds a separate local income tax on top of the state's flat 4.95% rate." }
+    ]
+  },
+  "ga": {
+    "name": "Georgia",
+    "abbr": "GA",
+    "slug": "georgia",
+    "formula_model": "flat_tax",
+    "effective_date": "2026-01-01",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-GA-v1",
+    "source": {
+      "agency_name": "Georgia Department of Revenue / Office of the Governor",
+      "url": "https://dor.georgia.gov/",
+      "statute_ref": "HB 463 (signed 2026-05-11), cutting the flat rate from 5.19% to 4.99% retroactive to 2026-01-01; see https://gov.georgia.gov/press-releases/2026-05-11/gov-kemp-signs-legislation-lowering-taxes-and-supporting-economic-growth"
+    },
+    "params": { "rate": 0.0499, "standard_deduction": 15000, "personal_exemption": 0 },
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).",
+        "Subtract Georgia's $15,000 single standard deduction from gross wages, then apply the flat 4.99% state rate.",
+        "What's left is your net take-home pay — Georgia has no local income tax."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Georgia resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $65,000 × 7.65% = $4,972.50",
+          "GA taxable wages: $65,000 - $15,000 = $50,000 → GA tax: $50,000 × 4.99% = $2,495",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,495 = $51,912.50 (≈$4,326.04/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      { "q": "What is Georgia's state income tax rate in 2026?", "a": "Georgia charges a flat 4.99% rate for tax year 2026, cut from 5.19% by HB 463 (signed May 11, 2026, retroactive to January 1, 2026). The law schedules further 0.125%-point annual cuts starting 2027 until the rate reaches 3.99%." },
+      { "q": "What is Georgia's standard deduction?", "a": "$15,000 for single filers and married filing separately in 2026 (up from prior years under HB 463), $30,000 for married filing jointly." },
+      { "q": "Does Georgia have local income tax?", "a": "No. Georgia counties and cities do not levy separate local income taxes on wages." }
+    ]
+  },
+  "nc": {
+    "name": "North Carolina",
+    "abbr": "NC",
+    "slug": "north-carolina",
+    "formula_model": "flat_tax",
+    "effective_date": "2026-01-01",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-NC-v1",
+    "source": {
+      "agency_name": "North Carolina Department of Revenue",
+      "url": "https://www.ncdor.gov/taxes-forms/individual-income-tax/tax-rate-schedules",
+      "statute_ref": "Session Law 2023-134 — phased-down flat rate, 3.99% for taxable years after 2025"
+    },
+    "params": { "rate": 0.0399, "standard_deduction": 12750, "personal_exemption": 0 },
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).",
+        "Subtract North Carolina's $12,750 single standard deduction from gross wages, then apply the flat 3.99% state rate.",
+        "What's left is your net take-home pay — North Carolina has no local income tax."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, North Carolina resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $65,000 × 7.65% = $4,972.50",
+          "NC taxable wages: $65,000 - $12,750 = $52,250 → NC tax: $52,250 × 3.99% = $2,084.78",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,084.78 = $52,322.72 (≈$4,360.23/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      { "q": "Is North Carolina's income tax rate still dropping?", "a": "Yes. Under Session Law 2023-134, North Carolina's flat rate has phased down annually — 4.5% (2024), 4.25% (2025), 3.99% (2026) — with further cuts to 3.75% (2027) and 3.5% (2028) scheduled if state revenue triggers are met." },
+      { "q": "What is North Carolina's standard deduction for 2026?", "a": "$12,750 for single filers under current law. A pending bill (S437) would raise it to $13,000, but that had not been enacted as of this page's last-verified date — check ncdor.gov for the final figure." },
+      { "q": "Does North Carolina have local income tax?", "a": "No. North Carolina counties and municipalities do not levy separate local income taxes on wages." }
+    ]
+  },
+  "mi": {
+    "name": "Michigan",
+    "abbr": "MI",
+    "slug": "michigan",
+    "formula_model": "flat_tax",
+    "effective_date": "2026-01-01",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-MI-v1",
+    "source": {
+      "agency_name": "Michigan Department of Treasury",
+      "url": "https://www.michigan.gov/taxes",
+      "statute_ref": "MCL 206.51 — flat rate, 4.25% for 2026; personal exemption per Treasury 2026 Withholding Guide (Form 446)"
+    },
+    "params": { "rate": 0.0425, "standard_deduction": 0, "personal_exemption": 5900 },
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).",
+        "Subtract Michigan's $5,900 personal exemption from gross wages, then apply the flat 4.25% state rate.",
+        "What's left is your net take-home pay before any city income tax (e.g. Detroit)."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Michigan resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $65,000 × 7.65% = $4,972.50",
+          "MI taxable wages: $65,000 - $5,900 = $59,100 → MI tax: $59,100 × 4.25% = $2,511.75",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,511.75 = $51,895.75 (≈$4,324.65/month, before local city tax)"
+        ]
+      }
+    },
+    "faq_extra": [
+      { "q": "What is Michigan's state income tax rate?", "a": "Michigan charges a flat 4.25% rate for 2026, with a $5,900 personal exemption per filer." },
+      { "q": "Does this calculator include Detroit's city income tax?", "a": "No. This estimate covers only Michigan's 4.25% state tax. Several Michigan cities, including Detroit (2.4% for residents), Grand Rapids, and Lansing, levy an additional local income tax not computed here." },
+      { "q": "How much is take-home pay on $65,000 in Michigan?", "a": "On a $65,000 gross salary, a single filer in Michigan takes home roughly $51,928/year (about $4,327/month) after federal tax, FICA, and the state's 4.25% flat tax — before any city tax." }
+    ]
+  },
+  "ca": {
+    "name": "California",
+    "abbr": "CA",
+    "slug": "california",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-CA-v1",
+    "source": {
+      "agency_name": "California Franchise Tax Board",
+      "url": "https://www.ftb.ca.gov/",
+      "statute_ref": "Cal. Rev. & Tax. Code § 17041 — 9-bracket schedule (1%-12.3%) plus 1% Mental Health Services Tax on taxable income over $1,000,000 (top effective rate 13.3%)"
+    },
+    "params": {
+      "standard_deduction": 5706,
+      "brackets": [
+        { "upTo": 10756, "rate": 0.01 },
+        { "upTo": 25499, "rate": 0.02 },
+        { "upTo": 40245, "rate": 0.04 },
+        { "upTo": 55866, "rate": 0.06 },
+        { "upTo": 70612, "rate": 0.08 },
+        { "upTo": 360659, "rate": 0.093 },
+        { "upTo": 432787, "rate": 0.103 },
+        { "upTo": 721314, "rate": 0.113 },
+        { "upTo": 1000000, "rate": 0.123 },
+        { "upTo": null, "rate": 0.133 }
+      ]
+    },
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).",
+        "Subtract California's $5,706 standard deduction from gross wages, then apply the 9-bracket state schedule (1%-12.3%) marginally — plus 1% Mental Health Services Tax on income over $1,000,000.",
+        "Subtract California SDI (1.3% of all wages, no cap in 2026) — a mandatory payroll deduction, not an income tax, but it reduces your paycheck.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, California resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $65,000 × 7.65% = $4,972.50",
+          "CA taxable income: $65,000 - $5,706 = $59,294 → marginal CA tax = $2,203.76",
+          "CA SDI: $65,000 × 1.3% = $845",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,203.76 - $845 = $51,358.74 (≈$4,279.90/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      { "q": "What are California's income tax brackets for 2026?", "a": "California uses 9 marginal brackets from 1% (income up to $10,756) to 12.3% (over $721,314 for single filers), plus a 1% Mental Health Services Tax on taxable income over $1,000,000, for a 13.3% top effective rate." },
+      { "q": "What is California SDI and is it a tax?", "a": "State Disability Insurance (SDI) is a mandatory payroll deduction, not a state income tax — 1.3% of all wages in 2026 with no wage cap. It funds short-term disability and Paid Family Leave benefits and is withheld separately from income tax." },
+      { "q": "How much is take-home pay on $65,000 in California?", "a": "On a $65,000 gross salary, a single filer in California takes home roughly $50,942/year (about $4,245/month) after federal tax, FICA, state income tax, and SDI." }
+    ]
+  },
+  "ny": {
+    "name": "New York",
+    "abbr": "NY",
+    "slug": "new-york",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-NY-v1",
+    "source": {
+      "agency_name": "New York State Department of Taxation and Finance",
+      "url": "https://www.tax.ny.gov/",
+      "statute_ref": "N.Y. Tax Law § 601 — FY2026 budget cut the bottom five bracket rates 0.1 point starting tax year 2026"
+    },
+    "params": {
+      "standard_deduction": 8000,
+      "brackets": [
+        { "upTo": 17150, "rate": 0.04 },
+        { "upTo": 23600, "rate": 0.045 },
+        { "upTo": 27900, "rate": 0.0525 },
+        { "upTo": 161550, "rate": 0.0585 },
+        { "upTo": 323200, "rate": 0.0625 },
+        { "upTo": 2155350, "rate": 0.0685 },
+        { "upTo": 5000000, "rate": 0.0965 },
+        { "upTo": 25000000, "rate": 0.103 },
+        { "upTo": null, "rate": 0.109 }
+      ]
+    },
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).",
+        "Subtract New York's $8,000 standard deduction from gross wages, then apply the 9-bracket state schedule (4%-10.9%) marginally.",
+        "Subtract New York Paid Family Leave (0.432% of wages, capped at $411.91/year in 2026) — a mandatory payroll deduction, not income tax.",
+        "What's left is your net take-home pay before any New York City or Yonkers resident tax."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, New York State resident (outside NYC).",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $65,000 × 7.65% = $4,972.50",
+          "NY taxable income: $65,000 - $8,000 = $57,000 → marginal NY tax ≈ $2,904.35",
+          "NY PFL: $65,000 × 0.432% = $280.80",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,904.35 - $280.80 = $51,222.35 (≈$4,268.53/month, before NYC/Yonkers tax)"
+        ]
+      }
+    },
+    "faq_extra": [
+      { "q": "What are New York's state income tax brackets for 2026?", "a": "New York has 9 brackets for single filers, from 4% on income up to $17,150 to 10.9% above $25,000,000. The FY2026 budget cut the bottom five bracket rates by 0.1 point." },
+      { "q": "Does this calculator include New York City tax?", "a": "No. This estimate covers only New York State tax. NYC residents owe an additional local income tax (3.078%-3.876%), and Yonkers residents owe a local surcharge — neither is computed here." },
+      { "q": "What is New York Paid Family Leave (PFL)?", "a": "A mandatory employee payroll deduction — 0.432% of wages in 2026, capped at $411.91/year — that funds paid leave benefits. It is separate from income tax." }
+    ]
+  },
+  "oh": {
+    "name": "Ohio",
+    "abbr": "OH",
+    "slug": "ohio",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-OH-v1",
+    "source": {
+      "agency_name": "Ohio Department of Taxation",
+      "url": "https://tax.ohio.gov/individual/resources/annual-tax-rates",
+      "statute_ref": "Ohio Rev. Code § 5747.02 — completion of the multi-year phase-down to a single 2.75% bracket for 2026 (3.5% in 2024, 3.125% in 2025, 2.75% in 2026), with the first $26,050 of nonbusiness income untaxed"
+    },
+    "params": {
+      "standard_deduction": 0,
+      "brackets": [
+        { "upTo": 26050, "rate": 0 },
+        { "upTo": null, "rate": 0.0275 }
+      ]
+    },
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).",
+        "Ohio taxes the first $26,050 of income at 0%, then a flat 2.75% on everything above that — no separate standard deduction to subtract first.",
+        "What's left is your net take-home pay before any municipal income tax."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Ohio resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $65,000 × 7.65% = $4,972.50",
+          "OH state tax: ($65,000 - $26,050) × 2.75% = $38,950 × 2.75% = $1,071.13",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $1,071.13 = $53,336.37 (≈$4,444.70/month, before municipal tax)"
+        ]
+      }
+    },
+    "faq_extra": [
+      { "q": "What is Ohio's state income tax rate in 2026?", "a": "Ohio completed a multi-year phase-down to a single flat rate for 2026: 0% on the first $26,050 of nonbusiness income, then 2.75% on everything above that — down from 3.125% in 2025 and 3.5% in 2024." },
+      { "q": "Does this calculator include Ohio city/municipal income tax?", "a": "No — and this matters a lot in Ohio. Over 600 Ohio municipalities levy their own income tax, typically 1%-3%, with Columbus, Cleveland, and Akron around 2.5%. For many Ohio taxpayers, city tax exceeds state tax. Check your city's rate at your municipality's finance department or RITA/CCA (Ohio's two major municipal tax collection agencies) — it is not included in this estimate." },
+      { "q": "How much is take-home pay on $65,000 in Ohio?", "a": "On a $65,000 gross salary, a single filer in Ohio takes home roughly $53,368/year (about $4,447/month) after federal tax, FICA, and Ohio's 2.75% state tax — before any city income tax, which can add another 1%-3%." }
+    ]
+  }
+}

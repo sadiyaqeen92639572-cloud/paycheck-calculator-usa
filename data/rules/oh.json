@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_cent",
+  "extra_payroll_tax": null,
+  "local_tax_note": "This estimate excludes Ohio municipal income tax — and for most Ohio taxpayers, this is the single biggest gap in a paycheck estimate. Over 600 Ohio municipalities levy their own income tax, typically 1%-3%, with Columbus, Cleveland, and Akron around 2.5%. For many urban Ohio workers, city tax exceeds the state tax computed here. Check your city's rate via RITA, CCA, or your municipality's finance department.",
+  "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and OH state calculations. Actual withholding may differ based on your W-4/IT-4 elections, pre-tax deductions, municipal tax, and other factors. Secondary sources disagreed on whether OH 2026 has one bracket or an additional tier above $100,000 — this page uses the single-2.75%-bracket structure corroborated by multiple independent sources citing tax.ohio.gov; verify against tax.ohio.gov directly if precision matters for your situation."
+}

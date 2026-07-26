@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_cent",
+  "extra_payroll_tax": { "name": "New York Paid Family Leave (PFL)", "rate": 0.00432, "wage_cap_annual_contribution": 411.91, "note": "Mandatory employee payroll deduction, 0.432% of wages in 2026, capped at $411.91/year. Funds paid family leave benefits — separate from income tax." },
+  "local_tax_note": "This estimate excludes New York City and Yonkers resident income tax. NYC residents owe an additional 3.078%-3.876% local tax, and Yonkers residents owe a local surcharge — neither is computed here, and for NYC residents this can be a larger addition than any other local tax layer in this ten-state set.",
+  "deviation_note": "This is an estimate based on standard single-filer federal, FICA, NY state tax, and NY PFL calculations. Actual withholding may differ based on your W-4/IT-2104 elections, pre-tax deductions, NYC/Yonkers tax, and other factors."
+}

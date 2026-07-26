@@ -1,0 +1,11 @@
+state,guideline_version,test_scenario,expected_result,our_result,delta,verified_by,verified_date
+Texas,2026-TX-v1,"$65,000/yr gross, single filer",Federal $5,620 + FICA $4,972.50 + state $0 = net $54,407.50/yr,net $54,407.50/yr,$0,claude-sonnet-5,2026-07-26
+Florida,2026-FL-v1,"$65,000/yr gross, single filer",Federal $5,620 + FICA $4,972.50 + state $0 = net $54,407.50/yr,net $54,407.50/yr,$0,claude-sonnet-5,2026-07-26
+Pennsylvania,2026-PA-v1,"$65,000/yr gross, single filer",Federal $5,620 + FICA $4,972.50 + PA $1,995.50 = net $52,412/yr,net $52,412/yr,$0,claude-sonnet-5,2026-07-26
+Illinois,2026-IL-v1,"$65,000/yr gross, single filer",Federal $5,620 + FICA $4,972.50 + IL $3,097.46 = net $51,310.04/yr,net $51,310.04/yr,$0,claude-sonnet-5,2026-07-26
+Georgia,2026-GA-v1,"$65,000/yr gross, single filer",Federal $5,620 + FICA $4,972.50 + GA $2,495 = net $51,912.50/yr,net $51,912.50/yr,$0,claude-sonnet-5,2026-07-26
+North Carolina,2026-NC-v1,"$65,000/yr gross, single filer",Federal $5,620 + FICA $4,972.50 + NC $2,084.78 = net $52,322.72/yr,net $52,322.72/yr,$0,claude-sonnet-5,2026-07-26
+Michigan,2026-MI-v1,"$65,000/yr gross, single filer",Federal $5,620 + FICA $4,972.50 + MI $2,511.75 = net $51,895.75/yr,net $51,895.75/yr,$0,claude-sonnet-5,2026-07-26
+California,2026-CA-v1,"$65,000/yr gross, single filer",Federal $5,620 + FICA $4,972.50 + CA marginal $2,203.76 + SDI $845 = net $51,358.74/yr,net $51,358.74/yr,$0,claude-sonnet-5,2026-07-26
+New York,2026-NY-v1,"$65,000/yr gross, single filer",Federal $5,620 + FICA $4,972.50 + NY marginal $2,904.35 + PFL $280.80 = net $51,222.35/yr,net $51,222.35/yr,$0,claude-sonnet-5,2026-07-26
+Ohio,2026-OH-v1,"$65,000/yr gross, single filer",Federal $5,620 + FICA $4,972.50 + OH $1,071.13 = net $53,336.37/yr,net $53,336.37/yr,$0,claude-sonnet-5,2026-07-26

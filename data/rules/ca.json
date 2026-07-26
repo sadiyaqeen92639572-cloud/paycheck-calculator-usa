@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_cent",
+  "extra_payroll_tax": { "name": "California SDI", "rate": 0.013, "wage_cap": null, "note": "Mandatory State Disability Insurance payroll deduction, 1.3% of all wages with no cap in 2026. Funds short-term disability and Paid Family Leave — separate from income tax." },
+  "local_tax_note": null,
+  "deviation_note": "This is an estimate based on standard single-filer federal, FICA, CA state tax, and CA SDI calculations. Actual withholding may differ based on your W-4/DE 4 elections, pre-tax deductions (401k, health insurance), and other factors. CA's exact 2026 bracket thresholds are inflation-indexed and finalized by the FTB in late 2026 — this page uses the most recently projected figures and will be updated once finalized."
+}
