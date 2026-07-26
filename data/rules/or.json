@@ -1,6 +1,6 @@
 {
   "rounding": "nearest_cent",
   "extra_payroll_tax": null,
-  "local_tax_note": null,
+  "local_tax_note": "This estimate excludes Portland-area local income taxes: Metro Supportive Housing Services (1% on income over $128,000 single) and Multnomah County Preschool for All (1.5% on income over $125,000, +1.5% more over $250,000). Neither is computed here — significant if you live or work in the Portland metro area.",
   "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and OR state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."
 }

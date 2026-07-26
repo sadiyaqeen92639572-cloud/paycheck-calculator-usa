@@ -1,6 +1,6 @@
 {
   "rounding": "nearest_cent",
   "extra_payroll_tax": null,
-  "local_tax_note": null,
+  "local_tax_note": "Many Iowa school districts levy a local income surtax, typically 1%-20% of your Iowa state tax liability (not of wages directly) — varies by district and not computed here.",
   "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and IA state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."
 }

@@ -1,6 +1,6 @@
 {
   "rounding": "nearest_cent",
   "extra_payroll_tax": null,
-  "local_tax_note": null,
+  "local_tax_note": "This estimate excludes the City of Wilmington's 1.25% wage tax, which applies to both residents and anyone who works within Wilmington city limits (Wilmington is the only Delaware municipality permitted to levy this tax). Not computed here.",
   "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and DE state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."
 }
