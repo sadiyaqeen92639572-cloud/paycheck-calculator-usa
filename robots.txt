@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://paycheck-calculator-usa.pages.dev/sitemap.xml
+Sitemap: https://calcpaycheck.com/sitemap.xml

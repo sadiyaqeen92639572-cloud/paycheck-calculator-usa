@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DOMAIN = 'https://paycheck-calculator-usa.pages.dev';
+const DOMAIN = 'https://calcpaycheck.com';
 const states = require('./data/states.json');
 
 const today = new Date().toISOString().split('T')[0];

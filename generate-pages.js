@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const states = require('./data/states.json');
-const SITE_URL = 'https://paycheck-calculator-usa.pages.dev';
+const SITE_URL = 'https://calcpaycheck.com';
 const YEAR = 2026;
 
 const GESMINE_ORG = {
