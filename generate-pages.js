@@ -9,6 +9,7 @@ const GESMINE_ORG = {
     '@type': 'Organization',
     name: 'USA Paycheck Calculator',
     legalName: 'Gesmine-Invest Limited',
+    url: SITE_URL + '/about/',
     identifier: { '@type': 'PropertyValue', propertyID: 'UK Company Number', value: '14120136' },
     address: { '@type': 'PostalAddress', streetAddress: 'Hardy House, 269 Poynders Gardens', addressLocality: 'London', postalCode: 'SW4 8PQ', addressCountry: 'GB' }
 };
