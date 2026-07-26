@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_cent",
+  "extra_payroll_tax": null,
+  "local_tax_note": null,
+  "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and AR state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Arkansas' low-income relief is baked into the 0% starter bracket rather than a separate standard deduction in this simplified model."
+}

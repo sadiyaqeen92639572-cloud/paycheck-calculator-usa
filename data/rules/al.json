@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_cent",
+  "extra_payroll_tax": null,
+  "local_tax_note": "Some Alabama cities and counties (e.g. Birmingham, Bessemer) levy a local occupational tax, typically 0.5%-2% of wages, not computed here.",
+  "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and AL state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Alabama's standard deduction is income-graduated ($2,000-$4,000 for single filers depending on AGI); this estimate uses a flat $3,000 approximation."
+}

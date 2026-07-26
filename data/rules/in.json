@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_cent",
+  "extra_payroll_tax": null,
+  "local_tax_note": "Indiana's 92 counties each levy their own local income tax (resident-based), ranging 0.50%-3.38% — often larger than any single layer in this calculator's other states. Not computed here; check your county's rate.",
+  "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and IN state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."
+}

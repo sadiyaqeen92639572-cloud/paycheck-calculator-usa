@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_cent",
+  "extra_payroll_tax": null,
+  "local_tax_note": "Many Kentucky cities and counties levy a local occupational/payroll tax (e.g. Louisville ~2.2%), not computed here.",
+  "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and KY state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."
+}

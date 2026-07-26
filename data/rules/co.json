@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_cent",
+  "extra_payroll_tax": null,
+  "local_tax_note": null,
+  "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and CO state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Colorado starts from federal taxable income; this estimate applies the federal standard deduction as the base. Colorado's TABOR mechanism can temporarily lower the effective rate in high-revenue years, not modeled here."
+}

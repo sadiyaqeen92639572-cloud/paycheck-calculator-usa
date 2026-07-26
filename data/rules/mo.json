@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_cent",
+  "extra_payroll_tax": null,
+  "local_tax_note": "Kansas City and St. Louis each levy a 1% local earnings tax on residents (and on nonresidents working there), not computed here.",
+  "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and MO state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."
+}

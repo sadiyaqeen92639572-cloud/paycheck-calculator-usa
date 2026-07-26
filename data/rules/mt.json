@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_cent",
+  "extra_payroll_tax": null,
+  "local_tax_note": null,
+  "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and MT state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Montana's standard deduction is actually 20% of AGI (min $2,830, max $5,660), not a fixed amount; this estimate uses the maximum, which understates tax for lower incomes."
+}

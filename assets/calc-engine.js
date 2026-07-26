@@ -65,29 +65,43 @@ function round2(n) { return Math.round(n * 100) / 100; }
 
 // ---- formula_model implementations ----
 
-function calcNoIncomeTax(grossAnnualIncome, stateEntry) {
+function calcNoIncomeTax(grossAnnualIncome, stateEntry, federalTax) {
     return { stateTax: 0, stateTaxBreakdown: 'No state income tax.' };
 }
 
-function calcFlatTax(grossAnnualIncome, stateEntry) {
-    const { rate, standard_deduction = 0, personal_exemption = 0 } = stateEntry.params;
-    const deduction = standard_deduction + personal_exemption;
+/**
+ * federal_tax_deductible: some states (e.g. Alabama) let filers deduct federal income tax
+ * paid from the state taxable base. When set, federalTax is subtracted before the state's
+ * own deduction/exemption and rate are applied.
+ */
+function calcFlatTax(grossAnnualIncome, stateEntry, federalTax) {
+    const { rate, standard_deduction = 0, personal_exemption = 0, federal_tax_deductible = false, credit = 0, surtax = null } = stateEntry.params;
+    const fedDeduction = federal_tax_deductible ? federalTax : 0;
+    const deduction = standard_deduction + personal_exemption + fedDeduction;
     const taxable = Math.max(0, grossAnnualIncome - deduction);
-    const stateTax = round2(taxable * rate);
-    return {
-        stateTax,
-        stateTaxBreakdown: `(${fmtMoney(grossAnnualIncome)} - ${fmtMoney(deduction)} deduction) × ${(rate * 100).toFixed(2)}% = ${fmtMoney(stateTax)}`
-    };
+    let stateTax = Math.max(0, round2(taxable * rate) - credit);
+    let breakdown = `(${fmtMoney(grossAnnualIncome)} - ${fmtMoney(deduction)} deduction${federal_tax_deductible ? ' incl. federal tax paid' : ''}) × ${(rate * 100).toFixed(2)}%${credit ? ` - ${fmtMoney(credit)} credit` : ''} = ${fmtMoney(stateTax)}`;
+    if (surtax) {
+        const surtaxAmount = round2(Math.max(0, grossAnnualIncome - surtax.threshold) * surtax.rate);
+        stateTax = round2(stateTax + surtaxAmount);
+        breakdown += surtaxAmount > 0 ? ` + ${fmtMoney(surtaxAmount)} surtax on income over ${fmtMoney(surtax.threshold)}` : '';
+    }
+    return { stateTax, stateTaxBreakdown: breakdown };
 }
 
-function calcProgressiveBrackets(grossAnnualIncome, stateEntry) {
-    const { brackets, standard_deduction = 0 } = stateEntry.params;
-    const taxable = Math.max(0, grossAnnualIncome - standard_deduction);
-    const stateTax = round2(marginalBracketTax(taxable, brackets));
-    return {
-        stateTax,
-        stateTaxBreakdown: `Marginal tax on ${fmtMoney(taxable)} taxable income (after ${fmtMoney(standard_deduction)} standard deduction) = ${fmtMoney(stateTax)}`
-    };
+function calcProgressiveBrackets(grossAnnualIncome, stateEntry, federalTax) {
+    const { brackets, standard_deduction = 0, personal_exemption = 0, federal_tax_deductible = false, surtax = null } = stateEntry.params;
+    const fedDeduction = federal_tax_deductible ? federalTax : 0;
+    const deduction = standard_deduction + personal_exemption + fedDeduction;
+    const taxable = Math.max(0, grossAnnualIncome - deduction);
+    let stateTax = round2(marginalBracketTax(taxable, brackets));
+    let breakdown = `Marginal tax on ${fmtMoney(taxable)} taxable income (after ${fmtMoney(deduction)} deduction${federal_tax_deductible ? ' incl. federal tax paid' : ''}) = ${fmtMoney(stateTax)}`;
+    if (surtax) {
+        const surtaxAmount = round2(Math.max(0, grossAnnualIncome - surtax.threshold) * surtax.rate);
+        stateTax = round2(stateTax + surtaxAmount);
+        breakdown += surtaxAmount > 0 ? ` + ${fmtMoney(surtaxAmount)} surtax on income over ${fmtMoney(surtax.threshold)}` : '';
+    }
+    return { stateTax, stateTaxBreakdown: breakdown };
 }
 
 const FORMULA_DISPATCH = {
@@ -132,7 +146,7 @@ function calculatePaycheck(stateEntry, rules, grossAnnualIncome, payFrequency) {
     const federalTax = round2(calcFederalTax(grossAnnualIncome));
     const fica = calcFICA(grossAnnualIncome);
     const stateFn = FORMULA_DISPATCH[stateEntry.formula_model];
-    const { stateTax, stateTaxBreakdown } = stateFn(grossAnnualIncome, stateEntry);
+    const { stateTax, stateTaxBreakdown } = stateFn(grossAnnualIncome, stateEntry, federalTax);
     const extraPayroll = calcExtraPayrollTax(grossAnnualIncome, rules);
 
     const totalWithheld = round2(federalTax + fica.total + stateTax + extraPayroll.amount);

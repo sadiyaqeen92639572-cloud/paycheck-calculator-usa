@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connecticut Paycheck Calculator — Take-Home Pay 2026</title>
+<meta name="description" content="Free Connecticut paycheck calculator. Estimate your 2026 take-home pay after federal tax, FICA, and Connecticut state tax — updated 2026-07-26.">
+<link rel="canonical" href="https://paycheck-calculator-usa.pages.dev/connecticut/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Connecticut Paycheck Calculator — Take-Home Pay 2026">
+<meta property="og:description" content="Free Connecticut paycheck calculator. Estimate your 2026 take-home pay after federal tax, FICA, and Connecticut state tax — updated 2026-07-26.">
+<meta property="og:url" content="https://paycheck-calculator-usa.pages.dev/connecticut/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Connecticut Paycheck Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-26","version":"2026-CT-v1","author":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}},"publisher":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are Connecticut's income tax brackets for 2026?","acceptedAnswer":{"@type":"Answer","text":"Connecticut uses 7 marginal brackets ranging from 2% to 6.99%."}},{"@type":"Question","name":"How much is take-home pay on $65,000 in Connecticut?","acceptedAnswer":{"@type":"Answer","text":"On a $65,000 gross salary, a single filer in Connecticut takes home roughly $52,407.5/year (about $4,367.29/month) after federal tax, FICA, and state tax."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://paycheck-calculator-usa.pages.dev/"},{"@type":"ListItem","position":2,"name":"Connecticut","item":"https://paycheck-calculator-usa.pages.dev/connecticut/"}]},{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}]}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a></p>
+  <h1>Connecticut Paycheck Calculator</h1>
+  <p class="badge">Estimate your 2026 take-home pay after federal tax, FICA, and Connecticut state tax</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Single-filer assumption, based on standard federal/state calculations. See methodology below for source and last-verified date. For your exact withholding, consult a tax professional or your payroll department.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      
+      <label>Gross Annual Salary ($)
+        <input type="number" id="grossIncome" min="0" step="100" value="65000" required>
+      </label>
+      <label>Pay Frequency
+        <select id="payFrequency">
+          <option value="annual">Annual</option>
+          <option value="monthly">Monthly</option>
+          <option value="semimonthly">Semi-Monthly (24/yr)</option>
+          <option value="biweekly" selected>Bi-Weekly (26/yr)</option>
+          <option value="weekly">Weekly</option>
+        </select>
+      </label>
+      <button type="submit">Calculate Take-Home Pay →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
+        <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
+        <div class="result-item"><span class="label">Connecticut State Tax</span><span class="value" id="result-state"></span></div>
+        <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+      </div>
+      
+    </div>
+  </section>
+
+  
+    <section id="worksheet" class="seo-section">
+      <h2>How to Calculate Your Connecticut Take-Home Pay</h2>
+      <ol><li>Start with your gross annual salary.</li><li>Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).</li><li>Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).</li><li>Subtract Connecticut's $15,000 personal exemption from gross wages, then apply the 7-bracket state schedule (2%-6.99%) marginally.</li><li>What's left is your net take-home pay.</li></ol>
+      <h3>Example: $65,000/year gross salary, single filer, Connecticut resident.</h3>
+      <ol><li>Federal tax: $5,620</li><li>FICA: $4,972.5</li><li>Connecticut state tax: Marginal tax on $50,000 taxable income (after $15,000 deduction) = $2,000</li><li>Net annual pay: $65,000 - $12,592.5 = $52,407.5 (≈$4,367.29/month)</li></ol>
+    </section>
+  
+    <section id="formula" class="seo-section formula-section">
+      <h2>How Connecticut Paycheck Tax Is Calculated (2026)</h2>
+      <span class="source-line">Source: Connecticut Department of Revenue Services</span>
+      
+        <table>
+          <tr><th>Taxable income bracket</th><th>Rate</th></tr>
+          <tr><td>$0 – $10,000</td><td>2%</td></tr><tr><td>$10,000 – $50,000</td><td>4.50%</td></tr><tr><td>$50,000 – $100,000</td><td>5.50%</td></tr><tr><td>$100,000 – $200,000</td><td>6%</td></tr><tr><td>$200,000 – $250,000</td><td>6.50%</td></tr><tr><td>$250,000 – $500,000</td><td>6.90%</td></tr><tr><td>$500,000 – +</td><td>6.99%</td></tr>
+        </table>
+        
+        <div class="formula-code">state_tax = marginal_bracket_tax(gross_income - 0, brackets)</div>
+      
+      <h3>Federal Tax &amp; FICA (shared across all states)</h3>
+      <table>
+        <tr><th>Federal standard deduction (single)</th><td>$16,100</td></tr>
+        <tr><th>Federal brackets</th><td>10% / 12% / 22% / 24% / 32% / 35% / 37%</td></tr>
+        <tr><th>Social Security</th><td>6.2% up to $184,500 wage base</td></tr>
+        <tr><th>Medicare</th><td>1.45% on all wages, +0.9% above $200,000</td></tr>
+      </table>
+      
+      <p class="formula-footnote">Guideline version 2026-CT-v1 · Last verified 2026-07-26</p>
+    </section>
+  
+    <section id="faq" class="seo-section">
+      <h2>Connecticut Paycheck Calculator FAQ</h2>
+      
+      <details class="faq-item">
+        <summary>What are Connecticut's income tax brackets for 2026?</summary>
+        <p>Connecticut uses 7 marginal brackets ranging from 2% to 6.99%.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How much is take-home pay on $65,000 in Connecticut?</summary>
+        <p>On a $65,000 gross salary, a single filer in Connecticut takes home roughly $52,407.5/year (about $4,367.29/month) after federal tax, FICA, and state tax.</p>
+      </details>
+    </section>
+  
+    <section id="methodology" class="methodology">
+      <h2>Methodology &amp; Source</h2>
+      <p>Connecticut state tax figures sourced from <strong>Connecticut Department of Revenue Services</strong> (<a href="https://portal.ct.gov/drs" target="_blank" rel="nofollow noopener">https://portal.ct.gov/drs</a>), citing Conn. Gen. Stat. § 12-700. Federal brackets and FICA constants sourced from the IRS (Revenue Procedure 2025-32).</p>
+      <p class="deviation-note">This is an estimate based on standard single-filer federal, FICA, and CT state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Connecticut's $15,000 personal exemption phases out between $30,000 and $45,000 of income; this estimate applies it as a flat amount, which understates tax for filers in that phase-out band. Connecticut also has a "tax recapture" provision affecting high earners, not modeled.</p>
+      <p>Guideline version: 2026-CT-v1 · Effective: 2026-01-01 · Last verified: 2026-07-26</p>
+    </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+
+    <script src="/assets/calc-engine.js"></script>
+    <script>
+    const STATE_ENTRY = {"name":"Connecticut","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"Connecticut Department of Revenue Services","url":"https://portal.ct.gov/drs","statute_ref":"Conn. Gen. Stat. § 12-700"},"params":{"brackets":[{"upTo":10000,"rate":0.02},{"upTo":50000,"rate":0.045},{"upTo":100000,"rate":0.055},{"upTo":200000,"rate":0.06},{"upTo":250000,"rate":0.065},{"upTo":500000,"rate":0.069},{"upTo":null,"rate":0.0699}],"personal_exemption":15000},"abbr":"CT","slug":"connecticut","last_verified":"2026-07-26","guideline_version":"2026-CT-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Connecticut's $15,000 personal exemption from gross wages, then apply the 7-bracket state schedule (2%-6.99%) marginally.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Connecticut resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Connecticut state tax: Marginal tax on $50,000 taxable income (after $15,000 deduction) = $2,000","Net annual pay: $65,000 - $12,592.5 = $52,407.5 (≈$4,367.29/month)"]}},"faq_extra":[{"q":"What are Connecticut's income tax brackets for 2026?","a":"Connecticut uses 7 marginal brackets ranging from 2% to 6.99%."},{"q":"How much is take-home pay on $65,000 in Connecticut?","a":"On a $65,000 gross salary, a single filer in Connecticut takes home roughly $52,407.5/year (about $4,367.29/month) after federal tax, FICA, and state tax."}]};
+    const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and CT state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Connecticut's $15,000 personal exemption phases out between $30,000 and $45,000 of income; this estimate applies it as a flat amount, which understates tax for filers in that phase-out band. Connecticut also has a \"tax recapture\" provision affecting high earners, not modeled."};
+
+    function runCalculation(e) {
+        e.preventDefault();
+        const gross = parseFloat(document.getElementById('grossIncome').value) || 0;
+        const freq = document.getElementById('payFrequency').value;
+        const r = calculatePaycheck(STATE_ENTRY, RULES, gross, freq);
+        const freqLabel = { annual: 'Annual', monthly: 'Monthly', semimonthly: 'Semi-Monthly', biweekly: 'Bi-Weekly', weekly: 'Weekly' }[freq];
+
+        document.getElementById('result-amount').textContent = fmtMoney(r.netPerPeriod) + ' / ' + freqLabel.toLowerCase();
+        document.getElementById('result-net-annual').textContent = fmtMoney(r.netAnnual);
+        document.getElementById('result-federal').textContent = fmtMoney(r.federalTax);
+        document.getElementById('result-fica').textContent = fmtMoney(r.fica.total);
+        document.getElementById('result-state').textContent = fmtMoney(r.stateTax);
+        const extraRow = document.getElementById('result-extra-row');
+        if (r.extraPayrollTax.amount > 0) {
+            extraRow.hidden = false;
+            document.getElementById('result-extra-label').textContent = r.extraPayrollTax.name;
+            document.getElementById('result-extra').textContent = fmtMoney(r.extraPayrollTax.amount);
+        } else {
+            extraRow.hidden = true;
+        }
+        document.getElementById('results-block').hidden = false;
+    }
+    document.getElementById('calc-form').addEventListener('submit', runCalculation);
+    document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+    </script>
+</body>
+</html>

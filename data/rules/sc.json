@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_cent",
+  "extra_payroll_tax": null,
+  "local_tax_note": null,
+  "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and SC state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. H.4216 replaces the federal standard deduction with a new \"South Carolina Income Adjusted Deduction\" (SCIAD); this page could not confirm the exact SCIAD dollar amount at last-verified date and uses $0, which overstates SC tax liability. Verify at dor.sc.gov before relying on this figure."
+}

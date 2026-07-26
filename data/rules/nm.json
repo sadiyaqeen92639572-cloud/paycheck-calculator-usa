@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_cent",
+  "extra_payroll_tax": null,
+  "local_tax_note": null,
+  "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and NM state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. HB 252 (2024) restructured New Mexico's brackets with a possible additional intermediate tier around $16,000-$210,000; this estimate uses the historically stable 5-bracket structure, which may not capture the newest intermediate bracket precisely — verify against tax.newmexico.gov for high-precision use."
+}

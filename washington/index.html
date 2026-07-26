@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Washington Paycheck Calculator — Take-Home Pay 2026</title>
+<meta name="description" content="Free Washington paycheck calculator. Estimate your 2026 take-home pay after federal tax, FICA, and Washington state tax — updated 2026-07-26.">
+<link rel="canonical" href="https://paycheck-calculator-usa.pages.dev/washington/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Washington Paycheck Calculator — Take-Home Pay 2026">
+<meta property="og:description" content="Free Washington paycheck calculator. Estimate your 2026 take-home pay after federal tax, FICA, and Washington state tax — updated 2026-07-26.">
+<meta property="og:url" content="https://paycheck-calculator-usa.pages.dev/washington/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Washington Paycheck Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-26","version":"2026-WA-v1","author":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}},"publisher":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Washington have a state income tax?","acceptedAnswer":{"@type":"Answer","text":"No. Washington is one of nine states with no personal income tax. Only federal income tax and FICA are withheld from your paycheck."}},{"@type":"Question","name":"How much is take-home pay on $65,000 in Washington?","acceptedAnswer":{"@type":"Answer","text":"On a $65,000 gross salary, a single filer in Washington takes home roughly $54,407.5/year (about $4,533.96/month) after federal tax, FICA."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://paycheck-calculator-usa.pages.dev/"},{"@type":"ListItem","position":2,"name":"Washington","item":"https://paycheck-calculator-usa.pages.dev/washington/"}]},{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}]}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a></p>
+  <h1>Washington Paycheck Calculator</h1>
+  <p class="badge">Estimate your 2026 take-home pay after federal tax, FICA</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Single-filer assumption, based on standard federal/state calculations. See methodology below for source and last-verified date. For your exact withholding, consult a tax professional or your payroll department.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      
+      <label>Gross Annual Salary ($)
+        <input type="number" id="grossIncome" min="0" step="100" value="65000" required>
+      </label>
+      <label>Pay Frequency
+        <select id="payFrequency">
+          <option value="annual">Annual</option>
+          <option value="monthly">Monthly</option>
+          <option value="semimonthly">Semi-Monthly (24/yr)</option>
+          <option value="biweekly" selected>Bi-Weekly (26/yr)</option>
+          <option value="weekly">Weekly</option>
+        </select>
+      </label>
+      <button type="submit">Calculate Take-Home Pay →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
+        <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
+        <div class="result-item"><span class="label">Washington State Tax</span><span class="value" id="result-state"></span></div>
+        <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+      </div>
+      
+    </div>
+  </section>
+
+  
+    <section id="worksheet" class="seo-section">
+      <h2>How to Calculate Your Washington Take-Home Pay</h2>
+      <ol><li>Start with your gross annual salary.</li><li>Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).</li><li>Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).</li><li>Washington charges no state income tax — your paycheck stops there. What's left is your net take-home pay.</li></ol>
+      <h3>Example: $65,000/year gross salary, single filer, Washington resident.</h3>
+      <ol><li>Federal tax: $5,620</li><li>FICA: $4,972.5</li><li>Washington state tax: No state income tax.</li><li>Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)</li></ol>
+    </section>
+  
+    <section id="formula" class="seo-section formula-section">
+      <h2>How Washington Paycheck Tax Is Calculated (2026)</h2>
+      <span class="source-line">Source: Washington Department of Revenue</span>
+      <p>Washington charges <strong>no state income tax</strong>. Only federal income tax and FICA are withheld from your paycheck.</p>
+      
+      <h3>Federal Tax &amp; FICA (shared across all states)</h3>
+      <table>
+        <tr><th>Federal standard deduction (single)</th><td>$16,100</td></tr>
+        <tr><th>Federal brackets</th><td>10% / 12% / 22% / 24% / 32% / 35% / 37%</td></tr>
+        <tr><th>Social Security</th><td>6.2% up to $184,500 wage base</td></tr>
+        <tr><th>Medicare</th><td>1.45% on all wages, +0.9% above $200,000</td></tr>
+      </table>
+      
+      <p class="formula-footnote">Guideline version 2026-WA-v1 · Last verified 2026-07-26</p>
+    </section>
+  
+    <section id="faq" class="seo-section">
+      <h2>Washington Paycheck Calculator FAQ</h2>
+      
+      <details class="faq-item">
+        <summary>Does Washington have a state income tax?</summary>
+        <p>No. Washington is one of nine states with no personal income tax. Only federal income tax and FICA are withheld from your paycheck.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How much is take-home pay on $65,000 in Washington?</summary>
+        <p>On a $65,000 gross salary, a single filer in Washington takes home roughly $54,407.5/year (about $4,533.96/month) after federal tax, FICA.</p>
+      </details>
+    </section>
+  
+    <section id="methodology" class="methodology">
+      <h2>Methodology &amp; Source</h2>
+      <p>Washington state tax figures sourced from <strong>Washington Department of Revenue</strong> (<a href="https://dor.wa.gov/" target="_blank" rel="nofollow noopener">https://dor.wa.gov/</a>), citing No personal income tax on wages. Federal brackets and FICA constants sourced from the IRS (Revenue Procedure 2025-32).</p>
+      <p class="deviation-note">This is an estimate based on standard single-filer federal, FICA, and WA state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Washington has a 7% capital gains tax on gains over $262,000/year — not a wage tax and not modeled here, since this calculator computes wage-income paychecks only.</p>
+      <p>Guideline version: 2026-WA-v1 · Effective: 1933-01-01 · Last verified: 2026-07-26</p>
+    </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+
+    <script src="/assets/calc-engine.js"></script>
+    <script>
+    const STATE_ENTRY = {"name":"Washington","formula_model":"no_income_tax","effective_date":"1933-01-01","source":{"agency_name":"Washington Department of Revenue","url":"https://dor.wa.gov/","statute_ref":"No personal income tax on wages"},"params":{},"abbr":"WA","slug":"washington","last_verified":"2026-07-26","guideline_version":"2026-WA-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Washington charges no state income tax — your paycheck stops there. What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Washington resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Washington state tax: No state income tax.","Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"]}},"faq_extra":[{"q":"Does Washington have a state income tax?","a":"No. Washington is one of nine states with no personal income tax. Only federal income tax and FICA are withheld from your paycheck."},{"q":"How much is take-home pay on $65,000 in Washington?","a":"On a $65,000 gross salary, a single filer in Washington takes home roughly $54,407.5/year (about $4,533.96/month) after federal tax, FICA."}]};
+    const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and WA state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Washington has a 7% capital gains tax on gains over $262,000/year — not a wage tax and not modeled here, since this calculator computes wage-income paychecks only."};
+
+    function runCalculation(e) {
+        e.preventDefault();
+        const gross = parseFloat(document.getElementById('grossIncome').value) || 0;
+        const freq = document.getElementById('payFrequency').value;
+        const r = calculatePaycheck(STATE_ENTRY, RULES, gross, freq);
+        const freqLabel = { annual: 'Annual', monthly: 'Monthly', semimonthly: 'Semi-Monthly', biweekly: 'Bi-Weekly', weekly: 'Weekly' }[freq];
+
+        document.getElementById('result-amount').textContent = fmtMoney(r.netPerPeriod) + ' / ' + freqLabel.toLowerCase();
+        document.getElementById('result-net-annual').textContent = fmtMoney(r.netAnnual);
+        document.getElementById('result-federal').textContent = fmtMoney(r.federalTax);
+        document.getElementById('result-fica').textContent = fmtMoney(r.fica.total);
+        document.getElementById('result-state').textContent = fmtMoney(r.stateTax);
+        const extraRow = document.getElementById('result-extra-row');
+        if (r.extraPayrollTax.amount > 0) {
+            extraRow.hidden = false;
+            document.getElementById('result-extra-label').textContent = r.extraPayrollTax.name;
+            document.getElementById('result-extra').textContent = fmtMoney(r.extraPayrollTax.amount);
+        } else {
+            extraRow.hidden = true;
+        }
+        document.getElementById('results-block').hidden = false;
+    }
+    document.getElementById('calc-form').addEventListener('submit', runCalculation);
+    document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+    </script>
+</body>
+</html>

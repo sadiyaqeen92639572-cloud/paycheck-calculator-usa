@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_cent",
+  "extra_payroll_tax": null,
+  "local_tax_note": null,
+  "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and WI state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Wisconsin's standard deduction phases out on a sliding scale above ~$18,950 (single); this estimate uses the maximum deduction, which understates tax for higher earners within the phase-out band."
+}

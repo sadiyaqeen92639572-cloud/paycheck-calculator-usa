@@ -1,0 +1,6 @@
+{
+  "rounding": "nearest_cent",
+  "extra_payroll_tax": null,
+  "local_tax_note": "Every Maryland county plus Baltimore City adds a local \"piggyback\" income tax of 1.75%-3.2% on the same return — this is one of the largest local-tax gaps in this calculator. Combined state+local can reach ~8.95%. Not computed here; check your county's rate.",
+  "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and MD state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."
+}

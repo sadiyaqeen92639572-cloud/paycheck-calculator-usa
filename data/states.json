@@ -31,9 +31,18 @@
       }
     },
     "faq_extra": [
-      { "q": "Does Texas have a state income tax?", "a": "No. Texas is one of nine states with no personal income tax, a status enshrined in the Texas Constitution since a 2019 voter-approved amendment (art. VIII, § 24). Your paycheck only has federal income tax and FICA withheld." },
-      { "q": "How much is take-home pay on $65,000 in Texas?", "a": "On a $65,000 gross salary, a single filer in Texas takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA — no state tax is withheld." },
-      { "q": "Are there any hidden state or local income taxes in Texas?", "a": "No Texas city or county levies a local income tax. Texas instead relies more heavily on sales tax and property tax to fund state and local government." }
+      {
+        "q": "Does Texas have a state income tax?",
+        "a": "No. Texas is one of nine states with no personal income tax, a status enshrined in the Texas Constitution since a 2019 voter-approved amendment (art. VIII, § 24). Your paycheck only has federal income tax and FICA withheld."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Texas?",
+        "a": "On a $65,000 gross salary, a single filer in Texas takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA — no state tax is withheld."
+      },
+      {
+        "q": "Are there any hidden state or local income taxes in Texas?",
+        "a": "No Texas city or county levies a local income tax. Texas instead relies more heavily on sales tax and property tax to fund state and local government."
+      }
     ]
   },
   "fl": {
@@ -68,9 +77,18 @@
       }
     },
     "faq_extra": [
-      { "q": "Does Florida have a state income tax?", "a": "No. Florida's constitution (art. VII, § 5) has barred a state personal income tax since 1924. Only federal income tax and FICA are withheld from Florida paychecks." },
-      { "q": "How much is take-home pay on $65,000 in Florida?", "a": "On a $65,000 gross salary, a single filer in Florida takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA — no state tax is withheld." },
-      { "q": "Why does Florida have no income tax?", "a": "Florida funds state government primarily through sales tax and tourism-related revenue instead of a personal income tax, a structure protected by its state constitution." }
+      {
+        "q": "Does Florida have a state income tax?",
+        "a": "No. Florida's constitution (art. VII, § 5) has barred a state personal income tax since 1924. Only federal income tax and FICA are withheld from Florida paychecks."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Florida?",
+        "a": "On a $65,000 gross salary, a single filer in Florida takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA — no state tax is withheld."
+      },
+      {
+        "q": "Why does Florida have no income tax?",
+        "a": "Florida funds state government primarily through sales tax and tourism-related revenue instead of a personal income tax, a structure protected by its state constitution."
+      }
     ]
   },
   "pa": {
@@ -86,7 +104,11 @@
       "url": "https://www.revenue.pa.gov/",
       "statute_ref": "72 P.S. § 7302 — flat 3.07% Personal Income Tax rate, unchanged since 2004"
     },
-    "params": { "rate": 0.0307, "standard_deduction": 0, "personal_exemption": 0 },
+    "params": {
+      "rate": 0.0307,
+      "standard_deduction": 0,
+      "personal_exemption": 0
+    },
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -106,9 +128,18 @@
       }
     },
     "faq_extra": [
-      { "q": "What is Pennsylvania's state income tax rate?", "a": "Pennsylvania charges a flat 3.07% Personal Income Tax on gross wages, a rate that has not changed since 2004. There is no standard deduction or personal exemption." },
-      { "q": "Does this calculator include Philadelphia or other local wage taxes?", "a": "No. This estimate covers only the state's 3.07% flat tax. Pennsylvania municipalities and school districts levy an additional local Earned Income Tax (EIT), commonly 1%-3.9%+, with Philadelphia at the high end. Check your municipality's EIT rate separately." },
-      { "q": "How much is take-home pay on $65,000 in Pennsylvania?", "a": "On a $65,000 gross salary, a single filer in Pennsylvania takes home roughly $52,444/year (about $4,370/month) after federal tax, FICA, and the state's 3.07% flat tax — before any local EIT." }
+      {
+        "q": "What is Pennsylvania's state income tax rate?",
+        "a": "Pennsylvania charges a flat 3.07% Personal Income Tax on gross wages, a rate that has not changed since 2004. There is no standard deduction or personal exemption."
+      },
+      {
+        "q": "Does this calculator include Philadelphia or other local wage taxes?",
+        "a": "No. This estimate covers only the state's 3.07% flat tax. Pennsylvania municipalities and school districts levy an additional local Earned Income Tax (EIT), commonly 1%-3.9%+, with Philadelphia at the high end. Check your municipality's EIT rate separately."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Pennsylvania?",
+        "a": "On a $65,000 gross salary, a single filer in Pennsylvania takes home roughly $52,444/year (about $4,370/month) after federal tax, FICA, and the state's 3.07% flat tax — before any local EIT."
+      }
     ]
   },
   "il": {
@@ -124,7 +155,11 @@
       "url": "https://tax.illinois.gov/",
       "statute_ref": "35 ILCS 5/201 — flat 4.95% rate (Illinois Constitution art. IX, § 3 prohibits graduated rates)"
     },
-    "params": { "rate": 0.0495, "standard_deduction": 0, "personal_exemption": 2425 },
+    "params": {
+      "rate": 0.0495,
+      "standard_deduction": 0,
+      "personal_exemption": 2425
+    },
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -144,9 +179,18 @@
       }
     },
     "faq_extra": [
-      { "q": "What is Illinois's state income tax rate?", "a": "Illinois charges a flat 4.95% income tax rate on all taxable income — the Illinois Constitution (art. IX, § 3) prohibits graduated rates. Each filer gets a $2,425 personal exemption in 2026." },
-      { "q": "Does Illinois tax retirement income?", "a": "No — Illinois does not tax Social Security, pension income, or 401(k)/IRA withdrawals, making it comparatively favorable for retirees despite the flat wage tax." },
-      { "q": "Does Illinois have local income tax?", "a": "No. Unlike Pennsylvania or Ohio, no Illinois city or county adds a separate local income tax on top of the state's flat 4.95% rate." }
+      {
+        "q": "What is Illinois's state income tax rate?",
+        "a": "Illinois charges a flat 4.95% income tax rate on all taxable income — the Illinois Constitution (art. IX, § 3) prohibits graduated rates. Each filer gets a $2,425 personal exemption in 2026."
+      },
+      {
+        "q": "Does Illinois tax retirement income?",
+        "a": "No — Illinois does not tax Social Security, pension income, or 401(k)/IRA withdrawals, making it comparatively favorable for retirees despite the flat wage tax."
+      },
+      {
+        "q": "Does Illinois have local income tax?",
+        "a": "No. Unlike Pennsylvania or Ohio, no Illinois city or county adds a separate local income tax on top of the state's flat 4.95% rate."
+      }
     ]
   },
   "ga": {
@@ -162,7 +206,11 @@
       "url": "https://dor.georgia.gov/",
       "statute_ref": "HB 463 (signed 2026-05-11), cutting the flat rate from 5.19% to 4.99% retroactive to 2026-01-01; see https://gov.georgia.gov/press-releases/2026-05-11/gov-kemp-signs-legislation-lowering-taxes-and-supporting-economic-growth"
     },
-    "params": { "rate": 0.0499, "standard_deduction": 15000, "personal_exemption": 0 },
+    "params": {
+      "rate": 0.0499,
+      "standard_deduction": 15000,
+      "personal_exemption": 0
+    },
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -182,9 +230,18 @@
       }
     },
     "faq_extra": [
-      { "q": "What is Georgia's state income tax rate in 2026?", "a": "Georgia charges a flat 4.99% rate for tax year 2026, cut from 5.19% by HB 463 (signed May 11, 2026, retroactive to January 1, 2026). The law schedules further 0.125%-point annual cuts starting 2027 until the rate reaches 3.99%." },
-      { "q": "What is Georgia's standard deduction?", "a": "$15,000 for single filers and married filing separately in 2026 (up from prior years under HB 463), $30,000 for married filing jointly." },
-      { "q": "Does Georgia have local income tax?", "a": "No. Georgia counties and cities do not levy separate local income taxes on wages." }
+      {
+        "q": "What is Georgia's state income tax rate in 2026?",
+        "a": "Georgia charges a flat 4.99% rate for tax year 2026, cut from 5.19% by HB 463 (signed May 11, 2026, retroactive to January 1, 2026). The law schedules further 0.125%-point annual cuts starting 2027 until the rate reaches 3.99%."
+      },
+      {
+        "q": "What is Georgia's standard deduction?",
+        "a": "$15,000 for single filers and married filing separately in 2026 (up from prior years under HB 463), $30,000 for married filing jointly."
+      },
+      {
+        "q": "Does Georgia have local income tax?",
+        "a": "No. Georgia counties and cities do not levy separate local income taxes on wages."
+      }
     ]
   },
   "nc": {
@@ -200,7 +257,11 @@
       "url": "https://www.ncdor.gov/taxes-forms/individual-income-tax/tax-rate-schedules",
       "statute_ref": "Session Law 2023-134 — phased-down flat rate, 3.99% for taxable years after 2025"
     },
-    "params": { "rate": 0.0399, "standard_deduction": 12750, "personal_exemption": 0 },
+    "params": {
+      "rate": 0.0399,
+      "standard_deduction": 12750,
+      "personal_exemption": 0
+    },
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -220,9 +281,18 @@
       }
     },
     "faq_extra": [
-      { "q": "Is North Carolina's income tax rate still dropping?", "a": "Yes. Under Session Law 2023-134, North Carolina's flat rate has phased down annually — 4.5% (2024), 4.25% (2025), 3.99% (2026) — with further cuts to 3.75% (2027) and 3.5% (2028) scheduled if state revenue triggers are met." },
-      { "q": "What is North Carolina's standard deduction for 2026?", "a": "$12,750 for single filers under current law. A pending bill (S437) would raise it to $13,000, but that had not been enacted as of this page's last-verified date — check ncdor.gov for the final figure." },
-      { "q": "Does North Carolina have local income tax?", "a": "No. North Carolina counties and municipalities do not levy separate local income taxes on wages." }
+      {
+        "q": "Is North Carolina's income tax rate still dropping?",
+        "a": "Yes. Under Session Law 2023-134, North Carolina's flat rate has phased down annually — 4.5% (2024), 4.25% (2025), 3.99% (2026) — with further cuts to 3.75% (2027) and 3.5% (2028) scheduled if state revenue triggers are met."
+      },
+      {
+        "q": "What is North Carolina's standard deduction for 2026?",
+        "a": "$12,750 for single filers under current law. A pending bill (S437) would raise it to $13,000, but that had not been enacted as of this page's last-verified date — check ncdor.gov for the final figure."
+      },
+      {
+        "q": "Does North Carolina have local income tax?",
+        "a": "No. North Carolina counties and municipalities do not levy separate local income taxes on wages."
+      }
     ]
   },
   "mi": {
@@ -238,7 +308,11 @@
       "url": "https://www.michigan.gov/taxes",
       "statute_ref": "MCL 206.51 — flat rate, 4.25% for 2026; personal exemption per Treasury 2026 Withholding Guide (Form 446)"
     },
-    "params": { "rate": 0.0425, "standard_deduction": 0, "personal_exemption": 5900 },
+    "params": {
+      "rate": 0.0425,
+      "standard_deduction": 0,
+      "personal_exemption": 5900
+    },
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -258,9 +332,18 @@
       }
     },
     "faq_extra": [
-      { "q": "What is Michigan's state income tax rate?", "a": "Michigan charges a flat 4.25% rate for 2026, with a $5,900 personal exemption per filer." },
-      { "q": "Does this calculator include Detroit's city income tax?", "a": "No. This estimate covers only Michigan's 4.25% state tax. Several Michigan cities, including Detroit (2.4% for residents), Grand Rapids, and Lansing, levy an additional local income tax not computed here." },
-      { "q": "How much is take-home pay on $65,000 in Michigan?", "a": "On a $65,000 gross salary, a single filer in Michigan takes home roughly $51,928/year (about $4,327/month) after federal tax, FICA, and the state's 4.25% flat tax — before any city tax." }
+      {
+        "q": "What is Michigan's state income tax rate?",
+        "a": "Michigan charges a flat 4.25% rate for 2026, with a $5,900 personal exemption per filer."
+      },
+      {
+        "q": "Does this calculator include Detroit's city income tax?",
+        "a": "No. This estimate covers only Michigan's 4.25% state tax. Several Michigan cities, including Detroit (2.4% for residents), Grand Rapids, and Lansing, levy an additional local income tax not computed here."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Michigan?",
+        "a": "On a $65,000 gross salary, a single filer in Michigan takes home roughly $51,928/year (about $4,327/month) after federal tax, FICA, and the state's 4.25% flat tax — before any city tax."
+      }
     ]
   },
   "ca": {
@@ -279,16 +362,46 @@
     "params": {
       "standard_deduction": 5706,
       "brackets": [
-        { "upTo": 10756, "rate": 0.01 },
-        { "upTo": 25499, "rate": 0.02 },
-        { "upTo": 40245, "rate": 0.04 },
-        { "upTo": 55866, "rate": 0.06 },
-        { "upTo": 70612, "rate": 0.08 },
-        { "upTo": 360659, "rate": 0.093 },
-        { "upTo": 432787, "rate": 0.103 },
-        { "upTo": 721314, "rate": 0.113 },
-        { "upTo": 1000000, "rate": 0.123 },
-        { "upTo": null, "rate": 0.133 }
+        {
+          "upTo": 10756,
+          "rate": 0.01
+        },
+        {
+          "upTo": 25499,
+          "rate": 0.02
+        },
+        {
+          "upTo": 40245,
+          "rate": 0.04
+        },
+        {
+          "upTo": 55866,
+          "rate": 0.06
+        },
+        {
+          "upTo": 70612,
+          "rate": 0.08
+        },
+        {
+          "upTo": 360659,
+          "rate": 0.093
+        },
+        {
+          "upTo": 432787,
+          "rate": 0.103
+        },
+        {
+          "upTo": 721314,
+          "rate": 0.113
+        },
+        {
+          "upTo": 1000000,
+          "rate": 0.123
+        },
+        {
+          "upTo": null,
+          "rate": 0.133
+        }
       ]
     },
     "worksheet": {
@@ -312,9 +425,18 @@
       }
     },
     "faq_extra": [
-      { "q": "What are California's income tax brackets for 2026?", "a": "California uses 9 marginal brackets from 1% (income up to $10,756) to 12.3% (over $721,314 for single filers), plus a 1% Mental Health Services Tax on taxable income over $1,000,000, for a 13.3% top effective rate." },
-      { "q": "What is California SDI and is it a tax?", "a": "State Disability Insurance (SDI) is a mandatory payroll deduction, not a state income tax — 1.3% of all wages in 2026 with no wage cap. It funds short-term disability and Paid Family Leave benefits and is withheld separately from income tax." },
-      { "q": "How much is take-home pay on $65,000 in California?", "a": "On a $65,000 gross salary, a single filer in California takes home roughly $50,942/year (about $4,245/month) after federal tax, FICA, state income tax, and SDI." }
+      {
+        "q": "What are California's income tax brackets for 2026?",
+        "a": "California uses 9 marginal brackets from 1% (income up to $10,756) to 12.3% (over $721,314 for single filers), plus a 1% Mental Health Services Tax on taxable income over $1,000,000, for a 13.3% top effective rate."
+      },
+      {
+        "q": "What is California SDI and is it a tax?",
+        "a": "State Disability Insurance (SDI) is a mandatory payroll deduction, not a state income tax — 1.3% of all wages in 2026 with no wage cap. It funds short-term disability and Paid Family Leave benefits and is withheld separately from income tax."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in California?",
+        "a": "On a $65,000 gross salary, a single filer in California takes home roughly $50,942/year (about $4,245/month) after federal tax, FICA, state income tax, and SDI."
+      }
     ]
   },
   "ny": {
@@ -333,15 +455,42 @@
     "params": {
       "standard_deduction": 8000,
       "brackets": [
-        { "upTo": 17150, "rate": 0.04 },
-        { "upTo": 23600, "rate": 0.045 },
-        { "upTo": 27900, "rate": 0.0525 },
-        { "upTo": 161550, "rate": 0.0585 },
-        { "upTo": 323200, "rate": 0.0625 },
-        { "upTo": 2155350, "rate": 0.0685 },
-        { "upTo": 5000000, "rate": 0.0965 },
-        { "upTo": 25000000, "rate": 0.103 },
-        { "upTo": null, "rate": 0.109 }
+        {
+          "upTo": 17150,
+          "rate": 0.04
+        },
+        {
+          "upTo": 23600,
+          "rate": 0.045
+        },
+        {
+          "upTo": 27900,
+          "rate": 0.0525
+        },
+        {
+          "upTo": 161550,
+          "rate": 0.0585
+        },
+        {
+          "upTo": 323200,
+          "rate": 0.0625
+        },
+        {
+          "upTo": 2155350,
+          "rate": 0.0685
+        },
+        {
+          "upTo": 5000000,
+          "rate": 0.0965
+        },
+        {
+          "upTo": 25000000,
+          "rate": 0.103
+        },
+        {
+          "upTo": null,
+          "rate": 0.109
+        }
       ]
     },
     "worksheet": {
@@ -365,9 +514,18 @@
       }
     },
     "faq_extra": [
-      { "q": "What are New York's state income tax brackets for 2026?", "a": "New York has 9 brackets for single filers, from 4% on income up to $17,150 to 10.9% above $25,000,000. The FY2026 budget cut the bottom five bracket rates by 0.1 point." },
-      { "q": "Does this calculator include New York City tax?", "a": "No. This estimate covers only New York State tax. NYC residents owe an additional local income tax (3.078%-3.876%), and Yonkers residents owe a local surcharge — neither is computed here." },
-      { "q": "What is New York Paid Family Leave (PFL)?", "a": "A mandatory employee payroll deduction — 0.432% of wages in 2026, capped at $411.91/year — that funds paid leave benefits. It is separate from income tax." }
+      {
+        "q": "What are New York's state income tax brackets for 2026?",
+        "a": "New York has 9 brackets for single filers, from 4% on income up to $17,150 to 10.9% above $25,000,000. The FY2026 budget cut the bottom five bracket rates by 0.1 point."
+      },
+      {
+        "q": "Does this calculator include New York City tax?",
+        "a": "No. This estimate covers only New York State tax. NYC residents owe an additional local income tax (3.078%-3.876%), and Yonkers residents owe a local surcharge — neither is computed here."
+      },
+      {
+        "q": "What is New York Paid Family Leave (PFL)?",
+        "a": "A mandatory employee payroll deduction — 0.432% of wages in 2026, capped at $411.91/year — that funds paid leave benefits. It is separate from income tax."
+      }
     ]
   },
   "oh": {
@@ -386,8 +544,14 @@
     "params": {
       "standard_deduction": 0,
       "brackets": [
-        { "upTo": 26050, "rate": 0 },
-        { "upTo": null, "rate": 0.0275 }
+        {
+          "upTo": 26050,
+          "rate": 0
+        },
+        {
+          "upTo": null,
+          "rate": 0.0275
+        }
       ]
     },
     "worksheet": {
@@ -409,9 +573,2396 @@
       }
     },
     "faq_extra": [
-      { "q": "What is Ohio's state income tax rate in 2026?", "a": "Ohio completed a multi-year phase-down to a single flat rate for 2026: 0% on the first $26,050 of nonbusiness income, then 2.75% on everything above that — down from 3.125% in 2025 and 3.5% in 2024." },
-      { "q": "Does this calculator include Ohio city/municipal income tax?", "a": "No — and this matters a lot in Ohio. Over 600 Ohio municipalities levy their own income tax, typically 1%-3%, with Columbus, Cleveland, and Akron around 2.5%. For many Ohio taxpayers, city tax exceeds state tax. Check your city's rate at your municipality's finance department or RITA/CCA (Ohio's two major municipal tax collection agencies) — it is not included in this estimate." },
-      { "q": "How much is take-home pay on $65,000 in Ohio?", "a": "On a $65,000 gross salary, a single filer in Ohio takes home roughly $53,368/year (about $4,447/month) after federal tax, FICA, and Ohio's 2.75% state tax — before any city income tax, which can add another 1%-3%." }
+      {
+        "q": "What is Ohio's state income tax rate in 2026?",
+        "a": "Ohio completed a multi-year phase-down to a single flat rate for 2026: 0% on the first $26,050 of nonbusiness income, then 2.75% on everything above that — down from 3.125% in 2025 and 3.5% in 2024."
+      },
+      {
+        "q": "Does this calculator include Ohio city/municipal income tax?",
+        "a": "No — and this matters a lot in Ohio. Over 600 Ohio municipalities levy their own income tax, typically 1%-3%, with Columbus, Cleveland, and Akron around 2.5%. For many Ohio taxpayers, city tax exceeds state tax. Check your city's rate at your municipality's finance department or RITA/CCA (Ohio's two major municipal tax collection agencies) — it is not included in this estimate."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Ohio?",
+        "a": "On a $65,000 gross salary, a single filer in Ohio takes home roughly $53,368/year (about $4,447/month) after federal tax, FICA, and Ohio's 2.75% state tax — before any city income tax, which can add another 1%-3%."
+      }
+    ]
+  },
+  "al": {
+    "name": "Alabama",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Alabama Department of Revenue",
+      "url": "https://www.revenue.alabama.gov/",
+      "statute_ref": "Ala. Code § 40-18-5 — 3-bracket schedule; § 40-18-15 permits deducting federal income tax paid"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 500,
+          "rate": 0.02
+        },
+        {
+          "upTo": 3000,
+          "rate": 0.04
+        },
+        {
+          "upTo": null,
+          "rate": 0.05
+        }
+      ],
+      "standard_deduction": 3000,
+      "federal_tax_deductible": true
+    },
+    "abbr": "AL",
+    "slug": "alabama",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-AL-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Alabama's $3,000 standard deduction and the federal tax you paid from gross wages, then apply the 3-bracket state schedule (2%-5%) marginally.",
+        "What's left is your net take-home pay before any local tax."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Alabama resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Alabama state tax: Marginal tax on $56,380 taxable income (after $8,620 deduction incl. federal tax paid) = $2,779",
+          "Net annual pay: $65,000 - $13,371.5 = $51,628.5 (≈$4,302.38/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Alabama's income tax brackets for 2026?",
+        "a": "Alabama uses 3 marginal brackets ranging from 2% to 5%. Standard deduction: $3,000 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Alabama?",
+        "a": "On a $65,000 gross salary, a single filer in Alabama takes home roughly $51,628.5/year (about $4,302.38/month) after federal tax, FICA, and state tax — before any local tax."
+      },
+      {
+        "q": "Does this calculator include Alabama local or city income tax?",
+        "a": "Some Alabama cities and counties (e.g. Birmingham, Bessemer) levy a local occupational tax, typically 0.5%-2% of wages, not computed here."
+      }
+    ]
+  },
+  "ak": {
+    "name": "Alaska",
+    "formula_model": "no_income_tax",
+    "effective_date": "1980-01-01",
+    "source": {
+      "agency_name": "Alaska Department of Revenue",
+      "url": "https://tax.alaska.gov/",
+      "statute_ref": "Alaska repealed its personal income tax in 1980"
+    },
+    "params": {},
+    "abbr": "AK",
+    "slug": "alaska",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-AK-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Alaska charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Alaska resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Alaska state tax: No state income tax.",
+          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does Alaska have a state income tax?",
+        "a": "No. Alaska is one of nine states with no personal income tax. Only federal income tax and FICA are withheld from your paycheck."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Alaska?",
+        "a": "On a $65,000 gross salary, a single filer in Alaska takes home roughly $54,407.5/year (about $4,533.96/month) after federal tax, FICA."
+      }
+    ]
+  },
+  "az": {
+    "name": "Arizona",
+    "formula_model": "flat_tax",
+    "effective_date": "2023-01-01",
+    "source": {
+      "agency_name": "Arizona Department of Revenue",
+      "url": "https://azdor.gov/",
+      "statute_ref": "Ariz. Rev. Stat. § 43-1011 — flat 2.5% rate effective 2023"
+    },
+    "params": {
+      "rate": 0.025,
+      "standard_deduction": 16100
+    },
+    "abbr": "AZ",
+    "slug": "arizona",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-AZ-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Arizona's $16,100 standard deduction from gross wages, then apply the flat 2.50% state rate.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Arizona resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Arizona state tax: ($65,000 - $16,100 deduction) × 2.50% = $1,222.5",
+          "Net annual pay: $65,000 - $11,815 = $53,185 (≈$4,432.08/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is Arizona's state income tax rate?",
+        "a": "Arizona charges a flat 2.50% rate for tax year 2026. Standard deduction: $16,100 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Arizona?",
+        "a": "On a $65,000 gross salary, a single filer in Arizona takes home roughly $53,185/year (about $4,432.08/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "ar": {
+    "name": "Arkansas",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Arkansas Department of Finance and Administration",
+      "url": "https://www.dfa.arkansas.gov/",
+      "statute_ref": "Top rate cut to 3.7% retroactive to 2026-01-01"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 5599,
+          "rate": 0
+        },
+        {
+          "upTo": 11199,
+          "rate": 0.02
+        },
+        {
+          "upTo": 15999,
+          "rate": 0.03
+        },
+        {
+          "upTo": 26399,
+          "rate": 0.034
+        },
+        {
+          "upTo": null,
+          "rate": 0.037
+        }
+      ],
+      "standard_deduction": 0
+    },
+    "abbr": "AR",
+    "slug": "arkansas",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-AR-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Arkansas's apply the 5-bracket state schedule (0%-3.70%) marginally to gross wages.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Arkansas resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Arkansas state tax: Marginal tax on $65,000 taxable income (after $0 deduction) = $2,037.84",
+          "Net annual pay: $65,000 - $12,630.34 = $52,369.66 (≈$4,364.14/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Arkansas's income tax brackets for 2026?",
+        "a": "Arkansas uses 5 marginal brackets ranging from 0% to 3.70%."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Arkansas?",
+        "a": "On a $65,000 gross salary, a single filer in Arkansas takes home roughly $52,369.66/year (about $4,364.14/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "co": {
+    "name": "Colorado",
+    "formula_model": "flat_tax",
+    "effective_date": "2022-01-01",
+    "source": {
+      "agency_name": "Colorado Department of Revenue",
+      "url": "https://tax.colorado.gov/",
+      "statute_ref": "Colo. Const. art. X (flat rate mandate) — 4.4% per Proposition 121 (2022)"
+    },
+    "params": {
+      "rate": 0.044,
+      "standard_deduction": 16100
+    },
+    "abbr": "CO",
+    "slug": "colorado",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-CO-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Colorado's $16,100 standard deduction from gross wages, then apply the flat 4.40% state rate.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Colorado resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Colorado state tax: ($65,000 - $16,100 deduction) × 4.40% = $2,151.6",
+          "Net annual pay: $65,000 - $12,744.1 = $52,255.9 (≈$4,354.66/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is Colorado's state income tax rate?",
+        "a": "Colorado charges a flat 4.40% rate for tax year 2026. Standard deduction: $16,100 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Colorado?",
+        "a": "On a $65,000 gross salary, a single filer in Colorado takes home roughly $52,255.9/year (about $4,354.66/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "ct": {
+    "name": "Connecticut",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Connecticut Department of Revenue Services",
+      "url": "https://portal.ct.gov/drs",
+      "statute_ref": "Conn. Gen. Stat. § 12-700"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 10000,
+          "rate": 0.02
+        },
+        {
+          "upTo": 50000,
+          "rate": 0.045
+        },
+        {
+          "upTo": 100000,
+          "rate": 0.055
+        },
+        {
+          "upTo": 200000,
+          "rate": 0.06
+        },
+        {
+          "upTo": 250000,
+          "rate": 0.065
+        },
+        {
+          "upTo": 500000,
+          "rate": 0.069
+        },
+        {
+          "upTo": null,
+          "rate": 0.0699
+        }
+      ],
+      "personal_exemption": 15000
+    },
+    "abbr": "CT",
+    "slug": "connecticut",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-CT-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Connecticut's $15,000 personal exemption from gross wages, then apply the 7-bracket state schedule (2%-6.99%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Connecticut resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Connecticut state tax: Marginal tax on $50,000 taxable income (after $15,000 deduction) = $2,000",
+          "Net annual pay: $65,000 - $12,592.5 = $52,407.5 (≈$4,367.29/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Connecticut's income tax brackets for 2026?",
+        "a": "Connecticut uses 7 marginal brackets ranging from 2% to 6.99%."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Connecticut?",
+        "a": "On a $65,000 gross salary, a single filer in Connecticut takes home roughly $52,407.5/year (about $4,367.29/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "de": {
+    "name": "Delaware",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Delaware Division of Revenue",
+      "url": "https://revenue.delaware.gov/",
+      "statute_ref": "Del. Code tit. 30 § 1102"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 2000,
+          "rate": 0
+        },
+        {
+          "upTo": 5000,
+          "rate": 0.022
+        },
+        {
+          "upTo": 10000,
+          "rate": 0.039
+        },
+        {
+          "upTo": 20000,
+          "rate": 0.048
+        },
+        {
+          "upTo": 25000,
+          "rate": 0.052
+        },
+        {
+          "upTo": 60000,
+          "rate": 0.0555
+        },
+        {
+          "upTo": null,
+          "rate": 0.066
+        }
+      ],
+      "standard_deduction": 3250
+    },
+    "abbr": "DE",
+    "slug": "delaware",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-DE-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Delaware's $3,250 standard deduction from gross wages, then apply the 7-bracket state schedule (0%-6.60%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Delaware resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Delaware state tax: Marginal tax on $61,750 taxable income (after $3,250 deduction) = $3,059",
+          "Net annual pay: $65,000 - $13,651.5 = $51,348.5 (≈$4,279.04/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Delaware's income tax brackets for 2026?",
+        "a": "Delaware uses 7 marginal brackets ranging from 0% to 6.60%. Standard deduction: $3,250 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Delaware?",
+        "a": "On a $65,000 gross salary, a single filer in Delaware takes home roughly $51,348.5/year (about $4,279.04/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "dc": {
+    "name": "District of Columbia",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "DC Office of Tax and Revenue",
+      "url": "https://otr.cfo.dc.gov/",
+      "statute_ref": "D.C. Code § 47-1806.03"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 10000,
+          "rate": 0.04
+        },
+        {
+          "upTo": 40000,
+          "rate": 0.06
+        },
+        {
+          "upTo": 60000,
+          "rate": 0.065
+        },
+        {
+          "upTo": 350000,
+          "rate": 0.085
+        },
+        {
+          "upTo": 1000000,
+          "rate": 0.0925
+        },
+        {
+          "upTo": null,
+          "rate": 0.1075
+        }
+      ],
+      "standard_deduction": 15700
+    },
+    "abbr": "DC",
+    "slug": "district-of-columbia",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-DC-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract District of Columbia's $15,700 standard deduction from gross wages, then apply the 6-bracket state schedule (4%-10.75%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, District of Columbia resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "District of Columbia state tax: Marginal tax on $49,300 taxable income (after $15,700 deduction) = $2,804.5",
+          "Net annual pay: $65,000 - $13,397 = $51,603 (≈$4,300.25/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are District of Columbia's income tax brackets for 2026?",
+        "a": "District of Columbia uses 6 marginal brackets ranging from 4% to 10.75%. Standard deduction: $15,700 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in District of Columbia?",
+        "a": "On a $65,000 gross salary, a single filer in District of Columbia takes home roughly $51,603/year (about $4,300.25/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "hi": {
+    "name": "Hawaii",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Hawaii Department of Taxation",
+      "url": "https://files.hawaii.gov/tax/",
+      "statute_ref": "Haw. Rev. Stat. § 235-51 — 12-bracket schedule"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 9600,
+          "rate": 0.014
+        },
+        {
+          "upTo": 14400,
+          "rate": 0.032
+        },
+        {
+          "upTo": 19200,
+          "rate": 0.055
+        },
+        {
+          "upTo": 24000,
+          "rate": 0.064
+        },
+        {
+          "upTo": 36000,
+          "rate": 0.068
+        },
+        {
+          "upTo": 48000,
+          "rate": 0.072
+        },
+        {
+          "upTo": 125000,
+          "rate": 0.076
+        },
+        {
+          "upTo": 175000,
+          "rate": 0.079
+        },
+        {
+          "upTo": 225000,
+          "rate": 0.0825
+        },
+        {
+          "upTo": 275000,
+          "rate": 0.09
+        },
+        {
+          "upTo": 325000,
+          "rate": 0.1
+        },
+        {
+          "upTo": null,
+          "rate": 0.11
+        }
+      ],
+      "standard_deduction": 2200
+    },
+    "abbr": "HI",
+    "slug": "hawaii",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-HI-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Hawaii's $2,200 standard deduction from gross wages, then apply the 12-bracket state schedule (1.40%-11%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Hawaii resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Hawaii state tax: Marginal tax on $62,800 taxable income (after $2,200 deduction) = $3,664",
+          "Net annual pay: $65,000 - $14,256.5 = $50,743.5 (≈$4,228.63/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Hawaii's income tax brackets for 2026?",
+        "a": "Hawaii uses 12 marginal brackets ranging from 1.40% to 11%. Standard deduction: $2,200 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Hawaii?",
+        "a": "On a $65,000 gross salary, a single filer in Hawaii takes home roughly $50,743.5/year (about $4,228.63/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "id": {
+    "name": "Idaho",
+    "formula_model": "flat_tax",
+    "effective_date": "2025-03-01",
+    "source": {
+      "agency_name": "Idaho State Tax Commission",
+      "url": "https://tax.idaho.gov/",
+      "statute_ref": "HB 40 (2025) — flat 5.3% rate"
+    },
+    "params": {
+      "rate": 0.053,
+      "standard_deduction": 16100
+    },
+    "abbr": "ID",
+    "slug": "idaho",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-ID-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Idaho's $16,100 standard deduction from gross wages, then apply the flat 5.30% state rate.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Idaho resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Idaho state tax: ($65,000 - $16,100 deduction) × 5.30% = $2,591.7",
+          "Net annual pay: $65,000 - $13,184.2 = $51,815.8 (≈$4,317.98/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is Idaho's state income tax rate?",
+        "a": "Idaho charges a flat 5.30% rate for tax year 2026. Standard deduction: $16,100 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Idaho?",
+        "a": "On a $65,000 gross salary, a single filer in Idaho takes home roughly $51,815.8/year (about $4,317.98/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "in": {
+    "name": "Indiana",
+    "formula_model": "flat_tax",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Indiana Department of Revenue",
+      "url": "https://www.in.gov/dor/",
+      "statute_ref": "Ind. Code § 6-3-2-1 — flat 2.95% for 2026"
+    },
+    "params": {
+      "rate": 0.0295,
+      "standard_deduction": 0
+    },
+    "abbr": "IN",
+    "slug": "indiana",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-IN-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Indiana's flat 2.95% state rate to gross wages.",
+        "What's left is your net take-home pay before any local tax."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Indiana resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Indiana state tax: ($65,000 - $0 deduction) × 2.95% = $1,917.5",
+          "Net annual pay: $65,000 - $12,510 = $52,490 (≈$4,374.17/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is Indiana's state income tax rate?",
+        "a": "Indiana charges a flat 2.95% rate for tax year 2026."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Indiana?",
+        "a": "On a $65,000 gross salary, a single filer in Indiana takes home roughly $52,490/year (about $4,374.17/month) after federal tax, FICA, and state tax — before any local tax."
+      },
+      {
+        "q": "Does this calculator include Indiana local or city income tax?",
+        "a": "Indiana's 92 counties each levy their own local income tax (resident-based), ranging 0.50%-3.38% — often larger than any single layer in this calculator's other states. Not computed here; check your county's rate."
+      }
+    ]
+  },
+  "ia": {
+    "name": "Iowa",
+    "formula_model": "flat_tax",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Iowa Department of Revenue",
+      "url": "https://revenue.iowa.gov/",
+      "statute_ref": "SF 2442 (2024) — flat 3.8% effective 2026, completing the phase-down from a 6-bracket system topping out at 8.53%"
+    },
+    "params": {
+      "rate": 0.038,
+      "standard_deduction": 16100
+    },
+    "abbr": "IA",
+    "slug": "iowa",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-IA-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Iowa's $16,100 standard deduction from gross wages, then apply the flat 3.80% state rate.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Iowa resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Iowa state tax: ($65,000 - $16,100 deduction) × 3.80% = $1,858.2",
+          "Net annual pay: $65,000 - $12,450.7 = $52,549.3 (≈$4,379.11/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is Iowa's state income tax rate?",
+        "a": "Iowa charges a flat 3.80% rate for tax year 2026. Standard deduction: $16,100 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Iowa?",
+        "a": "On a $65,000 gross salary, a single filer in Iowa takes home roughly $52,549.3/year (about $4,379.11/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "ks": {
+    "name": "Kansas",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Kansas Department of Revenue",
+      "url": "https://www.ksrevenue.gov/",
+      "statute_ref": "Kan. Stat. § 79-32,110"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 30000,
+          "rate": 0.031
+        },
+        {
+          "upTo": null,
+          "rate": 0.057
+        }
+      ],
+      "standard_deduction": 3605,
+      "personal_exemption": 9160
+    },
+    "abbr": "KS",
+    "slug": "kansas",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-KS-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Kansas's $3,605 standard deduction and $9,160 personal exemption from gross wages, then apply the 2-bracket state schedule (3.10%-5.70%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Kansas resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Kansas state tax: Marginal tax on $52,235 taxable income (after $12,765 deduction) = $2,197.4",
+          "Net annual pay: $65,000 - $12,789.9 = $52,210.1 (≈$4,350.84/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Kansas's income tax brackets for 2026?",
+        "a": "Kansas uses 2 marginal brackets ranging from 3.10% to 5.70%. Standard deduction: $3,605 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Kansas?",
+        "a": "On a $65,000 gross salary, a single filer in Kansas takes home roughly $52,210.1/year (about $4,350.84/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "ky": {
+    "name": "Kentucky",
+    "formula_model": "flat_tax",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Kentucky Department of Revenue",
+      "url": "https://revenue.ky.gov/",
+      "statute_ref": "Ky. Rev. Stat. § 141.020 — cut to 3.5% effective 2026-01-01"
+    },
+    "params": {
+      "rate": 0.035,
+      "standard_deduction": 3270
+    },
+    "abbr": "KY",
+    "slug": "kentucky",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-KY-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Kentucky's $3,270 standard deduction from gross wages, then apply the flat 3.50% state rate.",
+        "What's left is your net take-home pay before any local tax."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Kentucky resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Kentucky state tax: ($65,000 - $3,270 deduction) × 3.50% = $2,160.55",
+          "Net annual pay: $65,000 - $12,753.05 = $52,246.95 (≈$4,353.91/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is Kentucky's state income tax rate?",
+        "a": "Kentucky charges a flat 3.50% rate for tax year 2026. Standard deduction: $3,270 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Kentucky?",
+        "a": "On a $65,000 gross salary, a single filer in Kentucky takes home roughly $52,246.95/year (about $4,353.91/month) after federal tax, FICA, and state tax — before any local tax."
+      },
+      {
+        "q": "Does this calculator include Kentucky local or city income tax?",
+        "a": "Many Kentucky cities and counties levy a local occupational/payroll tax (e.g. Louisville ~2.2%), not computed here."
+      }
+    ]
+  },
+  "la": {
+    "name": "Louisiana",
+    "formula_model": "flat_tax",
+    "effective_date": "2025-01-01",
+    "source": {
+      "agency_name": "Louisiana Department of Revenue",
+      "url": "https://revenue.louisiana.gov/",
+      "statute_ref": "Constitutional Amendment 2 (Nov. 2024) — flat 3% rate replacing the prior 1.85%-4.25% brackets"
+    },
+    "params": {
+      "rate": 0.03,
+      "standard_deduction": 12500
+    },
+    "abbr": "LA",
+    "slug": "louisiana",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-LA-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Louisiana's $12,500 standard deduction from gross wages, then apply the flat 3% state rate.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Louisiana resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Louisiana state tax: ($65,000 - $12,500 deduction) × 3.00% = $1,575",
+          "Net annual pay: $65,000 - $12,167.5 = $52,832.5 (≈$4,402.71/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is Louisiana's state income tax rate?",
+        "a": "Louisiana charges a flat 3% rate for tax year 2026. Standard deduction: $12,500 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Louisiana?",
+        "a": "On a $65,000 gross salary, a single filer in Louisiana takes home roughly $52,832.5/year (about $4,402.71/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "me": {
+    "name": "Maine",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Maine Revenue Services",
+      "url": "https://www.maine.gov/revenue/",
+      "statute_ref": "36 M.R.S. § 5111"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 27400,
+          "rate": 0.058
+        },
+        {
+          "upTo": 64850,
+          "rate": 0.0675
+        },
+        {
+          "upTo": null,
+          "rate": 0.0715
+        }
+      ],
+      "standard_deduction": 15300
+    },
+    "abbr": "ME",
+    "slug": "maine",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-ME-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Maine's $15,300 standard deduction from gross wages, then apply the 3-bracket state schedule (5.80%-7.15%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Maine resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Maine state tax: Marginal tax on $49,700 taxable income (after $15,300 deduction) = $3,094.45",
+          "Net annual pay: $65,000 - $13,686.95 = $51,313.05 (≈$4,276.09/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Maine's income tax brackets for 2026?",
+        "a": "Maine uses 3 marginal brackets ranging from 5.80% to 7.15%. Standard deduction: $15,300 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Maine?",
+        "a": "On a $65,000 gross salary, a single filer in Maine takes home roughly $51,313.05/year (about $4,276.09/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "md": {
+    "name": "Maryland",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Comptroller of Maryland",
+      "url": "https://www.marylandtaxes.gov/",
+      "statute_ref": "Md. Code, Tax-General § 10-105 — 2026 budget added a 6.5% top bracket over $1,000,000"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 1000,
+          "rate": 0.02
+        },
+        {
+          "upTo": 2000,
+          "rate": 0.03
+        },
+        {
+          "upTo": 3000,
+          "rate": 0.04
+        },
+        {
+          "upTo": 100000,
+          "rate": 0.0475
+        },
+        {
+          "upTo": 125000,
+          "rate": 0.05
+        },
+        {
+          "upTo": 150000,
+          "rate": 0.0525
+        },
+        {
+          "upTo": 250000,
+          "rate": 0.055
+        },
+        {
+          "upTo": 1000000,
+          "rate": 0.0575
+        },
+        {
+          "upTo": null,
+          "rate": 0.065
+        }
+      ],
+      "standard_deduction": 2550
+    },
+    "abbr": "MD",
+    "slug": "maryland",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-MD-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Maryland's $2,550 standard deduction from gross wages, then apply the 9-bracket state schedule (2%-6.50%) marginally.",
+        "What's left is your net take-home pay before any local tax."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Maryland resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Maryland state tax: Marginal tax on $62,450 taxable income (after $2,550 deduction) = $2,913.88",
+          "Net annual pay: $65,000 - $13,506.38 = $51,493.62 (≈$4,291.14/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Maryland's income tax brackets for 2026?",
+        "a": "Maryland uses 9 marginal brackets ranging from 2% to 6.50%. Standard deduction: $2,550 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Maryland?",
+        "a": "On a $65,000 gross salary, a single filer in Maryland takes home roughly $51,493.62/year (about $4,291.14/month) after federal tax, FICA, and state tax — before any local tax."
+      },
+      {
+        "q": "Does this calculator include Maryland local or city income tax?",
+        "a": "Every Maryland county plus Baltimore City adds a local \"piggyback\" income tax of 1.75%-3.2% on the same return — this is one of the largest local-tax gaps in this calculator. Combined state+local can reach ~8.95%. Not computed here; check your county's rate."
+      }
+    ]
+  },
+  "ma": {
+    "name": "Massachusetts",
+    "formula_model": "flat_tax",
+    "effective_date": "2023-01-01",
+    "source": {
+      "agency_name": "Massachusetts Department of Revenue",
+      "url": "https://www.mass.gov/orgs/massachusetts-department-of-revenue",
+      "statute_ref": "Mass. Gen. Laws ch. 62 § 4 — flat 5% plus 4% surtax on income over $1M (2022 ballot amendment)"
+    },
+    "params": {
+      "rate": 0.05,
+      "personal_exemption": 4400,
+      "surtax": {
+        "threshold": 1083150,
+        "rate": 0.04
+      }
+    },
+    "abbr": "MA",
+    "slug": "massachusetts",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-MA-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Massachusetts's $4,400 personal exemption from gross wages, then apply the flat 5% state rate. An additional 4% surtax applies to income over $1,083,150.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Massachusetts resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Massachusetts state tax: ($65,000 - $4,400 deduction) × 5.00% = $3,030",
+          "Net annual pay: $65,000 - $13,622.5 = $51,377.5 (≈$4,281.46/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is Massachusetts's state income tax rate?",
+        "a": "Massachusetts charges a flat 5% rate for tax year 2026."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Massachusetts?",
+        "a": "On a $65,000 gross salary, a single filer in Massachusetts takes home roughly $51,377.5/year (about $4,281.46/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "mn": {
+    "name": "Minnesota",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Minnesota Department of Revenue",
+      "url": "https://www.revenue.state.mn.us/",
+      "statute_ref": "Minn. Stat. § 290.06"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 31690,
+          "rate": 0.0535
+        },
+        {
+          "upTo": 104090,
+          "rate": 0.068
+        },
+        {
+          "upTo": 193240,
+          "rate": 0.0785
+        },
+        {
+          "upTo": null,
+          "rate": 0.0985
+        }
+      ],
+      "standard_deduction": 14575
+    },
+    "abbr": "MN",
+    "slug": "minnesota",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-MN-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Minnesota's $14,575 standard deduction from gross wages, then apply the 4-bracket state schedule (5.35%-9.85%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Minnesota resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Minnesota state tax: Marginal tax on $50,425 taxable income (after $14,575 deduction) = $2,969.4",
+          "Net annual pay: $65,000 - $13,561.9 = $51,438.1 (≈$4,286.51/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Minnesota's income tax brackets for 2026?",
+        "a": "Minnesota uses 4 marginal brackets ranging from 5.35% to 9.85%. Standard deduction: $14,575 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Minnesota?",
+        "a": "On a $65,000 gross salary, a single filer in Minnesota takes home roughly $51,438.1/year (about $4,286.51/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "ms": {
+    "name": "Mississippi",
+    "formula_model": "flat_tax",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Mississippi Department of Revenue",
+      "url": "https://www.dor.ms.gov/",
+      "statute_ref": "Miss. Code § 27-7-5 — first $10,000 exempt, flat 4.4% above"
+    },
+    "params": {
+      "rate": 0.044,
+      "standard_deduction": 10000
+    },
+    "abbr": "MS",
+    "slug": "mississippi",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-MS-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Mississippi's $10,000 standard deduction from gross wages, then apply the flat 4.40% state rate.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Mississippi resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Mississippi state tax: ($65,000 - $10,000 deduction) × 4.40% = $2,420",
+          "Net annual pay: $65,000 - $13,012.5 = $51,987.5 (≈$4,332.29/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is Mississippi's state income tax rate?",
+        "a": "Mississippi charges a flat 4.40% rate for tax year 2026. Standard deduction: $10,000 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Mississippi?",
+        "a": "On a $65,000 gross salary, a single filer in Mississippi takes home roughly $51,987.5/year (about $4,332.29/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "mo": {
+    "name": "Missouri",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Missouri Department of Revenue",
+      "url": "https://dor.mo.gov/",
+      "statute_ref": "Mo. Rev. Stat. § 143.011"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 1313,
+          "rate": 0
+        },
+        {
+          "upTo": 2626,
+          "rate": 0.02
+        },
+        {
+          "upTo": 3939,
+          "rate": 0.025
+        },
+        {
+          "upTo": 5252,
+          "rate": 0.03
+        },
+        {
+          "upTo": 6565,
+          "rate": 0.035
+        },
+        {
+          "upTo": 7878,
+          "rate": 0.04
+        },
+        {
+          "upTo": 9191,
+          "rate": 0.045
+        },
+        {
+          "upTo": null,
+          "rate": 0.047
+        }
+      ],
+      "standard_deduction": 15750
+    },
+    "abbr": "MO",
+    "slug": "missouri",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-MO-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Missouri's $15,750 standard deduction from gross wages, then apply the 8-bracket state schedule (0%-4.70%) marginally.",
+        "What's left is your net take-home pay before any local tax."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Missouri resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Missouri state tax: Marginal tax on $49,250 taxable income (after $15,750 deduction) = $2,138.81",
+          "Net annual pay: $65,000 - $12,731.31 = $52,268.69 (≈$4,355.72/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Missouri's income tax brackets for 2026?",
+        "a": "Missouri uses 8 marginal brackets ranging from 0% to 4.70%. Standard deduction: $15,750 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Missouri?",
+        "a": "On a $65,000 gross salary, a single filer in Missouri takes home roughly $52,268.69/year (about $4,355.72/month) after federal tax, FICA, and state tax — before any local tax."
+      },
+      {
+        "q": "Does this calculator include Missouri local or city income tax?",
+        "a": "Kansas City and St. Louis each levy a 1% local earnings tax on residents (and on nonresidents working there), not computed here."
+      }
+    ]
+  },
+  "mt": {
+    "name": "Montana",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Montana Department of Revenue",
+      "url": "https://mtrevenue.gov/",
+      "statute_ref": "Mont. Code § 15-30-2103"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 20500,
+          "rate": 0.047
+        },
+        {
+          "upTo": null,
+          "rate": 0.059
+        }
+      ],
+      "standard_deduction": 5660
+    },
+    "abbr": "MT",
+    "slug": "montana",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-MT-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Montana's $5,660 standard deduction from gross wages, then apply the 2-bracket state schedule (4.70%-5.90%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Montana resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Montana state tax: Marginal tax on $59,340 taxable income (after $5,660 deduction) = $3,255.06",
+          "Net annual pay: $65,000 - $13,847.56 = $51,152.44 (≈$4,262.7/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Montana's income tax brackets for 2026?",
+        "a": "Montana uses 2 marginal brackets ranging from 4.70% to 5.90%. Standard deduction: $5,660 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Montana?",
+        "a": "On a $65,000 gross salary, a single filer in Montana takes home roughly $51,152.44/year (about $4,262.7/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "ne": {
+    "name": "Nebraska",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Nebraska Department of Revenue",
+      "url": "https://revenue.nebraska.gov/",
+      "statute_ref": "Neb. Rev. Stat. § 77-2715.03 — cut to 3-bracket, 4.55% top rate for 2026"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 2399,
+          "rate": 0.0246
+        },
+        {
+          "upTo": 17999,
+          "rate": 0.0351
+        },
+        {
+          "upTo": null,
+          "rate": 0.0455
+        }
+      ],
+      "standard_deduction": 16100
+    },
+    "abbr": "NE",
+    "slug": "nebraska",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-NE-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Nebraska's $16,100 standard deduction from gross wages, then apply the 3-bracket state schedule (2.46%-4.55%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Nebraska resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Nebraska state tax: Marginal tax on $48,900 taxable income (after $16,100 deduction) = $2,012.57",
+          "Net annual pay: $65,000 - $12,605.07 = $52,394.93 (≈$4,366.24/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Nebraska's income tax brackets for 2026?",
+        "a": "Nebraska uses 3 marginal brackets ranging from 2.46% to 4.55%. Standard deduction: $16,100 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Nebraska?",
+        "a": "On a $65,000 gross salary, a single filer in Nebraska takes home roughly $52,394.93/year (about $4,366.24/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "nv": {
+    "name": "Nevada",
+    "formula_model": "no_income_tax",
+    "effective_date": "1864-01-01",
+    "source": {
+      "agency_name": "Nevada Department of Taxation",
+      "url": "https://tax.nv.gov/",
+      "statute_ref": "Nev. Const. art. 10 — no personal income tax"
+    },
+    "params": {},
+    "abbr": "NV",
+    "slug": "nevada",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-NV-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Nevada charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Nevada resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Nevada state tax: No state income tax.",
+          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does Nevada have a state income tax?",
+        "a": "No. Nevada is one of nine states with no personal income tax. Only federal income tax and FICA are withheld from your paycheck."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Nevada?",
+        "a": "On a $65,000 gross salary, a single filer in Nevada takes home roughly $54,407.5/year (about $4,533.96/month) after federal tax, FICA."
+      }
+    ]
+  },
+  "nh": {
+    "name": "New Hampshire",
+    "formula_model": "no_income_tax",
+    "effective_date": "2025-01-01",
+    "source": {
+      "agency_name": "New Hampshire Department of Revenue Administration",
+      "url": "https://www.revenue.nh.gov/",
+      "statute_ref": "Interest & Dividends Tax fully repealed effective 2025-01-01 — no tax on any personal income including wages"
+    },
+    "params": {},
+    "abbr": "NH",
+    "slug": "new-hampshire",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-NH-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "New Hampshire charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, New Hampshire resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "New Hampshire state tax: No state income tax.",
+          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does New Hampshire have a state income tax?",
+        "a": "No. New Hampshire is one of nine states with no personal income tax. Only federal income tax and FICA are withheld from your paycheck."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in New Hampshire?",
+        "a": "On a $65,000 gross salary, a single filer in New Hampshire takes home roughly $54,407.5/year (about $4,533.96/month) after federal tax, FICA."
+      }
+    ]
+  },
+  "nj": {
+    "name": "New Jersey",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "New Jersey Division of Taxation",
+      "url": "https://www.nj.gov/treasury/taxation/",
+      "statute_ref": "N.J. Stat. § 54A:2-1 — 7-bracket schedule"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 20000,
+          "rate": 0.014
+        },
+        {
+          "upTo": 35000,
+          "rate": 0.0175
+        },
+        {
+          "upTo": 40000,
+          "rate": 0.035
+        },
+        {
+          "upTo": 75000,
+          "rate": 0.05525
+        },
+        {
+          "upTo": 500000,
+          "rate": 0.0637
+        },
+        {
+          "upTo": 1000000,
+          "rate": 0.0897
+        },
+        {
+          "upTo": null,
+          "rate": 0.1075
+        }
+      ],
+      "personal_exemption": 1000
+    },
+    "abbr": "NJ",
+    "slug": "new-jersey",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-NJ-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract New Jersey's $1,000 personal exemption from gross wages, then apply the 7-bracket state schedule (1.40%-10.75%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, New Jersey resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "New Jersey state tax: Marginal tax on $64,000 taxable income (after $1,000 deduction) = $2,043.5",
+          "Net annual pay: $65,000 - $12,636 = $52,364 (≈$4,363.67/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are New Jersey's income tax brackets for 2026?",
+        "a": "New Jersey uses 7 marginal brackets ranging from 1.40% to 10.75%."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in New Jersey?",
+        "a": "On a $65,000 gross salary, a single filer in New Jersey takes home roughly $52,364/year (about $4,363.67/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "nm": {
+    "name": "New Mexico",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2025-01-01",
+    "source": {
+      "agency_name": "New Mexico Taxation and Revenue Department",
+      "url": "https://www.tax.newmexico.gov/",
+      "statute_ref": "N.M. Stat. § 7-2-7, as amended by HB 252 (2024)"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 5500,
+          "rate": 0.015
+        },
+        {
+          "upTo": 11000,
+          "rate": 0.032
+        },
+        {
+          "upTo": 16000,
+          "rate": 0.043
+        },
+        {
+          "upTo": 210000,
+          "rate": 0.047
+        },
+        {
+          "upTo": null,
+          "rate": 0.059
+        }
+      ],
+      "standard_deduction": 14600
+    },
+    "abbr": "NM",
+    "slug": "new-mexico",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-NM-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract New Mexico's $14,600 standard deduction from gross wages, then apply the 5-bracket state schedule (1.50%-5.90%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, New Mexico resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "New Mexico state tax: Marginal tax on $50,400 taxable income (after $14,600 deduction) = $2,090.3",
+          "Net annual pay: $65,000 - $12,682.8 = $52,317.2 (≈$4,359.77/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are New Mexico's income tax brackets for 2026?",
+        "a": "New Mexico uses 5 marginal brackets ranging from 1.50% to 5.90%. Standard deduction: $14,600 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in New Mexico?",
+        "a": "On a $65,000 gross salary, a single filer in New Mexico takes home roughly $52,317.2/year (about $4,359.77/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "nd": {
+    "name": "North Dakota",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "North Dakota Office of State Tax Commissioner",
+      "url": "https://www.tax.nd.gov/",
+      "statute_ref": "N.D. Cent. Code § 57-38-30.3"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 44725,
+          "rate": 0.0195
+        },
+        {
+          "upTo": null,
+          "rate": 0.025
+        }
+      ],
+      "standard_deduction": 16100
+    },
+    "abbr": "ND",
+    "slug": "north-dakota",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-ND-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract North Dakota's $16,100 standard deduction from gross wages, then apply the 2-bracket state schedule (1.95%-2.50%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, North Dakota resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "North Dakota state tax: Marginal tax on $48,900 taxable income (after $16,100 deduction) = $976.51",
+          "Net annual pay: $65,000 - $11,569.01 = $53,430.99 (≈$4,452.58/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are North Dakota's income tax brackets for 2026?",
+        "a": "North Dakota uses 2 marginal brackets ranging from 1.95% to 2.50%. Standard deduction: $16,100 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in North Dakota?",
+        "a": "On a $65,000 gross salary, a single filer in North Dakota takes home roughly $53,430.99/year (about $4,452.58/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "ok": {
+    "name": "Oklahoma",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Oklahoma Tax Commission",
+      "url": "https://oklahoma.gov/tax.html",
+      "statute_ref": "Okla. Stat. tit. 68 § 2355"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 1000,
+          "rate": 0.0025
+        },
+        {
+          "upTo": 2500,
+          "rate": 0.0075
+        },
+        {
+          "upTo": 3750,
+          "rate": 0.0175
+        },
+        {
+          "upTo": 4900,
+          "rate": 0.0275
+        },
+        {
+          "upTo": 7200,
+          "rate": 0.0375
+        },
+        {
+          "upTo": null,
+          "rate": 0.0475
+        }
+      ],
+      "standard_deduction": 6350
+    },
+    "abbr": "OK",
+    "slug": "oklahoma",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-OK-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Oklahoma's $6,350 standard deduction from gross wages, then apply the 6-bracket state schedule (0.25%-4.75%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Oklahoma resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Oklahoma state tax: Marginal tax on $58,650 taxable income (after $6,350 deduction) = $2,597.38",
+          "Net annual pay: $65,000 - $13,189.88 = $51,810.12 (≈$4,317.51/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Oklahoma's income tax brackets for 2026?",
+        "a": "Oklahoma uses 6 marginal brackets ranging from 0.25% to 4.75%. Standard deduction: $6,350 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Oklahoma?",
+        "a": "On a $65,000 gross salary, a single filer in Oklahoma takes home roughly $51,810.12/year (about $4,317.51/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "or": {
+    "name": "Oregon",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Oregon Department of Revenue",
+      "url": "https://www.oregon.gov/dor/",
+      "statute_ref": "Or. Rev. Stat. § 316.037"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 4050,
+          "rate": 0.0475
+        },
+        {
+          "upTo": 10200,
+          "rate": 0.0675
+        },
+        {
+          "upTo": 125000,
+          "rate": 0.0875
+        },
+        {
+          "upTo": null,
+          "rate": 0.099
+        }
+      ],
+      "standard_deduction": 2875
+    },
+    "abbr": "OR",
+    "slug": "oregon",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-OR-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Oregon's $2,875 standard deduction from gross wages, then apply the 4-bracket state schedule (4.75%-9.90%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Oregon resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Oregon state tax: Marginal tax on $62,125 taxable income (after $2,875 deduction) = $5,150.94",
+          "Net annual pay: $65,000 - $15,743.44 = $49,256.56 (≈$4,104.71/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Oregon's income tax brackets for 2026?",
+        "a": "Oregon uses 4 marginal brackets ranging from 4.75% to 9.90%. Standard deduction: $2,875 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Oregon?",
+        "a": "On a $65,000 gross salary, a single filer in Oregon takes home roughly $49,256.56/year (about $4,104.71/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "ri": {
+    "name": "Rhode Island",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Rhode Island Division of Taxation",
+      "url": "https://tax.ri.gov/",
+      "statute_ref": "R.I. Gen. Laws § 44-30-2.6"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 73450,
+          "rate": 0.0375
+        },
+        {
+          "upTo": 166950,
+          "rate": 0.0475
+        },
+        {
+          "upTo": null,
+          "rate": 0.0599
+        }
+      ],
+      "standard_deduction": 10550,
+      "personal_exemption": 4700
+    },
+    "abbr": "RI",
+    "slug": "rhode-island",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-RI-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Rhode Island's $10,550 standard deduction and $4,700 personal exemption from gross wages, then apply the 3-bracket state schedule (3.75%-5.99%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Rhode Island resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Rhode Island state tax: Marginal tax on $49,750 taxable income (after $15,250 deduction) = $1,865.63",
+          "Net annual pay: $65,000 - $12,458.13 = $52,541.87 (≈$4,378.49/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Rhode Island's income tax brackets for 2026?",
+        "a": "Rhode Island uses 3 marginal brackets ranging from 3.75% to 5.99%. Standard deduction: $10,550 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Rhode Island?",
+        "a": "On a $65,000 gross salary, a single filer in Rhode Island takes home roughly $52,541.87/year (about $4,378.49/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "sc": {
+    "name": "South Carolina",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "South Carolina Department of Revenue",
+      "url": "https://dor.sc.gov/",
+      "statute_ref": "H.4216 (signed 2026-03-30) — 2-bracket overhaul, 1.99% under $30,000 / 5.21% above, decoupling from the federal standard deduction"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 30000,
+          "rate": 0.0199
+        },
+        {
+          "upTo": null,
+          "rate": 0.0521
+        }
+      ],
+      "standard_deduction": 0
+    },
+    "abbr": "SC",
+    "slug": "south-carolina",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-SC-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract South Carolina's apply the 2-bracket state schedule (1.99%-5.21%) marginally to gross wages.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, South Carolina resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "South Carolina state tax: Marginal tax on $65,000 taxable income (after $0 deduction) = $2,420.5",
+          "Net annual pay: $65,000 - $13,013 = $51,987 (≈$4,332.25/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are South Carolina's income tax brackets for 2026?",
+        "a": "South Carolina uses 2 marginal brackets ranging from 1.99% to 5.21%."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in South Carolina?",
+        "a": "On a $65,000 gross salary, a single filer in South Carolina takes home roughly $51,987/year (about $4,332.25/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "sd": {
+    "name": "South Dakota",
+    "formula_model": "no_income_tax",
+    "effective_date": "1943-01-01",
+    "source": {
+      "agency_name": "South Dakota Department of Revenue",
+      "url": "https://dor.sd.gov/",
+      "statute_ref": "S.D. Const. art. XI — no personal income tax"
+    },
+    "params": {},
+    "abbr": "SD",
+    "slug": "south-dakota",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-SD-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "South Dakota charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, South Dakota resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "South Dakota state tax: No state income tax.",
+          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does South Dakota have a state income tax?",
+        "a": "No. South Dakota is one of nine states with no personal income tax. Only federal income tax and FICA are withheld from your paycheck."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in South Dakota?",
+        "a": "On a $65,000 gross salary, a single filer in South Dakota takes home roughly $54,407.5/year (about $4,533.96/month) after federal tax, FICA."
+      }
+    ]
+  },
+  "tn": {
+    "name": "Tennessee",
+    "formula_model": "no_income_tax",
+    "effective_date": "2021-01-01",
+    "source": {
+      "agency_name": "Tennessee Department of Revenue",
+      "url": "https://www.tn.gov/revenue",
+      "statute_ref": "Hall Tax (on interest/dividends) fully repealed 2021-01-01 — no tax on any personal income including wages"
+    },
+    "params": {},
+    "abbr": "TN",
+    "slug": "tennessee",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-TN-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Tennessee charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Tennessee resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Tennessee state tax: No state income tax.",
+          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does Tennessee have a state income tax?",
+        "a": "No. Tennessee is one of nine states with no personal income tax. Only federal income tax and FICA are withheld from your paycheck."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Tennessee?",
+        "a": "On a $65,000 gross salary, a single filer in Tennessee takes home roughly $54,407.5/year (about $4,533.96/month) after federal tax, FICA."
+      }
+    ]
+  },
+  "ut": {
+    "name": "Utah",
+    "formula_model": "flat_tax",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Utah State Tax Commission",
+      "url": "https://tax.utah.gov/",
+      "statute_ref": "SB 60 (2026) — flat 4.45% rate, down from 4.5%"
+    },
+    "params": {
+      "rate": 0.0445,
+      "credit": 840
+    },
+    "abbr": "UT",
+    "slug": "utah",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-UT-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Utah's flat 4.45% state rate to gross wages. Subtract the $840 nonrefundable credit from the result.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Utah resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Utah state tax: ($65,000 - $0 deduction) × 4.45% - $840 credit = $2,052.5",
+          "Net annual pay: $65,000 - $12,645 = $52,355 (≈$4,362.92/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What is Utah's state income tax rate?",
+        "a": "Utah charges a flat 4.45% rate for tax year 2026."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Utah?",
+        "a": "On a $65,000 gross salary, a single filer in Utah takes home roughly $52,355/year (about $4,362.92/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "vt": {
+    "name": "Vermont",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Vermont Department of Taxes",
+      "url": "https://tax.vermont.gov/",
+      "statute_ref": "32 V.S.A. § 5822"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 45400,
+          "rate": 0.0335
+        },
+        {
+          "upTo": 110050,
+          "rate": 0.066
+        },
+        {
+          "upTo": 229550,
+          "rate": 0.076
+        },
+        {
+          "upTo": null,
+          "rate": 0.0875
+        }
+      ],
+      "standard_deduction": 7000
+    },
+    "abbr": "VT",
+    "slug": "vermont",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-VT-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Vermont's $7,000 standard deduction from gross wages, then apply the 4-bracket state schedule (3.35%-8.75%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Vermont resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Vermont state tax: Marginal tax on $58,000 taxable income (after $7,000 deduction) = $2,352.5",
+          "Net annual pay: $65,000 - $12,945 = $52,055 (≈$4,337.92/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Vermont's income tax brackets for 2026?",
+        "a": "Vermont uses 4 marginal brackets ranging from 3.35% to 8.75%. Standard deduction: $7,000 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Vermont?",
+        "a": "On a $65,000 gross salary, a single filer in Vermont takes home roughly $52,055/year (about $4,337.92/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "va": {
+    "name": "Virginia",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Virginia Department of Taxation",
+      "url": "https://www.tax.virginia.gov/",
+      "statute_ref": "Va. Code § 58.1-320"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 3000,
+          "rate": 0.02
+        },
+        {
+          "upTo": 5000,
+          "rate": 0.03
+        },
+        {
+          "upTo": 17000,
+          "rate": 0.05
+        },
+        {
+          "upTo": null,
+          "rate": 0.0575
+        }
+      ],
+      "standard_deduction": 8750,
+      "personal_exemption": 930
+    },
+    "abbr": "VA",
+    "slug": "virginia",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-VA-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Virginia's $8,750 standard deduction and $930 personal exemption from gross wages, then apply the 4-bracket state schedule (2%-5.75%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Virginia resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Virginia state tax: Marginal tax on $55,320 taxable income (after $9,680 deduction) = $2,923.4",
+          "Net annual pay: $65,000 - $13,515.9 = $51,484.1 (≈$4,290.34/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Virginia's income tax brackets for 2026?",
+        "a": "Virginia uses 4 marginal brackets ranging from 2% to 5.75%. Standard deduction: $8,750 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Virginia?",
+        "a": "On a $65,000 gross salary, a single filer in Virginia takes home roughly $51,484.1/year (about $4,290.34/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "wa": {
+    "name": "Washington",
+    "formula_model": "no_income_tax",
+    "effective_date": "1933-01-01",
+    "source": {
+      "agency_name": "Washington Department of Revenue",
+      "url": "https://dor.wa.gov/",
+      "statute_ref": "No personal income tax on wages"
+    },
+    "params": {},
+    "abbr": "WA",
+    "slug": "washington",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-WA-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Washington charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Washington resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Washington state tax: No state income tax.",
+          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does Washington have a state income tax?",
+        "a": "No. Washington is one of nine states with no personal income tax. Only federal income tax and FICA are withheld from your paycheck."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Washington?",
+        "a": "On a $65,000 gross salary, a single filer in Washington takes home roughly $54,407.5/year (about $4,533.96/month) after federal tax, FICA."
+      }
+    ]
+  },
+  "wv": {
+    "name": "West Virginia",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "West Virginia State Tax Department",
+      "url": "https://tax.wv.gov/",
+      "statute_ref": "W. Va. Code § 11-21-4e — rates cut ~5% for 2026"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 10000,
+          "rate": 0.0211
+        },
+        {
+          "upTo": 25000,
+          "rate": 0.0246
+        },
+        {
+          "upTo": 40000,
+          "rate": 0.0272
+        },
+        {
+          "upTo": 60000,
+          "rate": 0.0326
+        },
+        {
+          "upTo": null,
+          "rate": 0.0458
+        }
+      ],
+      "standard_deduction": 0
+    },
+    "abbr": "WV",
+    "slug": "west-virginia",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-WV-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract West Virginia's apply the 5-bracket state schedule (2.11%-4.58%) marginally to gross wages.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, West Virginia resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "West Virginia state tax: Marginal tax on $65,000 taxable income (after $0 deduction) = $1,869",
+          "Net annual pay: $65,000 - $12,461.5 = $52,538.5 (≈$4,378.21/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are West Virginia's income tax brackets for 2026?",
+        "a": "West Virginia uses 5 marginal brackets ranging from 2.11% to 4.58%."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in West Virginia?",
+        "a": "On a $65,000 gross salary, a single filer in West Virginia takes home roughly $52,538.5/year (about $4,378.21/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "wi": {
+    "name": "Wisconsin",
+    "formula_model": "progressive_brackets",
+    "effective_date": "2026-01-01",
+    "source": {
+      "agency_name": "Wisconsin Department of Revenue",
+      "url": "https://www.revenue.wi.gov/",
+      "statute_ref": "Wis. Stat. § 71.06"
+    },
+    "params": {
+      "brackets": [
+        {
+          "upTo": 14320,
+          "rate": 0.0354
+        },
+        {
+          "upTo": 28640,
+          "rate": 0.0465
+        },
+        {
+          "upTo": 315310,
+          "rate": 0.053
+        },
+        {
+          "upTo": null,
+          "rate": 0.0765
+        }
+      ],
+      "standard_deduction": 12760
+    },
+    "abbr": "WI",
+    "slug": "wisconsin",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-WI-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Subtract Wisconsin's $12,760 standard deduction from gross wages, then apply the 4-bracket state schedule (3.54%-7.65%) marginally.",
+        "What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Wisconsin resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Wisconsin state tax: Marginal tax on $52,240 taxable income (after $12,760 deduction) = $2,423.61",
+          "Net annual pay: $65,000 - $13,016.11 = $51,983.89 (≈$4,331.99/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "What are Wisconsin's income tax brackets for 2026?",
+        "a": "Wisconsin uses 4 marginal brackets ranging from 3.54% to 7.65%. Standard deduction: $12,760 for single filers."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Wisconsin?",
+        "a": "On a $65,000 gross salary, a single filer in Wisconsin takes home roughly $51,983.89/year (about $4,331.99/month) after federal tax, FICA, and state tax."
+      }
+    ]
+  },
+  "wy": {
+    "name": "Wyoming",
+    "formula_model": "no_income_tax",
+    "effective_date": "1913-01-01",
+    "source": {
+      "agency_name": "Wyoming Department of Revenue",
+      "url": "https://revenue.wyo.gov/",
+      "statute_ref": "No personal income tax"
+    },
+    "params": {},
+    "abbr": "WY",
+    "slug": "wyoming",
+    "last_verified": "2026-07-26",
+    "guideline_version": "2026-WY-v1",
+    "worksheet": {
+      "steps": [
+        "Start with your gross annual salary.",
+        "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
+        "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
+        "Wyoming charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+      ],
+      "example": {
+        "scenario": "Example: $65,000/year gross salary, single filer, Wyoming resident.",
+        "calculation": [
+          "Federal tax: $5,620",
+          "FICA: $4,972.5",
+          "Wyoming state tax: No state income tax.",
+          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"
+        ]
+      }
+    },
+    "faq_extra": [
+      {
+        "q": "Does Wyoming have a state income tax?",
+        "a": "No. Wyoming is one of nine states with no personal income tax. Only federal income tax and FICA are withheld from your paycheck."
+      },
+      {
+        "q": "How much is take-home pay on $65,000 in Wyoming?",
+        "a": "On a $65,000 gross salary, a single filer in Wyoming takes home roughly $54,407.5/year (about $4,533.96/month) after federal tax, FICA."
+      }
     ]
   }
 }

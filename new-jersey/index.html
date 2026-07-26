@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Jersey Paycheck Calculator — Take-Home Pay 2026</title>
+<meta name="description" content="Free New Jersey paycheck calculator. Estimate your 2026 take-home pay after federal tax, FICA, and New Jersey state tax — updated 2026-07-26.">
+<link rel="canonical" href="https://paycheck-calculator-usa.pages.dev/new-jersey/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="New Jersey Paycheck Calculator — Take-Home Pay 2026">
+<meta property="og:description" content="Free New Jersey paycheck calculator. Estimate your 2026 take-home pay after federal tax, FICA, and New Jersey state tax — updated 2026-07-26.">
+<meta property="og:url" content="https://paycheck-calculator-usa.pages.dev/new-jersey/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"New Jersey Paycheck Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-26","version":"2026-NJ-v1","author":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}},"publisher":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are New Jersey's income tax brackets for 2026?","acceptedAnswer":{"@type":"Answer","text":"New Jersey uses 7 marginal brackets ranging from 1.40% to 10.75%."}},{"@type":"Question","name":"How much is take-home pay on $65,000 in New Jersey?","acceptedAnswer":{"@type":"Answer","text":"On a $65,000 gross salary, a single filer in New Jersey takes home roughly $52,364/year (about $4,363.67/month) after federal tax, FICA, and state tax."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://paycheck-calculator-usa.pages.dev/"},{"@type":"ListItem","position":2,"name":"New Jersey","item":"https://paycheck-calculator-usa.pages.dev/new-jersey/"}]},{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}]}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a></p>
+  <h1>New Jersey Paycheck Calculator</h1>
+  <p class="badge">Estimate your 2026 take-home pay after federal tax, FICA, and New Jersey state tax</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Single-filer assumption, based on standard federal/state calculations. See methodology below for source and last-verified date. For your exact withholding, consult a tax professional or your payroll department.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      
+      <label>Gross Annual Salary ($)
+        <input type="number" id="grossIncome" min="0" step="100" value="65000" required>
+      </label>
+      <label>Pay Frequency
+        <select id="payFrequency">
+          <option value="annual">Annual</option>
+          <option value="monthly">Monthly</option>
+          <option value="semimonthly">Semi-Monthly (24/yr)</option>
+          <option value="biweekly" selected>Bi-Weekly (26/yr)</option>
+          <option value="weekly">Weekly</option>
+        </select>
+      </label>
+      <button type="submit">Calculate Take-Home Pay →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
+        <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
+        <div class="result-item"><span class="label">New Jersey State Tax</span><span class="value" id="result-state"></span></div>
+        <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+      </div>
+      
+    </div>
+  </section>
+
+  
+    <section id="worksheet" class="seo-section">
+      <h2>How to Calculate Your New Jersey Take-Home Pay</h2>
+      <ol><li>Start with your gross annual salary.</li><li>Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).</li><li>Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).</li><li>Subtract New Jersey's $1,000 personal exemption from gross wages, then apply the 7-bracket state schedule (1.40%-10.75%) marginally.</li><li>What's left is your net take-home pay.</li></ol>
+      <h3>Example: $65,000/year gross salary, single filer, New Jersey resident.</h3>
+      <ol><li>Federal tax: $5,620</li><li>FICA: $4,972.5</li><li>New Jersey state tax: Marginal tax on $64,000 taxable income (after $1,000 deduction) = $2,043.5</li><li>Net annual pay: $65,000 - $12,636 = $52,364 (≈$4,363.67/month)</li></ol>
+    </section>
+  
+    <section id="formula" class="seo-section formula-section">
+      <h2>How New Jersey Paycheck Tax Is Calculated (2026)</h2>
+      <span class="source-line">Source: New Jersey Division of Taxation</span>
+      
+        <table>
+          <tr><th>Taxable income bracket</th><th>Rate</th></tr>
+          <tr><td>$0 – $20,000</td><td>1.40%</td></tr><tr><td>$20,000 – $35,000</td><td>1.75%</td></tr><tr><td>$35,000 – $40,000</td><td>3.50%</td></tr><tr><td>$40,000 – $75,000</td><td>5.53%</td></tr><tr><td>$75,000 – $500,000</td><td>6.37%</td></tr><tr><td>$500,000 – $1,000,000</td><td>8.97%</td></tr><tr><td>$1,000,000 – +</td><td>10.75%</td></tr>
+        </table>
+        
+        <div class="formula-code">state_tax = marginal_bracket_tax(gross_income - 0, brackets)</div>
+      
+      <h3>Federal Tax &amp; FICA (shared across all states)</h3>
+      <table>
+        <tr><th>Federal standard deduction (single)</th><td>$16,100</td></tr>
+        <tr><th>Federal brackets</th><td>10% / 12% / 22% / 24% / 32% / 35% / 37%</td></tr>
+        <tr><th>Social Security</th><td>6.2% up to $184,500 wage base</td></tr>
+        <tr><th>Medicare</th><td>1.45% on all wages, +0.9% above $200,000</td></tr>
+      </table>
+      
+      <p class="formula-footnote">Guideline version 2026-NJ-v1 · Last verified 2026-07-26</p>
+    </section>
+  
+    <section id="faq" class="seo-section">
+      <h2>New Jersey Paycheck Calculator FAQ</h2>
+      
+      <details class="faq-item">
+        <summary>What are New Jersey's income tax brackets for 2026?</summary>
+        <p>New Jersey uses 7 marginal brackets ranging from 1.40% to 10.75%.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How much is take-home pay on $65,000 in New Jersey?</summary>
+        <p>On a $65,000 gross salary, a single filer in New Jersey takes home roughly $52,364/year (about $4,363.67/month) after federal tax, FICA, and state tax.</p>
+      </details>
+    </section>
+  
+    <section id="methodology" class="methodology">
+      <h2>Methodology &amp; Source</h2>
+      <p>New Jersey state tax figures sourced from <strong>New Jersey Division of Taxation</strong> (<a href="https://www.nj.gov/treasury/taxation/" target="_blank" rel="nofollow noopener">https://www.nj.gov/treasury/taxation/</a>), citing N.J. Stat. § 54A:2-1 — 7-bracket schedule. Federal brackets and FICA constants sourced from the IRS (Revenue Procedure 2025-32).</p>
+      <p class="deviation-note">This is an estimate based on standard single-filer federal, FICA, and NJ state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. New Jersey has no standard deduction, only a $1,000 personal exemption. New Jersey SDI/FLI (small mandatory payroll deductions, typically well under 1% in recent years) are not modeled here.</p>
+      <p>Guideline version: 2026-NJ-v1 · Effective: 2026-01-01 · Last verified: 2026-07-26</p>
+    </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+
+    <script src="/assets/calc-engine.js"></script>
+    <script>
+    const STATE_ENTRY = {"name":"New Jersey","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"New Jersey Division of Taxation","url":"https://www.nj.gov/treasury/taxation/","statute_ref":"N.J. Stat. § 54A:2-1 — 7-bracket schedule"},"params":{"brackets":[{"upTo":20000,"rate":0.014},{"upTo":35000,"rate":0.0175},{"upTo":40000,"rate":0.035},{"upTo":75000,"rate":0.05525},{"upTo":500000,"rate":0.0637},{"upTo":1000000,"rate":0.0897},{"upTo":null,"rate":0.1075}],"personal_exemption":1000},"abbr":"NJ","slug":"new-jersey","last_verified":"2026-07-26","guideline_version":"2026-NJ-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract New Jersey's $1,000 personal exemption from gross wages, then apply the 7-bracket state schedule (1.40%-10.75%) marginally.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, New Jersey resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","New Jersey state tax: Marginal tax on $64,000 taxable income (after $1,000 deduction) = $2,043.5","Net annual pay: $65,000 - $12,636 = $52,364 (≈$4,363.67/month)"]}},"faq_extra":[{"q":"What are New Jersey's income tax brackets for 2026?","a":"New Jersey uses 7 marginal brackets ranging from 1.40% to 10.75%."},{"q":"How much is take-home pay on $65,000 in New Jersey?","a":"On a $65,000 gross salary, a single filer in New Jersey takes home roughly $52,364/year (about $4,363.67/month) after federal tax, FICA, and state tax."}]};
+    const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and NJ state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. New Jersey has no standard deduction, only a $1,000 personal exemption. New Jersey SDI/FLI (small mandatory payroll deductions, typically well under 1% in recent years) are not modeled here."};
+
+    function runCalculation(e) {
+        e.preventDefault();
+        const gross = parseFloat(document.getElementById('grossIncome').value) || 0;
+        const freq = document.getElementById('payFrequency').value;
+        const r = calculatePaycheck(STATE_ENTRY, RULES, gross, freq);
+        const freqLabel = { annual: 'Annual', monthly: 'Monthly', semimonthly: 'Semi-Monthly', biweekly: 'Bi-Weekly', weekly: 'Weekly' }[freq];
+
+        document.getElementById('result-amount').textContent = fmtMoney(r.netPerPeriod) + ' / ' + freqLabel.toLowerCase();
+        document.getElementById('result-net-annual').textContent = fmtMoney(r.netAnnual);
+        document.getElementById('result-federal').textContent = fmtMoney(r.federalTax);
+        document.getElementById('result-fica').textContent = fmtMoney(r.fica.total);
+        document.getElementById('result-state').textContent = fmtMoney(r.stateTax);
+        const extraRow = document.getElementById('result-extra-row');
+        if (r.extraPayrollTax.amount > 0) {
+            extraRow.hidden = false;
+            document.getElementById('result-extra-label').textContent = r.extraPayrollTax.name;
+            document.getElementById('result-extra').textContent = fmtMoney(r.extraPayrollTax.amount);
+        } else {
+            extraRow.hidden = true;
+        }
+        document.getElementById('results-block').hidden = false;
+    }
+    document.getElementById('calc-form').addEventListener('submit', runCalculation);
+    document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+    </script>
+</body>
+</html>
