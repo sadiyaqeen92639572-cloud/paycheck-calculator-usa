@@ -122,11 +122,14 @@ function faqSection(state) {
     </section>`;
 }
 
-function methodologySection(state, rules) {
+function methodologySection(state, rules, opts = {}) {
+    const { bonus = false } = opts;
     return `
     <section id="methodology" class="methodology">
       <h2>Methodology &amp; Source</h2>
       <p>${state.name} state tax figures sourced from <strong>${state.source.agency_name}</strong> (<a href="${state.source.url}" target="_blank" rel="nofollow noopener">${state.source.url}</a>), citing ${state.source.statute_ref}. Federal brackets, standard deductions (single/MFJ/HoH), and FICA constants sourced from the IRS (Revenue Procedure 2025-32; married-filing-jointly Additional Medicare threshold of $250,000 is a separate, unindexed statutory figure). ${state.filing_status_backfilled ? `${state.name}'s married-filing-jointly and head-of-household figures have been independently verified against the source above.` : `${state.name}'s married-filing-jointly and head-of-household figures are not yet independently verified and currently fall back to single-filer brackets — see the caveat in the formula section above.`}</p>
+      ${rules.local_tax ? `<p>Local tax figures sourced from <strong>${rules.local_tax.source.agency_name}</strong>${rules.local_tax.source.url ? ` (<a href="${rules.local_tax.source.url}" target="_blank" rel="nofollow noopener">${rules.local_tax.source.url}</a>)` : ''}. ${rules.local_tax.source.note}</p>` : ''}
+      ${bonus ? `<p>Bonus federal withholding uses the flat supplemental-wage rate (22%, 37% above $1,000,000 cumulative supplemental wages/year), per IRS Publication 15 (Circular E), Employer's Tax Guide, 2026 edition — the alternative "aggregate method" is not modeled.</p>` : ''}
       <p class="deviation-note">${rules.deviation_note}</p>
       ${rules.extra_payroll_tax ? `<p>Pre-tax deductions assumption: HSA and health insurance premium contributions are assumed to also reduce the ${rules.extra_payroll_tax.name} wage base, consistent with their FICA wage treatment. This is a reasonable default, not independently verified against ${state.name}'s specific ${rules.extra_payroll_tax.name} statute.</p>` : ''}
       <p>Guideline version: ${state.guideline_version} · Effective: ${state.effective_date} · Last verified: ${state.last_verified}</p>
@@ -643,7 +646,7 @@ function renderBonusStatePage(state) {
 
   ${formulaSection(state, rules)}
   ${faqSection(state)}
-  ${methodologySection(state, rules)}
+  ${methodologySection(state, rules, { bonus: true })}
 </main>
 
 <footer>
