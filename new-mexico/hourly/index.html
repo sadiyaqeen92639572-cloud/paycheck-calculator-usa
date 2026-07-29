@@ -72,6 +72,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -162,6 +163,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"New Mexico","formula_model":"progressive_brackets","effective_date":"2025-01-01","source":{"agency_name":"New Mexico Taxation and Revenue Department","url":"https://www.tax.newmexico.gov/","statute_ref":"N.M. Stat. § 7-2-7, as amended by HB 252 (2024)"},"params":{"brackets":[{"upTo":5500,"rate":0.015},{"upTo":11000,"rate":0.032},{"upTo":16000,"rate":0.043},{"upTo":210000,"rate":0.047},{"upTo":null,"rate":0.059}],"standard_deduction":14600},"abbr":"NM","slug":"new-mexico","last_verified":"2026-07-26","guideline_version":"2026-NM-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract New Mexico's $14,600 standard deduction from gross wages, then apply the 5-bracket state schedule (1.50%-5.90%) marginally.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, New Mexico resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","New Mexico state tax: Marginal tax on $50,400 taxable income (after $14,600 deduction) = $2,090.3","Net annual pay: $65,000 - $12,682.8 = $52,317.2 (≈$4,359.77/month)"]}},"faq_extra":[{"q":"What are New Mexico's income tax brackets for 2026?","a":"New Mexico uses 5 marginal brackets ranging from 1.50% to 5.90%. Standard deduction: $14,600 for single filers."},{"q":"How much is take-home pay on $65,000 in New Mexico?","a":"On a $65,000 gross salary, a single filer in New Mexico takes home roughly $52,317.2/year (about $4,359.77/month) after federal tax, FICA, and state tax."},{"q":"What deductions does New Mexico apply before taxing my income?","a":"New Mexico applies a $14,600 standard deduction, before its marginal bracket schedule. See the \"How New Mexico Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and New Mexico state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check New Mexico Taxation and Revenue Department's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and NM state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. HB 252 (2024) restructured New Mexico's brackets with a possible additional intermediate tier around $16,000-$210,000; this estimate uses the historically stable 5-bracket structure, which may not capture the newest intermediate bracket precisely — verify against tax.newmexico.gov for high-precision use."};
@@ -244,6 +246,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

@@ -280,6 +280,7 @@ function calculatorScript(state, rules, mode = 'salary') {
         : `const gross = parseFloat(document.getElementById('grossIncome').value) || 0;`;
     return `
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = ${JSON.stringify(state)};
     const RULES = ${JSON.stringify(rules)};
@@ -359,6 +360,15 @@ function calculatorScript(state, rules, mode = 'salary') {
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
@@ -368,6 +378,7 @@ function calculatorScript(state, rules, mode = 'salary') {
 function bonusCalculatorScript(state, rules) {
     return `
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = ${JSON.stringify(state)};
     const RULES = ${JSON.stringify(rules)};
@@ -408,6 +419,15 @@ function bonusCalculatorScript(state, rules) {
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.bonusAmount,
+            federalTax: r.bonusFederalTax,
+            ficaTotal: r.bonusFica,
+            stateTax: r.bonusStateTax,
+            localTax: r.bonusLocalTax ? r.bonusLocalTax.amount : 0,
+            extraPayrollTax: r.bonusExtraPayrollTax,
+            netAnnual: r.bonusNet
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
@@ -454,6 +474,7 @@ function renderStatePage(state) {
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -531,6 +552,7 @@ function renderHourlyStatePage(state) {
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -604,6 +626,7 @@ function renderBonusStatePage(state) {
     </form>
     <div id="results-block" hidden>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Bonus Amount</span><span class="value" id="result-bonus-gross"></span></div>
         <div class="result-item"><span class="label">Federal Tax (22% flat)</span><span class="value" id="result-federal"></span></div>

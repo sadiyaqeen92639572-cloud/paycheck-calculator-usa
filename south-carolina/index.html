@@ -66,6 +66,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -155,6 +156,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"South Carolina","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"South Carolina Department of Revenue","url":"https://dor.sc.gov/","statute_ref":"H.4216 (signed 2026-03-30) — 2-bracket overhaul, 1.99% under $30,000 / 5.21% above, decoupling from the federal standard deduction"},"params":{"brackets":[{"upTo":30000,"rate":0.0199},{"upTo":null,"rate":0.0521}],"standard_deduction":15000},"abbr":"SC","slug":"south-carolina","last_verified":"2026-07-26","guideline_version":"2026-SC-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract South Carolina's apply the 2-bracket state schedule (1.99%-5.21%) marginally to gross wages.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, South Carolina resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","South Carolina state tax: Marginal tax on $65,000 taxable income (after $0 deduction) = $2,420.5","Net annual pay: $65,000 - $13,013 = $51,987 (≈$4,332.25/month)"]}},"faq_extra":[{"q":"What are South Carolina's income tax brackets for 2026?","a":"South Carolina uses 2 marginal brackets ranging from 1.99% to 5.21%."},{"q":"How much is take-home pay on $65,000 in South Carolina?","a":"On a $65,000 gross salary, a single filer in South Carolina takes home roughly $51,987/year (about $4,332.25/month) after federal tax, FICA, and state tax."},{"q":"What deductions does South Carolina apply before taxing my income?","a":"South Carolina applies a $15,000 standard deduction, before its marginal bracket schedule. See the \"How South Carolina Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and South Carolina state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check South Carolina Department of Revenue's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and SC state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. H.4216 replaces the federal standard deduction with a new \"South Carolina Income Adjusted Deduction\" (SCIAD) of $15,000 for single filers — but that amount phases out on a sliding scale between $40,000 and $95,000 of federal AGI (numerator = AGI over $40,000, denominator = $55,000). This estimate applies the full $15,000 regardless of income, which understates SC tax for filers in that phase-out band. Verify at dor.sc.gov for high-precision use."};
@@ -234,6 +236,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

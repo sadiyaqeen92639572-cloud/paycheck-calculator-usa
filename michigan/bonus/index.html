@@ -55,6 +55,7 @@
     </form>
     <div id="results-block" hidden>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Bonus Amount</span><span class="value" id="result-bonus-gross"></span></div>
         <div class="result-item"><span class="label">Federal Tax (22% flat)</span><span class="value" id="result-federal"></span></div>
@@ -130,6 +131,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"Michigan","abbr":"MI","slug":"michigan","formula_model":"flat_tax","effective_date":"2026-01-01","last_verified":"2026-07-26","guideline_version":"2026-MI-v1","source":{"agency_name":"Michigan Department of Treasury","url":"https://www.michigan.gov/taxes","statute_ref":"MCL 206.51 — flat rate, 4.25% for 2026; personal exemption per Treasury 2026 Withholding Guide (Form 446)"},"params":{"rate":0.0425,"standard_deduction":0,"personal_exemption":5900,"personal_exemption_mfj":11800},"worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).","Subtract Michigan's $5,900 personal exemption from gross wages, then apply the flat 4.25% state rate.","What's left is your net take-home pay before any city income tax (e.g. Detroit)."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Michigan resident.","calculation":["Federal tax: $5,620","FICA: $65,000 × 7.65% = $4,972.50","MI taxable wages: $65,000 - $5,900 = $59,100 → MI tax: $59,100 × 4.25% = $2,511.75","Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,511.75 = $51,895.75 (≈$4,324.65/month, before local city tax)"]}},"faq_extra":[{"q":"What is Michigan's state income tax rate?","a":"Michigan charges a flat 4.25% rate for 2026, with a $5,900 personal exemption per filer."},{"q":"Does this calculator include Detroit's city income tax?","a":"No. This estimate covers only Michigan's 4.25% state tax. Several Michigan cities, including Detroit (2.4% for residents), Grand Rapids, and Lansing, levy an additional local income tax not computed here."},{"q":"How much is take-home pay on $65,000 in Michigan?","a":"On a $65,000 gross salary, a single filer in Michigan takes home roughly $51,928/year (about $4,327/month) after federal tax, FICA, and the state's 4.25% flat tax — before any city tax."}],"filing_status_backfilled":true};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":"This estimate excludes Michigan city income tax. Several cities, including Detroit (2.4% for residents), Grand Rapids, Lansing, and others, levy an additional local income tax not computed here.","deviation_note":"This is an estimate based on standard single-filer federal, FICA, and MI state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, local city tax, and other factors."};
@@ -170,6 +172,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.bonusAmount,
+            federalTax: r.bonusFederalTax,
+            ficaTotal: r.bonusFica,
+            stateTax: r.bonusStateTax,
+            localTax: r.bonusLocalTax ? r.bonusLocalTax.amount : 0,
+            extraPayrollTax: r.bonusExtraPayrollTax,
+            netAnnual: r.bonusNet
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

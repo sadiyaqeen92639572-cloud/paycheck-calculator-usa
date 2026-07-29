@@ -66,6 +66,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -155,6 +156,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"District of Columbia","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"DC Office of Tax and Revenue","url":"https://otr.cfo.dc.gov/","statute_ref":"D.C. Code § 47-1806.03"},"params":{"brackets":[{"upTo":10000,"rate":0.04},{"upTo":40000,"rate":0.06},{"upTo":60000,"rate":0.065},{"upTo":350000,"rate":0.085},{"upTo":1000000,"rate":0.0925},{"upTo":null,"rate":0.1075}],"standard_deduction":15700},"abbr":"DC","slug":"district-of-columbia","last_verified":"2026-07-26","guideline_version":"2026-DC-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract District of Columbia's $15,700 standard deduction from gross wages, then apply the 6-bracket state schedule (4%-10.75%) marginally.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, District of Columbia resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","District of Columbia state tax: Marginal tax on $49,300 taxable income (after $15,700 deduction) = $2,804.5","Net annual pay: $65,000 - $13,397 = $51,603 (≈$4,300.25/month)"]}},"faq_extra":[{"q":"What are District of Columbia's income tax brackets for 2026?","a":"District of Columbia uses 6 marginal brackets ranging from 4% to 10.75%. Standard deduction: $15,700 for single filers."},{"q":"How much is take-home pay on $65,000 in District of Columbia?","a":"On a $65,000 gross salary, a single filer in District of Columbia takes home roughly $51,603/year (about $4,300.25/month) after federal tax, FICA, and state tax."},{"q":"What deductions does District of Columbia apply before taxing my income?","a":"District of Columbia applies a $15,700 standard deduction, before its marginal bracket schedule. See the \"How District of Columbia Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and District of Columbia state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check DC Office of Tax and Revenue's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and DC state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
@@ -234,6 +236,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

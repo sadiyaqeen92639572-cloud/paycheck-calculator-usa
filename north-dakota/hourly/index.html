@@ -72,6 +72,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -162,6 +163,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"North Dakota","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"North Dakota Office of State Tax Commissioner","url":"https://www.tax.nd.gov/","statute_ref":"N.D. Cent. Code § 57-38-30.3"},"params":{"brackets":[{"upTo":44725,"rate":0.0195},{"upTo":null,"rate":0.025}],"standard_deduction":16100},"abbr":"ND","slug":"north-dakota","last_verified":"2026-07-26","guideline_version":"2026-ND-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract North Dakota's $16,100 standard deduction from gross wages, then apply the 2-bracket state schedule (1.95%-2.50%) marginally.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, North Dakota resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","North Dakota state tax: Marginal tax on $48,900 taxable income (after $16,100 deduction) = $976.51","Net annual pay: $65,000 - $11,569.01 = $53,430.99 (≈$4,452.58/month)"]}},"faq_extra":[{"q":"What are North Dakota's income tax brackets for 2026?","a":"North Dakota uses 2 marginal brackets ranging from 1.95% to 2.50%. Standard deduction: $16,100 for single filers."},{"q":"How much is take-home pay on $65,000 in North Dakota?","a":"On a $65,000 gross salary, a single filer in North Dakota takes home roughly $53,430.99/year (about $4,452.58/month) after federal tax, FICA, and state tax."},{"q":"What deductions does North Dakota apply before taxing my income?","a":"North Dakota applies a $16,100 standard deduction, before its marginal bracket schedule. See the \"How North Dakota Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and North Dakota state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check North Dakota Office of State Tax Commissioner's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and ND state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
@@ -244,6 +246,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

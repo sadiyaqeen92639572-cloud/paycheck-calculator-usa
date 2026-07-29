@@ -69,6 +69,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -154,6 +155,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"New York","abbr":"NY","slug":"new-york","formula_model":"progressive_brackets","effective_date":"2026-01-01","last_verified":"2026-07-26","guideline_version":"2026-NY-v1","source":{"agency_name":"New York State Department of Taxation and Finance","url":"https://www.tax.ny.gov/","statute_ref":"N.Y. Tax Law § 601 — FY2026 budget cut the bottom five bracket rates 0.1 point starting tax year 2026"},"params":{"standard_deduction":8000,"brackets":[{"upTo":17150,"rate":0.04},{"upTo":23600,"rate":0.045},{"upTo":27900,"rate":0.0525},{"upTo":161550,"rate":0.0585},{"upTo":323200,"rate":0.0625},{"upTo":2155350,"rate":0.0685},{"upTo":5000000,"rate":0.0965},{"upTo":25000000,"rate":0.103},{"upTo":null,"rate":0.109}]},"worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).","Subtract New York's $8,000 standard deduction from gross wages, then apply the 9-bracket state schedule (4%-10.9%) marginally.","Subtract New York Paid Family Leave (0.432% of wages, capped at $411.91/year in 2026) — a mandatory payroll deduction, not income tax.","What's left is your net take-home pay before any New York City or Yonkers resident tax."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, New York State resident (outside NYC).","calculation":["Federal tax: $5,620","FICA: $65,000 × 7.65% = $4,972.50","NY taxable income: $65,000 - $8,000 = $57,000 → marginal NY tax ≈ $2,904.35","NY PFL: $65,000 × 0.432% = $280.80","Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,904.35 - $280.80 = $51,222.35 (≈$4,268.53/month, before NYC/Yonkers tax)"]}},"faq_extra":[{"q":"What are New York's state income tax brackets for 2026?","a":"New York has 9 brackets for single filers, from 4% on income up to $17,150 to 10.9% above $25,000,000. The FY2026 budget cut the bottom five bracket rates by 0.1 point."},{"q":"Does this calculator include New York City tax?","a":"Yes — select New York City resident (or Yonkers resident) from the local tax dropdown to include it. NYC resident tax uses 4 brackets from 3.078% to 3.876%; Yonkers resident tax is a 16.75% surcharge on your net NY state tax. Yonkers non-resident earnings tax and the MCTMT (for self-employment income) are not modeled."},{"q":"What is New York Paid Family Leave (PFL)?","a":"A mandatory employee payroll deduction — 0.432% of wages in 2026, capped at $411.91/year — that funds paid leave benefits. It is separate from income tax."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":{"name":"New York Paid Family Leave (PFL)","rate":0.00432,"wage_cap_annual_contribution":411.91,"note":"Mandatory employee payroll deduction, 0.432% of wages in 2026, capped at $411.91/year. Funds paid family leave benefits — separate from income tax."},"local_tax":{"type":"selectable","source":{"agency_name":"NYS Department of Taxation and Finance (IT-201 instructions) / City of Yonkers Code, Article IX","note":"NYC resident brackets cross-checked against two independent secondary sources 2026-07-29; Yonkers 16.75% resident surcharge (of net NY state tax) is a long-standing, unindexed statutory figure, cross-checked against a second secondary source the same day."},"options":[{"id":"none","label":"Outside NYC / Yonkers","kind":"none"},{"id":"nyc","label":"New York City resident","kind":"brackets","brackets":[{"upTo":12000,"rate":0.03078},{"upTo":25000,"rate":0.03762},{"upTo":50000,"rate":0.03819},{"upTo":null,"rate":0.03876}]},{"id":"yonkers","label":"Yonkers resident","kind":"surcharge_pct_of_state_tax","rate":0.1675}]},"local_tax_note":"This estimate now computes New York City resident tax (3.078%-3.876% brackets) and the Yonkers resident surcharge (16.75% of net NY state tax) when selected above. Not covered: Yonkers non-resident earnings tax (a separate levy on people who work, but don't live, in Yonkers) and the Metropolitan Commuter Transportation Mobility Tax (MCTMT) on self-employment income — neither is modeled here.","deviation_note":"This is an estimate based on standard single-filer federal, FICA, NY state tax, and NY PFL calculations. Actual withholding may differ based on your W-4/IT-2104 elections, pre-tax deductions, NYC/Yonkers tax, and other factors."};
@@ -233,6 +235,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

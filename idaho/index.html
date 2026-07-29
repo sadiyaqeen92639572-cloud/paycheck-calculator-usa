@@ -66,6 +66,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -155,6 +156,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"Idaho","formula_model":"flat_tax","effective_date":"2025-03-01","source":{"agency_name":"Idaho State Tax Commission","url":"https://tax.idaho.gov/","statute_ref":"HB 40 (2025) — flat 5.3% rate"},"params":{"rate":0.053,"standard_deduction":16100},"abbr":"ID","slug":"idaho","last_verified":"2026-07-26","guideline_version":"2026-ID-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Idaho's $16,100 standard deduction from gross wages, then apply the flat 5.30% state rate.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Idaho resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Idaho state tax: ($65,000 - $16,100 deduction) × 5.30% = $2,591.7","Net annual pay: $65,000 - $13,184.2 = $51,815.8 (≈$4,317.98/month)"]}},"faq_extra":[{"q":"What is Idaho's state income tax rate?","a":"Idaho charges a flat 5.30% rate for tax year 2026. Standard deduction: $16,100 for single filers."},{"q":"How much is take-home pay on $65,000 in Idaho?","a":"On a $65,000 gross salary, a single filer in Idaho takes home roughly $51,815.8/year (about $4,317.98/month) after federal tax, FICA, and state tax."},{"q":"What deductions does Idaho apply before taxing my income?","a":"Idaho applies a $16,100 standard deduction, before the flat 5.30% rate. See the \"How Idaho Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Idaho state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Idaho State Tax Commission's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and ID state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
@@ -234,6 +236,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

@@ -55,6 +55,7 @@
     </form>
     <div id="results-block" hidden>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Bonus Amount</span><span class="value" id="result-bonus-gross"></span></div>
         <div class="result-item"><span class="label">Federal Tax (22% flat)</span><span class="value" id="result-federal"></span></div>
@@ -134,6 +135,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"Massachusetts","formula_model":"flat_tax","effective_date":"2023-01-01","source":{"agency_name":"Massachusetts Department of Revenue","url":"https://www.mass.gov/orgs/massachusetts-department-of-revenue","statute_ref":"Mass. Gen. Laws ch. 62 § 4 — flat 5% plus 4% surtax on income over $1M (2022 ballot amendment)"},"params":{"rate":0.05,"personal_exemption":4400,"surtax":{"threshold":1083150,"rate":0.04}},"abbr":"MA","slug":"massachusetts","last_verified":"2026-07-26","guideline_version":"2026-MA-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Massachusetts's $4,400 personal exemption from gross wages, then apply the flat 5% state rate. An additional 4% surtax applies to income over $1,083,150.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Massachusetts resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Massachusetts state tax: ($65,000 - $4,400 deduction) × 5.00% = $3,030","Net annual pay: $65,000 - $13,622.5 = $51,377.5 (≈$4,281.46/month)"]}},"faq_extra":[{"q":"What is Massachusetts's state income tax rate?","a":"Massachusetts charges a flat 5% rate for tax year 2026."},{"q":"How much is take-home pay on $65,000 in Massachusetts?","a":"On a $65,000 gross salary, a single filer in Massachusetts takes home roughly $51,377.5/year (about $4,281.46/month) after federal tax, FICA, and state tax."},{"q":"What deductions does Massachusetts apply before taxing my income?","a":"Massachusetts applies a $4,400 personal exemption, plus an additional 4% surtax on income over $1,083,150, before the flat 5% rate. See the \"How Massachusetts Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Massachusetts state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Massachusetts Department of Revenue's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and MA state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. The millionaire's surtax threshold is inflation-indexed annually; $1,083,150 is the most recently published figure at last-verified date — confirm current threshold at mass.gov before relying on this near the boundary."};
@@ -174,6 +176,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.bonusAmount,
+            federalTax: r.bonusFederalTax,
+            ficaTotal: r.bonusFica,
+            stateTax: r.bonusStateTax,
+            localTax: r.bonusLocalTax ? r.bonusLocalTax.amount : 0,
+            extraPayrollTax: r.bonusExtraPayrollTax,
+            netAnnual: r.bonusNet
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

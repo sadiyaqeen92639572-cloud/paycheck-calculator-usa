@@ -66,6 +66,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -155,6 +156,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"West Virginia","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"West Virginia State Tax Department","url":"https://tax.wv.gov/","statute_ref":"W. Va. Code § 11-21-4e — rates cut ~5% for 2026"},"params":{"brackets":[{"upTo":10000,"rate":0.0211},{"upTo":25000,"rate":0.0246},{"upTo":40000,"rate":0.0272},{"upTo":60000,"rate":0.0326},{"upTo":null,"rate":0.0458}],"standard_deduction":0},"abbr":"WV","slug":"west-virginia","last_verified":"2026-07-26","guideline_version":"2026-WV-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract West Virginia's apply the 5-bracket state schedule (2.11%-4.58%) marginally to gross wages.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, West Virginia resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","West Virginia state tax: Marginal tax on $65,000 taxable income (after $0 deduction) = $1,869","Net annual pay: $65,000 - $12,461.5 = $52,538.5 (≈$4,378.21/month)"]}},"faq_extra":[{"q":"What are West Virginia's income tax brackets for 2026?","a":"West Virginia uses 5 marginal brackets ranging from 2.11% to 4.58%."},{"q":"How much is take-home pay on $65,000 in West Virginia?","a":"On a $65,000 gross salary, a single filer in West Virginia takes home roughly $52,538.5/year (about $4,378.21/month) after federal tax, FICA, and state tax."},{"q":"What deductions does West Virginia apply before taxing my income?","a":"West Virginia applies no standard deduction — the full rate applies to gross wages, before its marginal bracket schedule. See the \"How West Virginia Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and West Virginia state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check West Virginia State Tax Department's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and WV state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
@@ -234,6 +236,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

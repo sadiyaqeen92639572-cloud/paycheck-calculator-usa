@@ -72,6 +72,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -162,6 +163,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"Rhode Island","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"Rhode Island Division of Taxation","url":"https://tax.ri.gov/","statute_ref":"R.I. Gen. Laws § 44-30-2.6"},"params":{"brackets":[{"upTo":73450,"rate":0.0375},{"upTo":166950,"rate":0.0475},{"upTo":null,"rate":0.0599}],"standard_deduction":10550,"personal_exemption":4700},"abbr":"RI","slug":"rhode-island","last_verified":"2026-07-26","guideline_version":"2026-RI-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Rhode Island's $10,550 standard deduction and $4,700 personal exemption from gross wages, then apply the 3-bracket state schedule (3.75%-5.99%) marginally.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Rhode Island resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Rhode Island state tax: Marginal tax on $49,750 taxable income (after $15,250 deduction) = $1,865.63","Net annual pay: $65,000 - $12,458.13 = $52,541.87 (≈$4,378.49/month)"]}},"faq_extra":[{"q":"What are Rhode Island's income tax brackets for 2026?","a":"Rhode Island uses 3 marginal brackets ranging from 3.75% to 5.99%. Standard deduction: $10,550 for single filers."},{"q":"How much is take-home pay on $65,000 in Rhode Island?","a":"On a $65,000 gross salary, a single filer in Rhode Island takes home roughly $52,541.87/year (about $4,378.49/month) after federal tax, FICA, and state tax."},{"q":"What deductions does Rhode Island apply before taxing my income?","a":"Rhode Island applies a $10,550 standard deduction, plus a $4,700 personal exemption, before its marginal bracket schedule. See the \"How Rhode Island Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Rhode Island state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Rhode Island Division of Taxation's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and RI state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
@@ -244,6 +246,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

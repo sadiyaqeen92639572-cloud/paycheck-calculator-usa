@@ -72,6 +72,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -152,6 +153,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"Florida","abbr":"FL","slug":"florida","formula_model":"no_income_tax","effective_date":"1924-01-01","last_verified":"2026-07-26","guideline_version":"2026-FL-v1","source":{"agency_name":"Florida Department of Revenue","url":"https://floridarevenue.com/","statute_ref":"Fla. Const. art. VII, § 5 (constitutional ban on a state income tax)"},"params":{},"worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Florida charges no state income tax — your paycheck stops there. What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Florida resident.","calculation":["Federal taxable income: $65,000 - $16,100 = $48,900 → federal tax = $1,240 + ($48,900 - $12,400) × 12% = $5,620","FICA: $65,000 × 7.65% = $4,972.50","Florida state tax: $0","Net annual pay: $65,000 - $5,620 - $4,972.50 = $54,407.50 (≈$4,533.96/month)"]}},"faq_extra":[{"q":"Does Florida have a state income tax?","a":"No. Florida's constitution (art. VII, § 5) has barred a state personal income tax since 1924. Only federal income tax and FICA are withheld from Florida paychecks."},{"q":"How much is take-home pay on $65,000 in Florida?","a":"On a $65,000 gross salary, a single filer in Florida takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA — no state tax is withheld."},{"q":"Why does Florida have no income tax?","a":"Florida funds state government primarily through sales tax and tourism-related revenue instead of a personal income tax, a structure protected by its state constitution."}],"filing_status_backfilled":true};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal and FICA calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions (401k, health insurance), and other factors."};
@@ -234,6 +236,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

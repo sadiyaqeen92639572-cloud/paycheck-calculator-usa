@@ -72,6 +72,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -162,6 +163,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"Oklahoma","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"Oklahoma Tax Commission","url":"https://oklahoma.gov/tax.html","statute_ref":"Okla. Stat. tit. 68 § 2355"},"params":{"brackets":[{"upTo":1000,"rate":0.0025},{"upTo":2500,"rate":0.0075},{"upTo":3750,"rate":0.0175},{"upTo":4900,"rate":0.0275},{"upTo":7200,"rate":0.0375},{"upTo":null,"rate":0.0475}],"standard_deduction":6350},"abbr":"OK","slug":"oklahoma","last_verified":"2026-07-26","guideline_version":"2026-OK-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Oklahoma's $6,350 standard deduction from gross wages, then apply the 6-bracket state schedule (0.25%-4.75%) marginally.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Oklahoma resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Oklahoma state tax: Marginal tax on $58,650 taxable income (after $6,350 deduction) = $2,597.38","Net annual pay: $65,000 - $13,189.88 = $51,810.12 (≈$4,317.51/month)"]}},"faq_extra":[{"q":"What are Oklahoma's income tax brackets for 2026?","a":"Oklahoma uses 6 marginal brackets ranging from 0.25% to 4.75%. Standard deduction: $6,350 for single filers."},{"q":"How much is take-home pay on $65,000 in Oklahoma?","a":"On a $65,000 gross salary, a single filer in Oklahoma takes home roughly $51,810.12/year (about $4,317.51/month) after federal tax, FICA, and state tax."},{"q":"What deductions does Oklahoma apply before taxing my income?","a":"Oklahoma applies a $6,350 standard deduction, before its marginal bracket schedule. See the \"How Oklahoma Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Oklahoma state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Oklahoma Tax Commission's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and OK state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
@@ -244,6 +246,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

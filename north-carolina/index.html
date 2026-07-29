@@ -66,6 +66,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -151,6 +152,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"North Carolina","abbr":"NC","slug":"north-carolina","formula_model":"flat_tax","effective_date":"2026-01-01","last_verified":"2026-07-26","guideline_version":"2026-NC-v1","source":{"agency_name":"North Carolina Department of Revenue","url":"https://www.ncdor.gov/taxes-forms/individual-income-tax/tax-rate-schedules","statute_ref":"Session Law 2023-134 — phased-down flat rate, 3.99% for taxable years after 2025"},"params":{"rate":0.0399,"standard_deduction":12750,"personal_exemption":0,"standard_deduction_mfj":25500,"standard_deduction_hoh":19125},"worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).","Subtract North Carolina's $12,750 single standard deduction from gross wages, then apply the flat 3.99% state rate.","What's left is your net take-home pay — North Carolina has no local income tax."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, North Carolina resident.","calculation":["Federal tax: $5,620","FICA: $65,000 × 7.65% = $4,972.50","NC taxable wages: $65,000 - $12,750 = $52,250 → NC tax: $52,250 × 3.99% = $2,084.78","Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,084.78 = $52,322.72 (≈$4,360.23/month)"]}},"faq_extra":[{"q":"Is North Carolina's income tax rate still dropping?","a":"Yes. Under Session Law 2023-134, North Carolina's flat rate has phased down annually — 4.5% (2024), 4.25% (2025), 3.99% (2026) — with further cuts to 3.75% (2027) and 3.5% (2028) scheduled if state revenue triggers are met."},{"q":"What is North Carolina's standard deduction for 2026?","a":"$12,750 for single filers under current law. A pending bill (S437) would raise it to $13,000, but that had not been enacted as of this page's last-verified date — check ncdor.gov for the final figure."},{"q":"Does North Carolina have local income tax?","a":"No. North Carolina counties and municipalities do not levy separate local income taxes on wages."}],"filing_status_backfilled":true};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and NC state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions (401k, health insurance), and other factors. NC's flat rate is scheduled to keep dropping annually — check ncdor.gov for the current year's confirmed figure."};
@@ -230,6 +232,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

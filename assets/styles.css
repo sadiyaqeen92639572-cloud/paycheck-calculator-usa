@@ -25,6 +25,7 @@ button:hover { background: #065f46; }
 #results-block { margin-top: 20px; padding: 20px; background: var(--brand-light); border-radius: var(--radius); }
 #results-block[hidden] { display: none; }
 .result-amount { font-size: 2rem; font-weight: 800; margin: 0 0 8px; }
+#breakdown-chart { display: block; width: 100%; border-radius: 6px; margin-bottom: 16px; }
 .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 14px; }
 .result-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
 .result-item .label { font-size: .72rem; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); display: block; }

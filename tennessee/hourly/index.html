@@ -72,6 +72,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -156,6 +157,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"Tennessee","formula_model":"no_income_tax","effective_date":"2021-01-01","source":{"agency_name":"Tennessee Department of Revenue","url":"https://www.tn.gov/revenue","statute_ref":"Hall Tax (on interest/dividends) fully repealed 2021-01-01 — no tax on any personal income including wages"},"params":{},"abbr":"TN","slug":"tennessee","last_verified":"2026-07-26","guideline_version":"2026-TN-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Tennessee charges no state income tax — your paycheck stops there. What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Tennessee resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Tennessee state tax: No state income tax.","Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"]}},"faq_extra":[{"q":"Does Tennessee have a state income tax?","a":"No. Tennessee is one of nine states with no personal income tax. Only federal income tax and FICA are withheld from your paycheck."},{"q":"How much is take-home pay on $65,000 in Tennessee?","a":"On a $65,000 gross salary, a single filer in Tennessee takes home roughly $54,407.5/year (about $4,533.96/month) after federal tax, FICA."},{"q":"Why doesn't Tennessee have a state income tax?","a":"Tennessee is constitutionally or statutorily barred from levying a personal income tax on wages. See the Methodology section below for the specific citation."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Tennessee Department of Revenue's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and TN state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
@@ -238,6 +240,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

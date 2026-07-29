@@ -55,6 +55,7 @@
     </form>
     <div id="results-block" hidden>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Bonus Amount</span><span class="value" id="result-bonus-gross"></span></div>
         <div class="result-item"><span class="label">Federal Tax (22% flat)</span><span class="value" id="result-federal"></span></div>
@@ -134,6 +135,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"Virginia","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"Virginia Department of Taxation","url":"https://www.tax.virginia.gov/","statute_ref":"Va. Code § 58.1-320"},"params":{"brackets":[{"upTo":3000,"rate":0.02},{"upTo":5000,"rate":0.03},{"upTo":17000,"rate":0.05},{"upTo":null,"rate":0.0575}],"standard_deduction":8750,"personal_exemption":930},"abbr":"VA","slug":"virginia","last_verified":"2026-07-26","guideline_version":"2026-VA-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Virginia's $8,750 standard deduction and $930 personal exemption from gross wages, then apply the 4-bracket state schedule (2%-5.75%) marginally.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Virginia resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Virginia state tax: Marginal tax on $55,320 taxable income (after $9,680 deduction) = $2,923.4","Net annual pay: $65,000 - $13,515.9 = $51,484.1 (≈$4,290.34/month)"]}},"faq_extra":[{"q":"What are Virginia's income tax brackets for 2026?","a":"Virginia uses 4 marginal brackets ranging from 2% to 5.75%. Standard deduction: $8,750 for single filers."},{"q":"How much is take-home pay on $65,000 in Virginia?","a":"On a $65,000 gross salary, a single filer in Virginia takes home roughly $51,484.1/year (about $4,290.34/month) after federal tax, FICA, and state tax."},{"q":"What deductions does Virginia apply before taxing my income?","a":"Virginia applies a $8,750 standard deduction, plus a $930 personal exemption, before its marginal bracket schedule. See the \"How Virginia Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Virginia state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Virginia Department of Taxation's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and VA state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
@@ -174,6 +176,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.bonusAmount,
+            federalTax: r.bonusFederalTax,
+            ficaTotal: r.bonusFica,
+            stateTax: r.bonusStateTax,
+            localTax: r.bonusLocalTax ? r.bonusLocalTax.amount : 0,
+            extraPayrollTax: r.bonusExtraPayrollTax,
+            netAnnual: r.bonusNet
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

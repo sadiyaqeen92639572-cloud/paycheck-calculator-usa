@@ -66,6 +66,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -159,6 +160,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"Indiana","formula_model":"flat_tax","effective_date":"2026-01-01","source":{"agency_name":"Indiana Department of Revenue","url":"https://www.in.gov/dor/","statute_ref":"Ind. Code § 6-3-2-1 — flat 2.95% for 2026"},"params":{"rate":0.0295,"standard_deduction":0},"abbr":"IN","slug":"indiana","last_verified":"2026-07-26","guideline_version":"2026-IN-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Indiana's flat 2.95% state rate to gross wages.","What's left is your net take-home pay before any local tax."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Indiana resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Indiana state tax: ($65,000 - $0 deduction) × 2.95% = $1,917.5","Net annual pay: $65,000 - $12,510 = $52,490 (≈$4,374.17/month)"]}},"faq_extra":[{"q":"What is Indiana's state income tax rate?","a":"Indiana charges a flat 2.95% rate for tax year 2026."},{"q":"How much is take-home pay on $65,000 in Indiana?","a":"On a $65,000 gross salary, a single filer in Indiana takes home roughly $52,490/year (about $4,374.17/month) after federal tax, FICA, and state tax — before any local tax."},{"q":"What deductions does Indiana apply before taxing my income?","a":"Indiana applies no standard deduction — the full rate applies to gross wages, before the flat 2.95% rate. See the \"How Indiana Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Indiana state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Indiana Department of Revenue's married-filing-jointly tables for a precise figure."},{"q":"Does this calculator include Indiana local or city income tax?","a":"Indiana's 92 counties each levy their own local income tax (resident-based), ranging 0.50%-3.38% — often larger than any single layer in this calculator's other states. Not computed here; check your county's rate."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":"Indiana's 92 counties each levy their own local income tax (resident-based), ranging 0.50%-3.38% — often larger than any single layer in this calculator's other states. Not computed here; check your county's rate.","deviation_note":"This is an estimate based on standard single-filer federal, FICA, and IN state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
@@ -238,6 +240,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

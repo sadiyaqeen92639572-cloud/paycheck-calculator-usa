@@ -66,6 +66,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -155,6 +156,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"Hawaii","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"Hawaii Department of Taxation","url":"https://files.hawaii.gov/tax/","statute_ref":"Haw. Rev. Stat. § 235-51 — 12-bracket schedule"},"params":{"brackets":[{"upTo":9600,"rate":0.014},{"upTo":14400,"rate":0.032},{"upTo":19200,"rate":0.055},{"upTo":24000,"rate":0.064},{"upTo":36000,"rate":0.068},{"upTo":48000,"rate":0.072},{"upTo":125000,"rate":0.076},{"upTo":175000,"rate":0.079},{"upTo":225000,"rate":0.0825},{"upTo":275000,"rate":0.09},{"upTo":325000,"rate":0.1},{"upTo":null,"rate":0.11}],"standard_deduction":2200},"abbr":"HI","slug":"hawaii","last_verified":"2026-07-26","guideline_version":"2026-HI-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Hawaii's $2,200 standard deduction from gross wages, then apply the 12-bracket state schedule (1.40%-11%) marginally.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Hawaii resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Hawaii state tax: Marginal tax on $62,800 taxable income (after $2,200 deduction) = $3,664","Net annual pay: $65,000 - $14,256.5 = $50,743.5 (≈$4,228.63/month)"]}},"faq_extra":[{"q":"What are Hawaii's income tax brackets for 2026?","a":"Hawaii uses 12 marginal brackets ranging from 1.40% to 11%. Standard deduction: $2,200 for single filers."},{"q":"How much is take-home pay on $65,000 in Hawaii?","a":"On a $65,000 gross salary, a single filer in Hawaii takes home roughly $50,743.5/year (about $4,228.63/month) after federal tax, FICA, and state tax."},{"q":"What deductions does Hawaii apply before taxing my income?","a":"Hawaii applies a $2,200 standard deduction, before its marginal bracket schedule. See the \"How Hawaii Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Hawaii state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Hawaii Department of Taxation's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and HI state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
@@ -234,6 +236,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

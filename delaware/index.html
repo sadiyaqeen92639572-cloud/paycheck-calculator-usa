@@ -66,6 +66,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -155,6 +156,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"Delaware","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"Delaware Division of Revenue","url":"https://revenue.delaware.gov/","statute_ref":"Del. Code tit. 30 § 1102"},"params":{"brackets":[{"upTo":2000,"rate":0},{"upTo":5000,"rate":0.022},{"upTo":10000,"rate":0.039},{"upTo":20000,"rate":0.048},{"upTo":25000,"rate":0.052},{"upTo":60000,"rate":0.0555},{"upTo":null,"rate":0.066}],"standard_deduction":3250},"abbr":"DE","slug":"delaware","last_verified":"2026-07-26","guideline_version":"2026-DE-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Delaware's $3,250 standard deduction from gross wages, then apply the 7-bracket state schedule (0%-6.60%) marginally.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Delaware resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Delaware state tax: Marginal tax on $61,750 taxable income (after $3,250 deduction) = $3,059","Net annual pay: $65,000 - $13,651.5 = $51,348.5 (≈$4,279.04/month)"]}},"faq_extra":[{"q":"What are Delaware's income tax brackets for 2026?","a":"Delaware uses 7 marginal brackets ranging from 0% to 6.60%. Standard deduction: $3,250 for single filers."},{"q":"How much is take-home pay on $65,000 in Delaware?","a":"On a $65,000 gross salary, a single filer in Delaware takes home roughly $51,348.5/year (about $4,279.04/month) after federal tax, FICA, and state tax."},{"q":"What deductions does Delaware apply before taxing my income?","a":"Delaware applies a $3,250 standard deduction, before its marginal bracket schedule. See the \"How Delaware Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Delaware state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Delaware Division of Revenue's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":"This estimate excludes the City of Wilmington's 1.25% wage tax, which applies to both residents and anyone who works within Wilmington city limits (Wilmington is the only Delaware municipality permitted to levy this tax). Not computed here.","deviation_note":"This is an estimate based on standard single-filer federal, FICA, and DE state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
@@ -234,6 +236,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

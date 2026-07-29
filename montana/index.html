@@ -66,6 +66,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -155,6 +156,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"Montana","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"Montana Department of Revenue","url":"https://mtrevenue.gov/","statute_ref":"Mont. Code § 15-30-2103"},"params":{"brackets":[{"upTo":20500,"rate":0.047},{"upTo":null,"rate":0.059}],"standard_deduction":5660},"abbr":"MT","slug":"montana","last_verified":"2026-07-26","guideline_version":"2026-MT-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Montana's $5,660 standard deduction from gross wages, then apply the 2-bracket state schedule (4.70%-5.90%) marginally.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Montana resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Montana state tax: Marginal tax on $59,340 taxable income (after $5,660 deduction) = $3,255.06","Net annual pay: $65,000 - $13,847.56 = $51,152.44 (≈$4,262.7/month)"]}},"faq_extra":[{"q":"What are Montana's income tax brackets for 2026?","a":"Montana uses 2 marginal brackets ranging from 4.70% to 5.90%. Standard deduction: $5,660 for single filers."},{"q":"How much is take-home pay on $65,000 in Montana?","a":"On a $65,000 gross salary, a single filer in Montana takes home roughly $51,152.44/year (about $4,262.7/month) after federal tax, FICA, and state tax."},{"q":"What deductions does Montana apply before taxing my income?","a":"Montana applies a $5,660 standard deduction, before its marginal bracket schedule. See the \"How Montana Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Montana state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Montana Department of Revenue's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and MT state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Montana's standard deduction is actually 20% of AGI (min $2,830, max $5,660), not a fixed amount; this estimate uses the maximum, which understates tax for lower incomes."};
@@ -234,6 +236,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

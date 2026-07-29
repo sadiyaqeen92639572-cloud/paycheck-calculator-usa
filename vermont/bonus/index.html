@@ -55,6 +55,7 @@
     </form>
     <div id="results-block" hidden>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Bonus Amount</span><span class="value" id="result-bonus-gross"></span></div>
         <div class="result-item"><span class="label">Federal Tax (22% flat)</span><span class="value" id="result-federal"></span></div>
@@ -134,6 +135,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"Vermont","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"Vermont Department of Taxes","url":"https://tax.vermont.gov/","statute_ref":"32 V.S.A. § 5822"},"params":{"brackets":[{"upTo":45400,"rate":0.0335},{"upTo":110050,"rate":0.066},{"upTo":229550,"rate":0.076},{"upTo":null,"rate":0.0875}],"standard_deduction":7000},"abbr":"VT","slug":"vermont","last_verified":"2026-07-26","guideline_version":"2026-VT-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Vermont's $7,000 standard deduction from gross wages, then apply the 4-bracket state schedule (3.35%-8.75%) marginally.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Vermont resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Vermont state tax: Marginal tax on $58,000 taxable income (after $7,000 deduction) = $2,352.5","Net annual pay: $65,000 - $12,945 = $52,055 (≈$4,337.92/month)"]}},"faq_extra":[{"q":"What are Vermont's income tax brackets for 2026?","a":"Vermont uses 4 marginal brackets ranging from 3.35% to 8.75%. Standard deduction: $7,000 for single filers."},{"q":"How much is take-home pay on $65,000 in Vermont?","a":"On a $65,000 gross salary, a single filer in Vermont takes home roughly $52,055/year (about $4,337.92/month) after federal tax, FICA, and state tax."},{"q":"What deductions does Vermont apply before taxing my income?","a":"Vermont applies a $7,000 standard deduction, before its marginal bracket schedule. See the \"How Vermont Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Vermont state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Vermont Department of Taxes's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and VT state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
@@ -174,6 +176,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.bonusAmount,
+            federalTax: r.bonusFederalTax,
+            ficaTotal: r.bonusFica,
+            stateTax: r.bonusStateTax,
+            localTax: r.bonusLocalTax ? r.bonusLocalTax.amount : 0,
+            extraPayrollTax: r.bonusExtraPayrollTax,
+            netAnnual: r.bonusNet
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

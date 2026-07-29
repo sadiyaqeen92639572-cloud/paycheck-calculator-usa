@@ -72,6 +72,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -162,6 +163,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"Utah","formula_model":"flat_tax","effective_date":"2026-01-01","source":{"agency_name":"Utah State Tax Commission","url":"https://tax.utah.gov/","statute_ref":"SB 60 (2026) — flat 4.45% rate, down from 4.5%"},"params":{"rate":0.0445,"credit":840},"abbr":"UT","slug":"utah","last_verified":"2026-07-26","guideline_version":"2026-UT-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Utah's flat 4.45% state rate to gross wages. Subtract the $840 nonrefundable credit from the result.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Utah resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Utah state tax: ($65,000 - $0 deduction) × 4.45% - $840 credit = $2,052.5","Net annual pay: $65,000 - $12,645 = $52,355 (≈$4,362.92/month)"]}},"faq_extra":[{"q":"What is Utah's state income tax rate?","a":"Utah charges a flat 4.45% rate for tax year 2026."},{"q":"How much is take-home pay on $65,000 in Utah?","a":"On a $65,000 gross salary, a single filer in Utah takes home roughly $52,355/year (about $4,362.92/month) after federal tax, FICA, and state tax."},{"q":"What deductions does Utah apply before taxing my income?","a":"Utah applies a $840 nonrefundable tax credit (subtracted from computed tax, not from taxable income), before the flat 4.45% rate. See the \"How Utah Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Utah state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Utah State Tax Commission's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and UT state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Utah has no standard deduction — instead a $840 nonrefundable personal exemption credit is subtracted directly from computed tax (modeled here), floored at $0."};
@@ -244,6 +246,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

@@ -72,6 +72,7 @@
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
         <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
@@ -166,6 +167,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"Kentucky","formula_model":"flat_tax","effective_date":"2026-01-01","source":{"agency_name":"Kentucky Department of Revenue","url":"https://revenue.ky.gov/","statute_ref":"Ky. Rev. Stat. § 141.020 — cut to 3.5% effective 2026-01-01"},"params":{"rate":0.035,"standard_deduction":3270},"abbr":"KY","slug":"kentucky","last_verified":"2026-07-26","guideline_version":"2026-KY-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Kentucky's $3,270 standard deduction from gross wages, then apply the flat 3.50% state rate.","What's left is your net take-home pay before any local tax."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Kentucky resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Kentucky state tax: ($65,000 - $3,270 deduction) × 3.50% = $2,160.55","Net annual pay: $65,000 - $12,753.05 = $52,246.95 (≈$4,353.91/month)"]}},"faq_extra":[{"q":"What is Kentucky's state income tax rate?","a":"Kentucky charges a flat 3.50% rate for tax year 2026. Standard deduction: $3,270 for single filers."},{"q":"How much is take-home pay on $65,000 in Kentucky?","a":"On a $65,000 gross salary, a single filer in Kentucky takes home roughly $52,246.95/year (about $4,353.91/month) after federal tax, FICA, and state tax — before any local tax."},{"q":"What deductions does Kentucky apply before taxing my income?","a":"Kentucky applies a $3,270 standard deduction, before the flat 3.50% rate. See the \"How Kentucky Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Kentucky state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Kentucky Department of Revenue's married-filing-jointly tables for a precise figure."},{"q":"Does this calculator include Kentucky local or city income tax?","a":"Many Kentucky cities and counties levy a local occupational/payroll tax (e.g. Louisville ~2.2%), not computed here."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":"Many Kentucky cities and counties levy a local occupational/payroll tax (e.g. Louisville ~2.2%), not computed here.","deviation_note":"This is an estimate based on standard single-filer federal, FICA, and KY state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
@@ -248,6 +250,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.grossAnnualIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.fica.total,
+            stateTax: r.stateTax,
+            localTax: r.localTax ? r.localTax.amount : 0,
+            extraPayrollTax: r.extraPayrollTax.amount,
+            netAnnual: r.netAnnual
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });

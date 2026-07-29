@@ -55,6 +55,7 @@
     </form>
     <div id="results-block" hidden>
       <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
       <div class="result-grid">
         <div class="result-item"><span class="label">Bonus Amount</span><span class="value" id="result-bonus-gross"></span></div>
         <div class="result-item"><span class="label">Federal Tax (22% flat)</span><span class="value" id="result-federal"></span></div>
@@ -130,6 +131,7 @@
 </footer>
 
     <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
     <script>
     const STATE_ENTRY = {"name":"California","abbr":"CA","slug":"california","formula_model":"progressive_brackets","effective_date":"2026-01-01","last_verified":"2026-07-26","guideline_version":"2026-CA-v1","source":{"agency_name":"California Franchise Tax Board","url":"https://www.ftb.ca.gov/","statute_ref":"Cal. Rev. & Tax. Code § 17041 — 9-bracket schedule (1%-12.3%) plus 1% Mental Health Services Tax on taxable income over $1,000,000 (top effective rate 13.3%)"},"params":{"standard_deduction":5706,"brackets":[{"upTo":10756,"rate":0.01},{"upTo":25499,"rate":0.02},{"upTo":40245,"rate":0.04},{"upTo":55866,"rate":0.06},{"upTo":70612,"rate":0.08},{"upTo":360659,"rate":0.093},{"upTo":432787,"rate":0.103},{"upTo":721314,"rate":0.113},{"upTo":1000000,"rate":0.123},{"upTo":null,"rate":0.133}],"standard_deduction_mfj":11412,"standard_deduction_hoh":11412,"brackets_mfj":[{"upTo":21512,"rate":0.01},{"upTo":50998,"rate":0.02},{"upTo":80490,"rate":0.04},{"upTo":111732,"rate":0.06},{"upTo":141224,"rate":0.08},{"upTo":721318,"rate":0.093},{"upTo":865574,"rate":0.103},{"upTo":1442628,"rate":0.113},{"upTo":2000000,"rate":0.123},{"upTo":null,"rate":0.133}]},"worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).","Subtract California's $5,706 standard deduction from gross wages, then apply the 9-bracket state schedule (1%-12.3%) marginally — plus 1% Mental Health Services Tax on income over $1,000,000.","Subtract California SDI (1.3% of all wages, no cap in 2026) — a mandatory payroll deduction, not an income tax, but it reduces your paycheck.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, California resident.","calculation":["Federal tax: $5,620","FICA: $65,000 × 7.65% = $4,972.50","CA taxable income: $65,000 - $5,706 = $59,294 → marginal CA tax = $2,203.76","CA SDI: $65,000 × 1.3% = $845","Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,203.76 - $845 = $51,358.74 (≈$4,279.90/month)"]}},"faq_extra":[{"q":"What are California's income tax brackets for 2026?","a":"California uses 9 marginal brackets from 1% (income up to $10,756) to 12.3% (over $721,314 for single filers), plus a 1% Mental Health Services Tax on taxable income over $1,000,000, for a 13.3% top effective rate."},{"q":"What is California SDI and is it a tax?","a":"State Disability Insurance (SDI) is a mandatory payroll deduction, not a state income tax — 1.3% of all wages in 2026 with no wage cap. It funds short-term disability and Paid Family Leave benefits and is withheld separately from income tax."},{"q":"How much is take-home pay on $65,000 in California?","a":"On a $65,000 gross salary, a single filer in California takes home roughly $50,942/year (about $4,245/month) after federal tax, FICA, state income tax, and SDI."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":{"name":"California SDI","rate":0.013,"wage_cap":null,"note":"Mandatory State Disability Insurance payroll deduction, 1.3% of all wages with no cap in 2026. Funds short-term disability and Paid Family Leave — separate from income tax."},"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, CA state tax, and CA SDI calculations. Actual withholding may differ based on your W-4/DE 4 elections, pre-tax deductions (401k, health insurance), and other factors. CA's exact 2026 bracket thresholds are inflation-indexed and finalized by the FTB in late 2026 — this page uses the most recently projected figures and will be updated once finalized."};
@@ -170,6 +172,15 @@
         }
 
         document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.bonusAmount,
+            federalTax: r.bonusFederalTax,
+            ficaTotal: r.bonusFica,
+            stateTax: r.bonusStateTax,
+            localTax: r.bonusLocalTax ? r.bonusLocalTax.amount : 0,
+            extraPayrollTax: r.bonusExtraPayrollTax,
+            netAnnual: r.bonusNet
+        });
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
     document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
