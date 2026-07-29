@@ -54,6 +54,20 @@ assertTrue(withHsa.federalTax < txBaseline.federalTax, 'HSA reduces federal taxa
 // --- Phase 3: hourly annualization ---
 assertEqual(engine.annualizeHourly(20, 40), 41600, 'annualizeHourly($20/hr, 40hr/wk) = $41,600');
 
+// --- Tier 2 Phase 1: bonus calculator ---
+const bonusTx = engine.calcBonusPaycheck(states.tx, txRules, 65000, 5000, 'biweekly', 'single');
+assertEqual(bonusTx.bonusFederalTax, 1100, 'TX bonus federal tax = 22% flat on $5,000 bonus');
+// Naive calcFICA(bonusAmount) would apply the SS wage cap from zero on just the bonus; the delta
+// method must NOT match that naive (wrong) approach when regular wages are within the SS cap for
+// both the regular and combined incomes (should be simple 7.65% on the bonus slice in this case).
+assertEqual(bonusTx.bonusFica, 382.5, 'TX bonus FICA = delta method, 7.65% of $5,000 (regular income well under SS cap)');
+const bonusCa = engine.calcBonusPaycheck(states.ca, caRules, 65000, 5000, 'biweekly', 'single');
+assertTrue(bonusCa.bonusStateTax > 0, 'CA bonus state tax delta > 0 for a progressive-bracket state');
+// SS wage cap proration check: regular income already at/above the cap means the bonus itself
+// should add ~0 additional Social Security (only Medicare + Additional Medicare apply).
+const bonusAtCap = engine.calcBonusPaycheck(states.tx, txRules, 184500, 10000, 'biweekly', 'single');
+assertTrue(bonusAtCap.bonusFica < 10000 * 0.0765, 'Bonus FICA below cap-naive 7.65% when regular income already exceeds the SS wage base (cap correctly prorated)');
+
 if (failures > 0) {
     console.error(`\n${failures} assertion(s) failed.`);
     process.exit(1);

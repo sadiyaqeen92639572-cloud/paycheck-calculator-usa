@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alabama Bonus Tax Calculator — Take-Home Pay 2026</title>
+<meta name="description" content="Free Alabama bonus paycheck calculator. Estimate take-home pay on a bonus using the flat 22% federal supplemental withholding method, plus FICA and Alabama state tax — updated 2026-07-26.">
+<link rel="canonical" href="https://calcpaycheck.com/alabama/bonus/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Alabama Bonus Tax Calculator — Take-Home Pay 2026">
+<meta property="og:description" content="Free Alabama bonus paycheck calculator. Estimate take-home pay on a bonus using the flat 22% federal supplemental withholding method, plus FICA and Alabama state tax — updated 2026-07-26.">
+<meta property="og:url" content="https://calcpaycheck.com/alabama/bonus/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Alabama Bonus Paycheck Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-26","version":"2026-AL-v1","author":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}},"publisher":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are Alabama's income tax brackets for 2026?","acceptedAnswer":{"@type":"Answer","text":"Alabama uses 3 marginal brackets ranging from 2% to 5%. Standard deduction: $3,000 for single filers."}},{"@type":"Question","name":"How much is take-home pay on $65,000 in Alabama?","acceptedAnswer":{"@type":"Answer","text":"On a $65,000 gross salary, a single filer in Alabama takes home roughly $51,628.5/year (about $4,302.38/month) after federal tax, FICA, and state tax — before any local tax."}},{"@type":"Question","name":"What deductions does Alabama apply before taxing my income?","acceptedAnswer":{"@type":"Answer","text":"Alabama applies a $3,000 standard deduction, plus a deduction for federal income tax paid, before its marginal bracket schedule. See the \"How Alabama Paycheck Tax Is Calculated\" section above for the exact formula."}},{"@type":"Question","name":"Does this estimate change if I'm married or have dependents?","acceptedAnswer":{"@type":"Answer","text":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Alabama state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Alabama Department of Revenue's married-filing-jointly tables for a precise figure."}},{"@type":"Question","name":"Does this calculator include Alabama local or city income tax?","acceptedAnswer":{"@type":"Answer","text":"Some Alabama cities and counties (e.g. Birmingham, Bessemer) levy a local occupational tax, typically 0.5%-2% of wages, not computed here."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://calcpaycheck.com/"},{"@type":"ListItem","position":2,"name":"Alabama","item":"https://calcpaycheck.com/alabama/"},{"@type":"ListItem","position":3,"name":"Bonus","item":"https://calcpaycheck.com/alabama/bonus/"}]},{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}]}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a> · <a href="/alabama/">Alabama Paycheck Calculator</a></p>
+  <h1>Alabama Bonus Tax Calculator</h1>
+  <p class="badge">Estimate take-home pay on a bonus, using the federal flat-rate supplemental withholding method</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Federal tax on the bonus uses the flat 22% supplemental withholding rate (37% on cumulative supplemental wages over $1,000,000/year) — the alternative "aggregate method" some employers use instead is not modeled. FICA and any state SDI/PFL are computed as the difference between your regular income with and without the bonus added, so the Social Security wage cap applies correctly. State tax on the bonus is a marginal-bracket estimate, not necessarily any special state supplemental rate. See methodology below for source and last-verified date.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      
+      <label>Regular Annual Salary ($)
+        <input type="number" id="regularAnnualGross" min="0" step="100" value="65000" required>
+      </label>
+      <label>Bonus Amount ($)
+        <input type="number" id="bonusAmount" min="0" step="50" value="5000" required>
+      </label>
+      <label>Pay Frequency (for reference only — bonus tax uses the flat-rate method, not per-period withholding)
+        <select id="payFrequency">
+          <option value="annual">Annual</option>
+          <option value="monthly">Monthly</option>
+          <option value="semimonthly">Semi-Monthly (24/yr)</option>
+          <option value="biweekly" selected>Bi-Weekly (26/yr)</option>
+          <option value="weekly">Weekly</option>
+        </select>
+      </label>
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <button type="submit">Calculate Bonus Take-Home Pay →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Bonus Amount</span><span class="value" id="result-bonus-gross"></span></div>
+        <div class="result-item"><span class="label">Federal Tax (22% flat)</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
+        <div class="result-item"><span class="label">Alabama State Tax</span><span class="value" id="result-state"></span></div>
+        <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+      </div>
+      <div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>
+    </div>
+    <p class="cross-link"><a href="/alabama/">Calculating a regular paycheck? Try our Alabama paycheck calculator →</a></p>
+    <p class="cross-link"><a href="/alabama/hourly/">Paid hourly? Try our Alabama hourly paycheck calculator →</a></p>
+  </section>
+
+  
+    <section id="formula" class="seo-section formula-section">
+      <h2>How Alabama Paycheck Tax Is Calculated (2026)</h2>
+      <span class="source-line">Source: Alabama Department of Revenue</span>
+      
+        <table>
+          <tr><th>Taxable income bracket</th><th>Rate</th></tr>
+          <tr><td>$0 – $500</td><td>2%</td></tr><tr><td>$500 – $3,000</td><td>4%</td></tr><tr><td>$3,000 – +</td><td>5%</td></tr>
+        </table>
+        <p>Standard deduction (single): $3,000, subtracted from gross income before applying brackets.</p>
+        <div class="formula-code">state_tax = marginal_bracket_tax(gross_income - 3000, brackets)</div>
+      
+      <h3>Federal Tax &amp; FICA (shared across all states)</h3>
+      <table>
+        <tr><th>Filing status</th><th>Standard deduction</th></tr>
+        <tr><td>Single</td><td>$16,100</td></tr>
+        <tr><td>Married Filing Jointly</td><td>$32,200</td></tr>
+        <tr><td>Head of Household</td><td>$24,150</td></tr>
+      </table>
+      <table>
+        <tr><th>Federal brackets (all filing statuses)</th><td>10% / 12% / 22% / 24% / 32% / 35% / 37%</td></tr>
+        <tr><th>Social Security</th><td>6.2% up to $184,500 wage base</td></tr>
+        <tr><th>Medicare</th><td>1.45% on all wages, +0.9% above $200,000 single/HoH, $250,000 MFJ</td></tr>
+      </table>
+      <p class="deviation-note">⚠️ Alabama's married-filing-jointly and head-of-household state brackets have not yet been independently verified against the primary source above — this calculator uses Alabama's single-filer brackets as an estimate when those statuses are selected.</p>
+      <div class="local-tax-note">⚠️ Some Alabama cities and counties (e.g. Birmingham, Bessemer) levy a local occupational tax, typically 0.5%-2% of wages, not computed here.</div>
+      <p class="formula-footnote">Guideline version 2026-AL-v1 · Last verified 2026-07-26</p>
+    </section>
+  
+    <section id="faq" class="seo-section">
+      <h2>Alabama Paycheck Calculator FAQ</h2>
+      
+      <details class="faq-item">
+        <summary>What are Alabama's income tax brackets for 2026?</summary>
+        <p>Alabama uses 3 marginal brackets ranging from 2% to 5%. Standard deduction: $3,000 for single filers.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How much is take-home pay on $65,000 in Alabama?</summary>
+        <p>On a $65,000 gross salary, a single filer in Alabama takes home roughly $51,628.5/year (about $4,302.38/month) after federal tax, FICA, and state tax — before any local tax.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What deductions does Alabama apply before taxing my income?</summary>
+        <p>Alabama applies a $3,000 standard deduction, plus a deduction for federal income tax paid, before its marginal bracket schedule. See the "How Alabama Paycheck Tax Is Calculated" section above for the exact formula.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does this estimate change if I'm married or have dependents?</summary>
+        <p>This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Alabama state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Alabama Department of Revenue's married-filing-jointly tables for a precise figure.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does this calculator include Alabama local or city income tax?</summary>
+        <p>Some Alabama cities and counties (e.g. Birmingham, Bessemer) levy a local occupational tax, typically 0.5%-2% of wages, not computed here.</p>
+      </details>
+    </section>
+  
+    <section id="methodology" class="methodology">
+      <h2>Methodology &amp; Source</h2>
+      <p>Alabama state tax figures sourced from <strong>Alabama Department of Revenue</strong> (<a href="https://www.revenue.alabama.gov/" target="_blank" rel="nofollow noopener">https://www.revenue.alabama.gov/</a>), citing Ala. Code § 40-18-5 — 3-bracket schedule; § 40-18-15 permits deducting federal income tax paid. Federal brackets, standard deductions (single/MFJ/HoH), and FICA constants sourced from the IRS (Revenue Procedure 2025-32; married-filing-jointly Additional Medicare threshold of $250,000 is a separate, unindexed statutory figure). Alabama's married-filing-jointly and head-of-household figures are not yet independently verified and currently fall back to single-filer brackets — see the caveat in the formula section above.</p>
+      <p class="deviation-note">This is an estimate based on standard single-filer federal, FICA, and AL state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Alabama's standard deduction is income-graduated ($2,000-$4,000 for single filers depending on AGI); this estimate uses a flat $3,000 approximation.</p>
+      
+      <p>Guideline version: 2026-AL-v1 · Effective: 2026-01-01 · Last verified: 2026-07-26</p>
+    </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+
+    <script src="/assets/calc-engine.js"></script>
+    <script>
+    const STATE_ENTRY = {"name":"Alabama","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"Alabama Department of Revenue","url":"https://www.revenue.alabama.gov/","statute_ref":"Ala. Code § 40-18-5 — 3-bracket schedule; § 40-18-15 permits deducting federal income tax paid"},"params":{"brackets":[{"upTo":500,"rate":0.02},{"upTo":3000,"rate":0.04},{"upTo":null,"rate":0.05}],"standard_deduction":3000,"federal_tax_deductible":true},"abbr":"AL","slug":"alabama","last_verified":"2026-07-26","guideline_version":"2026-AL-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Alabama's $3,000 standard deduction and the federal tax you paid from gross wages, then apply the 3-bracket state schedule (2%-5%) marginally.","What's left is your net take-home pay before any local tax."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Alabama resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Alabama state tax: Marginal tax on $56,380 taxable income (after $8,620 deduction incl. federal tax paid) = $2,779","Net annual pay: $65,000 - $13,371.5 = $51,628.5 (≈$4,302.38/month)"]}},"faq_extra":[{"q":"What are Alabama's income tax brackets for 2026?","a":"Alabama uses 3 marginal brackets ranging from 2% to 5%. Standard deduction: $3,000 for single filers."},{"q":"How much is take-home pay on $65,000 in Alabama?","a":"On a $65,000 gross salary, a single filer in Alabama takes home roughly $51,628.5/year (about $4,302.38/month) after federal tax, FICA, and state tax — before any local tax."},{"q":"What deductions does Alabama apply before taxing my income?","a":"Alabama applies a $3,000 standard deduction, plus a deduction for federal income tax paid, before its marginal bracket schedule. See the \"How Alabama Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Alabama state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Alabama Department of Revenue's married-filing-jointly tables for a precise figure."},{"q":"Does this calculator include Alabama local or city income tax?","a":"Some Alabama cities and counties (e.g. Birmingham, Bessemer) levy a local occupational tax, typically 0.5%-2% of wages, not computed here."}],"filing_status_backfilled":false};
+    const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":"Some Alabama cities and counties (e.g. Birmingham, Bessemer) levy a local occupational tax, typically 0.5%-2% of wages, not computed here.","deviation_note":"This is an estimate based on standard single-filer federal, FICA, and AL state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Alabama's standard deduction is income-graduated ($2,000-$4,000 for single filers depending on AGI); this estimate uses a flat $3,000 approximation."};
+
+    function runCalculation(e) {
+        e.preventDefault();
+        const regularAnnualGross = parseFloat(document.getElementById('regularAnnualGross').value) || 0;
+        const bonusAmount = parseFloat(document.getElementById('bonusAmount').value) || 0;
+        const freq = document.getElementById('payFrequency').value;
+        const filingStatus = document.getElementById('filingStatus').value;
+        const r = calcBonusPaycheck(STATE_ENTRY, RULES, regularAnnualGross, bonusAmount, freq, filingStatus);
+
+        document.getElementById('result-amount').textContent = fmtMoney(r.bonusNet) + ' net bonus';
+        document.getElementById('result-bonus-gross').textContent = fmtMoney(r.bonusAmount);
+        document.getElementById('result-federal').textContent = fmtMoney(r.bonusFederalTax);
+        document.getElementById('result-fica').textContent = fmtMoney(r.bonusFica);
+        document.getElementById('result-state').textContent = fmtMoney(r.bonusStateTax);
+        const extraRow = document.getElementById('result-extra-row');
+        if (r.bonusExtraPayrollTax > 0) {
+            extraRow.hidden = false;
+            document.getElementById('result-extra-label').textContent = (RULES.extra_payroll_tax && RULES.extra_payroll_tax.name) || 'Extra payroll tax';
+            document.getElementById('result-extra').textContent = fmtMoney(r.bonusExtraPayrollTax);
+        } else {
+            extraRow.hidden = true;
+        }
+
+        document.getElementById('results-block').hidden = false;
+    }
+    document.getElementById('calc-form').addEventListener('submit', runCalculation);
+    document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+    </script>
+</body>
+</html>

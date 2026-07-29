@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Hampshire Bonus Tax Calculator — Take-Home Pay 2026</title>
+<meta name="description" content="Free New Hampshire bonus paycheck calculator. Estimate take-home pay on a bonus using the flat 22% federal supplemental withholding method, plus FICA and New Hampshire state tax — updated 2026-07-26.">
+<link rel="canonical" href="https://calcpaycheck.com/new-hampshire/bonus/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="New Hampshire Bonus Tax Calculator — Take-Home Pay 2026">
+<meta property="og:description" content="Free New Hampshire bonus paycheck calculator. Estimate take-home pay on a bonus using the flat 22% federal supplemental withholding method, plus FICA and New Hampshire state tax — updated 2026-07-26.">
+<meta property="og:url" content="https://calcpaycheck.com/new-hampshire/bonus/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"New Hampshire Bonus Paycheck Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-26","version":"2026-NH-v1","author":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}},"publisher":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does New Hampshire have a state income tax?","acceptedAnswer":{"@type":"Answer","text":"No. New Hampshire is one of nine states with no personal income tax. Only federal income tax and FICA are withheld from your paycheck."}},{"@type":"Question","name":"How much is take-home pay on $65,000 in New Hampshire?","acceptedAnswer":{"@type":"Answer","text":"On a $65,000 gross salary, a single filer in New Hampshire takes home roughly $54,407.5/year (about $4,533.96/month) after federal tax, FICA."}},{"@type":"Question","name":"Why doesn't New Hampshire have a state income tax?","acceptedAnswer":{"@type":"Answer","text":"New Hampshire is constitutionally or statutorily barred from levying a personal income tax on wages. See the Methodology section below for the specific citation."}},{"@type":"Question","name":"Does this estimate change if I'm married or have dependents?","acceptedAnswer":{"@type":"Answer","text":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check New Hampshire Department of Revenue Administration's married-filing-jointly tables for a precise figure."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://calcpaycheck.com/"},{"@type":"ListItem","position":2,"name":"New Hampshire","item":"https://calcpaycheck.com/new-hampshire/"},{"@type":"ListItem","position":3,"name":"Bonus","item":"https://calcpaycheck.com/new-hampshire/bonus/"}]},{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}]}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a> · <a href="/new-hampshire/">New Hampshire Paycheck Calculator</a></p>
+  <h1>New Hampshire Bonus Tax Calculator</h1>
+  <p class="badge">Estimate take-home pay on a bonus, using the federal flat-rate supplemental withholding method</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Federal tax on the bonus uses the flat 22% supplemental withholding rate (37% on cumulative supplemental wages over $1,000,000/year) — the alternative "aggregate method" some employers use instead is not modeled. FICA and any state SDI/PFL are computed as the difference between your regular income with and without the bonus added, so the Social Security wage cap applies correctly. State tax on the bonus is a marginal-bracket estimate, not necessarily any special state supplemental rate. See methodology below for source and last-verified date.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      
+      <label>Regular Annual Salary ($)
+        <input type="number" id="regularAnnualGross" min="0" step="100" value="65000" required>
+      </label>
+      <label>Bonus Amount ($)
+        <input type="number" id="bonusAmount" min="0" step="50" value="5000" required>
+      </label>
+      <label>Pay Frequency (for reference only — bonus tax uses the flat-rate method, not per-period withholding)
+        <select id="payFrequency">
+          <option value="annual">Annual</option>
+          <option value="monthly">Monthly</option>
+          <option value="semimonthly">Semi-Monthly (24/yr)</option>
+          <option value="biweekly" selected>Bi-Weekly (26/yr)</option>
+          <option value="weekly">Weekly</option>
+        </select>
+      </label>
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <button type="submit">Calculate Bonus Take-Home Pay →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Bonus Amount</span><span class="value" id="result-bonus-gross"></span></div>
+        <div class="result-item"><span class="label">Federal Tax (22% flat)</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
+        <div class="result-item"><span class="label">New Hampshire State Tax</span><span class="value" id="result-state"></span></div>
+        <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+      </div>
+      
+    </div>
+    <p class="cross-link"><a href="/new-hampshire/">Calculating a regular paycheck? Try our New Hampshire paycheck calculator →</a></p>
+    <p class="cross-link"><a href="/new-hampshire/hourly/">Paid hourly? Try our New Hampshire hourly paycheck calculator →</a></p>
+  </section>
+
+  
+    <section id="formula" class="seo-section formula-section">
+      <h2>How New Hampshire Paycheck Tax Is Calculated (2026)</h2>
+      <span class="source-line">Source: New Hampshire Department of Revenue Administration</span>
+      <p>New Hampshire charges <strong>no state income tax</strong>. Only federal income tax and FICA are withheld from your paycheck.</p>
+      
+      <h3>Federal Tax &amp; FICA (shared across all states)</h3>
+      <table>
+        <tr><th>Filing status</th><th>Standard deduction</th></tr>
+        <tr><td>Single</td><td>$16,100</td></tr>
+        <tr><td>Married Filing Jointly</td><td>$32,200</td></tr>
+        <tr><td>Head of Household</td><td>$24,150</td></tr>
+      </table>
+      <table>
+        <tr><th>Federal brackets (all filing statuses)</th><td>10% / 12% / 22% / 24% / 32% / 35% / 37%</td></tr>
+        <tr><th>Social Security</th><td>6.2% up to $184,500 wage base</td></tr>
+        <tr><th>Medicare</th><td>1.45% on all wages, +0.9% above $200,000 single/HoH, $250,000 MFJ</td></tr>
+      </table>
+      <p class="deviation-note">⚠️ New Hampshire's married-filing-jointly and head-of-household state brackets have not yet been independently verified against the primary source above — this calculator uses New Hampshire's single-filer brackets as an estimate when those statuses are selected.</p>
+      
+      <p class="formula-footnote">Guideline version 2026-NH-v1 · Last verified 2026-07-26</p>
+    </section>
+  
+    <section id="faq" class="seo-section">
+      <h2>New Hampshire Paycheck Calculator FAQ</h2>
+      
+      <details class="faq-item">
+        <summary>Does New Hampshire have a state income tax?</summary>
+        <p>No. New Hampshire is one of nine states with no personal income tax. Only federal income tax and FICA are withheld from your paycheck.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How much is take-home pay on $65,000 in New Hampshire?</summary>
+        <p>On a $65,000 gross salary, a single filer in New Hampshire takes home roughly $54,407.5/year (about $4,533.96/month) after federal tax, FICA.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Why doesn't New Hampshire have a state income tax?</summary>
+        <p>New Hampshire is constitutionally or statutorily barred from levying a personal income tax on wages. See the Methodology section below for the specific citation.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does this estimate change if I'm married or have dependents?</summary>
+        <p>This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check New Hampshire Department of Revenue Administration's married-filing-jointly tables for a precise figure.</p>
+      </details>
+    </section>
+  
+    <section id="methodology" class="methodology">
+      <h2>Methodology &amp; Source</h2>
+      <p>New Hampshire state tax figures sourced from <strong>New Hampshire Department of Revenue Administration</strong> (<a href="https://www.revenue.nh.gov/" target="_blank" rel="nofollow noopener">https://www.revenue.nh.gov/</a>), citing Interest & Dividends Tax fully repealed effective 2025-01-01 — no tax on any personal income including wages. Federal brackets, standard deductions (single/MFJ/HoH), and FICA constants sourced from the IRS (Revenue Procedure 2025-32; married-filing-jointly Additional Medicare threshold of $250,000 is a separate, unindexed statutory figure). New Hampshire's married-filing-jointly and head-of-household figures are not yet independently verified and currently fall back to single-filer brackets — see the caveat in the formula section above.</p>
+      <p class="deviation-note">This is an estimate based on standard single-filer federal, FICA, and NH state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors.</p>
+      
+      <p>Guideline version: 2026-NH-v1 · Effective: 2025-01-01 · Last verified: 2026-07-26</p>
+    </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+
+    <script src="/assets/calc-engine.js"></script>
+    <script>
+    const STATE_ENTRY = {"name":"New Hampshire","formula_model":"no_income_tax","effective_date":"2025-01-01","source":{"agency_name":"New Hampshire Department of Revenue Administration","url":"https://www.revenue.nh.gov/","statute_ref":"Interest & Dividends Tax fully repealed effective 2025-01-01 — no tax on any personal income including wages"},"params":{},"abbr":"NH","slug":"new-hampshire","last_verified":"2026-07-26","guideline_version":"2026-NH-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","New Hampshire charges no state income tax — your paycheck stops there. What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, New Hampshire resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","New Hampshire state tax: No state income tax.","Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"]}},"faq_extra":[{"q":"Does New Hampshire have a state income tax?","a":"No. New Hampshire is one of nine states with no personal income tax. Only federal income tax and FICA are withheld from your paycheck."},{"q":"How much is take-home pay on $65,000 in New Hampshire?","a":"On a $65,000 gross salary, a single filer in New Hampshire takes home roughly $54,407.5/year (about $4,533.96/month) after federal tax, FICA."},{"q":"Why doesn't New Hampshire have a state income tax?","a":"New Hampshire is constitutionally or statutorily barred from levying a personal income tax on wages. See the Methodology section below for the specific citation."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check New Hampshire Department of Revenue Administration's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
+    const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and NH state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
+
+    function runCalculation(e) {
+        e.preventDefault();
+        const regularAnnualGross = parseFloat(document.getElementById('regularAnnualGross').value) || 0;
+        const bonusAmount = parseFloat(document.getElementById('bonusAmount').value) || 0;
+        const freq = document.getElementById('payFrequency').value;
+        const filingStatus = document.getElementById('filingStatus').value;
+        const r = calcBonusPaycheck(STATE_ENTRY, RULES, regularAnnualGross, bonusAmount, freq, filingStatus);
+
+        document.getElementById('result-amount').textContent = fmtMoney(r.bonusNet) + ' net bonus';
+        document.getElementById('result-bonus-gross').textContent = fmtMoney(r.bonusAmount);
+        document.getElementById('result-federal').textContent = fmtMoney(r.bonusFederalTax);
+        document.getElementById('result-fica').textContent = fmtMoney(r.bonusFica);
+        document.getElementById('result-state').textContent = fmtMoney(r.bonusStateTax);
+        const extraRow = document.getElementById('result-extra-row');
+        if (r.bonusExtraPayrollTax > 0) {
+            extraRow.hidden = false;
+            document.getElementById('result-extra-label').textContent = (RULES.extra_payroll_tax && RULES.extra_payroll_tax.name) || 'Extra payroll tax';
+            document.getElementById('result-extra').textContent = fmtMoney(r.bonusExtraPayrollTax);
+        } else {
+            extraRow.hidden = true;
+        }
+
+        document.getElementById('results-block').hidden = false;
+    }
+    document.getElementById('calc-form').addEventListener('submit', runCalculation);
+    document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+    </script>
+</body>
+</html>

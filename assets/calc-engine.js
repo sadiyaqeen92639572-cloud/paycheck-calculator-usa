@@ -53,6 +53,16 @@ const RETIREMENT_401K_LIMIT_2026 = 24500;
 const HSA_LIMIT_SELF_ONLY_2026 = 4400;
 const HSA_LIMIT_FAMILY_2026 = 8750;
 
+// Federal flat-rate supplemental (bonus) withholding — IRS Pub 15 (Circular E), 2026 edition.
+// Employers may withhold federal tax on bonuses/supplemental wages at a flat 22% (37% on the
+// portion of cumulative supplemental wages over $1,000,000 in a year) instead of the aggregate
+// method. This calculator models the flat-rate method only — the aggregate method (adding the
+// bonus to a regular paycheck and withholding as if it were the whole period's pay) is not modeled.
+// Verified 2026-07-29.
+const SUPPLEMENTAL_FLAT_RATE = 0.22;
+const SUPPLEMENTAL_HIGH_RATE = 0.37;
+const SUPPLEMENTAL_HIGH_THRESHOLD = 1000000;
+
 // FICA constants — Social Security wage base $184,500 (2026), Medicare 1.45% + 0.9% additional
 // (statutory, unindexed thresholds: $250,000 MFJ / $200,000 single & HoH)
 const SS_WAGE_BASE_2026 = 184500;
@@ -284,6 +294,56 @@ function calculatePaycheck(stateEntry, rules, grossAnnualIncome, payFrequency, f
     };
 }
 
+/**
+ * Bonus / supplemental-pay withholding estimate. Federal tax uses the flat-rate supplemental
+ * method (22%, 37% above $1M cumulative supplemental wages/year — see SUPPLEMENTAL_FLAT_RATE
+ * above). FICA and state SDI/PFL are computed as a delta — calc(regular + bonus) - calc(regular)
+ * — rather than calling calcFICA(bonusAmount) directly, so the Social Security wage cap (and any
+ * payroll-tax wage cap) prorates correctly against wages already earned in the year instead of
+ * re-applying from zero. State income tax is likewise a marginal-bracket delta, which approximates
+ * actual liability but is not necessarily the flat supplemental rate some states (e.g. CA, NY)
+ * apply to bonus payments specifically — a known scope limitation, not modeled here.
+ * No pre-tax deductions (401k/HSA) support in the bonus flow — out of scope for this calculator.
+ */
+function calcBonusPaycheck(stateEntry, rules, regularAnnualGross, bonusAmount, payFrequency, filingStatus = 'single') {
+    regularAnnualGross = Math.max(0, Number(regularAnnualGross) || 0);
+    bonusAmount = Math.max(0, Number(bonusAmount) || 0);
+    const combinedGross = regularAnnualGross + bonusAmount;
+
+    const bonusFederalTax = bonusAmount <= SUPPLEMENTAL_HIGH_THRESHOLD
+        ? round2(bonusAmount * SUPPLEMENTAL_FLAT_RATE)
+        : round2(SUPPLEMENTAL_HIGH_THRESHOLD * SUPPLEMENTAL_FLAT_RATE + (bonusAmount - SUPPLEMENTAL_HIGH_THRESHOLD) * SUPPLEMENTAL_HIGH_RATE);
+
+    const ficaAtRegular = calcFICA(regularAnnualGross, filingStatus).total;
+    const ficaAtCombined = calcFICA(combinedGross, filingStatus).total;
+    const bonusFica = round2(ficaAtCombined - ficaAtRegular);
+
+    const federalAtRegular = round2(calcFederalTax(regularAnnualGross, filingStatus));
+    const federalAtCombined = round2(calcFederalTax(combinedGross, filingStatus));
+    const stateFn = FORMULA_DISPATCH[stateEntry.formula_model];
+    const stateTaxAtRegular = stateFn(regularAnnualGross, stateEntry, federalAtRegular, filingStatus).stateTax;
+    const stateTaxAtCombined = stateFn(combinedGross, stateEntry, federalAtCombined, filingStatus).stateTax;
+    const bonusStateTax = round2(stateTaxAtCombined - stateTaxAtRegular);
+
+    const extraAtRegular = calcExtraPayrollTax(regularAnnualGross, rules).amount;
+    const extraAtCombined = calcExtraPayrollTax(combinedGross, rules).amount;
+    const bonusExtraPayrollTax = round2(extraAtCombined - extraAtRegular);
+
+    const bonusNet = round2(bonusAmount - bonusFederalTax - bonusFica - bonusStateTax - bonusExtraPayrollTax);
+
+    return {
+        regularAnnualGross,
+        bonusAmount,
+        bonusFederalTax,
+        bonusFica,
+        bonusStateTax,
+        bonusExtraPayrollTax,
+        bonusNet,
+        payFrequency,
+        filingStatus
+    };
+}
+
 function fmtMoney(n) {
     return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
 }
@@ -301,5 +361,5 @@ function annualizeHourly(hourlyRate, hoursPerWeek, otHoursPerWeek = 0, otMultipl
 
 // Node (build-time verification) + browser (runtime calculator) export
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { calculatePaycheck, calcFederalTax, calcFICA, marginalBracketTax, fmtMoney, annualizeHourly };
+    module.exports = { calculatePaycheck, calcBonusPaycheck, calcFederalTax, calcFICA, marginalBracketTax, fmtMoney, annualizeHourly };
 }

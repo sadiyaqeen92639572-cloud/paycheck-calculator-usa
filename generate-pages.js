@@ -134,7 +134,7 @@ function methodologySection(state, rules) {
 }
 
 function jsonLd(state, opts = {}) {
-    const { hourly = false } = opts;
+    const { hourly = false, bonus = false } = opts;
     const faqEntities = state.faq_extra.map(f => ({
         '@type': 'Question',
         name: f.q,
@@ -145,12 +145,13 @@ function jsonLd(state, opts = {}) {
         { '@type': 'ListItem', position: 2, name: state.name, item: `${SITE_URL}/${state.slug}/` }
     ];
     if (hourly) breadcrumbItems.push({ '@type': 'ListItem', position: 3, name: 'Hourly', item: `${SITE_URL}/${state.slug}/hourly/` });
+    if (bonus) breadcrumbItems.push({ '@type': 'ListItem', position: 3, name: 'Bonus', item: `${SITE_URL}/${state.slug}/bonus/` });
     return JSON.stringify({
         '@context': 'https://schema.org',
         '@graph': [
             {
                 '@type': 'WebApplication',
-                name: `${state.name} ${hourly ? 'Hourly ' : ''}Paycheck Calculator`,
+                name: `${state.name} ${bonus ? 'Bonus ' : hourly ? 'Hourly ' : ''}Paycheck Calculator`,
                 applicationCategory: 'FinanceApplication',
                 operatingSystem: 'Any',
                 offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
@@ -229,6 +230,33 @@ function hourlyFormFields() {
       </label>
       ${filingStatusAndDeductionFields()}
       <button type="submit">Calculate Take-Home Pay →</button>`;
+}
+
+function bonusFormFields() {
+    return `
+      <label>Regular Annual Salary ($)
+        <input type="number" id="regularAnnualGross" min="0" step="100" value="65000" required>
+      </label>
+      <label>Bonus Amount ($)
+        <input type="number" id="bonusAmount" min="0" step="50" value="5000" required>
+      </label>
+      <label>Pay Frequency (for reference only — bonus tax uses the flat-rate method, not per-period withholding)
+        <select id="payFrequency">
+          <option value="annual">Annual</option>
+          <option value="monthly">Monthly</option>
+          <option value="semimonthly">Semi-Monthly (24/yr)</option>
+          <option value="biweekly" selected>Bi-Weekly (26/yr)</option>
+          <option value="weekly">Weekly</option>
+        </select>
+      </label>
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <button type="submit">Calculate Bonus Take-Home Pay →</button>`;
 }
 
 function calculatorScript(state, rules, mode = 'salary') {
@@ -312,6 +340,42 @@ function calculatorScript(state, rules, mode = 'salary') {
     </script>`;
 }
 
+function bonusCalculatorScript(state, rules) {
+    return `
+    <script src="/assets/calc-engine.js"></script>
+    <script>
+    const STATE_ENTRY = ${JSON.stringify(state)};
+    const RULES = ${JSON.stringify(rules)};
+
+    function runCalculation(e) {
+        e.preventDefault();
+        const regularAnnualGross = parseFloat(document.getElementById('regularAnnualGross').value) || 0;
+        const bonusAmount = parseFloat(document.getElementById('bonusAmount').value) || 0;
+        const freq = document.getElementById('payFrequency').value;
+        const filingStatus = document.getElementById('filingStatus').value;
+        const r = calcBonusPaycheck(STATE_ENTRY, RULES, regularAnnualGross, bonusAmount, freq, filingStatus);
+
+        document.getElementById('result-amount').textContent = fmtMoney(r.bonusNet) + ' net bonus';
+        document.getElementById('result-bonus-gross').textContent = fmtMoney(r.bonusAmount);
+        document.getElementById('result-federal').textContent = fmtMoney(r.bonusFederalTax);
+        document.getElementById('result-fica').textContent = fmtMoney(r.bonusFica);
+        document.getElementById('result-state').textContent = fmtMoney(r.bonusStateTax);
+        const extraRow = document.getElementById('result-extra-row');
+        if (r.bonusExtraPayrollTax > 0) {
+            extraRow.hidden = false;
+            document.getElementById('result-extra-label').textContent = (RULES.extra_payroll_tax && RULES.extra_payroll_tax.name) || 'Extra payroll tax';
+            document.getElementById('result-extra').textContent = fmtMoney(r.bonusExtraPayrollTax);
+        } else {
+            extraRow.hidden = true;
+        }
+
+        document.getElementById('results-block').hidden = false;
+    }
+    document.getElementById('calc-form').addEventListener('submit', runCalculation);
+    document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+    </script>`;
+}
+
 function renderStatePage(state) {
     assertComplete(state);
     const rules = loadRules(state.abbr.toLowerCase());
@@ -365,6 +429,7 @@ function renderStatePage(state) {
       ${rules.local_tax_note ? `<div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>` : ''}
     </div>
     <p class="cross-link"><a href="/${state.slug}/hourly/">Paid hourly instead? Try our ${state.name} hourly paycheck calculator →</a></p>
+    <p class="cross-link"><a href="/${state.slug}/bonus/">Calculating a bonus? Try our ${state.name} bonus paycheck calculator →</a></p>
   </section>
 
   ${worksheetSection(state)}
@@ -440,6 +505,7 @@ function renderHourlyStatePage(state) {
       ${rules.local_tax_note ? `<div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>` : ''}
     </div>
     <p class="cross-link"><a href="/${state.slug}/">Paid a salary instead? Try our ${state.name} paycheck calculator →</a></p>
+    <p class="cross-link"><a href="/${state.slug}/bonus/">Calculating a bonus? Try our ${state.name} bonus paycheck calculator →</a></p>
   </section>
 
   ${worksheetSection(state)}
@@ -454,6 +520,73 @@ function renderHourlyStatePage(state) {
   <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Paycheck Calculator. Estimates only — not tax advice.</p>
 </footer>
 ${calculatorScript(state, rules, 'hourly')}
+</body>
+</html>
+`;
+}
+
+function renderBonusStatePage(state) {
+    assertComplete(state);
+    const rules = loadRules(state.abbr.toLowerCase());
+    const title = `${state.name} Bonus Tax Calculator — Take-Home Pay ${YEAR}`;
+    const description = `Free ${state.name} bonus paycheck calculator. Estimate take-home pay on a bonus using the flat 22% federal supplemental withholding method, plus FICA and ${state.name} state tax — updated ${state.last_verified}.`;
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${title}</title>
+<meta name="description" content="${description}">
+<link rel="canonical" href="${SITE_URL}/${state.slug}/bonus/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${description}">
+<meta property="og:url" content="${SITE_URL}/${state.slug}/bonus/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">${jsonLd(state, { bonus: true })}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a> · <a href="/${state.slug}/">${state.name} Paycheck Calculator</a></p>
+  <h1>${state.name} Bonus Tax Calculator</h1>
+  <p class="badge">Estimate take-home pay on a bonus, using the federal flat-rate supplemental withholding method</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Federal tax on the bonus uses the flat 22% supplemental withholding rate (37% on cumulative supplemental wages over $1,000,000/year) — the alternative "aggregate method" some employers use instead is not modeled. FICA and any state SDI/PFL are computed as the difference between your regular income with and without the bonus added, so the Social Security wage cap applies correctly. State tax on the bonus is a marginal-bracket estimate, not necessarily any special state supplemental rate. See methodology below for source and last-verified date.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      ${bonusFormFields()}
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Bonus Amount</span><span class="value" id="result-bonus-gross"></span></div>
+        <div class="result-item"><span class="label">Federal Tax (22% flat)</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
+        <div class="result-item"><span class="label">${state.name} State Tax</span><span class="value" id="result-state"></span></div>
+        <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+      </div>
+      ${rules.local_tax_note ? `<div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>` : ''}
+    </div>
+    <p class="cross-link"><a href="/${state.slug}/">Calculating a regular paycheck? Try our ${state.name} paycheck calculator →</a></p>
+    <p class="cross-link"><a href="/${state.slug}/hourly/">Paid hourly? Try our ${state.name} hourly paycheck calculator →</a></p>
+  </section>
+
+  ${formulaSection(state, rules)}
+  ${faqSection(state)}
+  ${methodologySection(state, rules)}
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+${bonusCalculatorScript(state, rules)}
 </body>
 </html>
 `;
@@ -510,7 +643,12 @@ for (const state of Object.values(states)) {
     fs.writeFileSync(path.join(hourlyDir, 'index.html'), renderHourlyStatePage(state));
     built++;
 
-    console.log(`Generated: ${state.slug}/ + ${state.slug}/hourly/ (${state.formula_model})`);
+    const bonusDir = path.join(dir, 'bonus');
+    fs.mkdirSync(bonusDir, { recursive: true });
+    fs.writeFileSync(path.join(bonusDir, 'index.html'), renderBonusStatePage(state));
+    built++;
+
+    console.log(`Generated: ${state.slug}/ + ${state.slug}/hourly/ + ${state.slug}/bonus/ (${state.formula_model})`);
 }
 
 const changelogDir = path.join(__dirname, 'changelog');
