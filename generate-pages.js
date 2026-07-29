@@ -193,6 +193,15 @@ function filingStatusAndDeductionFields() {
       </details>`;
 }
 
+function localTaxResultNote(rules, extra = '') {
+    if (rules.local_tax) {
+        return rules.local_tax.coverage === 'partial'
+            ? `<p class="result-note">💡 Select your city/county above — the largest jurisdictions are computed; smaller ones still aren't covered (see methodology below).${extra}</p>`
+            : `<p class="result-note">💡 Select your city above — local tax now supported.${extra}</p>`;
+    }
+    return rules.local_tax_note ? `<div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>` : '';
+}
+
 function localTaxField(rules) {
     if (!rules.local_tax) return '';
     const options = rules.local_tax.options.map(o => `<option value="${o.id}"${o.id === 'none' ? ' selected' : ''}>${o.label}</option>`).join('');
@@ -489,7 +498,7 @@ function renderStatePage(state) {
         <div class="result-item" id="result-pretax-row-total" hidden><span class="label">Pre-Tax Deductions Total</span><span class="value" id="result-pretax-total"></span></div>
       </div>
       <div class="result-warning" id="result-pretax-limit-warning" hidden></div>
-      ${rules.local_tax ? `<p class="result-note">💡 Select your city above — NYC/Yonkers/Philadelphia local tax now supported.</p>` : (rules.local_tax_note ? `<div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>` : '')}
+      ${localTaxResultNote(rules)}
     </div>
     <p class="cross-link"><a href="/${state.slug}/hourly/">Paid hourly instead? Try our ${state.name} hourly paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/bonus/">Calculating a bonus? Try our ${state.name} bonus paycheck calculator →</a></p>
@@ -567,7 +576,7 @@ function renderHourlyStatePage(state) {
         <div class="result-item" id="result-pretax-row-total" hidden><span class="label">Pre-Tax Deductions Total</span><span class="value" id="result-pretax-total"></span></div>
       </div>
       <div class="result-warning" id="result-pretax-limit-warning" hidden></div>
-      ${rules.local_tax ? `<p class="result-note">💡 Select your city above — NYC/Yonkers/Philadelphia local tax now supported.</p>` : (rules.local_tax_note ? `<div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>` : '')}
+      ${localTaxResultNote(rules)}
     </div>
     <p class="cross-link"><a href="/${state.slug}/">Paid a salary instead? Try our ${state.name} paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/bonus/">Calculating a bonus? Try our ${state.name} bonus paycheck calculator →</a></p>
@@ -638,7 +647,7 @@ function renderBonusStatePage(state) {
         <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
         <div class="result-item" id="result-local-tax-row" hidden><span class="label" id="result-local-tax-label"></span><span class="value" id="result-local-tax"></span></div>
       </div>
-      ${rules.local_tax ? `<p class="result-note">💡 Select your city above — NYC/Yonkers/Philadelphia local tax now supported. Bonus state-tax and local-tax figures are marginal-bracket estimates, not necessarily any special supplemental rate your state or city may apply to bonus payments specifically.</p>` : (rules.local_tax_note ? `<div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>` : '')}
+      ${localTaxResultNote(rules, ' Bonus state-tax and local-tax figures are marginal-bracket estimates, not necessarily any special supplemental rate your state or city may apply to bonus payments specifically.')}
     </div>
     <p class="cross-link"><a href="/${state.slug}/">Calculating a regular paycheck? Try our ${state.name} paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/hourly/">Paid hourly? Try our ${state.name} hourly paycheck calculator →</a></p>

@@ -11,6 +11,8 @@ const nyRules = require('./data/rules/ny.json');
 const paRules = require('./data/rules/pa.json');
 const moRules = require('./data/rules/mo.json');
 const alRules = require('./data/rules/al.json');
+const mdRules = require('./data/rules/md.json');
+const inRules = require('./data/rules/in.json');
 
 let failures = 0;
 function assertEqual(actual, expected, label) {
@@ -111,6 +113,21 @@ const alGadsden = engine.calculatePaycheck(states.al, alRules, 65000, 'biweekly'
 assertEqual(alGadsden.localTax.amount, Math.round(65000 * 0.02 * 100) / 100, 'Gadsden occupational tax = 2% of gross');
 const alOther = engine.calculatePaycheck(states.al, alRules, 65000, 'biweekly', 'single', null, 'other');
 assertEqual(alOther.localTax.amount, 0, 'AL "Other city" option computes 0, same as none');
+
+// --- Local tax expansion Phase 6: Maryland + Indiana (flat_rate_on_state_taxable_base) ---
+const mdNone = engine.calculatePaycheck(states.md, mdRules, 65000, 'biweekly', 'single', null, 'none');
+const mdMontgomery = engine.calculatePaycheck(states.md, mdRules, 65000, 'biweekly', 'single', null, 'montgomery');
+assertTrue(mdMontgomery.localTax.amount > 0, 'Montgomery County selection > 0 (MD)');
+const mdStandardDeduction = states.md.params.standard_deduction || 0;
+const mdTaxableBase = 65000 - mdStandardDeduction - (states.md.params.personal_exemption || 0);
+assertEqual(mdMontgomery.localTax.amount, Math.round(mdTaxableBase * 0.032 * 100) / 100, 'Montgomery County tax computed on MD taxable base, not raw gross');
+assertTrue(mdMontgomery.localTax.amount < Math.round(65000 * 0.032 * 100) / 100, 'MD county tax on taxable base is less than if (incorrectly) computed on raw gross');
+assertEqual(mdNone.localTax.amount, 0, 'MD "none" selection computes 0');
+
+const inMarion = engine.calculatePaycheck(states.in, inRules, 65000, 'biweekly', 'single', null, 'marion');
+assertTrue(inMarion.localTax.amount > 0, 'Marion County selection > 0 (IN)');
+const inOther = engine.calculatePaycheck(states.in, inRules, 65000, 'biweekly', 'single', null, 'other');
+assertEqual(inOther.localTax.amount, 0, 'IN "Other county" option computes 0, same as none');
 
 if (failures > 0) {
     console.error(`\n${failures} assertion(s) failed.`);

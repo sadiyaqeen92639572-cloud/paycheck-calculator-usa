@@ -209,7 +209,9 @@ function calcExtraPayrollTax(grossAnnualIncome, rules) {
  * piggybacks on the NY state taxable-income calculation rather than a separate deduction scheme.
  * kind: 'none' -> 0; 'brackets' -> marginal bracket tax on stateTaxableBase (e.g. NYC);
  * 'surcharge_pct_of_state_tax' -> stateTax * rate (e.g. Yonkers, a surcharge on state tax liability);
- * 'flat_rate_on_gross' -> grossAnnualIncome * rate (e.g. Philadelphia Wage Tax, genuinely gross-based).
+ * 'flat_rate_on_gross' -> grossAnnualIncome * rate (e.g. Philadelphia Wage Tax, genuinely gross-based);
+ * 'flat_rate_on_state_taxable_base' -> stateTaxableBase * rate (e.g. MD county piggyback tax,
+ * IN county income tax — both apply to the same base as the state's own income tax, not gross).
  */
 function calcLocalTax(stateTaxableBase, grossAnnualIncome, stateTax, option) {
     if (!option || option.kind === 'none') return { amount: 0, label: null };
@@ -220,6 +222,8 @@ function calcLocalTax(stateTaxableBase, grossAnnualIncome, stateTax, option) {
         amount = stateTax * option.rate;
     } else if (option.kind === 'flat_rate_on_gross') {
         amount = grossAnnualIncome * option.rate;
+    } else if (option.kind === 'flat_rate_on_state_taxable_base') {
+        amount = stateTaxableBase * option.rate;
     } else {
         amount = 0;
     }

@@ -1,6 +1,25 @@
 {
   "rounding": "nearest_cent",
   "extra_payroll_tax": null,
-  "local_tax_note": "Every Maryland county plus Baltimore City adds a local \"piggyback\" income tax of 1.75%-3.2% on the same return — this is one of the largest local-tax gaps in this calculator. Combined state+local can reach ~8.95%. Not computed here; check your county's rate.",
+  "local_tax": {
+    "type": "selectable",
+    "coverage": "partial",
+    "source": {
+      "agency_name": "Comptroller of Maryland county income tax rate table",
+      "note": "Rates cross-checked against two independent secondary sources 2026-07-29 (countrytaxcalc.com, statebystatetax.com); both agree exactly on the 7 counties listed except Carroll County (3.03% vs 3.05% — dropped from this list rather than guess between them). Anne Arundel and Frederick Counties were excluded entirely: both switched to a tiered/graduated local rate structure rather than a single flat rate, which this calculator's flat-rate model cannot represent without misleading users — they fall under \"Other Maryland county\" until a tiered option is built. Maryland has 23 counties total; only the 7 largest flat-rate counties are covered below."
+    },
+    "options": [
+      { "id": "none", "label": "Outside these counties", "kind": "none" },
+      { "id": "montgomery", "label": "Montgomery County", "kind": "flat_rate_on_state_taxable_base", "rate": 0.032 },
+      { "id": "princes_george", "label": "Prince George's County", "kind": "flat_rate_on_state_taxable_base", "rate": 0.032 },
+      { "id": "baltimore_county", "label": "Baltimore County", "kind": "flat_rate_on_state_taxable_base", "rate": 0.032 },
+      { "id": "baltimore_city", "label": "Baltimore City", "kind": "flat_rate_on_state_taxable_base", "rate": 0.032 },
+      { "id": "howard", "label": "Howard County", "kind": "flat_rate_on_state_taxable_base", "rate": 0.032 },
+      { "id": "harford", "label": "Harford County", "kind": "flat_rate_on_state_taxable_base", "rate": 0.0306 },
+      { "id": "charles", "label": "Charles County", "kind": "flat_rate_on_state_taxable_base", "rate": 0.0303 },
+      { "id": "other", "label": "Other Maryland county — not covered", "kind": "none" }
+    ]
+  },
+  "local_tax_note": "Every Maryland county plus Baltimore City adds a local \"piggyback\" income tax of 1.75%-3.2% on the same return. Montgomery, Prince George's, Baltimore County, Baltimore City, Howard, Harford, and Charles Counties are now computed via the selector above (applied to the same MD taxable-income base as the state tax itself, not gross); the other 16 Maryland counties — including Anne Arundel and Frederick, which use tiered rather than flat local rates — are still not covered. Combined state+local can reach ~8.95% in the highest-rate counties.",
   "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and MD state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."
 }
