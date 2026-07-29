@@ -123,13 +123,14 @@ function faqSection(state) {
 }
 
 function methodologySection(state, rules, opts = {}) {
-    const { bonus = false } = opts;
+    const { bonus = false, selfEmployed = false } = opts;
     return `
     <section id="methodology" class="methodology">
       <h2>Methodology &amp; Source</h2>
       <p>${state.name} state tax figures sourced from <strong>${state.source.agency_name}</strong> (<a href="${state.source.url}" target="_blank" rel="nofollow noopener">${state.source.url}</a>), citing ${state.source.statute_ref}. Federal brackets, standard deductions (single/MFJ/HoH), and FICA constants sourced from the IRS (Revenue Procedure 2025-32; married-filing-jointly Additional Medicare threshold of $250,000 is a separate, unindexed statutory figure). ${state.filing_status_backfilled ? `${state.name}'s married-filing-jointly and head-of-household figures have been independently verified against the source above.` : `${state.name}'s married-filing-jointly and head-of-household figures are not yet independently verified and currently fall back to single-filer brackets — see the caveat in the formula section above.`}</p>
       ${rules.local_tax ? `<p>Local tax figures sourced from <strong>${rules.local_tax.source.agency_name}</strong>${rules.local_tax.source.url ? ` (<a href="${rules.local_tax.source.url}" target="_blank" rel="nofollow noopener">${rules.local_tax.source.url}</a>)` : ''}. ${rules.local_tax.source.note}</p>` : ''}
       ${bonus ? `<p>Bonus federal withholding uses the flat supplemental-wage rate (22%, 37% above $1,000,000 cumulative supplemental wages/year), per IRS Publication 15 (Circular E), Employer's Tax Guide, 2026 edition — the alternative "aggregate method" is not modeled.</p>` : ''}
+      ${selfEmployed ? `<p>Self-employment tax uses the statutory 15.3% rate (12.4% Social Security + 2.9% Medicare) on 92.35% of net self-employment income, with half of the SE tax deducted from federal taxable income above-the-line — per IRS Schedule SE (Form 1040) instructions, IRC §1401 and §164(f), 2026 edition. The 20% Qualified Business Income deduction (IRC §199A) is not modeled — it phases out by income and business type and is too state/entity-dependent to compute generically. This assumes the self-employment income is your only earnings for the year; if you also have W-2 wages, the Social Security wage-base cap and Additional Medicare threshold are actually based on your combined earnings, so this will overstate SE tax if you have significant wage income too.</p>` : ''}
       <p class="deviation-note">${rules.deviation_note}</p>
       ${rules.extra_payroll_tax ? `<p>Pre-tax deductions assumption: HSA and health insurance premium contributions are assumed to also reduce the ${rules.extra_payroll_tax.name} wage base, consistent with their FICA wage treatment. This is a reasonable default, not independently verified against ${state.name}'s specific ${rules.extra_payroll_tax.name} statute.</p>` : ''}
       <p>Guideline version: ${state.guideline_version} · Effective: ${state.effective_date} · Last verified: ${state.last_verified}</p>
@@ -137,7 +138,7 @@ function methodologySection(state, rules, opts = {}) {
 }
 
 function jsonLd(state, opts = {}) {
-    const { hourly = false, bonus = false } = opts;
+    const { hourly = false, bonus = false, selfEmployed = false } = opts;
     const faqEntities = state.faq_extra.map(f => ({
         '@type': 'Question',
         name: f.q,
@@ -149,12 +150,13 @@ function jsonLd(state, opts = {}) {
     ];
     if (hourly) breadcrumbItems.push({ '@type': 'ListItem', position: 3, name: 'Hourly', item: `${SITE_URL}/${state.slug}/hourly/` });
     if (bonus) breadcrumbItems.push({ '@type': 'ListItem', position: 3, name: 'Bonus', item: `${SITE_URL}/${state.slug}/bonus/` });
+    if (selfEmployed) breadcrumbItems.push({ '@type': 'ListItem', position: 3, name: 'Self-Employed', item: `${SITE_URL}/${state.slug}/self-employed/` });
     return JSON.stringify({
         '@context': 'https://schema.org',
         '@graph': [
             {
                 '@type': 'WebApplication',
-                name: `${state.name} ${bonus ? 'Bonus ' : hourly ? 'Hourly ' : ''}Paycheck Calculator`,
+                name: `${state.name} ${selfEmployed ? 'Self-Employed Tax ' : bonus ? 'Bonus ' : hourly ? 'Hourly ' : ''}Paycheck Calculator`,
                 applicationCategory: 'FinanceApplication',
                 operatingSystem: 'Any',
                 offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
@@ -281,6 +283,21 @@ function bonusFormFields(rules) {
       </label>
       ${localTaxField(rules)}
       <button type="submit">Calculate Bonus Take-Home Pay →</button>`;
+}
+
+function selfEmployedFormFields() {
+    return `
+      <label>Net Self-Employment Income ($/year)
+        <input type="number" id="netSEIncome" min="0" step="500" value="65000" required>
+      </label>
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <button type="submit">Calculate Self-Employment Tax →</button>`;
 }
 
 function calculatorScript(state, rules, mode = 'salary') {
@@ -446,6 +463,42 @@ function bonusCalculatorScript(state, rules) {
     </script>`;
 }
 
+function selfEmployedCalculatorScript(state, rules) {
+    return `
+    <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
+    <script>
+    const STATE_ENTRY = ${JSON.stringify(state)};
+    const RULES = ${JSON.stringify(rules)};
+
+    function runCalculation(e) {
+        e.preventDefault();
+        const netSEIncome = parseFloat(document.getElementById('netSEIncome').value) || 0;
+        const filingStatus = document.getElementById('filingStatus').value;
+        const r = calcSelfEmployedTax(STATE_ENTRY, RULES, netSEIncome, filingStatus);
+
+        document.getElementById('result-amount').textContent = fmtMoney(r.netIncome) + ' net / year';
+        document.getElementById('result-se-tax').textContent = fmtMoney(r.seTax);
+        document.getElementById('result-federal').textContent = fmtMoney(r.federalTax);
+        document.getElementById('result-state').textContent = fmtMoney(r.stateTax);
+        document.getElementById('result-quarterly').textContent = fmtMoney(r.quarterlyEstimate);
+
+        document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.netSEIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.seTax,
+            stateTax: r.stateTax,
+            localTax: 0,
+            extraPayrollTax: 0,
+            netAnnual: r.netIncome
+        });
+    }
+    document.getElementById('calc-form').addEventListener('submit', runCalculation);
+    document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+    </script>`;
+}
+
 function renderStatePage(state) {
     assertComplete(state);
     const rules = loadRules(state.abbr.toLowerCase());
@@ -503,6 +556,7 @@ function renderStatePage(state) {
     </div>
     <p class="cross-link"><a href="/${state.slug}/hourly/">Paid hourly instead? Try our ${state.name} hourly paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/bonus/">Calculating a bonus? Try our ${state.name} bonus paycheck calculator →</a></p>
+    <p class="cross-link"><a href="/${state.slug}/self-employed/">1099 or self-employed? Try our ${state.name} self-employment tax calculator →</a></p>
   </section>
 
   ${worksheetSection(state)}
@@ -582,6 +636,7 @@ function renderHourlyStatePage(state) {
     </div>
     <p class="cross-link"><a href="/${state.slug}/">Paid a salary instead? Try our ${state.name} paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/bonus/">Calculating a bonus? Try our ${state.name} bonus paycheck calculator →</a></p>
+    <p class="cross-link"><a href="/${state.slug}/self-employed/">1099 or self-employed? Try our ${state.name} self-employment tax calculator →</a></p>
   </section>
 
   ${worksheetSection(state)}
@@ -666,6 +721,71 @@ function renderBonusStatePage(state) {
   <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Paycheck Calculator. Estimates only — not tax advice.</p>
 </footer>
 ${bonusCalculatorScript(state, rules)}
+</body>
+</html>
+`;
+}
+
+function renderSelfEmployedStatePage(state) {
+    assertComplete(state);
+    const rules = loadRules(state.abbr.toLowerCase());
+    const title = `${state.name} Self-Employment Tax Calculator (1099) — ${YEAR}`;
+    const description = `Free ${state.name} self-employment / 1099 tax calculator. Estimate SE tax (Social Security + Medicare), federal tax, ${state.name} state tax, and a quarterly estimated-payment amount — updated ${state.last_verified}.`;
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${title}</title>
+<meta name="description" content="${description}">
+<link rel="canonical" href="${SITE_URL}/${state.slug}/self-employed/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${description}">
+<meta property="og:url" content="${SITE_URL}/${state.slug}/self-employed/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">${jsonLd(state, { selfEmployed: true })}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a> · <a href="/${state.slug}/">${state.name} Paycheck Calculator</a></p>
+  <h1>${state.name} Self-Employment Tax Calculator</h1>
+  <p class="badge">Estimate SE tax, federal and state tax, and a quarterly estimated-payment amount on 1099/self-employment income</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Self-employment tax is 15.3% (12.4% Social Security + 2.9% Medicare) on 92.35% of net SE income, with half of it deducted from federal taxable income. Assumes this is your only income for the year — if you also have W-2 wages, results will run high (see methodology below). Does not model the 20% Qualified Business Income deduction. The quarterly figure is an even 4-way split of annual liability, not the IRS's actual (unevenly spaced) estimated-payment due dates.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      ${selfEmployedFormFields()}
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Self-Employment Tax</span><span class="value" id="result-se-tax"></span></div>
+        <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">${state.name} State Tax</span><span class="value" id="result-state"></span></div>
+        <div class="result-item"><span class="label">Quarterly Estimated Payment</span><span class="value" id="result-quarterly"></span></div>
+      </div>
+      <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
+    </div>
+    <p class="cross-link"><a href="/${state.slug}/">Paid a W-2 salary instead? Try our ${state.name} paycheck calculator →</a></p>
+  </section>
+
+  ${faqSection(state)}
+  ${methodologySection(state, rules, { selfEmployed: true })}
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+${selfEmployedCalculatorScript(state, rules)}
 </body>
 </html>
 `;
@@ -865,7 +985,12 @@ for (const state of Object.values(states)) {
     fs.writeFileSync(path.join(bonusDir, 'index.html'), renderBonusStatePage(state));
     built++;
 
-    console.log(`Generated: ${state.slug}/ + ${state.slug}/hourly/ + ${state.slug}/bonus/ (${state.formula_model})`);
+    const selfEmployedDir = path.join(dir, 'self-employed');
+    fs.mkdirSync(selfEmployedDir, { recursive: true });
+    fs.writeFileSync(path.join(selfEmployedDir, 'index.html'), renderSelfEmployedStatePage(state));
+    built++;
+
+    console.log(`Generated: ${state.slug}/ + ${state.slug}/hourly/ + ${state.slug}/bonus/ + ${state.slug}/self-employed/ (${state.formula_model})`);
 }
 
 const changelogDir = path.join(__dirname, 'changelog');

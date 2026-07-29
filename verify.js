@@ -146,6 +146,21 @@ assertEqual(kyLouisvilleResident.localTax.amount, Math.round(65000 * 0.022 * 100
 assertEqual(txBaseline.federalTax, engine.calculatePaycheck(states.tx, txRules, 65000, 'biweekly').federalTax, 'TX baseline unaffected by Phase 7 local-tax data additions');
 assertEqual(caBaseline.stateTax, engine.calculatePaycheck(states.ca, caRules, 65000, 'biweekly').stateTax, 'CA baseline unaffected by Phase 7 local-tax data additions');
 
+// --- Tier 3 Phase 10: self-employment / 1099 tax ---
+const seTx = engine.calcSelfEmployedTax(states.tx, txRules, 65000, 'single');
+const expectedSeTaxableBase = 65000 * 0.9235;
+const expectedSeTax = Math.round((expectedSeTaxableBase * 0.124 + expectedSeTaxableBase * 0.029) * 100) / 100;
+assertEqual(seTx.seTax, expectedSeTax, 'SE tax = 15.3% of 92.35% of net SE income (sub-wage-base income)');
+// SS wage-base cap check: at a high SE income, the SS portion of SE tax should be capped —
+// verify SE tax grows sub-linearly past the cap rather than continuing at the full 12.4% rate.
+const seHighIncome = engine.calcSelfEmployedTax(states.tx, txRules, 250000, 'single');
+const naiveUncappedSeTax = 250000 * 0.9235 * 0.153;
+assertTrue(seHighIncome.seTax < naiveUncappedSeTax, 'SE tax below naive uncapped 15.3% flat calc once income exceeds the SS wage base');
+// Half-SE-tax federal deduction check: federal tax should be lower than if no SE-tax deduction were applied.
+// calcFederalTax(65000) already subtracts the standard deduction once internally — do not subtract it again here.
+const federalWithoutSeDeduction = engine.calcFederalTax(65000, 'single');
+assertTrue(seTx.federalTax < Math.round(federalWithoutSeDeduction * 100) / 100, 'Half of SE tax deducted from federal taxable income reduces federal tax');
+
 if (failures > 0) {
     console.error(`\n${failures} assertion(s) failed.`);
     process.exit(1);

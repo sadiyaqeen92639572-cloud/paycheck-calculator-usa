@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iowa Self-Employment Tax Calculator (1099) — 2026</title>
+<meta name="description" content="Free Iowa self-employment / 1099 tax calculator. Estimate SE tax (Social Security + Medicare), federal tax, Iowa state tax, and a quarterly estimated-payment amount — updated 2026-07-26.">
+<link rel="canonical" href="https://calcpaycheck.com/iowa/self-employed/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Iowa Self-Employment Tax Calculator (1099) — 2026">
+<meta property="og:description" content="Free Iowa self-employment / 1099 tax calculator. Estimate SE tax (Social Security + Medicare), federal tax, Iowa state tax, and a quarterly estimated-payment amount — updated 2026-07-26.">
+<meta property="og:url" content="https://calcpaycheck.com/iowa/self-employed/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Iowa Self-Employed Tax Paycheck Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-26","version":"2026-IA-v1","author":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}},"publisher":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Iowa's state income tax rate?","acceptedAnswer":{"@type":"Answer","text":"Iowa charges a flat 3.80% rate for tax year 2026. Standard deduction: $16,100 for single filers."}},{"@type":"Question","name":"How much is take-home pay on $65,000 in Iowa?","acceptedAnswer":{"@type":"Answer","text":"On a $65,000 gross salary, a single filer in Iowa takes home roughly $52,549.3/year (about $4,379.11/month) after federal tax, FICA, and state tax."}},{"@type":"Question","name":"What deductions does Iowa apply before taxing my income?","acceptedAnswer":{"@type":"Answer","text":"Iowa applies a $16,100 standard deduction, before the flat 3.80% rate. See the \"How Iowa Paycheck Tax Is Calculated\" section above for the exact formula."}},{"@type":"Question","name":"Does this estimate change if I'm married or have dependents?","acceptedAnswer":{"@type":"Answer","text":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Iowa state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Iowa Department of Revenue's married-filing-jointly tables for a precise figure."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://calcpaycheck.com/"},{"@type":"ListItem","position":2,"name":"Iowa","item":"https://calcpaycheck.com/iowa/"},{"@type":"ListItem","position":3,"name":"Self-Employed","item":"https://calcpaycheck.com/iowa/self-employed/"}]},{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}]}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a> · <a href="/iowa/">Iowa Paycheck Calculator</a></p>
+  <h1>Iowa Self-Employment Tax Calculator</h1>
+  <p class="badge">Estimate SE tax, federal and state tax, and a quarterly estimated-payment amount on 1099/self-employment income</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Self-employment tax is 15.3% (12.4% Social Security + 2.9% Medicare) on 92.35% of net SE income, with half of it deducted from federal taxable income. Assumes this is your only income for the year — if you also have W-2 wages, results will run high (see methodology below). Does not model the 20% Qualified Business Income deduction. The quarterly figure is an even 4-way split of annual liability, not the IRS's actual (unevenly spaced) estimated-payment due dates.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      
+      <label>Net Self-Employment Income ($/year)
+        <input type="number" id="netSEIncome" min="0" step="500" value="65000" required>
+      </label>
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <button type="submit">Calculate Self-Employment Tax →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Self-Employment Tax</span><span class="value" id="result-se-tax"></span></div>
+        <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">Iowa State Tax</span><span class="value" id="result-state"></span></div>
+        <div class="result-item"><span class="label">Quarterly Estimated Payment</span><span class="value" id="result-quarterly"></span></div>
+      </div>
+      <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
+    </div>
+    <p class="cross-link"><a href="/iowa/">Paid a W-2 salary instead? Try our Iowa paycheck calculator →</a></p>
+  </section>
+
+  
+    <section id="faq" class="seo-section">
+      <h2>Iowa Paycheck Calculator FAQ</h2>
+      
+      <details class="faq-item">
+        <summary>What is Iowa's state income tax rate?</summary>
+        <p>Iowa charges a flat 3.80% rate for tax year 2026. Standard deduction: $16,100 for single filers.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How much is take-home pay on $65,000 in Iowa?</summary>
+        <p>On a $65,000 gross salary, a single filer in Iowa takes home roughly $52,549.3/year (about $4,379.11/month) after federal tax, FICA, and state tax.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What deductions does Iowa apply before taxing my income?</summary>
+        <p>Iowa applies a $16,100 standard deduction, before the flat 3.80% rate. See the "How Iowa Paycheck Tax Is Calculated" section above for the exact formula.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does this estimate change if I'm married or have dependents?</summary>
+        <p>This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Iowa state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Iowa Department of Revenue's married-filing-jointly tables for a precise figure.</p>
+      </details>
+    </section>
+  
+    <section id="methodology" class="methodology">
+      <h2>Methodology &amp; Source</h2>
+      <p>Iowa state tax figures sourced from <strong>Iowa Department of Revenue</strong> (<a href="https://revenue.iowa.gov/" target="_blank" rel="nofollow noopener">https://revenue.iowa.gov/</a>), citing SF 2442 (2024) — flat 3.8% effective 2026, completing the phase-down from a 6-bracket system topping out at 8.53%. Federal brackets, standard deductions (single/MFJ/HoH), and FICA constants sourced from the IRS (Revenue Procedure 2025-32; married-filing-jointly Additional Medicare threshold of $250,000 is a separate, unindexed statutory figure). Iowa's married-filing-jointly and head-of-household figures are not yet independently verified and currently fall back to single-filer brackets — see the caveat in the formula section above.</p>
+      
+      
+      <p>Self-employment tax uses the statutory 15.3% rate (12.4% Social Security + 2.9% Medicare) on 92.35% of net self-employment income, with half of the SE tax deducted from federal taxable income above-the-line — per IRS Schedule SE (Form 1040) instructions, IRC §1401 and §164(f), 2026 edition. The 20% Qualified Business Income deduction (IRC §199A) is not modeled — it phases out by income and business type and is too state/entity-dependent to compute generically. This assumes the self-employment income is your only earnings for the year; if you also have W-2 wages, the Social Security wage-base cap and Additional Medicare threshold are actually based on your combined earnings, so this will overstate SE tax if you have significant wage income too.</p>
+      <p class="deviation-note">This is an estimate based on standard single-filer federal, FICA, and IA state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors.</p>
+      
+      <p>Guideline version: 2026-IA-v1 · Effective: 2026-01-01 · Last verified: 2026-07-26</p>
+    </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+
+    <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
+    <script>
+    const STATE_ENTRY = {"name":"Iowa","formula_model":"flat_tax","effective_date":"2026-01-01","source":{"agency_name":"Iowa Department of Revenue","url":"https://revenue.iowa.gov/","statute_ref":"SF 2442 (2024) — flat 3.8% effective 2026, completing the phase-down from a 6-bracket system topping out at 8.53%"},"params":{"rate":0.038,"standard_deduction":16100},"abbr":"IA","slug":"iowa","last_verified":"2026-07-26","guideline_version":"2026-IA-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Iowa's $16,100 standard deduction from gross wages, then apply the flat 3.80% state rate.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Iowa resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Iowa state tax: ($65,000 - $16,100 deduction) × 3.80% = $1,858.2","Net annual pay: $65,000 - $12,450.7 = $52,549.3 (≈$4,379.11/month)"]}},"faq_extra":[{"q":"What is Iowa's state income tax rate?","a":"Iowa charges a flat 3.80% rate for tax year 2026. Standard deduction: $16,100 for single filers."},{"q":"How much is take-home pay on $65,000 in Iowa?","a":"On a $65,000 gross salary, a single filer in Iowa takes home roughly $52,549.3/year (about $4,379.11/month) after federal tax, FICA, and state tax."},{"q":"What deductions does Iowa apply before taxing my income?","a":"Iowa applies a $16,100 standard deduction, before the flat 3.80% rate. See the \"How Iowa Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Iowa state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Iowa Department of Revenue's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
+    const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":"Many Iowa school districts levy a local income surtax, typically 1%-20% of your Iowa state tax liability (not of wages directly) — varies by district and not computed here.","deviation_note":"This is an estimate based on standard single-filer federal, FICA, and IA state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
+
+    function runCalculation(e) {
+        e.preventDefault();
+        const netSEIncome = parseFloat(document.getElementById('netSEIncome').value) || 0;
+        const filingStatus = document.getElementById('filingStatus').value;
+        const r = calcSelfEmployedTax(STATE_ENTRY, RULES, netSEIncome, filingStatus);
+
+        document.getElementById('result-amount').textContent = fmtMoney(r.netIncome) + ' net / year';
+        document.getElementById('result-se-tax').textContent = fmtMoney(r.seTax);
+        document.getElementById('result-federal').textContent = fmtMoney(r.federalTax);
+        document.getElementById('result-state').textContent = fmtMoney(r.stateTax);
+        document.getElementById('result-quarterly').textContent = fmtMoney(r.quarterlyEstimate);
+
+        document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.netSEIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.seTax,
+            stateTax: r.stateTax,
+            localTax: 0,
+            extraPayrollTax: 0,
+            netAnnual: r.netIncome
+        });
+    }
+    document.getElementById('calc-form').addEventListener('submit', runCalculation);
+    document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+    </script>
+</body>
+</html>

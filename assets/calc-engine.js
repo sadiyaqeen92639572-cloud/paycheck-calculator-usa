@@ -406,7 +406,57 @@ function annualizeHourly(hourlyRate, hoursPerWeek, otHoursPerWeek = 0, otMultipl
     return round2(regularAnnual + otAnnual);
 }
 
+// Self-employment (SE) tax constants — IRC §1401 (15.3% = 12.4% Social Security + 2.9%
+// Medicare, on 92.35% of net SE income), IRC §164(f) (half of SE tax is an above-the-line
+// federal deduction). Same SS_WAGE_BASE_2026 / ADDITIONAL_MEDICARE_THRESHOLD as FICA above.
+// Source: IRS Schedule SE (Form 1040) instructions, 2026. Verified 2026-07-29.
+const SE_NET_EARNINGS_FACTOR = 0.9235;
+const SE_SOCIAL_SECURITY_RATE = 0.124;
+const SE_MEDICARE_RATE = 0.029;
+
+/**
+ * Self-employment / 1099 tax estimate. Assumes netSEIncome is the filer's ONLY earnings for
+ * the year — if the filer also has W-2 wages (common for side 1099 work alongside a day job),
+ * the Social Security wage-base cap and Additional Medicare threshold are actually computed
+ * against COMBINED W-2 + SE earnings, not SE income alone, so results run high for anyone with
+ * substantial W-2 income too. Does not model the 20% Qualified Business Income (QBI) deduction
+ * (IRC §199A) — phases out by income and business type, too state/entity-dependent to model
+ * generically. quarterlyEstimate is an even 4-way split, not the real (unevenly spaced) IRS
+ * estimated-payment due dates (mid-April/June/September, January).
+ */
+function calcSelfEmployedTax(stateEntry, rules, netSEIncome, filingStatus = 'single') {
+    netSEIncome = Math.max(0, Number(netSEIncome) || 0);
+    const threshold = ADDITIONAL_MEDICARE_THRESHOLD[filingStatus] ?? ADDITIONAL_MEDICARE_THRESHOLD.single;
+
+    const seTaxableBase = netSEIncome * SE_NET_EARNINGS_FACTOR;
+    const ssPortion = Math.min(seTaxableBase, SS_WAGE_BASE_2026) * SE_SOCIAL_SECURITY_RATE;
+    const medicarePortion = seTaxableBase * SE_MEDICARE_RATE;
+    const additionalMedicare = Math.max(0, seTaxableBase - threshold) * ADDITIONAL_MEDICARE_RATE;
+    const seTax = round2(ssPortion + medicarePortion + additionalMedicare);
+
+    const standardDeduction = FEDERAL_STANDARD_DEDUCTION[filingStatus] ?? FEDERAL_STANDARD_DEDUCTION.single;
+    const federalTaxableIncome = Math.max(0, netSEIncome - seTax / 2 - standardDeduction);
+    const federalTax = round2(marginalBracketTax(federalTaxableIncome, FEDERAL_BRACKETS[filingStatus] ?? FEDERAL_BRACKETS.single));
+
+    const stateFn = FORMULA_DISPATCH[stateEntry.formula_model];
+    const stateTaxableIncome = Math.max(0, netSEIncome - seTax / 2);
+    const stateResult = stateFn(stateTaxableIncome, stateEntry, federalTax, filingStatus);
+
+    const quarterlyEstimate = round2((federalTax + seTax + stateResult.stateTax) / 4);
+    const netIncome = round2(netSEIncome - federalTax - seTax - stateResult.stateTax);
+
+    return {
+        netSEIncome,
+        seTax,
+        federalTax,
+        stateTax: stateResult.stateTax,
+        quarterlyEstimate,
+        netIncome,
+        filingStatus
+    };
+}
+
 // Node (build-time verification) + browser (runtime calculator) export
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { calculatePaycheck, calcBonusPaycheck, calcFederalTax, calcFICA, marginalBracketTax, fmtMoney, annualizeHourly };
+    module.exports = { calculatePaycheck, calcBonusPaycheck, calcSelfEmployedTax, calcFederalTax, calcFICA, marginalBracketTax, fmtMoney, annualizeHourly };
 }

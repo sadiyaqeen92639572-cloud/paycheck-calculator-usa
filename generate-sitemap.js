@@ -40,6 +40,15 @@ Object.values(states).forEach(state => {
       priority: '0.7'
     });
   }
+
+  if (fs.existsSync(path.join(__dirname, state.slug, 'self-employed', 'index.html'))) {
+    urls.push({
+      loc: `${DOMAIN}/${state.slug}/self-employed/`,
+      lastmod: state.last_verified,
+      changefreq: 'monthly',
+      priority: '0.7'
+    });
+  }
 });
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>

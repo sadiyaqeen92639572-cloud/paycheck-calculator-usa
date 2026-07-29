@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ohio Self-Employment Tax Calculator (1099) — 2026</title>
+<meta name="description" content="Free Ohio self-employment / 1099 tax calculator. Estimate SE tax (Social Security + Medicare), federal tax, Ohio state tax, and a quarterly estimated-payment amount — updated 2026-07-26.">
+<link rel="canonical" href="https://calcpaycheck.com/ohio/self-employed/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Ohio Self-Employment Tax Calculator (1099) — 2026">
+<meta property="og:description" content="Free Ohio self-employment / 1099 tax calculator. Estimate SE tax (Social Security + Medicare), federal tax, Ohio state tax, and a quarterly estimated-payment amount — updated 2026-07-26.">
+<meta property="og:url" content="https://calcpaycheck.com/ohio/self-employed/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Ohio Self-Employed Tax Paycheck Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-26","version":"2026-OH-v1","author":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}},"publisher":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Ohio's state income tax rate in 2026?","acceptedAnswer":{"@type":"Answer","text":"Ohio completed a multi-year phase-down to a single flat rate for 2026: 0% on the first $26,050 of nonbusiness income, then 2.75% on everything above that — down from 3.125% in 2025 and 3.5% in 2024."}},{"@type":"Question","name":"Does this calculator include Ohio city/municipal income tax?","acceptedAnswer":{"@type":"Answer","text":"No — and this matters a lot in Ohio. Over 600 Ohio municipalities levy their own income tax, typically 1%-3%, with Columbus, Cleveland, and Akron around 2.5%. For many Ohio taxpayers, city tax exceeds state tax. Check your city's rate at your municipality's finance department or RITA/CCA (Ohio's two major municipal tax collection agencies) — it is not included in this estimate."}},{"@type":"Question","name":"How much is take-home pay on $65,000 in Ohio?","acceptedAnswer":{"@type":"Answer","text":"On a $65,000 gross salary, a single filer in Ohio takes home roughly $53,368/year (about $4,447/month) after federal tax, FICA, and Ohio's 2.75% state tax — before any city income tax, which can add another 1%-3%."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://calcpaycheck.com/"},{"@type":"ListItem","position":2,"name":"Ohio","item":"https://calcpaycheck.com/ohio/"},{"@type":"ListItem","position":3,"name":"Self-Employed","item":"https://calcpaycheck.com/ohio/self-employed/"}]},{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}]}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a> · <a href="/ohio/">Ohio Paycheck Calculator</a></p>
+  <h1>Ohio Self-Employment Tax Calculator</h1>
+  <p class="badge">Estimate SE tax, federal and state tax, and a quarterly estimated-payment amount on 1099/self-employment income</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Self-employment tax is 15.3% (12.4% Social Security + 2.9% Medicare) on 92.35% of net SE income, with half of it deducted from federal taxable income. Assumes this is your only income for the year — if you also have W-2 wages, results will run high (see methodology below). Does not model the 20% Qualified Business Income deduction. The quarterly figure is an even 4-way split of annual liability, not the IRS's actual (unevenly spaced) estimated-payment due dates.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      
+      <label>Net Self-Employment Income ($/year)
+        <input type="number" id="netSEIncome" min="0" step="500" value="65000" required>
+      </label>
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <button type="submit">Calculate Self-Employment Tax →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Self-Employment Tax</span><span class="value" id="result-se-tax"></span></div>
+        <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">Ohio State Tax</span><span class="value" id="result-state"></span></div>
+        <div class="result-item"><span class="label">Quarterly Estimated Payment</span><span class="value" id="result-quarterly"></span></div>
+      </div>
+      <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
+    </div>
+    <p class="cross-link"><a href="/ohio/">Paid a W-2 salary instead? Try our Ohio paycheck calculator →</a></p>
+  </section>
+
+  
+    <section id="faq" class="seo-section">
+      <h2>Ohio Paycheck Calculator FAQ</h2>
+      
+      <details class="faq-item">
+        <summary>What is Ohio's state income tax rate in 2026?</summary>
+        <p>Ohio completed a multi-year phase-down to a single flat rate for 2026: 0% on the first $26,050 of nonbusiness income, then 2.75% on everything above that — down from 3.125% in 2025 and 3.5% in 2024.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does this calculator include Ohio city/municipal income tax?</summary>
+        <p>No — and this matters a lot in Ohio. Over 600 Ohio municipalities levy their own income tax, typically 1%-3%, with Columbus, Cleveland, and Akron around 2.5%. For many Ohio taxpayers, city tax exceeds state tax. Check your city's rate at your municipality's finance department or RITA/CCA (Ohio's two major municipal tax collection agencies) — it is not included in this estimate.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How much is take-home pay on $65,000 in Ohio?</summary>
+        <p>On a $65,000 gross salary, a single filer in Ohio takes home roughly $53,368/year (about $4,447/month) after federal tax, FICA, and Ohio's 2.75% state tax — before any city income tax, which can add another 1%-3%.</p>
+      </details>
+    </section>
+  
+    <section id="methodology" class="methodology">
+      <h2>Methodology &amp; Source</h2>
+      <p>Ohio state tax figures sourced from <strong>Ohio Department of Taxation</strong> (<a href="https://tax.ohio.gov/individual/resources/annual-tax-rates" target="_blank" rel="nofollow noopener">https://tax.ohio.gov/individual/resources/annual-tax-rates</a>), citing Ohio Rev. Code § 5747.02, as amended by House Bill 96 (FY2026-27 budget) — completion of the multi-year phase-down to a single 2.75% bracket for 2026 (3.5% in 2024, 3.125% in 2025, 2.75% in 2026), with the first $26,050 of nonbusiness income untaxed. Federal brackets, standard deductions (single/MFJ/HoH), and FICA constants sourced from the IRS (Revenue Procedure 2025-32; married-filing-jointly Additional Medicare threshold of $250,000 is a separate, unindexed statutory figure). Ohio's married-filing-jointly and head-of-household figures have been independently verified against the source above.</p>
+      <p>Local tax figures sourced from <strong>Ohio municipal income tax (RITA/CCA/self-administered city tax departments)</strong>. Rates cross-checked against two independent secondary sources 2026-07-29 (countrytaxcalc.com, tax-rates.org via search synthesis, and cantonohio.gov directly for Canton); tax.ohio.gov could not be reached in this environment (DNS error), same issue already logged in this file's deviation_note. Dayton was excluded — sources disagreed (2.25% vs 2.5%) rather than guessed between. Youngstown, Lorain, and Springfield were excluded for lacking a second independent source. Ohio has 600+ taxing municipalities; only the 7 largest with agreeing rates are covered below. This models a flat rate only — Ohio residents working in a different taxing city than they live in often get a credit against their resident tax for tax paid to their work-city, which this calculator does not compute (it assumes the selected city is both home and work location).</p>
+      
+      <p>Self-employment tax uses the statutory 15.3% rate (12.4% Social Security + 2.9% Medicare) on 92.35% of net self-employment income, with half of the SE tax deducted from federal taxable income above-the-line — per IRS Schedule SE (Form 1040) instructions, IRC §1401 and §164(f), 2026 edition. The 20% Qualified Business Income deduction (IRC §199A) is not modeled — it phases out by income and business type and is too state/entity-dependent to compute generically. This assumes the self-employment income is your only earnings for the year; if you also have W-2 wages, the Social Security wage-base cap and Additional Medicare threshold are actually based on your combined earnings, so this will overstate SE tax if you have significant wage income too.</p>
+      <p class="deviation-note">This is an estimate based on standard single-filer federal, FICA, and OH state calculations. Actual withholding may differ based on your W-4/IT-4 elections, pre-tax deductions, municipal tax, and other factors. Some early secondary sources disagreed on whether OH 2026 has one bracket or an additional tier above $100,000 — resolved: House Bill 96 (the FY2026-27 state budget) completed the phase-down to a single 2.75% bracket with no additional tier, confirmed by multiple independent sources citing that bill. Direct fetch of tax.ohio.gov failed in this environment (DNS error) both times attempted; re-verify there directly when reachable.</p>
+      
+      <p>Guideline version: 2026-OH-v1 · Effective: 2026-01-01 · Last verified: 2026-07-26</p>
+    </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+
+    <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
+    <script>
+    const STATE_ENTRY = {"name":"Ohio","abbr":"OH","slug":"ohio","formula_model":"progressive_brackets","effective_date":"2026-01-01","last_verified":"2026-07-26","guideline_version":"2026-OH-v1","source":{"agency_name":"Ohio Department of Taxation","url":"https://tax.ohio.gov/individual/resources/annual-tax-rates","statute_ref":"Ohio Rev. Code § 5747.02, as amended by House Bill 96 (FY2026-27 budget) — completion of the multi-year phase-down to a single 2.75% bracket for 2026 (3.5% in 2024, 3.125% in 2025, 2.75% in 2026), with the first $26,050 of nonbusiness income untaxed"},"params":{"standard_deduction":0,"brackets":[{"upTo":26050,"rate":0},{"upTo":null,"rate":0.0275}]},"worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).","Ohio taxes the first $26,050 of income at 0%, then a flat 2.75% on everything above that — no separate standard deduction to subtract first.","What's left is your net take-home pay before any municipal income tax."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Ohio resident.","calculation":["Federal tax: $5,620","FICA: $65,000 × 7.65% = $4,972.50","OH state tax: ($65,000 - $26,050) × 2.75% = $38,950 × 2.75% = $1,071.13","Net annual pay: $65,000 - $5,620 - $4,972.50 - $1,071.13 = $53,336.37 (≈$4,444.70/month, before municipal tax)"]}},"faq_extra":[{"q":"What is Ohio's state income tax rate in 2026?","a":"Ohio completed a multi-year phase-down to a single flat rate for 2026: 0% on the first $26,050 of nonbusiness income, then 2.75% on everything above that — down from 3.125% in 2025 and 3.5% in 2024."},{"q":"Does this calculator include Ohio city/municipal income tax?","a":"No — and this matters a lot in Ohio. Over 600 Ohio municipalities levy their own income tax, typically 1%-3%, with Columbus, Cleveland, and Akron around 2.5%. For many Ohio taxpayers, city tax exceeds state tax. Check your city's rate at your municipality's finance department or RITA/CCA (Ohio's two major municipal tax collection agencies) — it is not included in this estimate."},{"q":"How much is take-home pay on $65,000 in Ohio?","a":"On a $65,000 gross salary, a single filer in Ohio takes home roughly $53,368/year (about $4,447/month) after federal tax, FICA, and Ohio's 2.75% state tax — before any city income tax, which can add another 1%-3%."}],"filing_status_backfilled":true};
+    const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax":{"type":"selectable","coverage":"partial","source":{"agency_name":"Ohio municipal income tax (RITA/CCA/self-administered city tax departments)","note":"Rates cross-checked against two independent secondary sources 2026-07-29 (countrytaxcalc.com, tax-rates.org via search synthesis, and cantonohio.gov directly for Canton); tax.ohio.gov could not be reached in this environment (DNS error), same issue already logged in this file's deviation_note. Dayton was excluded — sources disagreed (2.25% vs 2.5%) rather than guessed between. Youngstown, Lorain, and Springfield were excluded for lacking a second independent source. Ohio has 600+ taxing municipalities; only the 7 largest with agreeing rates are covered below. This models a flat rate only — Ohio residents working in a different taxing city than they live in often get a credit against their resident tax for tax paid to their work-city, which this calculator does not compute (it assumes the selected city is both home and work location)."},"options":[{"id":"none","label":"Outside these cities","kind":"none"},{"id":"columbus","label":"Columbus","kind":"flat_rate_on_gross","rate":0.025},{"id":"cleveland","label":"Cleveland","kind":"flat_rate_on_gross","rate":0.025},{"id":"cincinnati","label":"Cincinnati","kind":"flat_rate_on_gross","rate":0.018},{"id":"toledo","label":"Toledo","kind":"flat_rate_on_gross","rate":0.0225},{"id":"akron","label":"Akron","kind":"flat_rate_on_gross","rate":0.025},{"id":"parma","label":"Parma","kind":"flat_rate_on_gross","rate":0.025},{"id":"canton","label":"Canton","kind":"flat_rate_on_gross","rate":0.025},{"id":"other","label":"Other Ohio municipality — not covered","kind":"none"}]},"local_tax_note":"Over 600 Ohio municipalities levy their own income tax, typically 1%-3%. Columbus, Cleveland, Cincinnati, Toledo, Akron, Parma, and Canton are now computed via the selector above (flat rate, assumes you live and work in the same selected city — Ohio's actual resident-credit-for-work-city-tax rules are not modeled); most of the state's 600+ other taxing municipalities are still not covered. For many urban Ohio workers, city tax exceeds the state tax computed here.","deviation_note":"This is an estimate based on standard single-filer federal, FICA, and OH state calculations. Actual withholding may differ based on your W-4/IT-4 elections, pre-tax deductions, municipal tax, and other factors. Some early secondary sources disagreed on whether OH 2026 has one bracket or an additional tier above $100,000 — resolved: House Bill 96 (the FY2026-27 state budget) completed the phase-down to a single 2.75% bracket with no additional tier, confirmed by multiple independent sources citing that bill. Direct fetch of tax.ohio.gov failed in this environment (DNS error) both times attempted; re-verify there directly when reachable."};
+
+    function runCalculation(e) {
+        e.preventDefault();
+        const netSEIncome = parseFloat(document.getElementById('netSEIncome').value) || 0;
+        const filingStatus = document.getElementById('filingStatus').value;
+        const r = calcSelfEmployedTax(STATE_ENTRY, RULES, netSEIncome, filingStatus);
+
+        document.getElementById('result-amount').textContent = fmtMoney(r.netIncome) + ' net / year';
+        document.getElementById('result-se-tax').textContent = fmtMoney(r.seTax);
+        document.getElementById('result-federal').textContent = fmtMoney(r.federalTax);
+        document.getElementById('result-state').textContent = fmtMoney(r.stateTax);
+        document.getElementById('result-quarterly').textContent = fmtMoney(r.quarterlyEstimate);
+
+        document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.netSEIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.seTax,
+            stateTax: r.stateTax,
+            localTax: 0,
+            extraPayrollTax: 0,
+            netAnnual: r.netIncome
+        });
+    }
+    document.getElementById('calc-form').addEventListener('submit', runCalculation);
+    document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+    </script>
+</body>
+</html>

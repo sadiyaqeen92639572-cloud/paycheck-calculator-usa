@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Texas Self-Employment Tax Calculator (1099) — 2026</title>
+<meta name="description" content="Free Texas self-employment / 1099 tax calculator. Estimate SE tax (Social Security + Medicare), federal tax, Texas state tax, and a quarterly estimated-payment amount — updated 2026-07-26.">
+<link rel="canonical" href="https://calcpaycheck.com/texas/self-employed/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Texas Self-Employment Tax Calculator (1099) — 2026">
+<meta property="og:description" content="Free Texas self-employment / 1099 tax calculator. Estimate SE tax (Social Security + Medicare), federal tax, Texas state tax, and a quarterly estimated-payment amount — updated 2026-07-26.">
+<meta property="og:url" content="https://calcpaycheck.com/texas/self-employed/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Texas Self-Employed Tax Paycheck Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-26","version":"2026-TX-v1","author":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}},"publisher":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Texas have a state income tax?","acceptedAnswer":{"@type":"Answer","text":"No. Texas is one of nine states with no personal income tax, a status enshrined in the Texas Constitution since a 2019 voter-approved amendment (art. VIII, § 24). Your paycheck only has federal income tax and FICA withheld."}},{"@type":"Question","name":"How much is take-home pay on $65,000 in Texas?","acceptedAnswer":{"@type":"Answer","text":"On a $65,000 gross salary, a single filer in Texas takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA — no state tax is withheld."}},{"@type":"Question","name":"Are there any hidden state or local income taxes in Texas?","acceptedAnswer":{"@type":"Answer","text":"No Texas city or county levies a local income tax. Texas instead relies more heavily on sales tax and property tax to fund state and local government."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://calcpaycheck.com/"},{"@type":"ListItem","position":2,"name":"Texas","item":"https://calcpaycheck.com/texas/"},{"@type":"ListItem","position":3,"name":"Self-Employed","item":"https://calcpaycheck.com/texas/self-employed/"}]},{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}]}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a> · <a href="/texas/">Texas Paycheck Calculator</a></p>
+  <h1>Texas Self-Employment Tax Calculator</h1>
+  <p class="badge">Estimate SE tax, federal and state tax, and a quarterly estimated-payment amount on 1099/self-employment income</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Self-employment tax is 15.3% (12.4% Social Security + 2.9% Medicare) on 92.35% of net SE income, with half of it deducted from federal taxable income. Assumes this is your only income for the year — if you also have W-2 wages, results will run high (see methodology below). Does not model the 20% Qualified Business Income deduction. The quarterly figure is an even 4-way split of annual liability, not the IRS's actual (unevenly spaced) estimated-payment due dates.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      
+      <label>Net Self-Employment Income ($/year)
+        <input type="number" id="netSEIncome" min="0" step="500" value="65000" required>
+      </label>
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <button type="submit">Calculate Self-Employment Tax →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Self-Employment Tax</span><span class="value" id="result-se-tax"></span></div>
+        <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">Texas State Tax</span><span class="value" id="result-state"></span></div>
+        <div class="result-item"><span class="label">Quarterly Estimated Payment</span><span class="value" id="result-quarterly"></span></div>
+      </div>
+      <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
+    </div>
+    <p class="cross-link"><a href="/texas/">Paid a W-2 salary instead? Try our Texas paycheck calculator →</a></p>
+  </section>
+
+  
+    <section id="faq" class="seo-section">
+      <h2>Texas Paycheck Calculator FAQ</h2>
+      
+      <details class="faq-item">
+        <summary>Does Texas have a state income tax?</summary>
+        <p>No. Texas is one of nine states with no personal income tax, a status enshrined in the Texas Constitution since a 2019 voter-approved amendment (art. VIII, § 24). Your paycheck only has federal income tax and FICA withheld.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How much is take-home pay on $65,000 in Texas?</summary>
+        <p>On a $65,000 gross salary, a single filer in Texas takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA — no state tax is withheld.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Are there any hidden state or local income taxes in Texas?</summary>
+        <p>No Texas city or county levies a local income tax. Texas instead relies more heavily on sales tax and property tax to fund state and local government.</p>
+      </details>
+    </section>
+  
+    <section id="methodology" class="methodology">
+      <h2>Methodology &amp; Source</h2>
+      <p>Texas state tax figures sourced from <strong>Texas Comptroller of Public Accounts</strong> (<a href="https://comptroller.texas.gov/" target="_blank" rel="nofollow noopener">https://comptroller.texas.gov/</a>), citing Tex. Const. art. VIII, § 24 (voter-approved 2019 ban on a state personal income tax). Federal brackets, standard deductions (single/MFJ/HoH), and FICA constants sourced from the IRS (Revenue Procedure 2025-32; married-filing-jointly Additional Medicare threshold of $250,000 is a separate, unindexed statutory figure). Texas's married-filing-jointly and head-of-household figures have been independently verified against the source above.</p>
+      
+      
+      <p>Self-employment tax uses the statutory 15.3% rate (12.4% Social Security + 2.9% Medicare) on 92.35% of net self-employment income, with half of the SE tax deducted from federal taxable income above-the-line — per IRS Schedule SE (Form 1040) instructions, IRC §1401 and §164(f), 2026 edition. The 20% Qualified Business Income deduction (IRC §199A) is not modeled — it phases out by income and business type and is too state/entity-dependent to compute generically. This assumes the self-employment income is your only earnings for the year; if you also have W-2 wages, the Social Security wage-base cap and Additional Medicare threshold are actually based on your combined earnings, so this will overstate SE tax if you have significant wage income too.</p>
+      <p class="deviation-note">This is an estimate based on standard single-filer federal and FICA calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions (401k, health insurance), and other factors.</p>
+      
+      <p>Guideline version: 2026-TX-v1 · Effective: 2019-01-01 · Last verified: 2026-07-26</p>
+    </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+
+    <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
+    <script>
+    const STATE_ENTRY = {"name":"Texas","abbr":"TX","slug":"texas","formula_model":"no_income_tax","effective_date":"2019-01-01","last_verified":"2026-07-26","guideline_version":"2026-TX-v1","source":{"agency_name":"Texas Comptroller of Public Accounts","url":"https://comptroller.texas.gov/","statute_ref":"Tex. Const. art. VIII, § 24 (voter-approved 2019 ban on a state personal income tax)"},"params":{},"worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Texas charges no state income tax — your paycheck stops there. What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Texas resident.","calculation":["Federal taxable income: $65,000 - $16,100 = $48,900 → federal tax = $1,240 + ($48,900 - $12,400) × 12% = $5,620","FICA: $65,000 × 7.65% = $4,972.50","Texas state tax: $0","Net annual pay: $65,000 - $5,620 - $4,972.50 = $54,407.50 (≈$4,533.96/month)"]}},"faq_extra":[{"q":"Does Texas have a state income tax?","a":"No. Texas is one of nine states with no personal income tax, a status enshrined in the Texas Constitution since a 2019 voter-approved amendment (art. VIII, § 24). Your paycheck only has federal income tax and FICA withheld."},{"q":"How much is take-home pay on $65,000 in Texas?","a":"On a $65,000 gross salary, a single filer in Texas takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA — no state tax is withheld."},{"q":"Are there any hidden state or local income taxes in Texas?","a":"No Texas city or county levies a local income tax. Texas instead relies more heavily on sales tax and property tax to fund state and local government."}],"filing_status_backfilled":true};
+    const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal and FICA calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions (401k, health insurance), and other factors."};
+
+    function runCalculation(e) {
+        e.preventDefault();
+        const netSEIncome = parseFloat(document.getElementById('netSEIncome').value) || 0;
+        const filingStatus = document.getElementById('filingStatus').value;
+        const r = calcSelfEmployedTax(STATE_ENTRY, RULES, netSEIncome, filingStatus);
+
+        document.getElementById('result-amount').textContent = fmtMoney(r.netIncome) + ' net / year';
+        document.getElementById('result-se-tax').textContent = fmtMoney(r.seTax);
+        document.getElementById('result-federal').textContent = fmtMoney(r.federalTax);
+        document.getElementById('result-state').textContent = fmtMoney(r.stateTax);
+        document.getElementById('result-quarterly').textContent = fmtMoney(r.quarterlyEstimate);
+
+        document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.netSEIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.seTax,
+            stateTax: r.stateTax,
+            localTax: 0,
+            extraPayrollTax: 0,
+            netAnnual: r.netIncome
+        });
+    }
+    document.getElementById('calc-form').addEventListener('submit', runCalculation);
+    document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+    </script>
+</body>
+</html>

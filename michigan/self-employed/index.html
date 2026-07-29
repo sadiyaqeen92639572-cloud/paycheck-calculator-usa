@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Michigan Self-Employment Tax Calculator (1099) — 2026</title>
+<meta name="description" content="Free Michigan self-employment / 1099 tax calculator. Estimate SE tax (Social Security + Medicare), federal tax, Michigan state tax, and a quarterly estimated-payment amount — updated 2026-07-26.">
+<link rel="canonical" href="https://calcpaycheck.com/michigan/self-employed/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Michigan Self-Employment Tax Calculator (1099) — 2026">
+<meta property="og:description" content="Free Michigan self-employment / 1099 tax calculator. Estimate SE tax (Social Security + Medicare), federal tax, Michigan state tax, and a quarterly estimated-payment amount — updated 2026-07-26.">
+<meta property="og:url" content="https://calcpaycheck.com/michigan/self-employed/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Michigan Self-Employed Tax Paycheck Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-26","version":"2026-MI-v1","author":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}},"publisher":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Michigan's state income tax rate?","acceptedAnswer":{"@type":"Answer","text":"Michigan charges a flat 4.25% rate for 2026, with a $5,900 personal exemption per filer."}},{"@type":"Question","name":"Does this calculator include Detroit's city income tax?","acceptedAnswer":{"@type":"Answer","text":"No. This estimate covers only Michigan's 4.25% state tax. Several Michigan cities, including Detroit (2.4% for residents), Grand Rapids, and Lansing, levy an additional local income tax not computed here."}},{"@type":"Question","name":"How much is take-home pay on $65,000 in Michigan?","acceptedAnswer":{"@type":"Answer","text":"On a $65,000 gross salary, a single filer in Michigan takes home roughly $51,928/year (about $4,327/month) after federal tax, FICA, and the state's 4.25% flat tax — before any city tax."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://calcpaycheck.com/"},{"@type":"ListItem","position":2,"name":"Michigan","item":"https://calcpaycheck.com/michigan/"},{"@type":"ListItem","position":3,"name":"Self-Employed","item":"https://calcpaycheck.com/michigan/self-employed/"}]},{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}]}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a> · <a href="/michigan/">Michigan Paycheck Calculator</a></p>
+  <h1>Michigan Self-Employment Tax Calculator</h1>
+  <p class="badge">Estimate SE tax, federal and state tax, and a quarterly estimated-payment amount on 1099/self-employment income</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Self-employment tax is 15.3% (12.4% Social Security + 2.9% Medicare) on 92.35% of net SE income, with half of it deducted from federal taxable income. Assumes this is your only income for the year — if you also have W-2 wages, results will run high (see methodology below). Does not model the 20% Qualified Business Income deduction. The quarterly figure is an even 4-way split of annual liability, not the IRS's actual (unevenly spaced) estimated-payment due dates.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      
+      <label>Net Self-Employment Income ($/year)
+        <input type="number" id="netSEIncome" min="0" step="500" value="65000" required>
+      </label>
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <button type="submit">Calculate Self-Employment Tax →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Self-Employment Tax</span><span class="value" id="result-se-tax"></span></div>
+        <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">Michigan State Tax</span><span class="value" id="result-state"></span></div>
+        <div class="result-item"><span class="label">Quarterly Estimated Payment</span><span class="value" id="result-quarterly"></span></div>
+      </div>
+      <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
+    </div>
+    <p class="cross-link"><a href="/michigan/">Paid a W-2 salary instead? Try our Michigan paycheck calculator →</a></p>
+  </section>
+
+  
+    <section id="faq" class="seo-section">
+      <h2>Michigan Paycheck Calculator FAQ</h2>
+      
+      <details class="faq-item">
+        <summary>What is Michigan's state income tax rate?</summary>
+        <p>Michigan charges a flat 4.25% rate for 2026, with a $5,900 personal exemption per filer.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does this calculator include Detroit's city income tax?</summary>
+        <p>No. This estimate covers only Michigan's 4.25% state tax. Several Michigan cities, including Detroit (2.4% for residents), Grand Rapids, and Lansing, levy an additional local income tax not computed here.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How much is take-home pay on $65,000 in Michigan?</summary>
+        <p>On a $65,000 gross salary, a single filer in Michigan takes home roughly $51,928/year (about $4,327/month) after federal tax, FICA, and the state's 4.25% flat tax — before any city tax.</p>
+      </details>
+    </section>
+  
+    <section id="methodology" class="methodology">
+      <h2>Methodology &amp; Source</h2>
+      <p>Michigan state tax figures sourced from <strong>Michigan Department of Treasury</strong> (<a href="https://www.michigan.gov/taxes" target="_blank" rel="nofollow noopener">https://www.michigan.gov/taxes</a>), citing MCL 206.51 — flat rate, 4.25% for 2026; personal exemption per Treasury 2026 Withholding Guide (Form 446). Federal brackets, standard deductions (single/MFJ/HoH), and FICA constants sourced from the IRS (Revenue Procedure 2025-32; married-filing-jointly Additional Medicare threshold of $250,000 is a separate, unindexed statutory figure). Michigan's married-filing-jointly and head-of-household figures have been independently verified against the source above.</p>
+      
+      
+      <p>Self-employment tax uses the statutory 15.3% rate (12.4% Social Security + 2.9% Medicare) on 92.35% of net self-employment income, with half of the SE tax deducted from federal taxable income above-the-line — per IRS Schedule SE (Form 1040) instructions, IRC §1401 and §164(f), 2026 edition. The 20% Qualified Business Income deduction (IRC §199A) is not modeled — it phases out by income and business type and is too state/entity-dependent to compute generically. This assumes the self-employment income is your only earnings for the year; if you also have W-2 wages, the Social Security wage-base cap and Additional Medicare threshold are actually based on your combined earnings, so this will overstate SE tax if you have significant wage income too.</p>
+      <p class="deviation-note">This is an estimate based on standard single-filer federal, FICA, and MI state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, local city tax, and other factors.</p>
+      
+      <p>Guideline version: 2026-MI-v1 · Effective: 2026-01-01 · Last verified: 2026-07-26</p>
+    </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+
+    <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
+    <script>
+    const STATE_ENTRY = {"name":"Michigan","abbr":"MI","slug":"michigan","formula_model":"flat_tax","effective_date":"2026-01-01","last_verified":"2026-07-26","guideline_version":"2026-MI-v1","source":{"agency_name":"Michigan Department of Treasury","url":"https://www.michigan.gov/taxes","statute_ref":"MCL 206.51 — flat rate, 4.25% for 2026; personal exemption per Treasury 2026 Withholding Guide (Form 446)"},"params":{"rate":0.0425,"standard_deduction":0,"personal_exemption":5900,"personal_exemption_mfj":11800},"worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).","Subtract Michigan's $5,900 personal exemption from gross wages, then apply the flat 4.25% state rate.","What's left is your net take-home pay before any city income tax (e.g. Detroit)."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Michigan resident.","calculation":["Federal tax: $5,620","FICA: $65,000 × 7.65% = $4,972.50","MI taxable wages: $65,000 - $5,900 = $59,100 → MI tax: $59,100 × 4.25% = $2,511.75","Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,511.75 = $51,895.75 (≈$4,324.65/month, before local city tax)"]}},"faq_extra":[{"q":"What is Michigan's state income tax rate?","a":"Michigan charges a flat 4.25% rate for 2026, with a $5,900 personal exemption per filer."},{"q":"Does this calculator include Detroit's city income tax?","a":"No. This estimate covers only Michigan's 4.25% state tax. Several Michigan cities, including Detroit (2.4% for residents), Grand Rapids, and Lansing, levy an additional local income tax not computed here."},{"q":"How much is take-home pay on $65,000 in Michigan?","a":"On a $65,000 gross salary, a single filer in Michigan takes home roughly $51,928/year (about $4,327/month) after federal tax, FICA, and the state's 4.25% flat tax — before any city tax."}],"filing_status_backfilled":true};
+    const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":"This estimate excludes Michigan city income tax. Several cities, including Detroit (2.4% for residents), Grand Rapids, Lansing, and others, levy an additional local income tax not computed here.","deviation_note":"This is an estimate based on standard single-filer federal, FICA, and MI state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, local city tax, and other factors."};
+
+    function runCalculation(e) {
+        e.preventDefault();
+        const netSEIncome = parseFloat(document.getElementById('netSEIncome').value) || 0;
+        const filingStatus = document.getElementById('filingStatus').value;
+        const r = calcSelfEmployedTax(STATE_ENTRY, RULES, netSEIncome, filingStatus);
+
+        document.getElementById('result-amount').textContent = fmtMoney(r.netIncome) + ' net / year';
+        document.getElementById('result-se-tax').textContent = fmtMoney(r.seTax);
+        document.getElementById('result-federal').textContent = fmtMoney(r.federalTax);
+        document.getElementById('result-state').textContent = fmtMoney(r.stateTax);
+        document.getElementById('result-quarterly').textContent = fmtMoney(r.quarterlyEstimate);
+
+        document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.netSEIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.seTax,
+            stateTax: r.stateTax,
+            localTax: 0,
+            extraPayrollTax: 0,
+            netAnnual: r.netIncome
+        });
+    }
+    document.getElementById('calc-form').addEventListener('submit', runCalculation);
+    document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+    </script>
+</body>
+</html>

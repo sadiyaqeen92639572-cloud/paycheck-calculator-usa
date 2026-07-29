@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connecticut Self-Employment Tax Calculator (1099) — 2026</title>
+<meta name="description" content="Free Connecticut self-employment / 1099 tax calculator. Estimate SE tax (Social Security + Medicare), federal tax, Connecticut state tax, and a quarterly estimated-payment amount — updated 2026-07-26.">
+<link rel="canonical" href="https://calcpaycheck.com/connecticut/self-employed/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Connecticut Self-Employment Tax Calculator (1099) — 2026">
+<meta property="og:description" content="Free Connecticut self-employment / 1099 tax calculator. Estimate SE tax (Social Security + Medicare), federal tax, Connecticut state tax, and a quarterly estimated-payment amount — updated 2026-07-26.">
+<meta property="og:url" content="https://calcpaycheck.com/connecticut/self-employed/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Connecticut Self-Employed Tax Paycheck Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-26","version":"2026-CT-v1","author":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}},"publisher":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are Connecticut's income tax brackets for 2026?","acceptedAnswer":{"@type":"Answer","text":"Connecticut uses 7 marginal brackets ranging from 2% to 6.99%."}},{"@type":"Question","name":"How much is take-home pay on $65,000 in Connecticut?","acceptedAnswer":{"@type":"Answer","text":"On a $65,000 gross salary, a single filer in Connecticut takes home roughly $52,407.5/year (about $4,367.29/month) after federal tax, FICA, and state tax."}},{"@type":"Question","name":"What deductions does Connecticut apply before taxing my income?","acceptedAnswer":{"@type":"Answer","text":"Connecticut applies a $15,000 personal exemption, before its marginal bracket schedule. See the \"How Connecticut Paycheck Tax Is Calculated\" section above for the exact formula."}},{"@type":"Question","name":"Does this estimate change if I'm married or have dependents?","acceptedAnswer":{"@type":"Answer","text":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Connecticut state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Connecticut Department of Revenue Services's married-filing-jointly tables for a precise figure."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://calcpaycheck.com/"},{"@type":"ListItem","position":2,"name":"Connecticut","item":"https://calcpaycheck.com/connecticut/"},{"@type":"ListItem","position":3,"name":"Self-Employed","item":"https://calcpaycheck.com/connecticut/self-employed/"}]},{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}]}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a> · <a href="/connecticut/">Connecticut Paycheck Calculator</a></p>
+  <h1>Connecticut Self-Employment Tax Calculator</h1>
+  <p class="badge">Estimate SE tax, federal and state tax, and a quarterly estimated-payment amount on 1099/self-employment income</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Self-employment tax is 15.3% (12.4% Social Security + 2.9% Medicare) on 92.35% of net SE income, with half of it deducted from federal taxable income. Assumes this is your only income for the year — if you also have W-2 wages, results will run high (see methodology below). Does not model the 20% Qualified Business Income deduction. The quarterly figure is an even 4-way split of annual liability, not the IRS's actual (unevenly spaced) estimated-payment due dates.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      
+      <label>Net Self-Employment Income ($/year)
+        <input type="number" id="netSEIncome" min="0" step="500" value="65000" required>
+      </label>
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <button type="submit">Calculate Self-Employment Tax →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Self-Employment Tax</span><span class="value" id="result-se-tax"></span></div>
+        <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">Connecticut State Tax</span><span class="value" id="result-state"></span></div>
+        <div class="result-item"><span class="label">Quarterly Estimated Payment</span><span class="value" id="result-quarterly"></span></div>
+      </div>
+      <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
+    </div>
+    <p class="cross-link"><a href="/connecticut/">Paid a W-2 salary instead? Try our Connecticut paycheck calculator →</a></p>
+  </section>
+
+  
+    <section id="faq" class="seo-section">
+      <h2>Connecticut Paycheck Calculator FAQ</h2>
+      
+      <details class="faq-item">
+        <summary>What are Connecticut's income tax brackets for 2026?</summary>
+        <p>Connecticut uses 7 marginal brackets ranging from 2% to 6.99%.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How much is take-home pay on $65,000 in Connecticut?</summary>
+        <p>On a $65,000 gross salary, a single filer in Connecticut takes home roughly $52,407.5/year (about $4,367.29/month) after federal tax, FICA, and state tax.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What deductions does Connecticut apply before taxing my income?</summary>
+        <p>Connecticut applies a $15,000 personal exemption, before its marginal bracket schedule. See the "How Connecticut Paycheck Tax Is Calculated" section above for the exact formula.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does this estimate change if I'm married or have dependents?</summary>
+        <p>This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Connecticut state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Connecticut Department of Revenue Services's married-filing-jointly tables for a precise figure.</p>
+      </details>
+    </section>
+  
+    <section id="methodology" class="methodology">
+      <h2>Methodology &amp; Source</h2>
+      <p>Connecticut state tax figures sourced from <strong>Connecticut Department of Revenue Services</strong> (<a href="https://portal.ct.gov/drs" target="_blank" rel="nofollow noopener">https://portal.ct.gov/drs</a>), citing Conn. Gen. Stat. § 12-700. Federal brackets, standard deductions (single/MFJ/HoH), and FICA constants sourced from the IRS (Revenue Procedure 2025-32; married-filing-jointly Additional Medicare threshold of $250,000 is a separate, unindexed statutory figure). Connecticut's married-filing-jointly and head-of-household figures are not yet independently verified and currently fall back to single-filer brackets — see the caveat in the formula section above.</p>
+      
+      
+      <p>Self-employment tax uses the statutory 15.3% rate (12.4% Social Security + 2.9% Medicare) on 92.35% of net self-employment income, with half of the SE tax deducted from federal taxable income above-the-line — per IRS Schedule SE (Form 1040) instructions, IRC §1401 and §164(f), 2026 edition. The 20% Qualified Business Income deduction (IRC §199A) is not modeled — it phases out by income and business type and is too state/entity-dependent to compute generically. This assumes the self-employment income is your only earnings for the year; if you also have W-2 wages, the Social Security wage-base cap and Additional Medicare threshold are actually based on your combined earnings, so this will overstate SE tax if you have significant wage income too.</p>
+      <p class="deviation-note">This is an estimate based on standard single-filer federal, FICA, and CT state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Connecticut's $15,000 personal exemption phases out between $30,000 and $45,000 of income; this estimate applies it as a flat amount, which understates tax for filers in that phase-out band. Connecticut also has a "tax recapture" provision affecting high earners, not modeled.</p>
+      
+      <p>Guideline version: 2026-CT-v1 · Effective: 2026-01-01 · Last verified: 2026-07-26</p>
+    </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+
+    <script src="/assets/calc-engine.js"></script>
+    <script src="/assets/chart.js"></script>
+    <script>
+    const STATE_ENTRY = {"name":"Connecticut","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"Connecticut Department of Revenue Services","url":"https://portal.ct.gov/drs","statute_ref":"Conn. Gen. Stat. § 12-700"},"params":{"brackets":[{"upTo":10000,"rate":0.02},{"upTo":50000,"rate":0.045},{"upTo":100000,"rate":0.055},{"upTo":200000,"rate":0.06},{"upTo":250000,"rate":0.065},{"upTo":500000,"rate":0.069},{"upTo":null,"rate":0.0699}],"personal_exemption":15000},"abbr":"CT","slug":"connecticut","last_verified":"2026-07-26","guideline_version":"2026-CT-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Connecticut's $15,000 personal exemption from gross wages, then apply the 7-bracket state schedule (2%-6.99%) marginally.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Connecticut resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Connecticut state tax: Marginal tax on $50,000 taxable income (after $15,000 deduction) = $2,000","Net annual pay: $65,000 - $12,592.5 = $52,407.5 (≈$4,367.29/month)"]}},"faq_extra":[{"q":"What are Connecticut's income tax brackets for 2026?","a":"Connecticut uses 7 marginal brackets ranging from 2% to 6.99%."},{"q":"How much is take-home pay on $65,000 in Connecticut?","a":"On a $65,000 gross salary, a single filer in Connecticut takes home roughly $52,407.5/year (about $4,367.29/month) after federal tax, FICA, and state tax."},{"q":"What deductions does Connecticut apply before taxing my income?","a":"Connecticut applies a $15,000 personal exemption, before its marginal bracket schedule. See the \"How Connecticut Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Connecticut state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Connecticut Department of Revenue Services's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
+    const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and CT state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Connecticut's $15,000 personal exemption phases out between $30,000 and $45,000 of income; this estimate applies it as a flat amount, which understates tax for filers in that phase-out band. Connecticut also has a \"tax recapture\" provision affecting high earners, not modeled."};
+
+    function runCalculation(e) {
+        e.preventDefault();
+        const netSEIncome = parseFloat(document.getElementById('netSEIncome').value) || 0;
+        const filingStatus = document.getElementById('filingStatus').value;
+        const r = calcSelfEmployedTax(STATE_ENTRY, RULES, netSEIncome, filingStatus);
+
+        document.getElementById('result-amount').textContent = fmtMoney(r.netIncome) + ' net / year';
+        document.getElementById('result-se-tax').textContent = fmtMoney(r.seTax);
+        document.getElementById('result-federal').textContent = fmtMoney(r.federalTax);
+        document.getElementById('result-state').textContent = fmtMoney(r.stateTax);
+        document.getElementById('result-quarterly').textContent = fmtMoney(r.quarterlyEstimate);
+
+        document.getElementById('results-block').hidden = false;
+        drawBreakdownChart(document.getElementById('breakdown-chart'), {
+            gross: r.netSEIncome,
+            federalTax: r.federalTax,
+            ficaTotal: r.seTax,
+            stateTax: r.stateTax,
+            localTax: 0,
+            extraPayrollTax: 0,
+            netAnnual: r.netIncome
+        });
+    }
+    document.getElementById('calc-form').addEventListener('submit', runCalculation);
+    document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+    </script>
+</body>
+</html>
