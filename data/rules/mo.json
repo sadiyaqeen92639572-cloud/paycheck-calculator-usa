@@ -1,6 +1,19 @@
 {
   "rounding": "nearest_cent",
   "extra_payroll_tax": null,
-  "local_tax_note": "Kansas City and St. Louis each levy a 1% local earnings tax on residents (and on nonresidents working there), not computed here.",
+  "local_tax": {
+    "type": "selectable",
+    "coverage": "full",
+    "source": {
+      "agency_name": "Kansas City & St. Louis earnings tax administration",
+      "note": "Both cities' 1% earnings tax rate has been stable for decades — cross-checked against two independent secondary sources 2026-07-29 (askdoss.com, countrytaxcalc.com) after both cities' own .gov earnings-tax pages returned a 403/DNS error in this environment. Simplification: this calculator treats the 'non-resident working here' option as if the full salary were city-sourced, same simplifying assumption as the Philadelphia non-resident option elsewhere on this site — in reality only city-sourced wages are taxed for non-residents."
+    },
+    "options": [
+      { "id": "none", "label": "Outside Kansas City / St. Louis", "kind": "none" },
+      { "id": "kc", "label": "Kansas City resident or worker", "kind": "flat_rate_on_gross", "rate": 0.01 },
+      { "id": "stl", "label": "St. Louis resident or worker", "kind": "flat_rate_on_gross", "rate": 0.01 }
+    ]
+  },
+  "local_tax_note": "Kansas City and St. Louis each levy a 1% local earnings tax on residents (and on nonresidents working there) — now computed via the selector above.",
   "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and MO state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."
 }

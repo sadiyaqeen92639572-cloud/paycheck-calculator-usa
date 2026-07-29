@@ -1,6 +1,24 @@
 {
   "rounding": "nearest_cent",
   "extra_payroll_tax": null,
-  "local_tax_note": "Some Alabama cities and counties (e.g. Birmingham, Bessemer) levy a local occupational tax, typically 0.5%-2% of wages, not computed here.",
+  "local_tax": {
+    "type": "selectable",
+    "coverage": "full",
+    "source": {
+      "agency_name": "City occupational/license tax ordinances (Birmingham, Bessemer, Gadsden, Attalla, Opelika, Auburn)",
+      "note": "Rates cross-checked against two independent secondary sources 2026-07-29 (city-tax aggregator listings and payroll-guide summaries); Gadsden's own city revenue page does not publish the numeric rate online, so it relies on secondary sourcing only — flagged here rather than silently treated as equally verified. Alabama has dozens of smaller municipalities with occupational tax not listed below; select \"Other\" for those."
+    },
+    "options": [
+      { "id": "none", "label": "Outside these cities", "kind": "none" },
+      { "id": "birmingham", "label": "Birmingham", "kind": "flat_rate_on_gross", "rate": 0.01 },
+      { "id": "bessemer", "label": "Bessemer", "kind": "flat_rate_on_gross", "rate": 0.01 },
+      { "id": "gadsden", "label": "Gadsden", "kind": "flat_rate_on_gross", "rate": 0.02 },
+      { "id": "attalla", "label": "Attalla", "kind": "flat_rate_on_gross", "rate": 0.02 },
+      { "id": "opelika", "label": "Opelika", "kind": "flat_rate_on_gross", "rate": 0.015 },
+      { "id": "auburn", "label": "Auburn", "kind": "flat_rate_on_gross", "rate": 0.01 },
+      { "id": "other", "label": "Other Alabama city — not covered", "kind": "none" }
+    ]
+  },
+  "local_tax_note": "Some Alabama cities and counties levy a local occupational tax, typically 0.5%-2% of wages. Birmingham, Bessemer, Gadsden, Attalla, Opelika, and Auburn are now computed via the selector above; dozens of smaller Alabama municipalities with their own occupational tax are still not covered.",
   "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and AL state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Alabama's standard deduction is income-graduated ($2,000-$4,000 for single filers depending on AGI); this estimate uses a flat $3,000 approximation."
 }

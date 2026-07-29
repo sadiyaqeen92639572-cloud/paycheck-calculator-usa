@@ -9,6 +9,8 @@ const txRules = require('./data/rules/tx.json');
 const caRules = require('./data/rules/ca.json');
 const nyRules = require('./data/rules/ny.json');
 const paRules = require('./data/rules/pa.json');
+const moRules = require('./data/rules/mo.json');
+const alRules = require('./data/rules/al.json');
 
 let failures = 0;
 function assertEqual(actual, expected, label) {
@@ -93,6 +95,22 @@ assertTrue(paPhilly.netAnnual < paNone.netAnnual, 'Philadelphia selection reduce
 // Regression: an unrelated state's 6-arg calculatePaycheck call (no localTaxOptionId) must still
 // match the Phase-1 baselines exactly — the 7th param must be fully backward compatible.
 assertEqual(txBaseline.federalTax, engine.calculatePaycheck(states.tx, txRules, 65000, 'biweekly').federalTax, 'TX 6-arg call unaffected by 7th local-tax param');
+
+// --- Local tax expansion Phase 5: Missouri (KC/STL) + Alabama (city occupational tax) ---
+const moNone = engine.calculatePaycheck(states.mo, moRules, 65000, 'biweekly', 'single', null, 'none');
+const moKc = engine.calculatePaycheck(states.mo, moRules, 65000, 'biweekly', 'single', null, 'kc');
+assertTrue(moKc.localTax.amount > 0, 'Kansas City selection > 0 (MO)');
+assertEqual(moKc.localTax.amount, Math.round(65000 * 0.01 * 100) / 100, 'KC earnings tax = 1% of gross');
+const moStl = engine.calculatePaycheck(states.mo, moRules, 65000, 'biweekly', 'single', null, 'stl');
+assertTrue(moStl.localTax.amount > 0, 'St. Louis selection > 0 (MO)');
+assertEqual(moNone.localTax.amount, 0, 'MO "none" selection computes 0');
+
+const alBirmingham = engine.calculatePaycheck(states.al, alRules, 65000, 'biweekly', 'single', null, 'birmingham');
+assertTrue(alBirmingham.localTax.amount > 0, 'Birmingham selection > 0 (AL)');
+const alGadsden = engine.calculatePaycheck(states.al, alRules, 65000, 'biweekly', 'single', null, 'gadsden');
+assertEqual(alGadsden.localTax.amount, Math.round(65000 * 0.02 * 100) / 100, 'Gadsden occupational tax = 2% of gross');
+const alOther = engine.calculatePaycheck(states.al, alRules, 65000, 'biweekly', 'single', null, 'other');
+assertEqual(alOther.localTax.amount, 0, 'AL "Other city" option computes 0, same as none');
 
 if (failures > 0) {
     console.error(`\n${failures} assertion(s) failed.`);
