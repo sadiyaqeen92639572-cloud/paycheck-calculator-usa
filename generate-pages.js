@@ -499,6 +499,7 @@ function renderStatePage(state) {
       </div>
       <div class="result-warning" id="result-pretax-limit-warning" hidden></div>
       ${localTaxResultNote(rules)}
+      <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
     </div>
     <p class="cross-link"><a href="/${state.slug}/hourly/">Paid hourly instead? Try our ${state.name} hourly paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/bonus/">Calculating a bonus? Try our ${state.name} bonus paycheck calculator →</a></p>
@@ -577,6 +578,7 @@ function renderHourlyStatePage(state) {
       </div>
       <div class="result-warning" id="result-pretax-limit-warning" hidden></div>
       ${localTaxResultNote(rules)}
+      <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
     </div>
     <p class="cross-link"><a href="/${state.slug}/">Paid a salary instead? Try our ${state.name} paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/bonus/">Calculating a bonus? Try our ${state.name} bonus paycheck calculator →</a></p>
@@ -648,6 +650,7 @@ function renderBonusStatePage(state) {
         <div class="result-item" id="result-local-tax-row" hidden><span class="label" id="result-local-tax-label"></span><span class="value" id="result-local-tax"></span></div>
       </div>
       ${localTaxResultNote(rules, ' Bonus state-tax and local-tax figures are marginal-bracket estimates, not necessarily any special supplemental rate your state or city may apply to bonus payments specifically.')}
+      <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
     </div>
     <p class="cross-link"><a href="/${state.slug}/">Calculating a regular paycheck? Try our ${state.name} paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/hourly/">Paid hourly? Try our ${state.name} hourly paycheck calculator →</a></p>
@@ -801,6 +804,7 @@ function renderComparatorPage() {
         <div class="result-item"><span class="label" id="result-b-label">State B</span><span class="value" id="result-b-net"></span></div>
         <div class="result-item"><span class="label">Difference</span><span class="value" id="result-diff"></span></div>
       </div>
+      <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
     </div>
   </section>
 </main>
