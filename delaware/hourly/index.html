@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delaware Hourly Paycheck Calculator — Take-Home Pay 2026</title>
+<meta name="description" content="Free Delaware hourly paycheck calculator. Enter your hourly rate and hours worked to estimate take-home pay after federal tax, FICA, and Delaware state tax — updated 2026-07-26.">
+<link rel="canonical" href="https://calcpaycheck.com/delaware/hourly/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Delaware Hourly Paycheck Calculator — Take-Home Pay 2026">
+<meta property="og:description" content="Free Delaware hourly paycheck calculator. Enter your hourly rate and hours worked to estimate take-home pay after federal tax, FICA, and Delaware state tax — updated 2026-07-26.">
+<meta property="og:url" content="https://calcpaycheck.com/delaware/hourly/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Delaware Hourly Paycheck Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-26","version":"2026-DE-v1","author":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}},"publisher":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are Delaware's income tax brackets for 2026?","acceptedAnswer":{"@type":"Answer","text":"Delaware uses 7 marginal brackets ranging from 0% to 6.60%. Standard deduction: $3,250 for single filers."}},{"@type":"Question","name":"How much is take-home pay on $65,000 in Delaware?","acceptedAnswer":{"@type":"Answer","text":"On a $65,000 gross salary, a single filer in Delaware takes home roughly $51,348.5/year (about $4,279.04/month) after federal tax, FICA, and state tax."}},{"@type":"Question","name":"What deductions does Delaware apply before taxing my income?","acceptedAnswer":{"@type":"Answer","text":"Delaware applies a $3,250 standard deduction, before its marginal bracket schedule. See the \"How Delaware Paycheck Tax Is Calculated\" section above for the exact formula."}},{"@type":"Question","name":"Does this estimate change if I'm married or have dependents?","acceptedAnswer":{"@type":"Answer","text":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Delaware state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Delaware Division of Revenue's married-filing-jointly tables for a precise figure."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://calcpaycheck.com/"},{"@type":"ListItem","position":2,"name":"Delaware","item":"https://calcpaycheck.com/delaware/"},{"@type":"ListItem","position":3,"name":"Hourly","item":"https://calcpaycheck.com/delaware/hourly/"}]},{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}]}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a> · <a href="/delaware/">Delaware Paycheck Calculator</a></p>
+  <h1>Delaware Hourly Paycheck Calculator</h1>
+  <p class="badge">Estimate your 2026 take-home pay after federal tax, FICA, and Delaware state tax from an hourly rate</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Supports single, married-filing-jointly, and head-of-household filing status, plus optional pre-tax 401(k), HSA, and health insurance deductions. Models standard weekly overtime only. See methodology below for source and last-verified date. For your exact withholding, consult a tax professional or your payroll department.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      
+      <label>Hourly Rate ($)
+        <input type="number" id="hourlyRate" min="0" step="0.25" value="25" required>
+      </label>
+      <label>Hours per Week
+        <input type="number" id="hoursPerWeek" min="0" max="80" step="1" value="40" required>
+      </label>
+      <label>Overtime Hours per Week (over 40)
+        <input type="number" id="otHoursPerWeek" min="0" max="80" step="1" value="0">
+      </label>
+      <label>Pay Frequency
+        <select id="payFrequency">
+          <option value="annual">Annual</option>
+          <option value="monthly">Monthly</option>
+          <option value="semimonthly">Semi-Monthly (24/yr)</option>
+          <option value="biweekly" selected>Bi-Weekly (26/yr)</option>
+          <option value="weekly">Weekly</option>
+        </select>
+      </label>
+      
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <details class="pretax-deductions">
+        <summary>+ Pre-tax deductions (401k, HSA, health insurance)</summary>
+        <label>401(k) contribution (% of salary)
+          <input type="number" id="retirement401kPct" min="0" max="100" step="0.5" value="0">
+        </label>
+        <label>HSA contribution ($/pay period)
+          <input type="number" id="hsaAmount" min="0" step="10" value="0">
+        </label>
+        <label>Health insurance premium ($/pay period)
+          <input type="number" id="healthPremium" min="0" step="10" value="0">
+        </label>
+      </details>
+      <button type="submit">Calculate Take-Home Pay →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-warning" id="result-filing-status-caveat" hidden></div>
+      <div class="result-amount" id="result-amount"></div>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
+        <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
+        <div class="result-item"><span class="label">Delaware State Tax</span><span class="value" id="result-state"></span></div>
+        <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+        <div class="result-item" id="result-pretax-row" hidden><span class="label">401(k) Contribution</span><span class="value" id="result-pretax-401k"></span></div>
+        <div class="result-item" id="result-pretax-row-total" hidden><span class="label">Pre-Tax Deductions Total</span><span class="value" id="result-pretax-total"></span></div>
+      </div>
+      <div class="result-warning" id="result-pretax-limit-warning" hidden></div>
+      <div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>
+    </div>
+    <p class="cross-link"><a href="/delaware/">Paid a salary instead? Try our Delaware paycheck calculator →</a></p>
+  </section>
+
+  
+    <section id="worksheet" class="seo-section">
+      <h2>How to Calculate Your Delaware Take-Home Pay</h2>
+      <ol><li>Start with your gross annual salary.</li><li>Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).</li><li>Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).</li><li>Subtract Delaware's $3,250 standard deduction from gross wages, then apply the 7-bracket state schedule (0%-6.60%) marginally.</li><li>What's left is your net take-home pay.</li></ol>
+      <h3>Example: $65,000/year gross salary, single filer, Delaware resident.</h3>
+      <ol><li>Federal tax: $5,620</li><li>FICA: $4,972.5</li><li>Delaware state tax: Marginal tax on $61,750 taxable income (after $3,250 deduction) = $3,059</li><li>Net annual pay: $65,000 - $13,651.5 = $51,348.5 (≈$4,279.04/month)</li></ol>
+    </section>
+  
+    <section id="formula" class="seo-section formula-section">
+      <h2>How Delaware Paycheck Tax Is Calculated (2026)</h2>
+      <span class="source-line">Source: Delaware Division of Revenue</span>
+      
+        <table>
+          <tr><th>Taxable income bracket</th><th>Rate</th></tr>
+          <tr><td>$0 – $2,000</td><td>0%</td></tr><tr><td>$2,000 – $5,000</td><td>2.20%</td></tr><tr><td>$5,000 – $10,000</td><td>3.90%</td></tr><tr><td>$10,000 – $20,000</td><td>4.80%</td></tr><tr><td>$20,000 – $25,000</td><td>5.20%</td></tr><tr><td>$25,000 – $60,000</td><td>5.55%</td></tr><tr><td>$60,000 – +</td><td>6.60%</td></tr>
+        </table>
+        <p>Standard deduction (single): $3,250, subtracted from gross income before applying brackets.</p>
+        <div class="formula-code">state_tax = marginal_bracket_tax(gross_income - 3250, brackets)</div>
+      
+      <h3>Federal Tax &amp; FICA (shared across all states)</h3>
+      <table>
+        <tr><th>Filing status</th><th>Standard deduction</th></tr>
+        <tr><td>Single</td><td>$16,100</td></tr>
+        <tr><td>Married Filing Jointly</td><td>$32,200</td></tr>
+        <tr><td>Head of Household</td><td>$24,150</td></tr>
+      </table>
+      <table>
+        <tr><th>Federal brackets (all filing statuses)</th><td>10% / 12% / 22% / 24% / 32% / 35% / 37%</td></tr>
+        <tr><th>Social Security</th><td>6.2% up to $184,500 wage base</td></tr>
+        <tr><th>Medicare</th><td>1.45% on all wages, +0.9% above $200,000 single/HoH, $250,000 MFJ</td></tr>
+      </table>
+      <p class="deviation-note">⚠️ Delaware's married-filing-jointly and head-of-household state brackets have not yet been independently verified against the primary source above — this calculator uses Delaware's single-filer brackets as an estimate when those statuses are selected.</p>
+      <div class="local-tax-note">⚠️ This estimate excludes the City of Wilmington's 1.25% wage tax, which applies to both residents and anyone who works within Wilmington city limits (Wilmington is the only Delaware municipality permitted to levy this tax). Not computed here.</div>
+      <p class="formula-footnote">Guideline version 2026-DE-v1 · Last verified 2026-07-26</p>
+    </section>
+  
+  
+    <section id="faq" class="seo-section">
+      <h2>Delaware Paycheck Calculator FAQ</h2>
+      
+      <details class="faq-item">
+        <summary>What are Delaware's income tax brackets for 2026?</summary>
+        <p>Delaware uses 7 marginal brackets ranging from 0% to 6.60%. Standard deduction: $3,250 for single filers.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How much is take-home pay on $65,000 in Delaware?</summary>
+        <p>On a $65,000 gross salary, a single filer in Delaware takes home roughly $51,348.5/year (about $4,279.04/month) after federal tax, FICA, and state tax.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What deductions does Delaware apply before taxing my income?</summary>
+        <p>Delaware applies a $3,250 standard deduction, before its marginal bracket schedule. See the "How Delaware Paycheck Tax Is Calculated" section above for the exact formula.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does this estimate change if I'm married or have dependents?</summary>
+        <p>This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Delaware state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Delaware Division of Revenue's married-filing-jointly tables for a precise figure.</p>
+      </details>
+    </section>
+  
+    <section id="methodology" class="methodology">
+      <h2>Methodology &amp; Source</h2>
+      <p>Delaware state tax figures sourced from <strong>Delaware Division of Revenue</strong> (<a href="https://revenue.delaware.gov/" target="_blank" rel="nofollow noopener">https://revenue.delaware.gov/</a>), citing Del. Code tit. 30 § 1102. Federal brackets, standard deductions (single/MFJ/HoH), and FICA constants sourced from the IRS (Revenue Procedure 2025-32; married-filing-jointly Additional Medicare threshold of $250,000 is a separate, unindexed statutory figure). Delaware's married-filing-jointly and head-of-household figures are not yet independently verified and currently fall back to single-filer brackets — see the caveat in the formula section above.</p>
+      <p class="deviation-note">This is an estimate based on standard single-filer federal, FICA, and DE state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors.</p>
+      
+      <p>Guideline version: 2026-DE-v1 · Effective: 2026-01-01 · Last verified: 2026-07-26</p>
+    </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+
+    <script src="/assets/calc-engine.js"></script>
+    <script>
+    const STATE_ENTRY = {"name":"Delaware","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"Delaware Division of Revenue","url":"https://revenue.delaware.gov/","statute_ref":"Del. Code tit. 30 § 1102"},"params":{"brackets":[{"upTo":2000,"rate":0},{"upTo":5000,"rate":0.022},{"upTo":10000,"rate":0.039},{"upTo":20000,"rate":0.048},{"upTo":25000,"rate":0.052},{"upTo":60000,"rate":0.0555},{"upTo":null,"rate":0.066}],"standard_deduction":3250},"abbr":"DE","slug":"delaware","last_verified":"2026-07-26","guideline_version":"2026-DE-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Delaware's $3,250 standard deduction from gross wages, then apply the 7-bracket state schedule (0%-6.60%) marginally.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Delaware resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Delaware state tax: Marginal tax on $61,750 taxable income (after $3,250 deduction) = $3,059","Net annual pay: $65,000 - $13,651.5 = $51,348.5 (≈$4,279.04/month)"]}},"faq_extra":[{"q":"What are Delaware's income tax brackets for 2026?","a":"Delaware uses 7 marginal brackets ranging from 0% to 6.60%. Standard deduction: $3,250 for single filers."},{"q":"How much is take-home pay on $65,000 in Delaware?","a":"On a $65,000 gross salary, a single filer in Delaware takes home roughly $51,348.5/year (about $4,279.04/month) after federal tax, FICA, and state tax."},{"q":"What deductions does Delaware apply before taxing my income?","a":"Delaware applies a $3,250 standard deduction, before its marginal bracket schedule. See the \"How Delaware Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Delaware state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Delaware Division of Revenue's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
+    const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":"This estimate excludes the City of Wilmington's 1.25% wage tax, which applies to both residents and anyone who works within Wilmington city limits (Wilmington is the only Delaware municipality permitted to levy this tax). Not computed here.","deviation_note":"This is an estimate based on standard single-filer federal, FICA, and DE state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
+
+    function runCalculation(e) {
+        e.preventDefault();
+        const hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
+        const hoursPerWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+        const otHoursPerWeek = parseFloat(document.getElementById('otHoursPerWeek').value) || 0;
+        const gross = annualizeHourly(hourlyRate, hoursPerWeek, otHoursPerWeek);
+        const freq = document.getElementById('payFrequency').value;
+        const filingStatus = document.getElementById('filingStatus').value;
+        const retirement401kPct = parseFloat(document.getElementById('retirement401kPct').value) || 0;
+        const hsaAmount = parseFloat(document.getElementById('hsaAmount').value) || 0;
+        const healthPremium = parseFloat(document.getElementById('healthPremium').value) || 0;
+        const hasPreTaxDeductions = retirement401kPct > 0 || hsaAmount > 0 || healthPremium > 0;
+        const preTaxDeductions = hasPreTaxDeductions
+            ? { retirement401k: { type: 'percent', value: retirement401kPct }, hsa: hsaAmount, healthPremium: healthPremium }
+            : null;
+        const r = calculatePaycheck(STATE_ENTRY, RULES, gross, freq, filingStatus, preTaxDeductions);
+        const freqLabel = { annual: 'Annual', monthly: 'Monthly', semimonthly: 'Semi-Monthly', biweekly: 'Bi-Weekly', weekly: 'Weekly' }[freq];
+
+        const caveat = document.getElementById('result-filing-status-caveat');
+        if (filingStatus !== 'single' && !STATE_ENTRY.filing_status_backfilled) {
+            caveat.hidden = false;
+            caveat.textContent = '⚠️ ' + STATE_ENTRY.name + ' married/head-of-household brackets are not yet independently verified — this estimate uses single-filer state brackets.';
+        } else {
+            caveat.hidden = true;
+        }
+
+        document.getElementById('result-amount').textContent = fmtMoney(r.netPerPeriod) + ' / ' + freqLabel.toLowerCase();
+        document.getElementById('result-net-annual').textContent = fmtMoney(r.netAnnual);
+        document.getElementById('result-federal').textContent = fmtMoney(r.federalTax);
+        document.getElementById('result-fica').textContent = fmtMoney(r.fica.total);
+        document.getElementById('result-state').textContent = fmtMoney(r.stateTax);
+        const extraRow = document.getElementById('result-extra-row');
+        if (r.extraPayrollTax.amount > 0) {
+            extraRow.hidden = false;
+            document.getElementById('result-extra-label').textContent = r.extraPayrollTax.name;
+            document.getElementById('result-extra').textContent = fmtMoney(r.extraPayrollTax.amount);
+        } else {
+            extraRow.hidden = true;
+        }
+
+        const preTaxRow = document.getElementById('result-pretax-row');
+        const preTaxRowTotal = document.getElementById('result-pretax-row-total');
+        const preTaxLimitWarning = document.getElementById('result-pretax-limit-warning');
+        if (r.preTaxDeductions) {
+            preTaxRow.hidden = false;
+            preTaxRowTotal.hidden = false;
+            const total = r.preTaxDeductions.retirement401kAnnual + r.preTaxDeductions.section125Annual;
+            document.getElementById('result-pretax-401k').textContent = fmtMoney(r.preTaxDeductions.retirement401kAnnual);
+            document.getElementById('result-pretax-total').textContent = fmtMoney(total);
+            const warnings = [];
+            if (r.preTaxDeductions.over401kLimit) warnings.push('401(k) contribution capped at the 2026 IRS elective deferral limit ($24,500/year).');
+            if (r.preTaxDeductions.overHsaLimit) warnings.push('HSA contribution capped at the 2026 IRS limit ($4,400/year self-only, $8,750/year family coverage).');
+            if (warnings.length) {
+                preTaxLimitWarning.hidden = false;
+                preTaxLimitWarning.textContent = '⚠️ ' + warnings.join(' ');
+            } else {
+                preTaxLimitWarning.hidden = true;
+            }
+        } else {
+            preTaxRow.hidden = true;
+            preTaxRowTotal.hidden = true;
+            preTaxLimitWarning.hidden = true;
+        }
+
+        document.getElementById('results-block').hidden = false;
+    }
+    document.getElementById('calc-form').addEventListener('submit', runCalculation);
+    document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+    </script>
+</body>
+</html>

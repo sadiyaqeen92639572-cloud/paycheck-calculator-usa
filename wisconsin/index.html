@@ -21,7 +21,7 @@
 </header>
 
 <div class="disclaimer-banner">
-  Estimate only — not tax advice. Single-filer assumption, based on standard federal/state calculations. See methodology below for source and last-verified date. For your exact withholding, consult a tax professional or your payroll department.
+  Estimate only — not tax advice. Supports single, married-filing-jointly, and head-of-household filing status, plus optional pre-tax 401(k), HSA, and health insurance deductions (401(k) reduces federal/state taxable wages only; HSA and health premiums also reduce FICA wages, per standard IRS treatment). See methodology below for source and last-verified date. For your exact withholding, consult a tax professional or your payroll department.
 </div>
 
 <main>
@@ -40,9 +40,30 @@
           <option value="weekly">Weekly</option>
         </select>
       </label>
+      
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <details class="pretax-deductions">
+        <summary>+ Pre-tax deductions (401k, HSA, health insurance)</summary>
+        <label>401(k) contribution (% of salary)
+          <input type="number" id="retirement401kPct" min="0" max="100" step="0.5" value="0">
+        </label>
+        <label>HSA contribution ($/pay period)
+          <input type="number" id="hsaAmount" min="0" step="10" value="0">
+        </label>
+        <label>Health insurance premium ($/pay period)
+          <input type="number" id="healthPremium" min="0" step="10" value="0">
+        </label>
+      </details>
       <button type="submit">Calculate Take-Home Pay →</button>
     </form>
     <div id="results-block" hidden>
+      <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
@@ -50,9 +71,13 @@
         <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
         <div class="result-item"><span class="label">Wisconsin State Tax</span><span class="value" id="result-state"></span></div>
         <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+        <div class="result-item" id="result-pretax-row" hidden><span class="label">401(k) Contribution</span><span class="value" id="result-pretax-401k"></span></div>
+        <div class="result-item" id="result-pretax-row-total" hidden><span class="label">Pre-Tax Deductions Total</span><span class="value" id="result-pretax-total"></span></div>
       </div>
+      <div class="result-warning" id="result-pretax-limit-warning" hidden></div>
       
     </div>
+    <p class="cross-link"><a href="/wisconsin/hourly/">Paid hourly instead? Try our Wisconsin hourly paycheck calculator →</a></p>
   </section>
 
   
@@ -76,11 +101,17 @@
       
       <h3>Federal Tax &amp; FICA (shared across all states)</h3>
       <table>
-        <tr><th>Federal standard deduction (single)</th><td>$16,100</td></tr>
-        <tr><th>Federal brackets</th><td>10% / 12% / 22% / 24% / 32% / 35% / 37%</td></tr>
-        <tr><th>Social Security</th><td>6.2% up to $184,500 wage base</td></tr>
-        <tr><th>Medicare</th><td>1.45% on all wages, +0.9% above $200,000</td></tr>
+        <tr><th>Filing status</th><th>Standard deduction</th></tr>
+        <tr><td>Single</td><td>$16,100</td></tr>
+        <tr><td>Married Filing Jointly</td><td>$32,200</td></tr>
+        <tr><td>Head of Household</td><td>$24,150</td></tr>
       </table>
+      <table>
+        <tr><th>Federal brackets (all filing statuses)</th><td>10% / 12% / 22% / 24% / 32% / 35% / 37%</td></tr>
+        <tr><th>Social Security</th><td>6.2% up to $184,500 wage base</td></tr>
+        <tr><th>Medicare</th><td>1.45% on all wages, +0.9% above $200,000 single/HoH, $250,000 MFJ</td></tr>
+      </table>
+      <p class="deviation-note">⚠️ Wisconsin's married-filing-jointly and head-of-household state brackets have not yet been independently verified against the primary source above — this calculator uses Wisconsin's single-filer brackets as an estimate when those statuses are selected.</p>
       
       <p class="formula-footnote">Guideline version 2026-WI-v1 · Last verified 2026-07-26</p>
     </section>
@@ -108,8 +139,9 @@
   
     <section id="methodology" class="methodology">
       <h2>Methodology &amp; Source</h2>
-      <p>Wisconsin state tax figures sourced from <strong>Wisconsin Department of Revenue</strong> (<a href="https://www.revenue.wi.gov/" target="_blank" rel="nofollow noopener">https://www.revenue.wi.gov/</a>), citing Wis. Stat. § 71.06. Federal brackets and FICA constants sourced from the IRS (Revenue Procedure 2025-32).</p>
+      <p>Wisconsin state tax figures sourced from <strong>Wisconsin Department of Revenue</strong> (<a href="https://www.revenue.wi.gov/" target="_blank" rel="nofollow noopener">https://www.revenue.wi.gov/</a>), citing Wis. Stat. § 71.06. Federal brackets, standard deductions (single/MFJ/HoH), and FICA constants sourced from the IRS (Revenue Procedure 2025-32; married-filing-jointly Additional Medicare threshold of $250,000 is a separate, unindexed statutory figure). Wisconsin's married-filing-jointly and head-of-household figures are not yet independently verified and currently fall back to single-filer brackets — see the caveat in the formula section above.</p>
       <p class="deviation-note">This is an estimate based on standard single-filer federal, FICA, and WI state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Wisconsin's standard deduction phases out on a sliding scale above ~$18,950 (single); this estimate uses the maximum deduction, which understates tax for higher earners within the phase-out band.</p>
+      
       <p>Guideline version: 2026-WI-v1 · Effective: 2026-01-01 · Last verified: 2026-07-26</p>
     </section>
 </main>
@@ -121,15 +153,31 @@
 
     <script src="/assets/calc-engine.js"></script>
     <script>
-    const STATE_ENTRY = {"name":"Wisconsin","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"Wisconsin Department of Revenue","url":"https://www.revenue.wi.gov/","statute_ref":"Wis. Stat. § 71.06"},"params":{"brackets":[{"upTo":14320,"rate":0.0354},{"upTo":28640,"rate":0.0465},{"upTo":315310,"rate":0.053},{"upTo":null,"rate":0.0765}],"standard_deduction":12760},"abbr":"WI","slug":"wisconsin","last_verified":"2026-07-26","guideline_version":"2026-WI-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Wisconsin's $12,760 standard deduction from gross wages, then apply the 4-bracket state schedule (3.54%-7.65%) marginally.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Wisconsin resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Wisconsin state tax: Marginal tax on $52,240 taxable income (after $12,760 deduction) = $2,423.61","Net annual pay: $65,000 - $13,016.11 = $51,983.89 (≈$4,331.99/month)"]}},"faq_extra":[{"q":"What are Wisconsin's income tax brackets for 2026?","a":"Wisconsin uses 4 marginal brackets ranging from 3.54% to 7.65%. Standard deduction: $12,760 for single filers."},{"q":"How much is take-home pay on $65,000 in Wisconsin?","a":"On a $65,000 gross salary, a single filer in Wisconsin takes home roughly $51,983.89/year (about $4,331.99/month) after federal tax, FICA, and state tax."},{"q":"What deductions does Wisconsin apply before taxing my income?","a":"Wisconsin applies a $12,760 standard deduction, before its marginal bracket schedule. See the \"How Wisconsin Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Wisconsin state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Wisconsin Department of Revenue's married-filing-jointly tables for a precise figure."}]};
+    const STATE_ENTRY = {"name":"Wisconsin","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"Wisconsin Department of Revenue","url":"https://www.revenue.wi.gov/","statute_ref":"Wis. Stat. § 71.06"},"params":{"brackets":[{"upTo":14320,"rate":0.0354},{"upTo":28640,"rate":0.0465},{"upTo":315310,"rate":0.053},{"upTo":null,"rate":0.0765}],"standard_deduction":12760},"abbr":"WI","slug":"wisconsin","last_verified":"2026-07-26","guideline_version":"2026-WI-v1","worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).","Subtract Wisconsin's $12,760 standard deduction from gross wages, then apply the 4-bracket state schedule (3.54%-7.65%) marginally.","What's left is your net take-home pay."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Wisconsin resident.","calculation":["Federal tax: $5,620","FICA: $4,972.5","Wisconsin state tax: Marginal tax on $52,240 taxable income (after $12,760 deduction) = $2,423.61","Net annual pay: $65,000 - $13,016.11 = $51,983.89 (≈$4,331.99/month)"]}},"faq_extra":[{"q":"What are Wisconsin's income tax brackets for 2026?","a":"Wisconsin uses 4 marginal brackets ranging from 3.54% to 7.65%. Standard deduction: $12,760 for single filers."},{"q":"How much is take-home pay on $65,000 in Wisconsin?","a":"On a $65,000 gross salary, a single filer in Wisconsin takes home roughly $51,983.89/year (about $4,331.99/month) after federal tax, FICA, and state tax."},{"q":"What deductions does Wisconsin apply before taxing my income?","a":"Wisconsin applies a $12,760 standard deduction, before its marginal bracket schedule. See the \"How Wisconsin Paycheck Tax Is Calculated\" section above for the exact formula."},{"q":"Does this estimate change if I'm married or have dependents?","a":"This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Wisconsin state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Wisconsin Department of Revenue's married-filing-jointly tables for a precise figure."}],"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and WI state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors. Wisconsin's standard deduction phases out on a sliding scale above ~$18,950 (single); this estimate uses the maximum deduction, which understates tax for higher earners within the phase-out band."};
 
     function runCalculation(e) {
         e.preventDefault();
         const gross = parseFloat(document.getElementById('grossIncome').value) || 0;
         const freq = document.getElementById('payFrequency').value;
-        const r = calculatePaycheck(STATE_ENTRY, RULES, gross, freq);
+        const filingStatus = document.getElementById('filingStatus').value;
+        const retirement401kPct = parseFloat(document.getElementById('retirement401kPct').value) || 0;
+        const hsaAmount = parseFloat(document.getElementById('hsaAmount').value) || 0;
+        const healthPremium = parseFloat(document.getElementById('healthPremium').value) || 0;
+        const hasPreTaxDeductions = retirement401kPct > 0 || hsaAmount > 0 || healthPremium > 0;
+        const preTaxDeductions = hasPreTaxDeductions
+            ? { retirement401k: { type: 'percent', value: retirement401kPct }, hsa: hsaAmount, healthPremium: healthPremium }
+            : null;
+        const r = calculatePaycheck(STATE_ENTRY, RULES, gross, freq, filingStatus, preTaxDeductions);
         const freqLabel = { annual: 'Annual', monthly: 'Monthly', semimonthly: 'Semi-Monthly', biweekly: 'Bi-Weekly', weekly: 'Weekly' }[freq];
+
+        const caveat = document.getElementById('result-filing-status-caveat');
+        if (filingStatus !== 'single' && !STATE_ENTRY.filing_status_backfilled) {
+            caveat.hidden = false;
+            caveat.textContent = '⚠️ ' + STATE_ENTRY.name + ' married/head-of-household brackets are not yet independently verified — this estimate uses single-filer state brackets.';
+        } else {
+            caveat.hidden = true;
+        }
 
         document.getElementById('result-amount').textContent = fmtMoney(r.netPerPeriod) + ' / ' + freqLabel.toLowerCase();
         document.getElementById('result-net-annual').textContent = fmtMoney(r.netAnnual);
@@ -144,6 +192,31 @@
         } else {
             extraRow.hidden = true;
         }
+
+        const preTaxRow = document.getElementById('result-pretax-row');
+        const preTaxRowTotal = document.getElementById('result-pretax-row-total');
+        const preTaxLimitWarning = document.getElementById('result-pretax-limit-warning');
+        if (r.preTaxDeductions) {
+            preTaxRow.hidden = false;
+            preTaxRowTotal.hidden = false;
+            const total = r.preTaxDeductions.retirement401kAnnual + r.preTaxDeductions.section125Annual;
+            document.getElementById('result-pretax-401k').textContent = fmtMoney(r.preTaxDeductions.retirement401kAnnual);
+            document.getElementById('result-pretax-total').textContent = fmtMoney(total);
+            const warnings = [];
+            if (r.preTaxDeductions.over401kLimit) warnings.push('401(k) contribution capped at the 2026 IRS elective deferral limit ($24,500/year).');
+            if (r.preTaxDeductions.overHsaLimit) warnings.push('HSA contribution capped at the 2026 IRS limit ($4,400/year self-only, $8,750/year family coverage).');
+            if (warnings.length) {
+                preTaxLimitWarning.hidden = false;
+                preTaxLimitWarning.textContent = '⚠️ ' + warnings.join(' ');
+            } else {
+                preTaxLimitWarning.hidden = true;
+            }
+        } else {
+            preTaxRow.hidden = true;
+            preTaxRowTotal.hidden = true;
+            preTaxLimitWarning.hidden = true;
+        }
+
         document.getElementById('results-block').hidden = false;
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);

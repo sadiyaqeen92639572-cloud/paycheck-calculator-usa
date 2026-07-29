@@ -21,6 +21,15 @@ Object.values(states).forEach(state => {
     changefreq: 'monthly',
     priority: '0.9'
   });
+
+  if (fs.existsSync(path.join(__dirname, state.slug, 'hourly', 'index.html'))) {
+    urls.push({
+      loc: `${DOMAIN}/${state.slug}/hourly/`,
+      lastmod: state.last_verified,
+      changefreq: 'monthly',
+      priority: '0.8'
+    });
+  }
 });
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>

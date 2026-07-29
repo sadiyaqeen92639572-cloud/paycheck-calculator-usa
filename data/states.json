@@ -43,7 +43,8 @@
         "q": "Are there any hidden state or local income taxes in Texas?",
         "a": "No Texas city or county levies a local income tax. Texas instead relies more heavily on sales tax and property tax to fund state and local government."
       }
-    ]
+    ],
+    "filing_status_backfilled": true
   },
   "fl": {
     "name": "Florida",
@@ -89,7 +90,8 @@
         "q": "Why does Florida have no income tax?",
         "a": "Florida funds state government primarily through sales tax and tourism-related revenue instead of a personal income tax, a structure protected by its state constitution."
       }
-    ]
+    ],
+    "filing_status_backfilled": true
   },
   "pa": {
     "name": "Pennsylvania",
@@ -140,7 +142,8 @@
         "q": "How much is take-home pay on $65,000 in Pennsylvania?",
         "a": "On a $65,000 gross salary, a single filer in Pennsylvania takes home roughly $52,444/year (about $4,370/month) after federal tax, FICA, and the state's 3.07% flat tax — before any local EIT."
       }
-    ]
+    ],
+    "filing_status_backfilled": true
   },
   "il": {
     "name": "Illinois",
@@ -158,7 +161,8 @@
     "params": {
       "rate": 0.0495,
       "standard_deduction": 0,
-      "personal_exemption": 2425
+      "personal_exemption": 2425,
+      "personal_exemption_mfj": 4850
     },
     "worksheet": {
       "steps": [
@@ -191,7 +195,8 @@
         "q": "Does Illinois have local income tax?",
         "a": "No. Unlike Pennsylvania or Ohio, no Illinois city or county adds a separate local income tax on top of the state's flat 4.95% rate."
       }
-    ]
+    ],
+    "filing_status_backfilled": true
   },
   "ga": {
     "name": "Georgia",
@@ -209,7 +214,8 @@
     "params": {
       "rate": 0.0499,
       "standard_deduction": 15000,
-      "personal_exemption": 0
+      "personal_exemption": 0,
+      "standard_deduction_mfj": 30000
     },
     "worksheet": {
       "steps": [
@@ -242,7 +248,8 @@
         "q": "Does Georgia have local income tax?",
         "a": "No. Georgia counties and cities do not levy separate local income taxes on wages."
       }
-    ]
+    ],
+    "filing_status_backfilled": true
   },
   "nc": {
     "name": "North Carolina",
@@ -260,7 +267,9 @@
     "params": {
       "rate": 0.0399,
       "standard_deduction": 12750,
-      "personal_exemption": 0
+      "personal_exemption": 0,
+      "standard_deduction_mfj": 25500,
+      "standard_deduction_hoh": 19125
     },
     "worksheet": {
       "steps": [
@@ -293,7 +302,8 @@
         "q": "Does North Carolina have local income tax?",
         "a": "No. North Carolina counties and municipalities do not levy separate local income taxes on wages."
       }
-    ]
+    ],
+    "filing_status_backfilled": true
   },
   "mi": {
     "name": "Michigan",
@@ -311,7 +321,8 @@
     "params": {
       "rate": 0.0425,
       "standard_deduction": 0,
-      "personal_exemption": 5900
+      "personal_exemption": 5900,
+      "personal_exemption_mfj": 11800
     },
     "worksheet": {
       "steps": [
@@ -344,7 +355,8 @@
         "q": "How much is take-home pay on $65,000 in Michigan?",
         "a": "On a $65,000 gross salary, a single filer in Michigan takes home roughly $51,928/year (about $4,327/month) after federal tax, FICA, and the state's 4.25% flat tax — before any city tax."
       }
-    ]
+    ],
+    "filing_status_backfilled": true
   },
   "ca": {
     "name": "California",
@@ -402,6 +414,50 @@
           "upTo": null,
           "rate": 0.133
         }
+      ],
+      "standard_deduction_mfj": 11412,
+      "standard_deduction_hoh": 11412,
+      "brackets_mfj": [
+        {
+          "upTo": 21512,
+          "rate": 0.01
+        },
+        {
+          "upTo": 50998,
+          "rate": 0.02
+        },
+        {
+          "upTo": 80490,
+          "rate": 0.04
+        },
+        {
+          "upTo": 111732,
+          "rate": 0.06
+        },
+        {
+          "upTo": 141224,
+          "rate": 0.08
+        },
+        {
+          "upTo": 721318,
+          "rate": 0.093
+        },
+        {
+          "upTo": 865574,
+          "rate": 0.103
+        },
+        {
+          "upTo": 1442628,
+          "rate": 0.113
+        },
+        {
+          "upTo": 2000000,
+          "rate": 0.123
+        },
+        {
+          "upTo": null,
+          "rate": 0.133
+        }
       ]
     },
     "worksheet": {
@@ -437,7 +493,8 @@
         "q": "How much is take-home pay on $65,000 in California?",
         "a": "On a $65,000 gross salary, a single filer in California takes home roughly $50,942/year (about $4,245/month) after federal tax, FICA, state income tax, and SDI."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "ny": {
     "name": "New York",
@@ -526,7 +583,8 @@
         "q": "What is New York Paid Family Leave (PFL)?",
         "a": "A mandatory employee payroll deduction — 0.432% of wages in 2026, capped at $411.91/year — that funds paid leave benefits. It is separate from income tax."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "oh": {
     "name": "Ohio",
@@ -585,7 +643,8 @@
         "q": "How much is take-home pay on $65,000 in Ohio?",
         "a": "On a $65,000 gross salary, a single filer in Ohio takes home roughly $53,368/year (about $4,447/month) after federal tax, FICA, and Ohio's 2.75% state tax — before any city income tax, which can add another 1%-3%."
       }
-    ]
+    ],
+    "filing_status_backfilled": true
   },
   "al": {
     "name": "Alabama",
@@ -657,7 +716,8 @@
         "q": "Does this calculator include Alabama local or city income tax?",
         "a": "Some Alabama cities and counties (e.g. Birmingham, Bessemer) levy a local occupational tax, typically 0.5%-2% of wages, not computed here."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "ak": {
     "name": "Alaska",
@@ -707,7 +767,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Alaska Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "az": {
     "name": "Arizona",
@@ -761,7 +822,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Arizona state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Arizona Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "ar": {
     "name": "Arkansas",
@@ -836,7 +898,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Arkansas state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Arkansas Department of Finance and Administration's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "co": {
     "name": "Colorado",
@@ -890,7 +953,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Colorado state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Colorado Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "ct": {
     "name": "Connecticut",
@@ -973,7 +1037,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Connecticut state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Connecticut Department of Revenue Services's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "de": {
     "name": "Delaware",
@@ -1056,7 +1121,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Delaware state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Delaware Division of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "dc": {
     "name": "District of Columbia",
@@ -1135,7 +1201,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and District of Columbia state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check DC Office of Tax and Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "hi": {
     "name": "Hawaii",
@@ -1238,7 +1305,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Hawaii state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Hawaii Department of Taxation's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "id": {
     "name": "Idaho",
@@ -1292,7 +1360,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Idaho state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Idaho State Tax Commission's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "in": {
     "name": "Indiana",
@@ -1350,7 +1419,8 @@
         "q": "Does this calculator include Indiana local or city income tax?",
         "a": "Indiana's 92 counties each levy their own local income tax (resident-based), ranging 0.50%-3.38% — often larger than any single layer in this calculator's other states. Not computed here; check your county's rate."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "ia": {
     "name": "Iowa",
@@ -1404,7 +1474,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Iowa state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Iowa Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "ks": {
     "name": "Kansas",
@@ -1468,7 +1539,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Kansas state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Kansas Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "ky": {
     "name": "Kentucky",
@@ -1526,7 +1598,8 @@
         "q": "Does this calculator include Kentucky local or city income tax?",
         "a": "Many Kentucky cities and counties levy a local occupational/payroll tax (e.g. Louisville ~2.2%), not computed here."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "la": {
     "name": "Louisiana",
@@ -1580,7 +1653,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Louisiana state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Louisiana Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "me": {
     "name": "Maine",
@@ -1647,7 +1721,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Maine state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Maine Revenue Services's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "md": {
     "name": "Maryland",
@@ -1742,7 +1817,8 @@
         "q": "Does this calculator include Maryland local or city income tax?",
         "a": "Every Maryland county plus Baltimore City adds a local \"piggyback\" income tax of 1.75%-3.2% on the same return — this is one of the largest local-tax gaps in this calculator. Combined state+local can reach ~8.95%. Not computed here; check your county's rate."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "ma": {
     "name": "Massachusetts",
@@ -1800,7 +1876,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Massachusetts state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Massachusetts Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "mn": {
     "name": "Minnesota",
@@ -1871,7 +1948,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Minnesota state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Minnesota Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "ms": {
     "name": "Mississippi",
@@ -1925,7 +2003,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Mississippi state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Mississippi Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "mo": {
     "name": "Missouri",
@@ -2016,7 +2095,8 @@
         "q": "Does this calculator include Missouri local or city income tax?",
         "a": "Kansas City and St. Louis each levy a 1% local earnings tax on residents (and on nonresidents working there), not computed here."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "mt": {
     "name": "Montana",
@@ -2079,7 +2159,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Montana state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Montana Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "ne": {
     "name": "Nebraska",
@@ -2146,7 +2227,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Nebraska state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Nebraska Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "nv": {
     "name": "Nevada",
@@ -2196,7 +2278,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Nevada Department of Taxation's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "nh": {
     "name": "New Hampshire",
@@ -2246,7 +2329,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check New Hampshire Department of Revenue Administration's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "nj": {
     "name": "New Jersey",
@@ -2329,7 +2413,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and New Jersey state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check New Jersey Division of Taxation's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "nm": {
     "name": "New Mexico",
@@ -2404,7 +2489,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and New Mexico state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check New Mexico Taxation and Revenue Department's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "nd": {
     "name": "North Dakota",
@@ -2467,7 +2553,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and North Dakota state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check North Dakota Office of State Tax Commissioner's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "ok": {
     "name": "Oklahoma",
@@ -2546,7 +2633,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Oklahoma state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Oklahoma Tax Commission's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "or": {
     "name": "Oregon",
@@ -2617,7 +2705,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Oregon state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Oregon Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "ri": {
     "name": "Rhode Island",
@@ -2685,7 +2774,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Rhode Island state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Rhode Island Division of Taxation's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "sc": {
     "name": "South Carolina",
@@ -2748,7 +2838,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and South Carolina state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check South Carolina Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "sd": {
     "name": "South Dakota",
@@ -2798,7 +2889,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check South Dakota Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "tn": {
     "name": "Tennessee",
@@ -2848,7 +2940,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Tennessee Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "ut": {
     "name": "Utah",
@@ -2902,7 +2995,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Utah state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Utah State Tax Commission's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "vt": {
     "name": "Vermont",
@@ -2973,7 +3067,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Vermont state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Vermont Department of Taxes's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "va": {
     "name": "Virginia",
@@ -3045,7 +3140,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Virginia state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Virginia Department of Taxation's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "wa": {
     "name": "Washington",
@@ -3095,7 +3191,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Washington Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "wv": {
     "name": "West Virginia",
@@ -3170,7 +3267,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and West Virginia state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check West Virginia State Tax Department's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "wi": {
     "name": "Wisconsin",
@@ -3241,7 +3339,8 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Wisconsin state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Wisconsin Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   },
   "wy": {
     "name": "Wyoming",
@@ -3291,6 +3390,7 @@
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Wyoming Department of Revenue's married-filing-jointly tables for a precise figure."
       }
-    ]
+    ],
+    "filing_status_backfilled": false
   }
 }

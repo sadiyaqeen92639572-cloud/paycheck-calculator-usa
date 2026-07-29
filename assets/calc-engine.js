@@ -4,25 +4,66 @@
  * One pure function per formula_model, plus a dispatcher, plus shared federal/FICA helpers.
  */
 
-// ---- 2026 federal constants (single filer only, v1 scope) ----
+// ---- 2026 federal constants, by filing status ----
 // Source: IRS Revenue Procedure 2025-32, https://www.irs.gov/pub/irs-drop/rp-25-32.pdf
-const FEDERAL_STANDARD_DEDUCTION_SINGLE = 16100;
-const FEDERAL_BRACKETS_SINGLE = [
-    { upTo: 12400, rate: 0.10 },
-    { upTo: 50400, rate: 0.12 },
-    { upTo: 105700, rate: 0.22 },
-    { upTo: 201775, rate: 0.24 },
-    { upTo: 256225, rate: 0.32 },
-    { upTo: 640600, rate: 0.35 },
-    { upTo: null, rate: 0.37 }
-];
+// MFJ figures cross-checked against https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill
+// HoH bracket thresholds cross-checked against Tax Foundation's 2026 bracket table (taxfoundation.org/data/all/federal/2026-tax-brackets/);
+// HoH converges with single-filer thresholds at the 32%/35%/37% breakpoints, consistent with IRS's published bracket design.
+// Verified 2026-07-29.
+const FEDERAL_STANDARD_DEDUCTION = {
+    single: 16100,
+    mfj: 32200,
+    hoh: 24150
+};
+const FEDERAL_BRACKETS = {
+    single: [
+        { upTo: 12400, rate: 0.10 },
+        { upTo: 50400, rate: 0.12 },
+        { upTo: 105700, rate: 0.22 },
+        { upTo: 201775, rate: 0.24 },
+        { upTo: 256225, rate: 0.32 },
+        { upTo: 640600, rate: 0.35 },
+        { upTo: null, rate: 0.37 }
+    ],
+    mfj: [
+        { upTo: 24800, rate: 0.10 },
+        { upTo: 100800, rate: 0.12 },
+        { upTo: 211400, rate: 0.22 },
+        { upTo: 403550, rate: 0.24 },
+        { upTo: 512450, rate: 0.32 },
+        { upTo: 768700, rate: 0.35 },
+        { upTo: null, rate: 0.37 }
+    ],
+    hoh: [
+        { upTo: 17700, rate: 0.10 },
+        { upTo: 67450, rate: 0.12 },
+        { upTo: 105700, rate: 0.22 },
+        { upTo: 201775, rate: 0.24 },
+        { upTo: 256200, rate: 0.32 },
+        { upTo: 640600, rate: 0.35 },
+        { upTo: null, rate: 0.37 }
+    ]
+};
 
-// FICA constants — Social Security wage base $184,500 (2026), Medicare 1.45% + 0.9% additional over $200,000
+// 2026 IRS pre-tax deduction limits.
+// 401(k) elective deferral limit: IRS Notice 2025-67 (retirement plan cost-of-living adjustments).
+// HSA contribution limits: IRS Notice 2026-05, https://www.irs.gov/pub/irs-drop/n-26-05.pdf — $4,400 self-only / $8,750 family coverage.
+// Verified 2026-07-29.
+const RETIREMENT_401K_LIMIT_2026 = 24500;
+const HSA_LIMIT_SELF_ONLY_2026 = 4400;
+const HSA_LIMIT_FAMILY_2026 = 8750;
+
+// FICA constants — Social Security wage base $184,500 (2026), Medicare 1.45% + 0.9% additional
+// (statutory, unindexed thresholds: $250,000 MFJ / $200,000 single & HoH)
 const SS_WAGE_BASE_2026 = 184500;
 const SS_RATE = 0.062;
 const MEDICARE_RATE = 0.0145;
 const ADDITIONAL_MEDICARE_RATE = 0.009;
-const ADDITIONAL_MEDICARE_THRESHOLD_SINGLE = 200000;
+const ADDITIONAL_MEDICARE_THRESHOLD = {
+    single: 200000,
+    mfj: 250000,
+    hoh: 200000
+};
 
 /**
  * Marginal bracket tax over a taxable-income amount.
@@ -43,16 +84,18 @@ function marginalBracketTax(taxableIncome, brackets) {
     return tax;
 }
 
-function calcFederalTax(grossAnnualIncome) {
-    const taxable = Math.max(0, grossAnnualIncome - FEDERAL_STANDARD_DEDUCTION_SINGLE);
-    return marginalBracketTax(taxable, FEDERAL_BRACKETS_SINGLE);
+function calcFederalTax(grossAnnualIncome, filingStatus = 'single') {
+    const status = FEDERAL_STANDARD_DEDUCTION[filingStatus] !== undefined ? filingStatus : 'single';
+    const taxable = Math.max(0, grossAnnualIncome - FEDERAL_STANDARD_DEDUCTION[status]);
+    return marginalBracketTax(taxable, FEDERAL_BRACKETS[status]);
 }
 
-function calcFICA(grossAnnualIncome) {
+function calcFICA(grossAnnualIncome, filingStatus = 'single') {
+    const threshold = ADDITIONAL_MEDICARE_THRESHOLD[filingStatus] ?? ADDITIONAL_MEDICARE_THRESHOLD.single;
     const ssWages = Math.min(grossAnnualIncome, SS_WAGE_BASE_2026);
     const socialSecurity = ssWages * SS_RATE;
     const medicare = grossAnnualIncome * MEDICARE_RATE;
-    const additionalMedicare = Math.max(0, grossAnnualIncome - ADDITIONAL_MEDICARE_THRESHOLD_SINGLE) * ADDITIONAL_MEDICARE_RATE;
+    const additionalMedicare = Math.max(0, grossAnnualIncome - threshold) * ADDITIONAL_MEDICARE_RATE;
     return {
         socialSecurity: round2(socialSecurity),
         medicare: round2(medicare),
@@ -65,7 +108,7 @@ function round2(n) { return Math.round(n * 100) / 100; }
 
 // ---- formula_model implementations ----
 
-function calcNoIncomeTax(grossAnnualIncome, stateEntry, federalTax) {
+function calcNoIncomeTax(grossAnnualIncome, stateEntry, federalTax, filingStatus = 'single') {
     return { stateTax: 0, stateTaxBreakdown: 'No state income tax.' };
 }
 
@@ -73,9 +116,20 @@ function calcNoIncomeTax(grossAnnualIncome, stateEntry, federalTax) {
  * federal_tax_deductible: some states (e.g. Alabama) let filers deduct federal income tax
  * paid from the state taxable base. When set, federalTax is subtracted before the state's
  * own deduction/exemption and rate are applied.
+ *
+ * filingStatus: looks for params.standard_deduction_mfj/standard_deduction_hoh overrides,
+ * falling back to the single-filer params.standard_deduction when a state hasn't been
+ * backfilled with status-specific figures yet (see states.json.filing_status_backfilled).
  */
-function calcFlatTax(grossAnnualIncome, stateEntry, federalTax) {
-    const { rate, standard_deduction = 0, personal_exemption = 0, federal_tax_deductible = false, credit = 0, surtax = null } = stateEntry.params;
+function calcFlatTax(grossAnnualIncome, stateEntry, federalTax, filingStatus = 'single') {
+    const p = stateEntry.params;
+    const { rate, federal_tax_deductible = false, credit = 0, surtax = null } = p;
+    const standard_deduction = (filingStatus === 'mfj' && p.standard_deduction_mfj !== undefined) ? p.standard_deduction_mfj
+                              : (filingStatus === 'hoh' && p.standard_deduction_hoh !== undefined) ? p.standard_deduction_hoh
+                              : (p.standard_deduction || 0);
+    const personal_exemption = (filingStatus === 'mfj' && p.personal_exemption_mfj !== undefined) ? p.personal_exemption_mfj
+                              : (filingStatus === 'hoh' && p.personal_exemption_hoh !== undefined) ? p.personal_exemption_hoh
+                              : (p.personal_exemption || 0);
     const fedDeduction = federal_tax_deductible ? federalTax : 0;
     const deduction = standard_deduction + personal_exemption + fedDeduction;
     const taxable = Math.max(0, grossAnnualIncome - deduction);
@@ -89,8 +143,18 @@ function calcFlatTax(grossAnnualIncome, stateEntry, federalTax) {
     return { stateTax, stateTaxBreakdown: breakdown };
 }
 
-function calcProgressiveBrackets(grossAnnualIncome, stateEntry, federalTax) {
-    const { brackets, standard_deduction = 0, personal_exemption = 0, federal_tax_deductible = false, surtax = null } = stateEntry.params;
+function calcProgressiveBrackets(grossAnnualIncome, stateEntry, federalTax, filingStatus = 'single') {
+    const p = stateEntry.params;
+    const { federal_tax_deductible = false, surtax = null } = p;
+    const brackets = (filingStatus === 'mfj' && p.brackets_mfj) ? p.brackets_mfj
+                    : (filingStatus === 'hoh' && p.brackets_hoh) ? p.brackets_hoh
+                    : p.brackets;
+    const standard_deduction = (filingStatus === 'mfj' && p.standard_deduction_mfj !== undefined) ? p.standard_deduction_mfj
+                              : (filingStatus === 'hoh' && p.standard_deduction_hoh !== undefined) ? p.standard_deduction_hoh
+                              : (p.standard_deduction || 0);
+    const personal_exemption = (filingStatus === 'mfj' && p.personal_exemption_mfj !== undefined) ? p.personal_exemption_mfj
+                              : (filingStatus === 'hoh' && p.personal_exemption_hoh !== undefined) ? p.personal_exemption_hoh
+                              : (p.personal_exemption || 0);
     const fedDeduction = federal_tax_deductible ? federalTax : 0;
     const deduction = standard_deduction + personal_exemption + fedDeduction;
     const taxable = Math.max(0, grossAnnualIncome - deduction);
@@ -128,6 +192,43 @@ function calcExtraPayrollTax(grossAnnualIncome, rules) {
     return { amount: round2(amount), name: extra.name };
 }
 
+/**
+ * Pre-tax deduction split, by IRS wage-base treatment:
+ * - Traditional 401(k): reduces federal + state taxable wages, NOT FICA wages.
+ * - HSA / employer health insurance premium (Section 125 cafeteria plan): reduces
+ *   federal + state + FICA wages.
+ * deductions: { retirement401k?: {type:'percent'|'amount', value}, hsa?: number, healthPremium?: number }
+ * hsa/healthPremium are $/pay-period; retirement401k.value is either % of salary or $/pay-period.
+ */
+function calcPreTaxDeductions(grossAnnualIncome, deductions, payFrequency) {
+    const divisor = PAY_FREQUENCY_DIVISORS[payFrequency] || 1;
+    let retirement401kAnnual = deductions.retirement401k
+        ? (deductions.retirement401k.type === 'percent'
+            ? grossAnnualIncome * ((deductions.retirement401k.value || 0) / 100)
+            : (deductions.retirement401k.value || 0) * divisor)
+        : 0;
+    const capped401k = Math.min(retirement401kAnnual, RETIREMENT_401K_LIMIT_2026);
+    const over401kLimit = retirement401kAnnual > RETIREMENT_401K_LIMIT_2026;
+    retirement401kAnnual = capped401k;
+
+    const hsaLimit = (deductions.hsaCoverage === 'family') ? HSA_LIMIT_FAMILY_2026 : HSA_LIMIT_SELF_ONLY_2026;
+    let hsaAnnual = (deductions.hsa || 0) * divisor;
+    const overHsaLimit = hsaAnnual > hsaLimit;
+    hsaAnnual = Math.min(hsaAnnual, hsaLimit);
+
+    const healthPremiumAnnual = (deductions.healthPremium || 0) * divisor;
+    const section125Annual = round2(hsaAnnual + healthPremiumAnnual);
+
+    return {
+        retirement401kAnnual: round2(retirement401kAnnual),
+        section125Annual,
+        ficaWages: round2(Math.max(0, grossAnnualIncome - section125Annual)),
+        incomeTaxWages: round2(Math.max(0, grossAnnualIncome - retirement401kAnnual - section125Annual)),
+        over401kLimit,
+        overHsaLimit
+    };
+}
+
 const PAY_FREQUENCY_DIVISORS = {
     annual: 1,
     monthly: 12,
@@ -138,19 +239,32 @@ const PAY_FREQUENCY_DIVISORS = {
 
 /**
  * Main dispatcher — computes full paycheck breakdown for a given state + annual gross income.
- * Pay-frequency conversion is a pure display-time division of the annual net figure (v1 scope:
- * single-filer only, no separate per-frequency tax computation).
+ * Pay-frequency conversion is a pure display-time division of the annual net figure (no
+ * separate per-frequency tax computation). filingStatus: 'single' | 'mfj' | 'hoh'.
+ * preTaxDeductions (optional): { retirement401k?, hsa?, hsaCoverage?, healthPremium? } — see calcPreTaxDeductions.
+ * SDI/PFL (extra_payroll_tax) is computed on FICA-equivalent wages, consistent with Section 125's FICA
+ * wage-base treatment — a documented assumption, not verified against every state's own SDI statute.
  */
-function calculatePaycheck(stateEntry, rules, grossAnnualIncome, payFrequency) {
+function calculatePaycheck(stateEntry, rules, grossAnnualIncome, payFrequency, filingStatus = 'single', preTaxDeductions = null) {
     grossAnnualIncome = Math.max(0, Number(grossAnnualIncome) || 0);
-    const federalTax = round2(calcFederalTax(grossAnnualIncome));
-    const fica = calcFICA(grossAnnualIncome);
-    const stateFn = FORMULA_DISPATCH[stateEntry.formula_model];
-    const { stateTax, stateTaxBreakdown } = stateFn(grossAnnualIncome, stateEntry, federalTax);
-    const extraPayroll = calcExtraPayrollTax(grossAnnualIncome, rules);
+    let ficaBase = grossAnnualIncome;
+    let taxableBase = grossAnnualIncome;
+    let preTax = null;
+    if (preTaxDeductions) {
+        preTax = calcPreTaxDeductions(grossAnnualIncome, preTaxDeductions, payFrequency);
+        ficaBase = preTax.ficaWages;
+        taxableBase = preTax.incomeTaxWages;
+    }
 
+    const federalTax = round2(calcFederalTax(taxableBase, filingStatus));
+    const fica = calcFICA(ficaBase, filingStatus);
+    const stateFn = FORMULA_DISPATCH[stateEntry.formula_model];
+    const { stateTax, stateTaxBreakdown } = stateFn(taxableBase, stateEntry, federalTax, filingStatus);
+    const extraPayroll = calcExtraPayrollTax(ficaBase, rules);
+
+    const preTaxTotal = preTax ? round2(preTax.retirement401kAnnual + preTax.section125Annual) : 0;
     const totalWithheld = round2(federalTax + fica.total + stateTax + extraPayroll.amount);
-    const netAnnual = round2(grossAnnualIncome - totalWithheld);
+    const netAnnual = round2(grossAnnualIncome - totalWithheld - preTaxTotal);
     const divisor = PAY_FREQUENCY_DIVISORS[payFrequency] || 1;
     const netPerPeriod = round2(netAnnual / divisor);
 
@@ -161,10 +275,12 @@ function calculatePaycheck(stateEntry, rules, grossAnnualIncome, payFrequency) {
         stateTax,
         stateTaxBreakdown,
         extraPayrollTax: extraPayroll,
+        preTaxDeductions: preTax,
         totalWithheld,
         netAnnual,
         netPerPeriod,
-        payFrequency
+        payFrequency,
+        filingStatus
     };
 }
 
@@ -172,7 +288,18 @@ function fmtMoney(n) {
     return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
 }
 
+/**
+ * Annualizes an hourly wage into a gross annual salary, for feeding into calculatePaycheck().
+ * otMultiplier: 1.5 for standard time-and-a-half. Models generic weekly overtime (>40hr/week)
+ * only — not state-specific daily-OT rules (e.g. California's daily >8hr/1.5x, >12hr/2x).
+ */
+function annualizeHourly(hourlyRate, hoursPerWeek, otHoursPerWeek = 0, otMultiplier = 1.5) {
+    const regularAnnual = hourlyRate * hoursPerWeek * 52;
+    const otAnnual = hourlyRate * otMultiplier * otHoursPerWeek * 52;
+    return round2(regularAnnual + otAnnual);
+}
+
 // Node (build-time verification) + browser (runtime calculator) export
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { calculatePaycheck, calcFederalTax, calcFICA, marginalBracketTax, fmtMoney };
+    module.exports = { calculatePaycheck, calcFederalTax, calcFICA, marginalBracketTax, fmtMoney, annualizeHourly };
 }

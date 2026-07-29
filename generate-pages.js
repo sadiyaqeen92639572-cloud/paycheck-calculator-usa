@@ -81,11 +81,17 @@ function formulaSection(state, rules) {
       ${extraHtml}
       <h3>Federal Tax &amp; FICA (shared across all states)</h3>
       <table>
-        <tr><th>Federal standard deduction (single)</th><td>$16,100</td></tr>
-        <tr><th>Federal brackets</th><td>10% / 12% / 22% / 24% / 32% / 35% / 37%</td></tr>
-        <tr><th>Social Security</th><td>6.2% up to $184,500 wage base</td></tr>
-        <tr><th>Medicare</th><td>1.45% on all wages, +0.9% above $200,000</td></tr>
+        <tr><th>Filing status</th><th>Standard deduction</th></tr>
+        <tr><td>Single</td><td>$16,100</td></tr>
+        <tr><td>Married Filing Jointly</td><td>$32,200</td></tr>
+        <tr><td>Head of Household</td><td>$24,150</td></tr>
       </table>
+      <table>
+        <tr><th>Federal brackets (all filing statuses)</th><td>10% / 12% / 22% / 24% / 32% / 35% / 37%</td></tr>
+        <tr><th>Social Security</th><td>6.2% up to $184,500 wage base</td></tr>
+        <tr><th>Medicare</th><td>1.45% on all wages, +0.9% above $200,000 single/HoH, $250,000 MFJ</td></tr>
+      </table>
+      ${!state.filing_status_backfilled ? `<p class="deviation-note">⚠️ ${state.name}'s married-filing-jointly and head-of-household state brackets have not yet been independently verified against the primary source above — this calculator uses ${state.name}'s single-filer brackets as an estimate when those statuses are selected.</p>` : ''}
       ${localNote}
       <p class="formula-footnote">Guideline version ${state.guideline_version} · Last verified ${state.last_verified}</p>
     </section>`;
@@ -120,24 +126,31 @@ function methodologySection(state, rules) {
     return `
     <section id="methodology" class="methodology">
       <h2>Methodology &amp; Source</h2>
-      <p>${state.name} state tax figures sourced from <strong>${state.source.agency_name}</strong> (<a href="${state.source.url}" target="_blank" rel="nofollow noopener">${state.source.url}</a>), citing ${state.source.statute_ref}. Federal brackets and FICA constants sourced from the IRS (Revenue Procedure 2025-32).</p>
+      <p>${state.name} state tax figures sourced from <strong>${state.source.agency_name}</strong> (<a href="${state.source.url}" target="_blank" rel="nofollow noopener">${state.source.url}</a>), citing ${state.source.statute_ref}. Federal brackets, standard deductions (single/MFJ/HoH), and FICA constants sourced from the IRS (Revenue Procedure 2025-32; married-filing-jointly Additional Medicare threshold of $250,000 is a separate, unindexed statutory figure). ${state.filing_status_backfilled ? `${state.name}'s married-filing-jointly and head-of-household figures have been independently verified against the source above.` : `${state.name}'s married-filing-jointly and head-of-household figures are not yet independently verified and currently fall back to single-filer brackets — see the caveat in the formula section above.`}</p>
       <p class="deviation-note">${rules.deviation_note}</p>
+      ${rules.extra_payroll_tax ? `<p>Pre-tax deductions assumption: HSA and health insurance premium contributions are assumed to also reduce the ${rules.extra_payroll_tax.name} wage base, consistent with their FICA wage treatment. This is a reasonable default, not independently verified against ${state.name}'s specific ${rules.extra_payroll_tax.name} statute.</p>` : ''}
       <p>Guideline version: ${state.guideline_version} · Effective: ${state.effective_date} · Last verified: ${state.last_verified}</p>
     </section>`;
 }
 
-function jsonLd(state) {
+function jsonLd(state, opts = {}) {
+    const { hourly = false } = opts;
     const faqEntities = state.faq_extra.map(f => ({
         '@type': 'Question',
         name: f.q,
         acceptedAnswer: { '@type': 'Answer', text: f.a }
     }));
+    const breadcrumbItems = [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+        { '@type': 'ListItem', position: 2, name: state.name, item: `${SITE_URL}/${state.slug}/` }
+    ];
+    if (hourly) breadcrumbItems.push({ '@type': 'ListItem', position: 3, name: 'Hourly', item: `${SITE_URL}/${state.slug}/hourly/` });
     return JSON.stringify({
         '@context': 'https://schema.org',
         '@graph': [
             {
                 '@type': 'WebApplication',
-                name: `${state.name} Paycheck Calculator`,
+                name: `${state.name} ${hourly ? 'Hourly ' : ''}Paycheck Calculator`,
                 applicationCategory: 'FinanceApplication',
                 operatingSystem: 'Any',
                 offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
@@ -147,16 +160,33 @@ function jsonLd(state) {
                 publisher: GESMINE_ORG
             },
             { '@type': 'FAQPage', mainEntity: faqEntities },
-            {
-                '@type': 'BreadcrumbList',
-                itemListElement: [
-                    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-                    { '@type': 'ListItem', position: 2, name: state.name, item: `${SITE_URL}/${state.slug}/` }
-                ]
-            },
+            { '@type': 'BreadcrumbList', itemListElement: breadcrumbItems },
             GESMINE_ORG
         ]
     });
+}
+
+function filingStatusAndDeductionFields() {
+    return `
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <details class="pretax-deductions">
+        <summary>+ Pre-tax deductions (401k, HSA, health insurance)</summary>
+        <label>401(k) contribution (% of salary)
+          <input type="number" id="retirement401kPct" min="0" max="100" step="0.5" value="0">
+        </label>
+        <label>HSA contribution ($/pay period)
+          <input type="number" id="hsaAmount" min="0" step="10" value="0">
+        </label>
+        <label>Health insurance premium ($/pay period)
+          <input type="number" id="healthPremium" min="0" step="10" value="0">
+        </label>
+      </details>`;
 }
 
 function calculatorFormFields() {
@@ -173,10 +203,41 @@ function calculatorFormFields() {
           <option value="weekly">Weekly</option>
         </select>
       </label>
+      ${filingStatusAndDeductionFields()}
       <button type="submit">Calculate Take-Home Pay →</button>`;
 }
 
-function calculatorScript(state, rules) {
+function hourlyFormFields() {
+    return `
+      <label>Hourly Rate ($)
+        <input type="number" id="hourlyRate" min="0" step="0.25" value="25" required>
+      </label>
+      <label>Hours per Week
+        <input type="number" id="hoursPerWeek" min="0" max="80" step="1" value="40" required>
+      </label>
+      <label>Overtime Hours per Week (over 40)
+        <input type="number" id="otHoursPerWeek" min="0" max="80" step="1" value="0">
+      </label>
+      <label>Pay Frequency
+        <select id="payFrequency">
+          <option value="annual">Annual</option>
+          <option value="monthly">Monthly</option>
+          <option value="semimonthly">Semi-Monthly (24/yr)</option>
+          <option value="biweekly" selected>Bi-Weekly (26/yr)</option>
+          <option value="weekly">Weekly</option>
+        </select>
+      </label>
+      ${filingStatusAndDeductionFields()}
+      <button type="submit">Calculate Take-Home Pay →</button>`;
+}
+
+function calculatorScript(state, rules, mode = 'salary') {
+    const grossComputation = mode === 'hourly'
+        ? `const hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
+        const hoursPerWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+        const otHoursPerWeek = parseFloat(document.getElementById('otHoursPerWeek').value) || 0;
+        const gross = annualizeHourly(hourlyRate, hoursPerWeek, otHoursPerWeek);`
+        : `const gross = parseFloat(document.getElementById('grossIncome').value) || 0;`;
     return `
     <script src="/assets/calc-engine.js"></script>
     <script>
@@ -185,10 +246,26 @@ function calculatorScript(state, rules) {
 
     function runCalculation(e) {
         e.preventDefault();
-        const gross = parseFloat(document.getElementById('grossIncome').value) || 0;
+        ${grossComputation}
         const freq = document.getElementById('payFrequency').value;
-        const r = calculatePaycheck(STATE_ENTRY, RULES, gross, freq);
+        const filingStatus = document.getElementById('filingStatus').value;
+        const retirement401kPct = parseFloat(document.getElementById('retirement401kPct').value) || 0;
+        const hsaAmount = parseFloat(document.getElementById('hsaAmount').value) || 0;
+        const healthPremium = parseFloat(document.getElementById('healthPremium').value) || 0;
+        const hasPreTaxDeductions = retirement401kPct > 0 || hsaAmount > 0 || healthPremium > 0;
+        const preTaxDeductions = hasPreTaxDeductions
+            ? { retirement401k: { type: 'percent', value: retirement401kPct }, hsa: hsaAmount, healthPremium: healthPremium }
+            : null;
+        const r = calculatePaycheck(STATE_ENTRY, RULES, gross, freq, filingStatus, preTaxDeductions);
         const freqLabel = { annual: 'Annual', monthly: 'Monthly', semimonthly: 'Semi-Monthly', biweekly: 'Bi-Weekly', weekly: 'Weekly' }[freq];
+
+        const caveat = document.getElementById('result-filing-status-caveat');
+        if (filingStatus !== 'single' && !STATE_ENTRY.filing_status_backfilled) {
+            caveat.hidden = false;
+            caveat.textContent = '⚠️ ' + STATE_ENTRY.name + ' married/head-of-household brackets are not yet independently verified — this estimate uses single-filer state brackets.';
+        } else {
+            caveat.hidden = true;
+        }
 
         document.getElementById('result-amount').textContent = fmtMoney(r.netPerPeriod) + ' / ' + freqLabel.toLowerCase();
         document.getElementById('result-net-annual').textContent = fmtMoney(r.netAnnual);
@@ -203,6 +280,31 @@ function calculatorScript(state, rules) {
         } else {
             extraRow.hidden = true;
         }
+
+        const preTaxRow = document.getElementById('result-pretax-row');
+        const preTaxRowTotal = document.getElementById('result-pretax-row-total');
+        const preTaxLimitWarning = document.getElementById('result-pretax-limit-warning');
+        if (r.preTaxDeductions) {
+            preTaxRow.hidden = false;
+            preTaxRowTotal.hidden = false;
+            const total = r.preTaxDeductions.retirement401kAnnual + r.preTaxDeductions.section125Annual;
+            document.getElementById('result-pretax-401k').textContent = fmtMoney(r.preTaxDeductions.retirement401kAnnual);
+            document.getElementById('result-pretax-total').textContent = fmtMoney(total);
+            const warnings = [];
+            if (r.preTaxDeductions.over401kLimit) warnings.push('401(k) contribution capped at the 2026 IRS elective deferral limit ($24,500/year).');
+            if (r.preTaxDeductions.overHsaLimit) warnings.push('HSA contribution capped at the 2026 IRS limit ($4,400/year self-only, $8,750/year family coverage).');
+            if (warnings.length) {
+                preTaxLimitWarning.hidden = false;
+                preTaxLimitWarning.textContent = '⚠️ ' + warnings.join(' ');
+            } else {
+                preTaxLimitWarning.hidden = true;
+            }
+        } else {
+            preTaxRow.hidden = true;
+            preTaxRowTotal.hidden = true;
+            preTaxLimitWarning.hidden = true;
+        }
+
         document.getElementById('results-block').hidden = false;
     }
     document.getElementById('calc-form').addEventListener('submit', runCalculation);
@@ -239,7 +341,7 @@ function renderStatePage(state) {
 </header>
 
 <div class="disclaimer-banner">
-  Estimate only — not tax advice. Single-filer assumption, based on standard federal/state calculations. See methodology below for source and last-verified date. For your exact withholding, consult a tax professional or your payroll department.
+  Estimate only — not tax advice. Supports single, married-filing-jointly, and head-of-household filing status, plus optional pre-tax 401(k), HSA, and health insurance deductions (401(k) reduces federal/state taxable wages only; HSA and health premiums also reduce FICA wages, per standard IRS treatment). See methodology below for source and last-verified date. For your exact withholding, consult a tax professional or your payroll department.
 </div>
 
 <main>
@@ -248,6 +350,7 @@ function renderStatePage(state) {
       ${calculatorFormFields()}
     </form>
     <div id="results-block" hidden>
+      <div class="result-warning" id="result-filing-status-caveat" hidden></div>
       <div class="result-amount" id="result-amount"></div>
       <div class="result-grid">
         <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
@@ -255,9 +358,13 @@ function renderStatePage(state) {
         <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
         <div class="result-item"><span class="label">${state.name} State Tax</span><span class="value" id="result-state"></span></div>
         <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+        <div class="result-item" id="result-pretax-row" hidden><span class="label">401(k) Contribution</span><span class="value" id="result-pretax-401k"></span></div>
+        <div class="result-item" id="result-pretax-row-total" hidden><span class="label">Pre-Tax Deductions Total</span><span class="value" id="result-pretax-total"></span></div>
       </div>
+      <div class="result-warning" id="result-pretax-limit-warning" hidden></div>
       ${rules.local_tax_note ? `<div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>` : ''}
     </div>
+    <p class="cross-link"><a href="/${state.slug}/hourly/">Paid hourly instead? Try our ${state.name} hourly paycheck calculator →</a></p>
   </section>
 
   ${worksheetSection(state)}
@@ -271,6 +378,82 @@ function renderStatePage(state) {
   <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Paycheck Calculator. Estimates only — not tax advice.</p>
 </footer>
 ${calculatorScript(state, rules)}
+</body>
+</html>
+`;
+}
+
+function renderHourlyStatePage(state) {
+    assertComplete(state);
+    const rules = loadRules(state.abbr.toLowerCase());
+    const title = `${state.name} Hourly Paycheck Calculator — Take-Home Pay ${YEAR}`;
+    const description = `Free ${state.name} hourly paycheck calculator. Enter your hourly rate and hours worked to estimate take-home pay after federal tax, FICA, and ${state.name} state tax — updated ${state.last_verified}.`;
+    const dailyOtStates = new Set(['CA', 'AK', 'CO', 'NV']);
+    const dailyOtNote = dailyOtStates.has(state.abbr)
+        ? `<p class="deviation-note">⚠️ This calculator models standard weekly overtime (over 40 hours/week) only. ${state.name} has additional daily-overtime rules (e.g. daily hours beyond a state-specific threshold at 1.5x/2x) that this calculator does not yet compute — treat overtime pay as an estimate.</p>`
+        : '';
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${title}</title>
+<meta name="description" content="${description}">
+<link rel="canonical" href="${SITE_URL}/${state.slug}/hourly/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${description}">
+<meta property="og:url" content="${SITE_URL}/${state.slug}/hourly/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">${jsonLd(state, { hourly: true })}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a> · <a href="/${state.slug}/">${state.name} Paycheck Calculator</a></p>
+  <h1>${state.name} Hourly Paycheck Calculator</h1>
+  <p class="badge">Estimate your ${YEAR} take-home pay after federal tax, FICA${state.formula_model === 'no_income_tax' ? '' : `, and ${state.name} state tax`} from an hourly rate</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Supports single, married-filing-jointly, and head-of-household filing status, plus optional pre-tax 401(k), HSA, and health insurance deductions. Models standard weekly overtime only. See methodology below for source and last-verified date. For your exact withholding, consult a tax professional or your payroll department.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      ${hourlyFormFields()}
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-warning" id="result-filing-status-caveat" hidden></div>
+      <div class="result-amount" id="result-amount"></div>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
+        <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
+        <div class="result-item"><span class="label">${state.name} State Tax</span><span class="value" id="result-state"></span></div>
+        <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+        <div class="result-item" id="result-pretax-row" hidden><span class="label">401(k) Contribution</span><span class="value" id="result-pretax-401k"></span></div>
+        <div class="result-item" id="result-pretax-row-total" hidden><span class="label">Pre-Tax Deductions Total</span><span class="value" id="result-pretax-total"></span></div>
+      </div>
+      <div class="result-warning" id="result-pretax-limit-warning" hidden></div>
+      ${rules.local_tax_note ? `<div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>` : ''}
+    </div>
+    <p class="cross-link"><a href="/${state.slug}/">Paid a salary instead? Try our ${state.name} paycheck calculator →</a></p>
+  </section>
+
+  ${worksheetSection(state)}
+  ${formulaSection(state, rules)}
+  ${dailyOtNote}
+  ${faqSection(state)}
+  ${methodologySection(state, rules)}
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+${calculatorScript(state, rules, 'hourly')}
 </body>
 </html>
 `;
@@ -320,8 +503,14 @@ for (const state of Object.values(states)) {
     const dir = path.join(__dirname, state.slug);
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(path.join(dir, 'index.html'), renderStatePage(state));
-    console.log(`Generated: ${state.slug}/ (${state.formula_model})`);
     built++;
+
+    const hourlyDir = path.join(dir, 'hourly');
+    fs.mkdirSync(hourlyDir, { recursive: true });
+    fs.writeFileSync(path.join(hourlyDir, 'index.html'), renderHourlyStatePage(state));
+    built++;
+
+    console.log(`Generated: ${state.slug}/ + ${state.slug}/hourly/ (${state.formula_model})`);
 }
 
 const changelogDir = path.join(__dirname, 'changelog');
