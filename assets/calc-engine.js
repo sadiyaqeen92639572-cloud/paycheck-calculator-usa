@@ -456,7 +456,37 @@ function calcSelfEmployedTax(stateEntry, rules, netSEIncome, filingStatus = 'sin
     };
 }
 
+/**
+ * Withholding pace checkup — pure arithmetic, no tax constants. Not a replica of the IRS's
+ * multiple-jobs worksheet (which uses lookup tables, not simple brackets); this is a "will your
+ * current withholding pace cover your expected federal tax bill" projection, meant to inform the
+ * extra-withholding amount on Form W-4 Step 4(c). Projects your remaining withholding at the same
+ * per-period pace you've withheld so far this year (ytdWithheld / periodsElapsed), then compares
+ * the projected annual total against expectedAnnualFederalTax.
+ */
+function calcWithholdingGap(expectedAnnualFederalTax, ytdWithheld, periodsElapsed, payPeriodsRemaining) {
+    expectedAnnualFederalTax = Math.max(0, Number(expectedAnnualFederalTax) || 0);
+    ytdWithheld = Math.max(0, Number(ytdWithheld) || 0);
+    periodsElapsed = Math.max(0, Number(periodsElapsed) || 0);
+    payPeriodsRemaining = Math.max(0, Number(payPeriodsRemaining) || 0);
+
+    const currentPacePerPeriod = periodsElapsed > 0 ? ytdWithheld / periodsElapsed : 0;
+    const projectedTotalWithholding = round2(ytdWithheld + currentPacePerPeriod * payPeriodsRemaining);
+    const projectedShortfall = round2(expectedAnnualFederalTax - projectedTotalWithholding);
+    const recommendedExtraPerPeriod = (projectedShortfall > 0 && payPeriodsRemaining > 0)
+        ? round2(projectedShortfall / payPeriodsRemaining)
+        : 0;
+
+    return {
+        currentPacePerPeriod: round2(currentPacePerPeriod),
+        projectedTotalWithholding,
+        projectedShortfall,
+        recommendedExtraPerPeriod,
+        onTrack: projectedShortfall <= 0
+    };
+}
+
 // Node (build-time verification) + browser (runtime calculator) export
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { calculatePaycheck, calcBonusPaycheck, calcSelfEmployedTax, calcFederalTax, calcFICA, marginalBracketTax, fmtMoney, annualizeHourly };
+    module.exports = { calculatePaycheck, calcBonusPaycheck, calcSelfEmployedTax, calcWithholdingGap, calcFederalTax, calcFICA, marginalBracketTax, fmtMoney, annualizeHourly };
 }

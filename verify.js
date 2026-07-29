@@ -161,6 +161,20 @@ assertTrue(seHighIncome.seTax < naiveUncappedSeTax, 'SE tax below naive uncapped
 const federalWithoutSeDeduction = engine.calcFederalTax(65000, 'single');
 assertTrue(seTx.federalTax < Math.round(federalWithoutSeDeduction * 100) / 100, 'Half of SE tax deducted from federal taxable income reduces federal tax');
 
+// --- Tier 3 Phase 11: withholding pace checkup (pure arithmetic) ---
+// Halfway through the year (13 of 26 biweekly periods elapsed), withheld exactly half of a
+// $6,000 expected annual liability -> on pace, no shortfall, no extra withholding recommended.
+const wgOnPace = engine.calcWithholdingGap(6000, 3000, 13, 13);
+assertEqual(wgOnPace.projectedShortfall, 0, 'On-pace scenario projects zero shortfall');
+assertEqual(wgOnPace.recommendedExtraPerPeriod, 0, 'On-pace scenario recommends no extra withholding');
+assertTrue(wgOnPace.onTrack, 'On-pace scenario reports onTrack = true');
+
+// Under-withholding: only $1,500 withheld halfway through toward the same $6,000 expected total.
+const wgShortfall = engine.calcWithholdingGap(6000, 1500, 13, 13);
+assertTrue(wgShortfall.projectedShortfall > 0, 'Under-withholding scenario projects a shortfall > 0');
+assertTrue(!wgShortfall.onTrack, 'Under-withholding scenario reports onTrack = false');
+assertEqual(wgShortfall.recommendedExtraPerPeriod, Math.round((wgShortfall.projectedShortfall / 13) * 100) / 100, 'Recommended extra per period = shortfall / periods remaining');
+
 if (failures > 0) {
     console.error(`\n${failures} assertion(s) failed.`);
     process.exit(1);

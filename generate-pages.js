@@ -967,6 +967,139 @@ document.addEventListener('DOMContentLoaded', () => { document.getElementById('c
 `;
 }
 
+function renderWithholdingCheckupPage() {
+    const title = 'Withholding Pace Checkup — USA Paycheck Calculator';
+    const description = 'Check whether your federal tax withholding is on pace to cover your expected tax bill, and how much extra to withhold per paycheck (W-4 Step 4c) to close any gap.';
+
+    const jsonLd = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'WebApplication',
+                name: 'Withholding Pace Checkup',
+                applicationCategory: 'FinanceApplication',
+                operatingSystem: 'Any',
+                offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+                author: GESMINE_ORG,
+                publisher: GESMINE_ORG
+            },
+            GESMINE_ORG
+        ]
+    });
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${title}</title>
+<meta name="description" content="${description}">
+<link rel="canonical" href="${SITE_URL}/withholding-checkup/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${description}">
+<meta property="og:url" content="${SITE_URL}/withholding-checkup/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">${jsonLd}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a></p>
+  <h1>Withholding Pace Checkup</h1>
+  <p class="badge">Are you on track to owe or get a refund? See a recommended extra per-paycheck withholding amount</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice, and not a replacement for the IRS's own Tax Withholding Estimator or the Form W-4 multiple-jobs worksheet (those use lookup tables this tool doesn't replicate). This projects your remaining withholding at the same per-paycheck pace you've withheld so far this year, compares it to your expected annual federal tax, and suggests an extra per-paycheck amount for Form W-4 Step 4(c) to close any gap. Federal tax only — state withholding isn't included.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      <label>Expected Annual Gross Income ($)
+        <input type="number" id="grossIncome" min="0" step="100" value="65000" required>
+      </label>
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <label>Pay Frequency
+        <select id="payFrequency">
+          <option value="monthly">Monthly (12/yr)</option>
+          <option value="semimonthly">Semi-Monthly (24/yr)</option>
+          <option value="biweekly" selected>Bi-Weekly (26/yr)</option>
+          <option value="weekly">Weekly (52/yr)</option>
+        </select>
+      </label>
+      <label>Federal Tax Withheld So Far This Year ($)
+        <input type="number" id="ytdWithheld" min="0" step="50" value="2500" required>
+      </label>
+      <label>Pay Periods Remaining This Year
+        <input type="number" id="periodsRemaining" min="0" step="1" value="13" required>
+      </label>
+      <button type="submit">Check My Withholding Pace →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Expected Annual Federal Tax</span><span class="value" id="result-expected"></span></div>
+        <div class="result-item"><span class="label">Projected Total Withholding</span><span class="value" id="result-projected"></span></div>
+        <div class="result-item"><span class="label">Projected Gap</span><span class="value" id="result-gap"></span></div>
+        <div class="result-item" id="result-extra-row" hidden><span class="label">Recommended Extra / Paycheck</span><span class="value" id="result-extra"></span></div>
+      </div>
+      <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · <a href="/compare/">Compare States</a> · &copy; ${YEAR} USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+<script src="/assets/calc-engine.js"></script>
+<script>
+const PERIODS_PER_YEAR = { monthly: 12, semimonthly: 24, biweekly: 26, weekly: 52 };
+
+function runCalculation(e) {
+    e.preventDefault();
+    const gross = parseFloat(document.getElementById('grossIncome').value) || 0;
+    const filingStatus = document.getElementById('filingStatus').value;
+    const freq = document.getElementById('payFrequency').value;
+    const ytdWithheld = parseFloat(document.getElementById('ytdWithheld').value) || 0;
+    const periodsRemaining = parseFloat(document.getElementById('periodsRemaining').value) || 0;
+    const totalPeriods = PERIODS_PER_YEAR[freq] || 26;
+    const periodsElapsed = Math.max(0, totalPeriods - periodsRemaining);
+
+    const expectedAnnualFederalTax = calcFederalTax(gross, filingStatus);
+    const r = calcWithholdingGap(expectedAnnualFederalTax, ytdWithheld, periodsElapsed, periodsRemaining);
+
+    document.getElementById('result-amount').textContent = r.onTrack
+        ? '✅ On pace — projected refund of ' + fmtMoney(Math.abs(r.projectedShortfall))
+        : '⚠️ Projected shortfall of ' + fmtMoney(r.projectedShortfall);
+    document.getElementById('result-expected').textContent = fmtMoney(expectedAnnualFederalTax);
+    document.getElementById('result-projected').textContent = fmtMoney(r.projectedTotalWithholding);
+    document.getElementById('result-gap').textContent = fmtMoney(r.projectedShortfall);
+    const extraRow = document.getElementById('result-extra-row');
+    if (r.recommendedExtraPerPeriod > 0) {
+        extraRow.hidden = false;
+        document.getElementById('result-extra').textContent = fmtMoney(r.recommendedExtraPerPeriod);
+    } else {
+        extraRow.hidden = true;
+    }
+
+    document.getElementById('results-block').hidden = false;
+}
+document.getElementById('calc-form').addEventListener('submit', runCalculation);
+document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+</script>
+</body>
+</html>
+`;
+}
+
 // ---- Build ----
 let built = 0;
 for (const state of Object.values(states)) {
@@ -1002,5 +1135,10 @@ const compareDir = path.join(__dirname, 'compare');
 fs.mkdirSync(compareDir, { recursive: true });
 fs.writeFileSync(path.join(compareDir, 'index.html'), renderComparatorPage());
 console.log('Generated: compare/');
+
+const withholdingCheckupDir = path.join(__dirname, 'withholding-checkup');
+fs.mkdirSync(withholdingCheckupDir, { recursive: true });
+fs.writeFileSync(path.join(withholdingCheckupDir, 'index.html'), renderWithholdingCheckupPage());
+console.log('Generated: withholding-checkup/');
 
 console.log(`\nDone. ${built} state pages built.`);
