@@ -58,6 +58,27 @@ details.faq-item p { margin: 8px 0 0; color: var(--muted); }
 .print-btn { margin-top: 14px; background: #fff; color: var(--brand); border: 1px solid var(--brand); }
 .print-btn:hover { background: var(--brand-light); }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand: #10b981;
+    --brand-light: #064e3b;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --border: #334155;
+    --bg: #1e293b;
+  }
+  body { background: #0f172a; }
+  .result-item { background: #1e293b; }
+  .disclaimer-banner { background: #422006; border-bottom-color: #78350f; color: #fde68a; }
+  .result-warning { background: #450a0a; color: #fca5a5; }
+  .local-tax-note { background: #422006; border-color: #78350f; color: #fde68a; }
+  .formula-section { background: #1e293b; border-color: var(--border); }
+  .print-btn { background: #1e293b; }
+  .print-btn:hover { background: var(--brand-light); }
+  input, select { background: #0f172a; color: var(--text); }
+  .state-grid a { color: var(--text); }
+}
+
 @media print {
   header { background: none; color: #000; padding: 0 0 12px; }
   header p, header .badge { display: none; }
