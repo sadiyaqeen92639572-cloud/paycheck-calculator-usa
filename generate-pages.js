@@ -190,7 +190,16 @@ function filingStatusAndDeductionFields() {
       </details>`;
 }
 
-function calculatorFormFields() {
+function localTaxField(rules) {
+    if (!rules.local_tax) return '';
+    const options = rules.local_tax.options.map(o => `<option value="${o.id}"${o.id === 'none' ? ' selected' : ''}>${o.label}</option>`).join('');
+    return `
+      <label>Local Tax
+        <select id="localTaxOption">${options}</select>
+      </label>`;
+}
+
+function calculatorFormFields(rules) {
     return `
       <label>Gross Annual Salary ($)
         <input type="number" id="grossIncome" min="0" step="100" value="65000" required>
@@ -205,10 +214,11 @@ function calculatorFormFields() {
         </select>
       </label>
       ${filingStatusAndDeductionFields()}
+      ${localTaxField(rules)}
       <button type="submit">Calculate Take-Home Pay →</button>`;
 }
 
-function hourlyFormFields() {
+function hourlyFormFields(rules) {
     return `
       <label>Hourly Rate ($)
         <input type="number" id="hourlyRate" min="0" step="0.25" value="25" required>
@@ -229,10 +239,11 @@ function hourlyFormFields() {
         </select>
       </label>
       ${filingStatusAndDeductionFields()}
+      ${localTaxField(rules)}
       <button type="submit">Calculate Take-Home Pay →</button>`;
 }
 
-function bonusFormFields() {
+function bonusFormFields(rules) {
     return `
       <label>Regular Annual Salary ($)
         <input type="number" id="regularAnnualGross" min="0" step="100" value="65000" required>
@@ -256,6 +267,7 @@ function bonusFormFields() {
           <option value="hoh">Head of Household</option>
         </select>
       </label>
+      ${localTaxField(rules)}
       <button type="submit">Calculate Bonus Take-Home Pay →</button>`;
 }
 
@@ -284,7 +296,9 @@ function calculatorScript(state, rules, mode = 'salary') {
         const preTaxDeductions = hasPreTaxDeductions
             ? { retirement401k: { type: 'percent', value: retirement401kPct }, hsa: hsaAmount, healthPremium: healthPremium }
             : null;
-        const r = calculatePaycheck(STATE_ENTRY, RULES, gross, freq, filingStatus, preTaxDeductions);
+        const localTaxEl = document.getElementById('localTaxOption');
+        const localTaxOption = localTaxEl ? localTaxEl.value : null;
+        const r = calculatePaycheck(STATE_ENTRY, RULES, gross, freq, filingStatus, preTaxDeductions, localTaxOption);
         const freqLabel = { annual: 'Annual', monthly: 'Monthly', semimonthly: 'Semi-Monthly', biweekly: 'Bi-Weekly', weekly: 'Weekly' }[freq];
 
         const caveat = document.getElementById('result-filing-status-caveat');
@@ -307,6 +321,17 @@ function calculatorScript(state, rules, mode = 'salary') {
             document.getElementById('result-extra').textContent = fmtMoney(r.extraPayrollTax.amount);
         } else {
             extraRow.hidden = true;
+        }
+
+        const localTaxRow = document.getElementById('result-local-tax-row');
+        if (localTaxRow) {
+            if (r.localTax && r.localTax.amount > 0) {
+                localTaxRow.hidden = false;
+                document.getElementById('result-local-tax-label').textContent = r.localTax.label;
+                document.getElementById('result-local-tax').textContent = fmtMoney(r.localTax.amount);
+            } else {
+                localTaxRow.hidden = true;
+            }
         }
 
         const preTaxRow = document.getElementById('result-pretax-row');
@@ -353,7 +378,9 @@ function bonusCalculatorScript(state, rules) {
         const bonusAmount = parseFloat(document.getElementById('bonusAmount').value) || 0;
         const freq = document.getElementById('payFrequency').value;
         const filingStatus = document.getElementById('filingStatus').value;
-        const r = calcBonusPaycheck(STATE_ENTRY, RULES, regularAnnualGross, bonusAmount, freq, filingStatus);
+        const localTaxEl = document.getElementById('localTaxOption');
+        const localTaxOption = localTaxEl ? localTaxEl.value : null;
+        const r = calcBonusPaycheck(STATE_ENTRY, RULES, regularAnnualGross, bonusAmount, freq, filingStatus, localTaxOption);
 
         document.getElementById('result-amount').textContent = fmtMoney(r.bonusNet) + ' net bonus';
         document.getElementById('result-bonus-gross').textContent = fmtMoney(r.bonusAmount);
@@ -367,6 +394,17 @@ function bonusCalculatorScript(state, rules) {
             document.getElementById('result-extra').textContent = fmtMoney(r.bonusExtraPayrollTax);
         } else {
             extraRow.hidden = true;
+        }
+
+        const localTaxRow = document.getElementById('result-local-tax-row');
+        if (localTaxRow) {
+            if (r.bonusLocalTax && r.bonusLocalTax.amount > 0) {
+                localTaxRow.hidden = false;
+                document.getElementById('result-local-tax-label').textContent = r.bonusLocalTax.label;
+                document.getElementById('result-local-tax').textContent = fmtMoney(r.bonusLocalTax.amount);
+            } else {
+                localTaxRow.hidden = true;
+            }
         }
 
         document.getElementById('results-block').hidden = false;
@@ -411,7 +449,7 @@ function renderStatePage(state) {
 <main>
   <section id="calculator">
     <form id="calc-form">
-      ${calculatorFormFields()}
+      ${calculatorFormFields(rules)}
     </form>
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
@@ -422,11 +460,12 @@ function renderStatePage(state) {
         <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
         <div class="result-item"><span class="label">${state.name} State Tax</span><span class="value" id="result-state"></span></div>
         <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+        <div class="result-item" id="result-local-tax-row" hidden><span class="label" id="result-local-tax-label"></span><span class="value" id="result-local-tax"></span></div>
         <div class="result-item" id="result-pretax-row" hidden><span class="label">401(k) Contribution</span><span class="value" id="result-pretax-401k"></span></div>
         <div class="result-item" id="result-pretax-row-total" hidden><span class="label">Pre-Tax Deductions Total</span><span class="value" id="result-pretax-total"></span></div>
       </div>
       <div class="result-warning" id="result-pretax-limit-warning" hidden></div>
-      ${rules.local_tax_note ? `<div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>` : ''}
+      ${rules.local_tax ? `<p class="result-note">💡 Select your city above — NYC/Yonkers/Philadelphia local tax now supported.</p>` : (rules.local_tax_note ? `<div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>` : '')}
     </div>
     <p class="cross-link"><a href="/${state.slug}/hourly/">Paid hourly instead? Try our ${state.name} hourly paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/bonus/">Calculating a bonus? Try our ${state.name} bonus paycheck calculator →</a></p>
@@ -487,7 +526,7 @@ function renderHourlyStatePage(state) {
 <main>
   <section id="calculator">
     <form id="calc-form">
-      ${hourlyFormFields()}
+      ${hourlyFormFields(rules)}
     </form>
     <div id="results-block" hidden>
       <div class="result-warning" id="result-filing-status-caveat" hidden></div>
@@ -498,11 +537,12 @@ function renderHourlyStatePage(state) {
         <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
         <div class="result-item"><span class="label">${state.name} State Tax</span><span class="value" id="result-state"></span></div>
         <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+        <div class="result-item" id="result-local-tax-row" hidden><span class="label" id="result-local-tax-label"></span><span class="value" id="result-local-tax"></span></div>
         <div class="result-item" id="result-pretax-row" hidden><span class="label">401(k) Contribution</span><span class="value" id="result-pretax-401k"></span></div>
         <div class="result-item" id="result-pretax-row-total" hidden><span class="label">Pre-Tax Deductions Total</span><span class="value" id="result-pretax-total"></span></div>
       </div>
       <div class="result-warning" id="result-pretax-limit-warning" hidden></div>
-      ${rules.local_tax_note ? `<div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>` : ''}
+      ${rules.local_tax ? `<p class="result-note">💡 Select your city above — NYC/Yonkers/Philadelphia local tax now supported.</p>` : (rules.local_tax_note ? `<div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>` : '')}
     </div>
     <p class="cross-link"><a href="/${state.slug}/">Paid a salary instead? Try our ${state.name} paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/bonus/">Calculating a bonus? Try our ${state.name} bonus paycheck calculator →</a></p>
@@ -560,7 +600,7 @@ function renderBonusStatePage(state) {
 <main>
   <section id="calculator">
     <form id="calc-form">
-      ${bonusFormFields()}
+      ${bonusFormFields(rules)}
     </form>
     <div id="results-block" hidden>
       <div class="result-amount" id="result-amount"></div>
@@ -570,8 +610,9 @@ function renderBonusStatePage(state) {
         <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
         <div class="result-item"><span class="label">${state.name} State Tax</span><span class="value" id="result-state"></span></div>
         <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+        <div class="result-item" id="result-local-tax-row" hidden><span class="label" id="result-local-tax-label"></span><span class="value" id="result-local-tax"></span></div>
       </div>
-      ${rules.local_tax_note ? `<div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>` : ''}
+      ${rules.local_tax ? `<p class="result-note">💡 Select your city above — NYC/Yonkers/Philadelphia local tax now supported. Bonus state-tax and local-tax figures are marginal-bracket estimates, not necessarily any special supplemental rate your state or city may apply to bonus payments specifically.</p>` : (rules.local_tax_note ? `<div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>` : '')}
     </div>
     <p class="cross-link"><a href="/${state.slug}/">Calculating a regular paycheck? Try our ${state.name} paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/hourly/">Paid hourly? Try our ${state.name} hourly paycheck calculator →</a></p>

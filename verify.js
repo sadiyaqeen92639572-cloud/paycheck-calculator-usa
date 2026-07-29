@@ -7,6 +7,8 @@ const engine = require('./assets/calc-engine.js');
 const states = require('./data/states.json');
 const txRules = require('./data/rules/tx.json');
 const caRules = require('./data/rules/ca.json');
+const nyRules = require('./data/rules/ny.json');
+const paRules = require('./data/rules/pa.json');
 
 let failures = 0;
 function assertEqual(actual, expected, label) {
@@ -67,6 +69,30 @@ assertTrue(bonusCa.bonusStateTax > 0, 'CA bonus state tax delta > 0 for a progre
 // should add ~0 additional Social Security (only Medicare + Additional Medicare apply).
 const bonusAtCap = engine.calcBonusPaycheck(states.tx, txRules, 184500, 10000, 'biweekly', 'single');
 assertTrue(bonusAtCap.bonusFica < 10000 * 0.0765, 'Bonus FICA below cap-naive 7.65% when regular income already exceeds the SS wage base (cap correctly prorated)');
+
+// --- Tier 2 Phase 2: NYC/Yonkers/Philadelphia local tax ---
+const nyNone = engine.calculatePaycheck(states.ny, nyRules, 65000, 'biweekly', 'single', null, 'none');
+const nyNyc = engine.calculatePaycheck(states.ny, nyRules, 65000, 'biweekly', 'single', null, 'nyc');
+assertTrue(nyNyc.netAnnual < nyNone.netAnnual, 'NYC selection reduces net pay vs none (NY)');
+const nycOption = nyRules.local_tax.options.find(o => o.id === 'nyc');
+const nyStandardDeduction = states.ny.params.standard_deduction;
+const expectedNycTax = engine.marginalBracketTax(65000 - nyStandardDeduction, nycOption.brackets);
+assertEqual(nyNyc.localTax.amount, Math.round(expectedNycTax * 100) / 100, 'NYC bracket tax computed on NY taxable base (gross - standard deduction), not raw gross');
+assertTrue(nyNyc.localTax.amount < engine.marginalBracketTax(65000, nycOption.brackets), 'NYC tax on taxable base is less than if (incorrectly) computed on raw gross');
+
+const nyYonkers = engine.calculatePaycheck(states.ny, nyRules, 65000, 'biweekly', 'single', null, 'yonkers');
+assertTrue(nyYonkers.localTax.amount > 0, 'Yonkers selection > 0 (NY)');
+const yonkersOption = nyRules.local_tax.options.find(o => o.id === 'yonkers');
+assertEqual(nyYonkers.localTax.amount, Math.round(nyNone.stateTax * yonkersOption.rate * 100) / 100, 'Yonkers surcharge = 16.75% of NY state tax');
+
+const paNone = engine.calculatePaycheck(states.pa, paRules, 65000, 'biweekly', 'single', null, 'none');
+const paPhilly = engine.calculatePaycheck(states.pa, paRules, 65000, 'biweekly', 'single', null, 'phila_resident');
+assertTrue(paPhilly.localTax.amount > 0, 'Philadelphia resident selection > 0 (PA)');
+assertTrue(paPhilly.netAnnual < paNone.netAnnual, 'Philadelphia selection reduces net pay vs none (PA)');
+
+// Regression: an unrelated state's 6-arg calculatePaycheck call (no localTaxOptionId) must still
+// match the Phase-1 baselines exactly — the 7th param must be fully backward compatible.
+assertEqual(txBaseline.federalTax, engine.calculatePaycheck(states.tx, txRules, 65000, 'biweekly').federalTax, 'TX 6-arg call unaffected by 7th local-tax param');
 
 if (failures > 0) {
     console.error(`\n${failures} assertion(s) failed.`);

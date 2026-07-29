@@ -119,7 +119,7 @@ function round2(n) { return Math.round(n * 100) / 100; }
 // ---- formula_model implementations ----
 
 function calcNoIncomeTax(grossAnnualIncome, stateEntry, federalTax, filingStatus = 'single') {
-    return { stateTax: 0, stateTaxBreakdown: 'No state income tax.' };
+    return { stateTax: 0, stateTaxBreakdown: 'No state income tax.', taxableBase: grossAnnualIncome };
 }
 
 /**
@@ -150,7 +150,7 @@ function calcFlatTax(grossAnnualIncome, stateEntry, federalTax, filingStatus = '
         stateTax = round2(stateTax + surtaxAmount);
         breakdown += surtaxAmount > 0 ? ` + ${fmtMoney(surtaxAmount)} surtax on income over ${fmtMoney(surtax.threshold)}` : '';
     }
-    return { stateTax, stateTaxBreakdown: breakdown };
+    return { stateTax, stateTaxBreakdown: breakdown, taxableBase: taxable };
 }
 
 function calcProgressiveBrackets(grossAnnualIncome, stateEntry, federalTax, filingStatus = 'single') {
@@ -175,7 +175,7 @@ function calcProgressiveBrackets(grossAnnualIncome, stateEntry, federalTax, fili
         stateTax = round2(stateTax + surtaxAmount);
         breakdown += surtaxAmount > 0 ? ` + ${fmtMoney(surtaxAmount)} surtax on income over ${fmtMoney(surtax.threshold)}` : '';
     }
-    return { stateTax, stateTaxBreakdown: breakdown };
+    return { stateTax, stateTaxBreakdown: breakdown, taxableBase: taxable };
 }
 
 const FORMULA_DISPATCH = {
@@ -200,6 +200,30 @@ function calcExtraPayrollTax(grossAnnualIncome, rules) {
         amount = grossAnnualIncome * extra.rate;
     }
     return { amount: round2(amount), name: extra.name };
+}
+
+/**
+ * Local/municipal tax (NYC, Yonkers, Philadelphia, etc.) — see rules.local_tax.options.
+ * stateTaxableBase: the state's own taxable income base (post state standard deduction/exemption),
+ * as returned by FORMULA_DISPATCH — NYC brackets apply to this, NOT raw gross, since NYC tax
+ * piggybacks on the NY state taxable-income calculation rather than a separate deduction scheme.
+ * kind: 'none' -> 0; 'brackets' -> marginal bracket tax on stateTaxableBase (e.g. NYC);
+ * 'surcharge_pct_of_state_tax' -> stateTax * rate (e.g. Yonkers, a surcharge on state tax liability);
+ * 'flat_rate_on_gross' -> grossAnnualIncome * rate (e.g. Philadelphia Wage Tax, genuinely gross-based).
+ */
+function calcLocalTax(stateTaxableBase, grossAnnualIncome, stateTax, option) {
+    if (!option || option.kind === 'none') return { amount: 0, label: null };
+    let amount;
+    if (option.kind === 'brackets') {
+        amount = marginalBracketTax(stateTaxableBase, option.brackets);
+    } else if (option.kind === 'surcharge_pct_of_state_tax') {
+        amount = stateTax * option.rate;
+    } else if (option.kind === 'flat_rate_on_gross') {
+        amount = grossAnnualIncome * option.rate;
+    } else {
+        amount = 0;
+    }
+    return { amount: round2(amount), label: option.label };
 }
 
 /**
@@ -255,7 +279,7 @@ const PAY_FREQUENCY_DIVISORS = {
  * SDI/PFL (extra_payroll_tax) is computed on FICA-equivalent wages, consistent with Section 125's FICA
  * wage-base treatment — a documented assumption, not verified against every state's own SDI statute.
  */
-function calculatePaycheck(stateEntry, rules, grossAnnualIncome, payFrequency, filingStatus = 'single', preTaxDeductions = null) {
+function calculatePaycheck(stateEntry, rules, grossAnnualIncome, payFrequency, filingStatus = 'single', preTaxDeductions = null, localTaxOptionId = null) {
     grossAnnualIncome = Math.max(0, Number(grossAnnualIncome) || 0);
     let ficaBase = grossAnnualIncome;
     let taxableBase = grossAnnualIncome;
@@ -269,11 +293,18 @@ function calculatePaycheck(stateEntry, rules, grossAnnualIncome, payFrequency, f
     const federalTax = round2(calcFederalTax(taxableBase, filingStatus));
     const fica = calcFICA(ficaBase, filingStatus);
     const stateFn = FORMULA_DISPATCH[stateEntry.formula_model];
-    const { stateTax, stateTaxBreakdown } = stateFn(taxableBase, stateEntry, federalTax, filingStatus);
+    const stateResult = stateFn(taxableBase, stateEntry, federalTax, filingStatus);
+    const { stateTax, stateTaxBreakdown } = stateResult;
     const extraPayroll = calcExtraPayrollTax(ficaBase, rules);
 
+    let localTax = null;
+    if (rules && rules.local_tax && localTaxOptionId) {
+        const option = rules.local_tax.options.find(o => o.id === localTaxOptionId);
+        if (option) localTax = calcLocalTax(stateResult.taxableBase, grossAnnualIncome, stateTax, option);
+    }
+
     const preTaxTotal = preTax ? round2(preTax.retirement401kAnnual + preTax.section125Annual) : 0;
-    const totalWithheld = round2(federalTax + fica.total + stateTax + extraPayroll.amount);
+    const totalWithheld = round2(federalTax + fica.total + stateTax + extraPayroll.amount + (localTax ? localTax.amount : 0));
     const netAnnual = round2(grossAnnualIncome - totalWithheld - preTaxTotal);
     const divisor = PAY_FREQUENCY_DIVISORS[payFrequency] || 1;
     const netPerPeriod = round2(netAnnual / divisor);
@@ -285,6 +316,7 @@ function calculatePaycheck(stateEntry, rules, grossAnnualIncome, payFrequency, f
         stateTax,
         stateTaxBreakdown,
         extraPayrollTax: extraPayroll,
+        localTax,
         preTaxDeductions: preTax,
         totalWithheld,
         netAnnual,
@@ -305,7 +337,7 @@ function calculatePaycheck(stateEntry, rules, grossAnnualIncome, payFrequency, f
  * apply to bonus payments specifically — a known scope limitation, not modeled here.
  * No pre-tax deductions (401k/HSA) support in the bonus flow — out of scope for this calculator.
  */
-function calcBonusPaycheck(stateEntry, rules, regularAnnualGross, bonusAmount, payFrequency, filingStatus = 'single') {
+function calcBonusPaycheck(stateEntry, rules, regularAnnualGross, bonusAmount, payFrequency, filingStatus = 'single', localTaxOptionId = null) {
     regularAnnualGross = Math.max(0, Number(regularAnnualGross) || 0);
     bonusAmount = Math.max(0, Number(bonusAmount) || 0);
     const combinedGross = regularAnnualGross + bonusAmount;
@@ -321,15 +353,25 @@ function calcBonusPaycheck(stateEntry, rules, regularAnnualGross, bonusAmount, p
     const federalAtRegular = round2(calcFederalTax(regularAnnualGross, filingStatus));
     const federalAtCombined = round2(calcFederalTax(combinedGross, filingStatus));
     const stateFn = FORMULA_DISPATCH[stateEntry.formula_model];
-    const stateTaxAtRegular = stateFn(regularAnnualGross, stateEntry, federalAtRegular, filingStatus).stateTax;
-    const stateTaxAtCombined = stateFn(combinedGross, stateEntry, federalAtCombined, filingStatus).stateTax;
-    const bonusStateTax = round2(stateTaxAtCombined - stateTaxAtRegular);
+    const stateResultAtRegular = stateFn(regularAnnualGross, stateEntry, federalAtRegular, filingStatus);
+    const stateResultAtCombined = stateFn(combinedGross, stateEntry, federalAtCombined, filingStatus);
+    const bonusStateTax = round2(stateResultAtCombined.stateTax - stateResultAtRegular.stateTax);
 
     const extraAtRegular = calcExtraPayrollTax(regularAnnualGross, rules).amount;
     const extraAtCombined = calcExtraPayrollTax(combinedGross, rules).amount;
     const bonusExtraPayrollTax = round2(extraAtCombined - extraAtRegular);
 
-    const bonusNet = round2(bonusAmount - bonusFederalTax - bonusFica - bonusStateTax - bonusExtraPayrollTax);
+    let bonusLocalTax = null;
+    if (rules && rules.local_tax && localTaxOptionId) {
+        const option = rules.local_tax.options.find(o => o.id === localTaxOptionId);
+        if (option) {
+            const localAtRegular = calcLocalTax(stateResultAtRegular.taxableBase, regularAnnualGross, stateResultAtRegular.stateTax, option);
+            const localAtCombined = calcLocalTax(stateResultAtCombined.taxableBase, combinedGross, stateResultAtCombined.stateTax, option);
+            bonusLocalTax = { amount: round2(localAtCombined.amount - localAtRegular.amount), label: option.label };
+        }
+    }
+
+    const bonusNet = round2(bonusAmount - bonusFederalTax - bonusFica - bonusStateTax - bonusExtraPayrollTax - (bonusLocalTax ? bonusLocalTax.amount : 0));
 
     return {
         regularAnnualGross,
@@ -338,6 +380,7 @@ function calcBonusPaycheck(stateEntry, rules, regularAnnualGross, bonusAmount, p
         bonusFica,
         bonusStateTax,
         bonusExtraPayrollTax,
+        bonusLocalTax,
         bonusNet,
         payFrequency,
         filingStatus

@@ -11,7 +11,7 @@
 <meta property="og:description" content="Free Pennsylvania hourly paycheck calculator. Enter your hourly rate and hours worked to estimate take-home pay after federal tax, FICA, and Pennsylvania state tax — updated 2026-07-26.">
 <meta property="og:url" content="https://calcpaycheck.com/pennsylvania/hourly/">
 <meta property="og:type" content="website">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Pennsylvania Hourly Paycheck Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-26","version":"2026-PA-v1","author":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}},"publisher":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Pennsylvania's state income tax rate?","acceptedAnswer":{"@type":"Answer","text":"Pennsylvania charges a flat 3.07% Personal Income Tax on gross wages, a rate that has not changed since 2004. There is no standard deduction or personal exemption."}},{"@type":"Question","name":"Does this calculator include Philadelphia or other local wage taxes?","acceptedAnswer":{"@type":"Answer","text":"No. This estimate covers only the state's 3.07% flat tax. Pennsylvania municipalities and school districts levy an additional local Earned Income Tax (EIT), commonly 1%-3.9%+, with Philadelphia at the high end. Check your municipality's EIT rate separately."}},{"@type":"Question","name":"How much is take-home pay on $65,000 in Pennsylvania?","acceptedAnswer":{"@type":"Answer","text":"On a $65,000 gross salary, a single filer in Pennsylvania takes home roughly $52,444/year (about $4,370/month) after federal tax, FICA, and the state's 3.07% flat tax — before any local EIT."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://calcpaycheck.com/"},{"@type":"ListItem","position":2,"name":"Pennsylvania","item":"https://calcpaycheck.com/pennsylvania/"},{"@type":"ListItem","position":3,"name":"Hourly","item":"https://calcpaycheck.com/pennsylvania/hourly/"}]},{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Pennsylvania Hourly Paycheck Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-26","version":"2026-PA-v1","author":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}},"publisher":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Pennsylvania's state income tax rate?","acceptedAnswer":{"@type":"Answer","text":"Pennsylvania charges a flat 3.07% Personal Income Tax on gross wages, a rate that has not changed since 2004. There is no standard deduction or personal exemption."}},{"@type":"Question","name":"Does this calculator include Philadelphia or other local wage taxes?","acceptedAnswer":{"@type":"Answer","text":"Philadelphia is now supported — select Philadelphia resident or non-resident from the local tax dropdown (3.735% resident / 3.425% non-resident, effective 2026-07-01). Every other Pennsylvania municipality and school district still levies its own separate Earned Income Tax (EIT), commonly 1%-3.9%+, which this calculator does not compute."}},{"@type":"Question","name":"How much is take-home pay on $65,000 in Pennsylvania?","acceptedAnswer":{"@type":"Answer","text":"On a $65,000 gross salary, a single filer in Pennsylvania takes home roughly $52,412/year (about $4,370/month) after federal tax, FICA, and the state's 3.07% flat tax — before any local EIT."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://calcpaycheck.com/"},{"@type":"ListItem","position":2,"name":"Pennsylvania","item":"https://calcpaycheck.com/pennsylvania/"},{"@type":"ListItem","position":3,"name":"Hourly","item":"https://calcpaycheck.com/pennsylvania/hourly/"}]},{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}]}</script>
 </head>
 <body>
 <header>
@@ -66,6 +66,10 @@
           <input type="number" id="healthPremium" min="0" step="10" value="0">
         </label>
       </details>
+      
+      <label>Local Tax
+        <select id="localTaxOption"><option value="none" selected>Outside Philadelphia</option><option value="phila_resident">Philadelphia resident</option><option value="phila_nonresident">Philadelphia non-resident (works in Philly)</option></select>
+      </label>
       <button type="submit">Calculate Take-Home Pay →</button>
     </form>
     <div id="results-block" hidden>
@@ -77,11 +81,12 @@
         <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
         <div class="result-item"><span class="label">Pennsylvania State Tax</span><span class="value" id="result-state"></span></div>
         <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+        <div class="result-item" id="result-local-tax-row" hidden><span class="label" id="result-local-tax-label"></span><span class="value" id="result-local-tax"></span></div>
         <div class="result-item" id="result-pretax-row" hidden><span class="label">401(k) Contribution</span><span class="value" id="result-pretax-401k"></span></div>
         <div class="result-item" id="result-pretax-row-total" hidden><span class="label">Pre-Tax Deductions Total</span><span class="value" id="result-pretax-total"></span></div>
       </div>
       <div class="result-warning" id="result-pretax-limit-warning" hidden></div>
-      <div class="result-warning">⚠️ Excludes local/municipal tax — see methodology below.</div>
+      <p class="result-note">💡 Select your city above — NYC/Yonkers/Philadelphia local tax now supported.</p>
     </div>
     <p class="cross-link"><a href="/pennsylvania/">Paid a salary instead? Try our Pennsylvania paycheck calculator →</a></p>
     <p class="cross-link"><a href="/pennsylvania/bonus/">Calculating a bonus? Try our Pennsylvania bonus paycheck calculator →</a></p>
@@ -119,7 +124,7 @@
         <tr><th>Medicare</th><td>1.45% on all wages, +0.9% above $200,000 single/HoH, $250,000 MFJ</td></tr>
       </table>
       
-      <div class="local-tax-note">⚠️ This estimate excludes local Earned Income Tax (EIT), which Pennsylvania municipalities and school districts levy separately — commonly 1%-3.9%+, with Philadelphia at the high end. Check your municipality's EIT rate at the PA Department of Community & Economic Development's local tax finder.</div>
+      <div class="local-tax-note">⚠️ This estimate now computes the Philadelphia Wage Tax (3.735% resident / 3.425% non-resident, effective 2026-07-01) when selected above. Every other Pennsylvania municipality and school district's own Earned Income Tax (EIT) — commonly 1%-3.9%+ elsewhere in the state — is still not computed; check your municipality's EIT rate at the PA Department of Community & Economic Development's local tax finder.</div>
       <p class="formula-footnote">Guideline version 2026-PA-v1 · Last verified 2026-07-26</p>
     </section>
   
@@ -133,11 +138,11 @@
       </details>
       <details class="faq-item">
         <summary>Does this calculator include Philadelphia or other local wage taxes?</summary>
-        <p>No. This estimate covers only the state's 3.07% flat tax. Pennsylvania municipalities and school districts levy an additional local Earned Income Tax (EIT), commonly 1%-3.9%+, with Philadelphia at the high end. Check your municipality's EIT rate separately.</p>
+        <p>Philadelphia is now supported — select Philadelphia resident or non-resident from the local tax dropdown (3.735% resident / 3.425% non-resident, effective 2026-07-01). Every other Pennsylvania municipality and school district still levies its own separate Earned Income Tax (EIT), commonly 1%-3.9%+, which this calculator does not compute.</p>
       </details>
       <details class="faq-item">
         <summary>How much is take-home pay on $65,000 in Pennsylvania?</summary>
-        <p>On a $65,000 gross salary, a single filer in Pennsylvania takes home roughly $52,444/year (about $4,370/month) after federal tax, FICA, and the state's 3.07% flat tax — before any local EIT.</p>
+        <p>On a $65,000 gross salary, a single filer in Pennsylvania takes home roughly $52,412/year (about $4,370/month) after federal tax, FICA, and the state's 3.07% flat tax — before any local EIT.</p>
       </details>
     </section>
   
@@ -157,8 +162,8 @@
 
     <script src="/assets/calc-engine.js"></script>
     <script>
-    const STATE_ENTRY = {"name":"Pennsylvania","abbr":"PA","slug":"pennsylvania","formula_model":"flat_tax","effective_date":"2004-01-01","last_verified":"2026-07-26","guideline_version":"2026-PA-v1","source":{"agency_name":"Pennsylvania Department of Revenue","url":"https://www.revenue.pa.gov/","statute_ref":"72 P.S. § 7302 — flat 3.07% Personal Income Tax rate, unchanged since 2004"},"params":{"rate":0.0307,"standard_deduction":0,"personal_exemption":0},"worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).","Subtract Pennsylvania's flat 3.07% state tax — applied to gross wages, with no standard deduction or personal exemption.","What's left is your net take-home pay before any local Earned Income Tax (EIT)."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Pennsylvania resident.","calculation":["Federal tax: $5,620","FICA: $65,000 × 7.65% = $4,972.50","PA state tax: $65,000 × 3.07% = $1,995.50","Net annual pay: $65,000 - $5,620 - $4,972.50 - $1,995.50 = $52,412 (≈$4,367.67/month, before local EIT)"]}},"faq_extra":[{"q":"What is Pennsylvania's state income tax rate?","a":"Pennsylvania charges a flat 3.07% Personal Income Tax on gross wages, a rate that has not changed since 2004. There is no standard deduction or personal exemption."},{"q":"Does this calculator include Philadelphia or other local wage taxes?","a":"No. This estimate covers only the state's 3.07% flat tax. Pennsylvania municipalities and school districts levy an additional local Earned Income Tax (EIT), commonly 1%-3.9%+, with Philadelphia at the high end. Check your municipality's EIT rate separately."},{"q":"How much is take-home pay on $65,000 in Pennsylvania?","a":"On a $65,000 gross salary, a single filer in Pennsylvania takes home roughly $52,444/year (about $4,370/month) after federal tax, FICA, and the state's 3.07% flat tax — before any local EIT."}],"filing_status_backfilled":true};
-    const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":"This estimate excludes local Earned Income Tax (EIT), which Pennsylvania municipalities and school districts levy separately — commonly 1%-3.9%+, with Philadelphia at the high end. Check your municipality's EIT rate at the PA Department of Community & Economic Development's local tax finder.","deviation_note":"This is an estimate based on standard single-filer federal, FICA, and PA state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, local EIT, and other factors."};
+    const STATE_ENTRY = {"name":"Pennsylvania","abbr":"PA","slug":"pennsylvania","formula_model":"flat_tax","effective_date":"2004-01-01","last_verified":"2026-07-26","guideline_version":"2026-PA-v1","source":{"agency_name":"Pennsylvania Department of Revenue","url":"https://www.revenue.pa.gov/","statute_ref":"72 P.S. § 7302 — flat 3.07% Personal Income Tax rate, unchanged since 2004"},"params":{"rate":0.0307,"standard_deduction":0,"personal_exemption":0},"worksheet":{"steps":["Start with your gross annual salary.","Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).","Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).","Subtract Pennsylvania's flat 3.07% state tax — applied to gross wages, with no standard deduction or personal exemption.","What's left is your net take-home pay before any local Earned Income Tax (EIT)."],"example":{"scenario":"Example: $65,000/year gross salary, single filer, Pennsylvania resident.","calculation":["Federal tax: $5,620","FICA: $65,000 × 7.65% = $4,972.50","PA state tax: $65,000 × 3.07% = $1,995.50","Net annual pay: $65,000 - $5,620 - $4,972.50 - $1,995.50 = $52,412 (≈$4,367.67/month, before local EIT)"]}},"faq_extra":[{"q":"What is Pennsylvania's state income tax rate?","a":"Pennsylvania charges a flat 3.07% Personal Income Tax on gross wages, a rate that has not changed since 2004. There is no standard deduction or personal exemption."},{"q":"Does this calculator include Philadelphia or other local wage taxes?","a":"Philadelphia is now supported — select Philadelphia resident or non-resident from the local tax dropdown (3.735% resident / 3.425% non-resident, effective 2026-07-01). Every other Pennsylvania municipality and school district still levies its own separate Earned Income Tax (EIT), commonly 1%-3.9%+, which this calculator does not compute."},{"q":"How much is take-home pay on $65,000 in Pennsylvania?","a":"On a $65,000 gross salary, a single filer in Pennsylvania takes home roughly $52,412/year (about $4,370/month) after federal tax, FICA, and the state's 3.07% flat tax — before any local EIT."}],"filing_status_backfilled":true};
+    const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax":{"type":"selectable","source":{"agency_name":"City of Philadelphia Department of Revenue — Wage Tax / Earnings Tax rates","url":"https://www.phila.gov/services/payments-assistance-taxes/taxes/income-taxes/earnings-tax-employees/","note":"Rate effective 2026-07-01 (part of a 5-year phased reduction plan); cross-checked against a second secondary source 2026-07-29."},"options":[{"id":"none","label":"Outside Philadelphia","kind":"none"},{"id":"phila_resident","label":"Philadelphia resident","kind":"flat_rate_on_gross","rate":0.03735},{"id":"phila_nonresident","label":"Philadelphia non-resident (works in Philly)","kind":"flat_rate_on_gross","rate":0.03425}]},"local_tax_note":"This estimate now computes the Philadelphia Wage Tax (3.735% resident / 3.425% non-resident, effective 2026-07-01) when selected above. Every other Pennsylvania municipality and school district's own Earned Income Tax (EIT) — commonly 1%-3.9%+ elsewhere in the state — is still not computed; check your municipality's EIT rate at the PA Department of Community & Economic Development's local tax finder.","deviation_note":"This is an estimate based on standard single-filer federal, FICA, and PA state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, local EIT, and other factors."};
 
     function runCalculation(e) {
         e.preventDefault();
@@ -175,7 +180,9 @@
         const preTaxDeductions = hasPreTaxDeductions
             ? { retirement401k: { type: 'percent', value: retirement401kPct }, hsa: hsaAmount, healthPremium: healthPremium }
             : null;
-        const r = calculatePaycheck(STATE_ENTRY, RULES, gross, freq, filingStatus, preTaxDeductions);
+        const localTaxEl = document.getElementById('localTaxOption');
+        const localTaxOption = localTaxEl ? localTaxEl.value : null;
+        const r = calculatePaycheck(STATE_ENTRY, RULES, gross, freq, filingStatus, preTaxDeductions, localTaxOption);
         const freqLabel = { annual: 'Annual', monthly: 'Monthly', semimonthly: 'Semi-Monthly', biweekly: 'Bi-Weekly', weekly: 'Weekly' }[freq];
 
         const caveat = document.getElementById('result-filing-status-caveat');
@@ -198,6 +205,17 @@
             document.getElementById('result-extra').textContent = fmtMoney(r.extraPayrollTax.amount);
         } else {
             extraRow.hidden = true;
+        }
+
+        const localTaxRow = document.getElementById('result-local-tax-row');
+        if (localTaxRow) {
+            if (r.localTax && r.localTax.amount > 0) {
+                localTaxRow.hidden = false;
+                document.getElementById('result-local-tax-label').textContent = r.localTax.label;
+                document.getElementById('result-local-tax').textContent = fmtMoney(r.localTax.amount);
+            } else {
+                localTaxRow.hidden = true;
+            }
         }
 
         const preTaxRow = document.getElementById('result-pretax-row');

@@ -136,11 +136,11 @@
       },
       {
         "q": "Does this calculator include Philadelphia or other local wage taxes?",
-        "a": "No. This estimate covers only the state's 3.07% flat tax. Pennsylvania municipalities and school districts levy an additional local Earned Income Tax (EIT), commonly 1%-3.9%+, with Philadelphia at the high end. Check your municipality's EIT rate separately."
+        "a": "Philadelphia is now supported — select Philadelphia resident or non-resident from the local tax dropdown (3.735% resident / 3.425% non-resident, effective 2026-07-01). Every other Pennsylvania municipality and school district still levies its own separate Earned Income Tax (EIT), commonly 1%-3.9%+, which this calculator does not compute."
       },
       {
         "q": "How much is take-home pay on $65,000 in Pennsylvania?",
-        "a": "On a $65,000 gross salary, a single filer in Pennsylvania takes home roughly $52,444/year (about $4,370/month) after federal tax, FICA, and the state's 3.07% flat tax — before any local EIT."
+        "a": "On a $65,000 gross salary, a single filer in Pennsylvania takes home roughly $52,412/year (about $4,370/month) after federal tax, FICA, and the state's 3.07% flat tax — before any local EIT."
       }
     ],
     "filing_status_backfilled": true
@@ -577,7 +577,7 @@
       },
       {
         "q": "Does this calculator include New York City tax?",
-        "a": "No. This estimate covers only New York State tax. NYC residents owe an additional local income tax (3.078%-3.876%), and Yonkers residents owe a local surcharge — neither is computed here."
+        "a": "Yes — select New York City resident (or Yonkers resident) from the local tax dropdown to include it. NYC resident tax uses 4 brackets from 3.078% to 3.876%; Yonkers resident tax is a 16.75% surcharge on your net NY state tax. Yonkers non-resident earnings tax and the MCTMT (for self-employment income) are not modeled."
       },
       {
         "q": "What is New York Paid Family Leave (PFL)?",

@@ -1,6 +1,23 @@
 {
   "rounding": "nearest_cent",
   "extra_payroll_tax": { "name": "New York Paid Family Leave (PFL)", "rate": 0.00432, "wage_cap_annual_contribution": 411.91, "note": "Mandatory employee payroll deduction, 0.432% of wages in 2026, capped at $411.91/year. Funds paid family leave benefits — separate from income tax." },
-  "local_tax_note": "This estimate excludes New York City and Yonkers resident income tax. NYC residents owe an additional 3.078%-3.876% local tax, and Yonkers residents owe a local surcharge — neither is computed here, and for NYC residents this can be a larger addition than any other local tax layer in this ten-state set.",
+  "local_tax": {
+    "type": "selectable",
+    "source": {
+      "agency_name": "NYS Department of Taxation and Finance (IT-201 instructions) / City of Yonkers Code, Article IX",
+      "note": "NYC resident brackets cross-checked against two independent secondary sources 2026-07-29; Yonkers 16.75% resident surcharge (of net NY state tax) is a long-standing, unindexed statutory figure, cross-checked against a second secondary source the same day."
+    },
+    "options": [
+      { "id": "none", "label": "Outside NYC / Yonkers", "kind": "none" },
+      { "id": "nyc", "label": "New York City resident", "kind": "brackets", "brackets": [
+        { "upTo": 12000, "rate": 0.03078 },
+        { "upTo": 25000, "rate": 0.03762 },
+        { "upTo": 50000, "rate": 0.03819 },
+        { "upTo": null, "rate": 0.03876 }
+      ] },
+      { "id": "yonkers", "label": "Yonkers resident", "kind": "surcharge_pct_of_state_tax", "rate": 0.1675 }
+    ]
+  },
+  "local_tax_note": "This estimate now computes New York City resident tax (3.078%-3.876% brackets) and the Yonkers resident surcharge (16.75% of net NY state tax) when selected above. Not covered: Yonkers non-resident earnings tax (a separate levy on people who work, but don't live, in Yonkers) and the Metropolitan Commuter Transportation Mobility Tax (MCTMT) on self-employment income — neither is modeled here.",
   "deviation_note": "This is an estimate based on standard single-filer federal, FICA, NY state tax, and NY PFL calculations. Actual withholding may differ based on your W-4/IT-2104 elections, pre-tax deductions, NYC/Yonkers tax, and other factors."
 }

@@ -1,6 +1,19 @@
 {
   "rounding": "nearest_cent",
   "extra_payroll_tax": null,
-  "local_tax_note": "This estimate excludes local Earned Income Tax (EIT), which Pennsylvania municipalities and school districts levy separately — commonly 1%-3.9%+, with Philadelphia at the high end. Check your municipality's EIT rate at the PA Department of Community & Economic Development's local tax finder.",
+  "local_tax": {
+    "type": "selectable",
+    "source": {
+      "agency_name": "City of Philadelphia Department of Revenue — Wage Tax / Earnings Tax rates",
+      "url": "https://www.phila.gov/services/payments-assistance-taxes/taxes/income-taxes/earnings-tax-employees/",
+      "note": "Rate effective 2026-07-01 (part of a 5-year phased reduction plan); cross-checked against a second secondary source 2026-07-29."
+    },
+    "options": [
+      { "id": "none", "label": "Outside Philadelphia", "kind": "none" },
+      { "id": "phila_resident", "label": "Philadelphia resident", "kind": "flat_rate_on_gross", "rate": 0.03735 },
+      { "id": "phila_nonresident", "label": "Philadelphia non-resident (works in Philly)", "kind": "flat_rate_on_gross", "rate": 0.03425 }
+    ]
+  },
+  "local_tax_note": "This estimate now computes the Philadelphia Wage Tax (3.735% resident / 3.425% non-resident, effective 2026-07-01) when selected above. Every other Pennsylvania municipality and school district's own Earned Income Tax (EIT) — commonly 1%-3.9%+ elsewhere in the state — is still not computed; check your municipality's EIT rate at the PA Department of Community & Economic Development's local tax finder.",
   "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and PA state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, local EIT, and other factors."
 }

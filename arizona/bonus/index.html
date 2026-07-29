@@ -50,6 +50,7 @@
           <option value="hoh">Head of Household</option>
         </select>
       </label>
+      
       <button type="submit">Calculate Bonus Take-Home Pay →</button>
     </form>
     <div id="results-block" hidden>
@@ -60,6 +61,7 @@
         <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
         <div class="result-item"><span class="label">Arizona State Tax</span><span class="value" id="result-state"></span></div>
         <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+        <div class="result-item" id="result-local-tax-row" hidden><span class="label" id="result-local-tax-label"></span><span class="value" id="result-local-tax"></span></div>
       </div>
       
     </div>
@@ -142,7 +144,9 @@
         const bonusAmount = parseFloat(document.getElementById('bonusAmount').value) || 0;
         const freq = document.getElementById('payFrequency').value;
         const filingStatus = document.getElementById('filingStatus').value;
-        const r = calcBonusPaycheck(STATE_ENTRY, RULES, regularAnnualGross, bonusAmount, freq, filingStatus);
+        const localTaxEl = document.getElementById('localTaxOption');
+        const localTaxOption = localTaxEl ? localTaxEl.value : null;
+        const r = calcBonusPaycheck(STATE_ENTRY, RULES, regularAnnualGross, bonusAmount, freq, filingStatus, localTaxOption);
 
         document.getElementById('result-amount').textContent = fmtMoney(r.bonusNet) + ' net bonus';
         document.getElementById('result-bonus-gross').textContent = fmtMoney(r.bonusAmount);
@@ -156,6 +160,17 @@
             document.getElementById('result-extra').textContent = fmtMoney(r.bonusExtraPayrollTax);
         } else {
             extraRow.hidden = true;
+        }
+
+        const localTaxRow = document.getElementById('result-local-tax-row');
+        if (localTaxRow) {
+            if (r.bonusLocalTax && r.bonusLocalTax.amount > 0) {
+                localTaxRow.hidden = false;
+                document.getElementById('result-local-tax-label').textContent = r.bonusLocalTax.label;
+                document.getElementById('result-local-tax').textContent = fmtMoney(r.bonusLocalTax.amount);
+            } else {
+                localTaxRow.hidden = true;
+            }
         }
 
         document.getElementById('results-block').hidden = false;
