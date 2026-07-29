@@ -671,6 +671,143 @@ function renderChangelogPage() {
 `;
 }
 
+function renderComparatorPage() {
+    const allRules = {};
+    for (const state of Object.values(states)) {
+        allRules[state.abbr] = loadRules(state.abbr.toLowerCase());
+    }
+    const stateOptions = Object.values(states)
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(s => `<option value="${s.abbr}"${s.abbr === 'TX' ? ' selected' : ''}>${s.name}</option>`)
+        .join('');
+    const stateOptionsB = Object.values(states)
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(s => `<option value="${s.abbr}"${s.abbr === 'CA' ? ' selected' : ''}>${s.name}</option>`)
+        .join('');
+
+    const title = 'Compare Take-Home Pay by State — USA Paycheck Calculator';
+    const description = 'Compare take-home pay between two US states at the same gross salary — see the net-pay difference after federal tax, FICA, and each state\'s income tax.';
+
+    const jsonLd = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'WebApplication',
+                name: 'Compare Take-Home Pay by State',
+                applicationCategory: 'FinanceApplication',
+                operatingSystem: 'Any',
+                offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+                author: GESMINE_ORG,
+                publisher: GESMINE_ORG
+            },
+            GESMINE_ORG
+        ]
+    });
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${title}</title>
+<meta name="description" content="${description}">
+<link rel="canonical" href="${SITE_URL}/compare/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${description}">
+<meta property="og:url" content="${SITE_URL}/compare/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">${jsonLd}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a></p>
+  <h1>Compare Take-Home Pay by State</h1>
+  <p class="badge">Same salary, two states — see the net-pay difference after federal tax, FICA, and state income tax</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Excludes local/municipal tax (e.g. NYC, Yonkers, Philadelphia) — for a locality-specific estimate, use that state's dedicated calculator page. State-specific mandatory payroll deductions like SDI/PFL are included in each state's net figure where applicable.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      <label>Gross Annual Salary ($)
+        <input type="number" id="grossIncome" min="0" step="100" value="65000" required>
+      </label>
+      <label>Pay Frequency
+        <select id="payFrequency">
+          <option value="annual">Annual</option>
+          <option value="monthly">Monthly</option>
+          <option value="semimonthly">Semi-Monthly (24/yr)</option>
+          <option value="biweekly" selected>Bi-Weekly (26/yr)</option>
+          <option value="weekly">Weekly</option>
+        </select>
+      </label>
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <label>State A
+        <select id="stateA">${stateOptions}</select>
+      </label>
+      <label>State B
+        <select id="stateB">${stateOptionsB}</select>
+      </label>
+      <button type="submit">Compare Take-Home Pay →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-grid">
+        <div class="result-item"><span class="label" id="result-a-label">State A</span><span class="value" id="result-a-net"></span></div>
+        <div class="result-item"><span class="label" id="result-b-label">State B</span><span class="value" id="result-b-net"></span></div>
+        <div class="result-item"><span class="label">Difference</span><span class="value" id="result-diff"></span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+<script src="/assets/calc-engine.js"></script>
+<script>
+const ALL_STATES = ${JSON.stringify(states)};
+const ALL_RULES = ${JSON.stringify(allRules)};
+
+function runCalculation(e) {
+    e.preventDefault();
+    const gross = parseFloat(document.getElementById('grossIncome').value) || 0;
+    const freq = document.getElementById('payFrequency').value;
+    const filingStatus = document.getElementById('filingStatus').value;
+    const abbrA = document.getElementById('stateA').value;
+    const abbrB = document.getElementById('stateB').value;
+    const stateA = ALL_STATES[abbrA.toLowerCase()];
+    const stateB = ALL_STATES[abbrB.toLowerCase()];
+    const rA = calculatePaycheck(stateA, ALL_RULES[abbrA], gross, freq, filingStatus);
+    const rB = calculatePaycheck(stateB, ALL_RULES[abbrB], gross, freq, filingStatus);
+
+    document.getElementById('result-a-label').textContent = stateA.name;
+    document.getElementById('result-b-label').textContent = stateB.name;
+    document.getElementById('result-a-net').textContent = fmtMoney(rA.netAnnual) + '/yr';
+    document.getElementById('result-b-net').textContent = fmtMoney(rB.netAnnual) + '/yr';
+    const diff = rA.netAnnual - rB.netAnnual;
+    document.getElementById('result-diff').textContent = (diff >= 0 ? '+' : '') + fmtMoney(diff) + '/yr ' + (diff >= 0 ? '(' + stateA.name + ' ahead)' : '(' + stateB.name + ' ahead)');
+
+    document.getElementById('results-block').hidden = false;
+}
+document.getElementById('calc-form').addEventListener('submit', runCalculation);
+document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+</script>
+</body>
+</html>
+`;
+}
+
 // ---- Build ----
 let built = 0;
 for (const state of Object.values(states)) {
@@ -696,5 +833,10 @@ const changelogDir = path.join(__dirname, 'changelog');
 fs.mkdirSync(changelogDir, { recursive: true });
 fs.writeFileSync(path.join(changelogDir, 'index.html'), renderChangelogPage());
 console.log('Generated: changelog/');
+
+const compareDir = path.join(__dirname, 'compare');
+fs.mkdirSync(compareDir, { recursive: true });
+fs.writeFileSync(path.join(compareDir, 'index.html'), renderComparatorPage());
+console.log('Generated: compare/');
 
 console.log(`\nDone. ${built} state pages built.`);

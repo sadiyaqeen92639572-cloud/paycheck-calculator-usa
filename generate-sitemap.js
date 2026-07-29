@@ -12,6 +12,7 @@ urls.push({ loc: `${DOMAIN}/`, lastmod: today, changefreq: 'monthly', priority: 
 urls.push({ loc: `${DOMAIN}/about/`, lastmod: today, changefreq: 'yearly', priority: '0.3' });
 urls.push({ loc: `${DOMAIN}/privacy/`, lastmod: today, changefreq: 'yearly', priority: '0.3' });
 urls.push({ loc: `${DOMAIN}/changelog/`, lastmod: today, changefreq: 'weekly', priority: '0.4' });
+urls.push({ loc: `${DOMAIN}/compare/`, lastmod: today, changefreq: 'monthly', priority: '0.7' });
 
 Object.values(states).forEach(state => {
   if (!fs.existsSync(path.join(__dirname, state.slug, 'index.html'))) return;
