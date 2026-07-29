@@ -1,6 +1,24 @@
 {
   "rounding": "nearest_cent",
   "extra_payroll_tax": null,
-  "local_tax_note": "Many Kentucky cities and counties levy a local occupational/payroll tax (e.g. Louisville ~2.2%), not computed here.",
+  "local_tax": {
+    "type": "selectable",
+    "coverage": "partial",
+    "source": {
+      "agency_name": "Kentucky occupational license tax (county + city ordinances; KY Secretary of State occupational tax database)",
+      "note": "Rates cross-checked against two independent secondary sources 2026-07-29 (ustaxdisputes.com, countrytaxcalc.com). Bowling Green was excluded — sources disagreed (1.85% vs 2.00%) rather than guessed between. Boone, Kenton, and Campbell Counties were excluded for lacking a second independent source in this pass. Kentucky is unusual in that county AND city occupational taxes can stack (e.g. a Louisville Metro resident working in a specific suburb can owe an additional city-level tax on top of the Metro rate) — this selector offers one combined rate per major jurisdiction rather than modeling every stacking combination; actual liability may be higher in a stacking situation. 87 of Kentucky's 120 counties levy this tax; only 4 major jurisdictions are covered below."
+    },
+    "options": [
+      { "id": "none", "label": "Outside these jurisdictions", "kind": "none" },
+      { "id": "louisville_resident", "label": "Louisville / Jefferson County resident", "kind": "flat_rate_on_gross", "rate": 0.022 },
+      { "id": "louisville_nonresident", "label": "Louisville / Jefferson County non-resident (works there)", "kind": "flat_rate_on_gross", "rate": 0.0145 },
+      { "id": "lexington", "label": "Lexington-Fayette", "kind": "flat_rate_on_gross", "rate": 0.0225 },
+      { "id": "covington", "label": "Covington", "kind": "flat_rate_on_gross", "rate": 0.0245 },
+      { "id": "florence", "label": "Florence", "kind": "flat_rate_on_gross", "rate": 0.02 },
+      { "id": "owensboro", "label": "Owensboro", "kind": "flat_rate_on_gross", "rate": 0.0178 },
+      { "id": "other", "label": "Other Kentucky county/city — not covered", "kind": "none" }
+    ]
+  },
+  "local_tax_note": "Many Kentucky cities and counties levy a local occupational/payroll tax. Louisville/Jefferson County, Lexington-Fayette, Covington, Florence, and Owensboro are now computed via the selector above (one combined rate per jurisdiction — Kentucky's county+city stacking is not fully modeled); 87 of Kentucky's 120 counties levy this tax in total, so most jurisdictions are still not covered.",
   "deviation_note": "This is an estimate based on standard single-filer federal, FICA, and KY state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."
 }

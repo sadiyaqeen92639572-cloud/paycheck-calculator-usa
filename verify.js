@@ -13,6 +13,8 @@ const moRules = require('./data/rules/mo.json');
 const alRules = require('./data/rules/al.json');
 const mdRules = require('./data/rules/md.json');
 const inRules = require('./data/rules/in.json');
+const ohRules = require('./data/rules/oh.json');
+const kyRules = require('./data/rules/ky.json');
 
 let failures = 0;
 function assertEqual(actual, expected, label) {
@@ -128,6 +130,21 @@ const inMarion = engine.calculatePaycheck(states.in, inRules, 65000, 'biweekly',
 assertTrue(inMarion.localTax.amount > 0, 'Marion County selection > 0 (IN)');
 const inOther = engine.calculatePaycheck(states.in, inRules, 65000, 'biweekly', 'single', null, 'other');
 assertEqual(inOther.localTax.amount, 0, 'IN "Other county" option computes 0, same as none');
+
+// --- Local tax expansion Phase 7: Ohio + Kentucky (flat_rate_on_gross) ---
+const ohColumbus = engine.calculatePaycheck(states.oh, ohRules, 65000, 'biweekly', 'single', null, 'columbus');
+assertEqual(ohColumbus.localTax.amount, Math.round(65000 * 0.025 * 100) / 100, 'Columbus municipal tax = 2.5% of gross');
+const ohOther = engine.calculatePaycheck(states.oh, ohRules, 65000, 'biweekly', 'single', null, 'other');
+assertEqual(ohOther.localTax.amount, 0, 'OH "Other municipality" option computes 0, same as none');
+
+const kyLouisvilleResident = engine.calculatePaycheck(states.ky, kyRules, 65000, 'biweekly', 'single', null, 'louisville_resident');
+const kyLouisvilleNonresident = engine.calculatePaycheck(states.ky, kyRules, 65000, 'biweekly', 'single', null, 'louisville_nonresident');
+assertTrue(kyLouisvilleResident.localTax.amount > kyLouisvilleNonresident.localTax.amount, 'Louisville resident rate (2.2%) > non-resident rate (1.45%) at same gross');
+assertEqual(kyLouisvilleResident.localTax.amount, Math.round(65000 * 0.022 * 100) / 100, 'Louisville resident occupational tax = 2.2% of gross');
+
+// Regression: unrelated already-shipped states unaffected by this phase's data-only changes.
+assertEqual(txBaseline.federalTax, engine.calculatePaycheck(states.tx, txRules, 65000, 'biweekly').federalTax, 'TX baseline unaffected by Phase 7 local-tax data additions');
+assertEqual(caBaseline.stateTax, engine.calculatePaycheck(states.ca, caRules, 65000, 'biweekly').stateTax, 'CA baseline unaffected by Phase 7 local-tax data additions');
 
 if (failures > 0) {
     console.error(`\n${failures} assertion(s) failed.`);
