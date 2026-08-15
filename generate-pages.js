@@ -659,7 +659,7 @@ ${calculatorScript(state, rules, 'hourly')}
 function renderBonusStatePage(state) {
     assertComplete(state);
     const rules = loadRules(state.abbr.toLowerCase());
-    const title = `${state.name} Bonus Tax Calculator — Take-Home Pay ${YEAR}`;
+    const title = `${state.name} Bonus Calculator — Bonus Tax Rate & Take-Home Pay ${YEAR}`;
     const description = `Free ${state.name} bonus paycheck calculator. Estimate take-home pay on a bonus using the flat 22% federal supplemental withholding method, plus FICA and ${state.name} state tax — updated ${state.last_verified}.`;
 
     return `<!DOCTYPE html>
