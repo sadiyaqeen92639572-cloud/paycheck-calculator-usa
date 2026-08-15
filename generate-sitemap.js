@@ -38,7 +38,7 @@ Object.values(states).forEach(state => {
       loc: `${DOMAIN}/${state.slug}/bonus/`,
       lastmod: state.last_verified,
       changefreq: 'monthly',
-      priority: '0.7'
+      priority: '0.85'
     });
   }
 
