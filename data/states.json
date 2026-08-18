@@ -364,46 +364,46 @@
     "slug": "california",
     "formula_model": "progressive_brackets",
     "effective_date": "2026-01-01",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-CA-v1",
+    "last_verified": "2026-08-18",
+    "guideline_version": "2026-CA-v2",
     "source": {
       "agency_name": "California Franchise Tax Board",
-      "url": "https://www.ftb.ca.gov/",
-      "statute_ref": "Cal. Rev. & Tax. Code § 17041 — 9-bracket schedule (1%-12.3%) plus 1% Mental Health Services Tax on taxable income over $1,000,000 (top effective rate 13.3%)"
+      "url": "https://www.ftb.ca.gov/forms/2025/2025-540-tax-rate-schedules.pdf",
+      "statute_ref": "Cal. Rev. & Tax. Code § 17041 — 9-bracket schedule (1%-12.3%) plus 1% Mental Health Services Tax on taxable income over $1,000,000 (top effective rate 13.3%). Thresholds are the 2025 FTB Schedule X figures (2026 schedule not yet published at time of verification)."
     },
     "params": {
       "standard_deduction": 5706,
       "brackets": [
         {
-          "upTo": 10756,
+          "upTo": 11079,
           "rate": 0.01
         },
         {
-          "upTo": 25499,
+          "upTo": 26264,
           "rate": 0.02
         },
         {
-          "upTo": 40245,
+          "upTo": 41452,
           "rate": 0.04
         },
         {
-          "upTo": 55866,
+          "upTo": 57542,
           "rate": 0.06
         },
         {
-          "upTo": 70612,
+          "upTo": 72724,
           "rate": 0.08
         },
         {
-          "upTo": 360659,
+          "upTo": 371479,
           "rate": 0.093
         },
         {
-          "upTo": 432787,
+          "upTo": 445771,
           "rate": 0.103
         },
         {
-          "upTo": 721314,
+          "upTo": 742953,
           "rate": 0.113
         },
         {
@@ -474,16 +474,16 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $65,000 × 7.65% = $4,972.50",
-          "CA taxable income: $65,000 - $5,706 = $59,294 → marginal CA tax = $2,203.76",
+          "CA taxable income: $65,000 - $5,706 = $59,294 → marginal CA tax = $2,127.57",
           "CA SDI: $65,000 × 1.3% = $845",
-          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,203.76 - $845 = $51,358.74 (≈$4,279.90/month)"
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,127.57 - $845 = $51,434.93 (≈$4,286.24/month)"
         ]
       }
     },
     "faq_extra": [
       {
         "q": "What are California's income tax brackets for 2026?",
-        "a": "California uses 9 marginal brackets from 1% (income up to $10,756) to 12.3% (over $721,314 for single filers), plus a 1% Mental Health Services Tax on taxable income over $1,000,000, for a 13.3% top effective rate."
+        "a": "California uses 9 marginal brackets from 1% (income up to $11,079) to 12.3% (over $742,953 for single filers), plus a 1% Mental Health Services Tax on taxable income over $1,000,000, for a 13.3% top effective rate. These are the 2025 FTB Schedule X thresholds, the most recent published at time of writing — 2026 thresholds will be slightly higher once the FTB publishes its annual inflation adjustment."
       },
       {
         "q": "What is California SDI and is it a tax?",
@@ -491,7 +491,7 @@
       },
       {
         "q": "How much is take-home pay on $65,000 in California?",
-        "a": "On a $65,000 gross salary, a single filer in California takes home roughly $50,942/year (about $4,245/month) after federal tax, FICA, state income tax, and SDI."
+        "a": "On a $65,000 gross salary, a single filer in California takes home roughly $51,435/year (about $4,286/month) after federal tax, FICA, state income tax, and SDI."
       }
     ],
     "filing_status_backfilled": false
@@ -502,38 +502,38 @@
     "slug": "new-york",
     "formula_model": "progressive_brackets",
     "effective_date": "2026-01-01",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-NY-v1",
+    "last_verified": "2026-08-18",
+    "guideline_version": "2026-NY-v2",
     "source": {
       "agency_name": "New York State Department of Taxation and Finance",
       "url": "https://www.tax.ny.gov/",
-      "statute_ref": "N.Y. Tax Law § 601 — FY2026 budget cut the bottom five bracket rates 0.1 point starting tax year 2026"
+      "statute_ref": "N.Y. Tax Law § 601 — FY2026 budget cut the bottom five bracket rates 0.1 point starting tax year 2026 (4%→3.9%, 4.5%→4.4%, 5.25%→5.15%, 5.5%→5.4%, 6%→5.9%). Thresholds below are the single-filer schedule — previously this file incorrectly used married-filing-jointly thresholds."
     },
     "params": {
       "standard_deduction": 8000,
       "brackets": [
         {
-          "upTo": 17150,
-          "rate": 0.04
+          "upTo": 8500,
+          "rate": 0.039
         },
         {
-          "upTo": 23600,
-          "rate": 0.045
+          "upTo": 11700,
+          "rate": 0.044
         },
         {
-          "upTo": 27900,
-          "rate": 0.0525
+          "upTo": 13900,
+          "rate": 0.0515
         },
         {
-          "upTo": 161550,
-          "rate": 0.0585
+          "upTo": 80650,
+          "rate": 0.054
         },
         {
-          "upTo": 323200,
-          "rate": 0.0625
+          "upTo": 215400,
+          "rate": 0.059
         },
         {
-          "upTo": 2155350,
+          "upTo": 1077550,
           "rate": 0.0685
         },
         {
@@ -555,7 +555,7 @@
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).",
-        "Subtract New York's $8,000 standard deduction from gross wages, then apply the 9-bracket state schedule (4%-10.9%) marginally.",
+        "Subtract New York's $8,000 standard deduction from gross wages, then apply the 9-bracket state schedule (3.9%-10.9%) marginally.",
         "Subtract New York Paid Family Leave (0.432% of wages, capped at $411.91/year in 2026) — a mandatory payroll deduction, not income tax.",
         "What's left is your net take-home pay before any New York City or Yonkers resident tax."
       ],
@@ -564,16 +564,16 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $65,000 × 7.65% = $4,972.50",
-          "NY taxable income: $65,000 - $8,000 = $57,000 → marginal NY tax ≈ $2,904.35",
+          "NY taxable income: $65,000 - $8,000 = $57,000 → marginal NY tax = $2,913.00",
           "NY PFL: $65,000 × 0.432% = $280.80",
-          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,904.35 - $280.80 = $51,222.35 (≈$4,268.53/month, before NYC/Yonkers tax)"
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,913.00 - $280.80 = $51,213.70 (≈$4,267.81/month, before NYC/Yonkers tax)"
         ]
       }
     },
     "faq_extra": [
       {
         "q": "What are New York's state income tax brackets for 2026?",
-        "a": "New York has 9 brackets for single filers, from 4% on income up to $17,150 to 10.9% above $25,000,000. The FY2026 budget cut the bottom five bracket rates by 0.1 point."
+        "a": "New York has 9 brackets for single filers, from 3.9% on income up to $8,500 to 10.9% above $25,000,000. The FY2026 budget cut the bottom five bracket rates by 0.1 point (4%→3.9%, 4.5%→4.4%, 5.25%→5.15%, 5.5%→5.4%, 6%→5.9%)."
       },
       {
         "q": "Does this calculator include New York City tax?",
@@ -2110,26 +2110,26 @@
     "params": {
       "brackets": [
         {
-          "upTo": 20500,
+          "upTo": 95000,
           "rate": 0.047
         },
         {
           "upTo": null,
-          "rate": 0.059
+          "rate": 0.0565
         }
       ],
       "standard_deduction": 5660
     },
     "abbr": "MT",
     "slug": "montana",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-MT-v1",
+    "last_verified": "2026-08-18",
+    "guideline_version": "2026-MT-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
-        "Subtract Montana's $5,660 standard deduction from gross wages, then apply the 2-bracket state schedule (4.70%-5.90%) marginally.",
+        "Subtract Montana's $5,660 standard deduction from gross wages, then apply the 2-bracket state schedule (4.70%-5.65%) marginally.",
         "What's left is your net take-home pay."
       ],
       "example": {
@@ -2137,19 +2137,19 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Montana state tax: Marginal tax on $59,340 taxable income (after $5,660 deduction) = $3,255.06",
-          "Net annual pay: $65,000 - $13,847.56 = $51,152.44 (≈$4,262.7/month)"
+          "Montana state tax: Marginal tax on $59,340 taxable income (after $5,660 deduction), all within the 4.70% bracket (under the $95,000 break) = $2,788.98",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,788.98 = $51,618.52 (≈$4,301.54/month)"
         ]
       }
     },
     "faq_extra": [
       {
         "q": "What are Montana's income tax brackets for 2026?",
-        "a": "Montana uses 2 marginal brackets ranging from 4.70% to 5.90%. Standard deduction: $5,660 for single filers."
+        "a": "Montana uses 2 marginal brackets under HB 337: 4.70% up to $95,000 of taxable income, and 5.65% above that (single filers). Standard deduction: $5,660."
       },
       {
         "q": "How much is take-home pay on $65,000 in Montana?",
-        "a": "On a $65,000 gross salary, a single filer in Montana takes home roughly $51,152.44/year (about $4,262.7/month) after federal tax, FICA, and state tax."
+        "a": "On a $65,000 gross salary, a single filer in Montana takes home roughly $51,618.52/year (about $4,301.54/month) after federal tax, FICA, and state tax."
       },
       {
         "q": "What deductions does Montana apply before taxing my income?",
