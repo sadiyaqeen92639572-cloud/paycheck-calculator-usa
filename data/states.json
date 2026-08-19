@@ -1841,7 +1841,7 @@
       "rate": 0.05,
       "personal_exemption": 4400,
       "surtax": {
-        "threshold": 1083150,
+        "threshold": 1107750,
         "rate": 0.04
       }
     },
@@ -1854,7 +1854,7 @@
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
-        "Subtract Massachusetts's $4,400 personal exemption from gross wages, then apply the flat 5% state rate. An additional 4% surtax applies to income over $1,083,150.",
+        "Subtract Massachusetts's $4,400 personal exemption from gross wages, then apply the flat 5% state rate. An additional 4% surtax applies to income over $1,107,750.",
         "What's left is your net take-home pay."
       ],
       "example": {
@@ -1878,7 +1878,7 @@
       },
       {
         "q": "What deductions does Massachusetts apply before taxing my income?",
-        "a": "Massachusetts applies a $4,400 personal exemption, plus an additional 4% surtax on income over $1,083,150, before the flat 5% rate. See the \"How Massachusetts Paycheck Tax Is Calculated\" section above for the exact formula."
+        "a": "Massachusetts applies a $4,400 personal exemption, plus an additional 4% surtax on income over $1,107,750, before the flat 5% rate. See the \"How Massachusetts Paycheck Tax Is Calculated\" section above for the exact formula."
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
