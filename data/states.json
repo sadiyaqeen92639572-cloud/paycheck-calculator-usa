@@ -2431,7 +2431,7 @@
     "source": {
       "agency_name": "New Mexico Taxation and Revenue Department",
       "url": "https://www.tax.newmexico.gov/",
-      "statute_ref": "N.M. Stat. \u00a7 7-2-7, as amended by HB 252 (2024)"
+      "statute_ref": "N.M. Stat. \u00a7 7-2-7 \u2014 HB 252 added a 6th bracket (4.9%) between $16,000/$66,500(approx) and $210,000, effective 2025 continuing into 2026; verify exact $66,500 breakpoint against NM Taxation & Revenue Dept if precision matters"
     },
     "params": {
       "brackets": [
@@ -2448,8 +2448,12 @@
           "rate": 0.043
         },
         {
-          "upTo": 210000,
+          "upTo": 66500,
           "rate": 0.047
+        },
+        {
+          "upTo": 210000,
+          "rate": 0.049
         },
         {
           "upTo": null,
@@ -2460,8 +2464,8 @@
     },
     "abbr": "NM",
     "slug": "new-mexico",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-NM-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-NM-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -2507,12 +2511,16 @@
     "source": {
       "agency_name": "North Dakota Office of State Tax Commissioner",
       "url": "https://www.tax.nd.gov/",
-      "statute_ref": "N.D. Cent. Code \u00a7 57-38-30.3"
+      "statute_ref": "N.D. Cent. Code \u00a7 57-38-30 \u2014 3 brackets: 0% to $48,475, 1.95% to $244,825, 2.50% above (Tax Foundation 2026 table)"
     },
     "params": {
       "brackets": [
         {
-          "upTo": 44725,
+          "upTo": 48475,
+          "rate": 0.0
+        },
+        {
+          "upTo": 244825,
           "rate": 0.0195
         },
         {
@@ -2524,8 +2532,8 @@
     },
     "abbr": "ND",
     "slug": "north-dakota",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-ND-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-ND-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -2539,8 +2547,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "North Dakota state tax: Marginal tax on $48,900 taxable income (after $16,100 deduction) = $976.51",
-          "Net annual pay: $65,000 - $11,569.01 = $53,430.99 (\u2248$4,452.58/month)"
+          "North Dakota state tax: Marginal tax on $48,900 taxable income (after $16,100 deduction) = $8.29",
+          "Net annual pay: $65,000 - $10,600.79 = $54,399.21 (\u2248$4,533.27/month)"
         ]
       }
     },
@@ -2571,41 +2579,33 @@
     "source": {
       "agency_name": "Oklahoma Tax Commission",
       "url": "https://oklahoma.gov/tax.html",
-      "statute_ref": "Okla. Stat. tit. 68 \u00a7 2355"
+      "statute_ref": "68 O.S. \u00a7 2355 \u2014 HB 2764 consolidated to 3 brackets effective 2026-01-01: 0% to $3,750, 2.50%, 3.50%, 4.50% top rate"
     },
     "params": {
       "brackets": [
         {
-          "upTo": 1000,
-          "rate": 0.0025
-        },
-        {
-          "upTo": 2500,
-          "rate": 0.0075
-        },
-        {
           "upTo": 3750,
-          "rate": 0.0175
+          "rate": 0.0
         },
         {
           "upTo": 4900,
-          "rate": 0.0275
+          "rate": 0.025
         },
         {
           "upTo": 7200,
-          "rate": 0.0375
+          "rate": 0.035
         },
         {
           "upTo": null,
-          "rate": 0.0475
+          "rate": 0.045
         }
       ],
       "standard_deduction": 6350
     },
     "abbr": "OK",
     "slug": "oklahoma",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-OK-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-OK-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -2619,8 +2619,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Oklahoma state tax: Marginal tax on $58,650 taxable income (after $6,350 deduction) = $2,597.38",
-          "Net annual pay: $65,000 - $13,189.88 = $51,810.12 (\u2248$4,317.51/month)"
+          "Oklahoma state tax: Marginal tax on $58,650 taxable income (after $6,350 deduction) = $2,424.50",
+          "Net annual pay: $65,000 - $13,017 = $51,983 (\u2248$4,331.92/month)"
         ]
       }
     },
@@ -2723,16 +2723,16 @@
     "source": {
       "agency_name": "Rhode Island Division of Taxation",
       "url": "https://tax.ri.gov/",
-      "statute_ref": "R.I. Gen. Laws \u00a7 44-30-2.6"
+      "statute_ref": "R.I. Gen. Laws \u00a7 44-30-2.6 \u2014 2026 inflation-adjusted thresholds per RI Division of Taxation ADV 2025-22: $82,050/$186,450"
     },
     "params": {
       "brackets": [
         {
-          "upTo": 73450,
+          "upTo": 82050,
           "rate": 0.0375
         },
         {
-          "upTo": 166950,
+          "upTo": 186450,
           "rate": 0.0475
         },
         {
@@ -2745,8 +2745,8 @@
     },
     "abbr": "RI",
     "slug": "rhode-island",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-RI-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-RI-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -3209,25 +3209,25 @@
     "source": {
       "agency_name": "West Virginia State Tax Department",
       "url": "https://tax.wv.gov/",
-      "statute_ref": "W. Va. Code \u00a7 11-21-4e \u2014 rates cut ~5% for 2026"
+      "statute_ref": "W. Va. Code \u00a7 11-21-4e \u2014 2026 rates 2.11/2.81/3.16/4.22/4.58% (2026 5% cut), thresholds per WV Tax Division IT-100.2A annualized withholding table"
     },
     "params": {
       "brackets": [
         {
-          "upTo": 10000,
+          "upTo": 7488,
           "rate": 0.0211
         },
         {
-          "upTo": 25000,
-          "rate": 0.0246
+          "upTo": 18772,
+          "rate": 0.0281
         },
         {
-          "upTo": 40000,
-          "rate": 0.0272
+          "upTo": 30004,
+          "rate": 0.0316
         },
         {
-          "upTo": 60000,
-          "rate": 0.0326
+          "upTo": 45032,
+          "rate": 0.0422
         },
         {
           "upTo": null,
@@ -3238,8 +3238,8 @@
     },
     "abbr": "WV",
     "slug": "west-virginia",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-WV-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-WV-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -3253,8 +3253,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "West Virginia state tax: Marginal tax on $65,000 taxable income (after $0 deduction) = $1,869",
-          "Net annual pay: $65,000 - $12,461.5 = $52,538.5 (\u2248$4,378.21/month)"
+          "West Virginia state tax: Marginal tax on $65,000 taxable income (after $0 deduction) = $2,378.72",
+          "Net annual pay: $65,000 - $12,971.22 = $52,028.78 (\u2248$4,335.73/month)"
         ]
       }
     },
@@ -3285,20 +3285,20 @@
     "source": {
       "agency_name": "Wisconsin Department of Revenue",
       "url": "https://www.revenue.wi.gov/",
-      "statute_ref": "Wis. Stat. \u00a7 71.06"
+      "statute_ref": "Wis. Stat. \u00a7 71.06 \u2014 per revenue.wi.gov FAQ: 3.50/4.40/5.30/7.65% at $14,680/$50,480/$323,290. Note: WI's real standard deduction is income-phased-out (not a flat figure); this calculator uses a flat approximation ($12,760) rather than the phase-out schedule \u2014 treat results as approximate for incomes where the phase-out matters most (~$14k-$120k)."
     },
     "params": {
       "brackets": [
         {
-          "upTo": 14320,
-          "rate": 0.0354
+          "upTo": 14680,
+          "rate": 0.035
         },
         {
-          "upTo": 28640,
-          "rate": 0.0465
+          "upTo": 50480,
+          "rate": 0.044
         },
         {
-          "upTo": 315310,
+          "upTo": 323290,
           "rate": 0.053
         },
         {
@@ -3310,8 +3310,8 @@
     },
     "abbr": "WI",
     "slug": "wisconsin",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-WI-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-WI-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -3325,8 +3325,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Wisconsin state tax: Marginal tax on $52,240 taxable income (after $12,760 deduction) = $2,423.61",
-          "Net annual pay: $65,000 - $13,016.11 = $51,983.89 (\u2248$4,331.99/month)"
+          "Wisconsin state tax: Marginal tax on $52,240 taxable income (after $12,760 deduction) = $2,182.28",
+          "Net annual pay: $65,000 - $12,774.78 = $52,225.22 (\u2248$4,352.10/month)"
         ]
       }
     },
