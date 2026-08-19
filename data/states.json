@@ -10,7 +10,7 @@
     "source": {
       "agency_name": "Texas Comptroller of Public Accounts",
       "url": "https://comptroller.texas.gov/",
-      "statute_ref": "Tex. Const. art. VIII, § 24 (voter-approved 2019 ban on a state personal income tax)"
+      "statute_ref": "Tex. Const. art. VIII, \u00a7 24 (voter-approved 2019 ban on a state personal income tax)"
     },
     "params": {},
     "worksheet": {
@@ -18,26 +18,26 @@
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
-        "Texas charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+        "Texas charges no state income tax \u2014 your paycheck stops there. What's left is your net take-home pay."
       ],
       "example": {
         "scenario": "Example: $65,000/year gross salary, single filer, Texas resident.",
         "calculation": [
-          "Federal taxable income: $65,000 - $16,100 = $48,900 → federal tax = $1,240 + ($48,900 - $12,400) × 12% = $5,620",
-          "FICA: $65,000 × 7.65% = $4,972.50",
+          "Federal taxable income: $65,000 - $16,100 = $48,900 \u2192 federal tax = $1,240 + ($48,900 - $12,400) \u00d7 12% = $5,620",
+          "FICA: $65,000 \u00d7 7.65% = $4,972.50",
           "Texas state tax: $0",
-          "Net annual pay: $65,000 - $5,620 - $4,972.50 = $54,407.50 (≈$4,533.96/month)"
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 = $54,407.50 (\u2248$4,533.96/month)"
         ]
       }
     },
     "faq_extra": [
       {
         "q": "Does Texas have a state income tax?",
-        "a": "No. Texas is one of nine states with no personal income tax, a status enshrined in the Texas Constitution since a 2019 voter-approved amendment (art. VIII, § 24). Your paycheck only has federal income tax and FICA withheld."
+        "a": "No. Texas is one of nine states with no personal income tax, a status enshrined in the Texas Constitution since a 2019 voter-approved amendment (art. VIII, \u00a7 24). Your paycheck only has federal income tax and FICA withheld."
       },
       {
         "q": "How much is take-home pay on $65,000 in Texas?",
-        "a": "On a $65,000 gross salary, a single filer in Texas takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA — no state tax is withheld."
+        "a": "On a $65,000 gross salary, a single filer in Texas takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA \u2014 no state tax is withheld."
       },
       {
         "q": "Are there any hidden state or local income taxes in Texas?",
@@ -57,7 +57,7 @@
     "source": {
       "agency_name": "Florida Department of Revenue",
       "url": "https://floridarevenue.com/",
-      "statute_ref": "Fla. Const. art. VII, § 5 (constitutional ban on a state income tax)"
+      "statute_ref": "Fla. Const. art. VII, \u00a7 5 (constitutional ban on a state income tax)"
     },
     "params": {},
     "worksheet": {
@@ -65,26 +65,26 @@
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
-        "Florida charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+        "Florida charges no state income tax \u2014 your paycheck stops there. What's left is your net take-home pay."
       ],
       "example": {
         "scenario": "Example: $65,000/year gross salary, single filer, Florida resident.",
         "calculation": [
-          "Federal taxable income: $65,000 - $16,100 = $48,900 → federal tax = $1,240 + ($48,900 - $12,400) × 12% = $5,620",
-          "FICA: $65,000 × 7.65% = $4,972.50",
+          "Federal taxable income: $65,000 - $16,100 = $48,900 \u2192 federal tax = $1,240 + ($48,900 - $12,400) \u00d7 12% = $5,620",
+          "FICA: $65,000 \u00d7 7.65% = $4,972.50",
           "Florida state tax: $0",
-          "Net annual pay: $65,000 - $5,620 - $4,972.50 = $54,407.50 (≈$4,533.96/month)"
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 = $54,407.50 (\u2248$4,533.96/month)"
         ]
       }
     },
     "faq_extra": [
       {
         "q": "Does Florida have a state income tax?",
-        "a": "No. Florida's constitution (art. VII, § 5) has barred a state personal income tax since 1924. Only federal income tax and FICA are withheld from Florida paychecks."
+        "a": "No. Florida's constitution (art. VII, \u00a7 5) has barred a state personal income tax since 1924. Only federal income tax and FICA are withheld from Florida paychecks."
       },
       {
         "q": "How much is take-home pay on $65,000 in Florida?",
-        "a": "On a $65,000 gross salary, a single filer in Florida takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA — no state tax is withheld."
+        "a": "On a $65,000 gross salary, a single filer in Florida takes home roughly $54,440/year (about $4,537/month) after federal income tax and FICA \u2014 no state tax is withheld."
       },
       {
         "q": "Why does Florida have no income tax?",
@@ -104,7 +104,7 @@
     "source": {
       "agency_name": "Pennsylvania Department of Revenue",
       "url": "https://www.revenue.pa.gov/",
-      "statute_ref": "72 P.S. § 7302 — flat 3.07% Personal Income Tax rate, unchanged since 2004"
+      "statute_ref": "72 P.S. \u00a7 7302 \u2014 flat 3.07% Personal Income Tax rate, unchanged since 2004"
     },
     "params": {
       "rate": 0.0307,
@@ -116,16 +116,16 @@
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).",
-        "Subtract Pennsylvania's flat 3.07% state tax — applied to gross wages, with no standard deduction or personal exemption.",
+        "Subtract Pennsylvania's flat 3.07% state tax \u2014 applied to gross wages, with no standard deduction or personal exemption.",
         "What's left is your net take-home pay before any local Earned Income Tax (EIT)."
       ],
       "example": {
         "scenario": "Example: $65,000/year gross salary, single filer, Pennsylvania resident.",
         "calculation": [
           "Federal tax: $5,620",
-          "FICA: $65,000 × 7.65% = $4,972.50",
-          "PA state tax: $65,000 × 3.07% = $1,995.50",
-          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $1,995.50 = $52,412 (≈$4,367.67/month, before local EIT)"
+          "FICA: $65,000 \u00d7 7.65% = $4,972.50",
+          "PA state tax: $65,000 \u00d7 3.07% = $1,995.50",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $1,995.50 = $52,412 (\u2248$4,367.67/month, before local EIT)"
         ]
       }
     },
@@ -136,11 +136,11 @@
       },
       {
         "q": "Does this calculator include Philadelphia or other local wage taxes?",
-        "a": "Philadelphia is now supported — select Philadelphia resident or non-resident from the local tax dropdown (3.735% resident / 3.425% non-resident, effective 2026-07-01). Every other Pennsylvania municipality and school district still levies its own separate Earned Income Tax (EIT), commonly 1%-3.9%+, which this calculator does not compute."
+        "a": "Philadelphia is now supported \u2014 select Philadelphia resident or non-resident from the local tax dropdown (3.735% resident / 3.425% non-resident, effective 2026-07-01). Every other Pennsylvania municipality and school district still levies its own separate Earned Income Tax (EIT), commonly 1%-3.9%+, which this calculator does not compute."
       },
       {
         "q": "How much is take-home pay on $65,000 in Pennsylvania?",
-        "a": "On a $65,000 gross salary, a single filer in Pennsylvania takes home roughly $52,412/year (about $4,370/month) after federal tax, FICA, and the state's 3.07% flat tax — before any local EIT."
+        "a": "On a $65,000 gross salary, a single filer in Pennsylvania takes home roughly $52,412/year (about $4,370/month) after federal tax, FICA, and the state's 3.07% flat tax \u2014 before any local EIT."
       }
     ],
     "filing_status_backfilled": true
@@ -156,7 +156,7 @@
     "source": {
       "agency_name": "Illinois Department of Revenue",
       "url": "https://tax.illinois.gov/",
-      "statute_ref": "35 ILCS 5/201 — flat 4.95% rate (Illinois Constitution art. IX, § 3 prohibits graduated rates)"
+      "statute_ref": "35 ILCS 5/201 \u2014 flat 4.95% rate (Illinois Constitution art. IX, \u00a7 3 prohibits graduated rates)"
     },
     "params": {
       "rate": 0.0495,
@@ -170,26 +170,26 @@
         "Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).",
         "Subtract Illinois's $2,425 personal exemption from gross wages, then apply the flat 4.95% state rate to the remainder.",
-        "What's left is your net take-home pay — Illinois has no local income tax."
+        "What's left is your net take-home pay \u2014 Illinois has no local income tax."
       ],
       "example": {
         "scenario": "Example: $65,000/year gross salary, single filer, Illinois resident.",
         "calculation": [
           "Federal tax: $5,620",
-          "FICA: $65,000 × 7.65% = $4,972.50",
-          "IL taxable wages: $65,000 - $2,425 = $62,575 → IL tax: $62,575 × 4.95% = $3,097.46",
-          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $3,097.46 = $51,310.04 (≈$4,275.84/month)"
+          "FICA: $65,000 \u00d7 7.65% = $4,972.50",
+          "IL taxable wages: $65,000 - $2,425 = $62,575 \u2192 IL tax: $62,575 \u00d7 4.95% = $3,097.46",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $3,097.46 = $51,310.04 (\u2248$4,275.84/month)"
         ]
       }
     },
     "faq_extra": [
       {
         "q": "What is Illinois's state income tax rate?",
-        "a": "Illinois charges a flat 4.95% income tax rate on all taxable income — the Illinois Constitution (art. IX, § 3) prohibits graduated rates. Each filer gets a $2,425 personal exemption in 2026."
+        "a": "Illinois charges a flat 4.95% income tax rate on all taxable income \u2014 the Illinois Constitution (art. IX, \u00a7 3) prohibits graduated rates. Each filer gets a $2,425 personal exemption in 2026."
       },
       {
         "q": "Does Illinois tax retirement income?",
-        "a": "No — Illinois does not tax Social Security, pension income, or 401(k)/IRA withdrawals, making it comparatively favorable for retirees despite the flat wage tax."
+        "a": "No \u2014 Illinois does not tax Social Security, pension income, or 401(k)/IRA withdrawals, making it comparatively favorable for retirees despite the flat wage tax."
       },
       {
         "q": "Does Illinois have local income tax?",
@@ -204,18 +204,18 @@
     "slug": "georgia",
     "formula_model": "flat_tax",
     "effective_date": "2026-01-01",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-GA-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-GA-v2",
     "source": {
       "agency_name": "Georgia Department of Revenue / Office of the Governor",
       "url": "https://dor.georgia.gov/",
-      "statute_ref": "HB 463 (signed 2026-05-11), cutting the flat rate from 5.19% to 4.99% retroactive to 2026-01-01; see https://gov.georgia.gov/press-releases/2026-05-11/gov-kemp-signs-legislation-lowering-taxes-and-supporting-economic-growth"
+      "statute_ref": "HB 463 (signed 2026-05-11), cutting the flat rate from 5.19% to 4.99% retroactive to 2026-01-01; HB 463's higher standard deduction ($15,000/$30,000) takes effect 2027-01-01, NOT 2026 \u2014 2026 uses $12,000/$24,000"
     },
     "params": {
       "rate": 0.0499,
-      "standard_deduction": 15000,
+      "standard_deduction": 12000,
       "personal_exemption": 0,
-      "standard_deduction_mfj": 30000
+      "standard_deduction_mfj": 24000
     },
     "worksheet": {
       "steps": [
@@ -223,15 +223,15 @@
         "Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).",
         "Subtract Georgia's $15,000 single standard deduction from gross wages, then apply the flat 4.99% state rate.",
-        "What's left is your net take-home pay — Georgia has no local income tax."
+        "What's left is your net take-home pay \u2014 Georgia has no local income tax."
       ],
       "example": {
         "scenario": "Example: $65,000/year gross salary, single filer, Georgia resident.",
         "calculation": [
           "Federal tax: $5,620",
-          "FICA: $65,000 × 7.65% = $4,972.50",
-          "GA taxable wages: $65,000 - $15,000 = $50,000 → GA tax: $50,000 × 4.99% = $2,495",
-          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,495 = $51,912.50 (≈$4,326.04/month)"
+          "FICA: $65,000 \u00d7 7.65% = $4,972.50",
+          "GA taxable wages: $65,000 - $12,000 = $53,000 \u2192 GA tax: $53,000 \u00d7 4.99% = $2,644.70",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,644.70 = $51,762.80 (\u2248$4,313.57/month)"
         ]
       }
     },
@@ -262,7 +262,7 @@
     "source": {
       "agency_name": "North Carolina Department of Revenue",
       "url": "https://www.ncdor.gov/taxes-forms/individual-income-tax/tax-rate-schedules",
-      "statute_ref": "Session Law 2023-134 — phased-down flat rate, 3.99% for taxable years after 2025"
+      "statute_ref": "Session Law 2023-134 \u2014 phased-down flat rate, 3.99% for taxable years after 2025"
     },
     "params": {
       "rate": 0.0399,
@@ -277,26 +277,26 @@
         "Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).",
         "Subtract North Carolina's $12,750 single standard deduction from gross wages, then apply the flat 3.99% state rate.",
-        "What's left is your net take-home pay — North Carolina has no local income tax."
+        "What's left is your net take-home pay \u2014 North Carolina has no local income tax."
       ],
       "example": {
         "scenario": "Example: $65,000/year gross salary, single filer, North Carolina resident.",
         "calculation": [
           "Federal tax: $5,620",
-          "FICA: $65,000 × 7.65% = $4,972.50",
-          "NC taxable wages: $65,000 - $12,750 = $52,250 → NC tax: $52,250 × 3.99% = $2,084.78",
-          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,084.78 = $52,322.72 (≈$4,360.23/month)"
+          "FICA: $65,000 \u00d7 7.65% = $4,972.50",
+          "NC taxable wages: $65,000 - $12,750 = $52,250 \u2192 NC tax: $52,250 \u00d7 3.99% = $2,084.78",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,084.78 = $52,322.72 (\u2248$4,360.23/month)"
         ]
       }
     },
     "faq_extra": [
       {
         "q": "Is North Carolina's income tax rate still dropping?",
-        "a": "Yes. Under Session Law 2023-134, North Carolina's flat rate has phased down annually — 4.5% (2024), 4.25% (2025), 3.99% (2026) — with further cuts to 3.75% (2027) and 3.5% (2028) scheduled if state revenue triggers are met."
+        "a": "Yes. Under Session Law 2023-134, North Carolina's flat rate has phased down annually \u2014 4.5% (2024), 4.25% (2025), 3.99% (2026) \u2014 with further cuts to 3.75% (2027) and 3.5% (2028) scheduled if state revenue triggers are met."
       },
       {
         "q": "What is North Carolina's standard deduction for 2026?",
-        "a": "$12,750 for single filers under current law. A pending bill (S437) would raise it to $13,000, but that had not been enacted as of this page's last-verified date — check ncdor.gov for the final figure."
+        "a": "$12,750 for single filers under current law. A pending bill (S437) would raise it to $13,000, but that had not been enacted as of this page's last-verified date \u2014 check ncdor.gov for the final figure."
       },
       {
         "q": "Does North Carolina have local income tax?",
@@ -316,7 +316,7 @@
     "source": {
       "agency_name": "Michigan Department of Treasury",
       "url": "https://www.michigan.gov/taxes",
-      "statute_ref": "MCL 206.51 — flat rate, 4.25% for 2026; personal exemption per Treasury 2026 Withholding Guide (Form 446)"
+      "statute_ref": "MCL 206.51 \u2014 flat rate, 4.25% for 2026; personal exemption per Treasury 2026 Withholding Guide (Form 446)"
     },
     "params": {
       "rate": 0.0425,
@@ -336,9 +336,9 @@
         "scenario": "Example: $65,000/year gross salary, single filer, Michigan resident.",
         "calculation": [
           "Federal tax: $5,620",
-          "FICA: $65,000 × 7.65% = $4,972.50",
-          "MI taxable wages: $65,000 - $5,900 = $59,100 → MI tax: $59,100 × 4.25% = $2,511.75",
-          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,511.75 = $51,895.75 (≈$4,324.65/month, before local city tax)"
+          "FICA: $65,000 \u00d7 7.65% = $4,972.50",
+          "MI taxable wages: $65,000 - $5,900 = $59,100 \u2192 MI tax: $59,100 \u00d7 4.25% = $2,511.75",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,511.75 = $51,895.75 (\u2248$4,324.65/month, before local city tax)"
         ]
       }
     },
@@ -353,7 +353,7 @@
       },
       {
         "q": "How much is take-home pay on $65,000 in Michigan?",
-        "a": "On a $65,000 gross salary, a single filer in Michigan takes home roughly $51,928/year (about $4,327/month) after federal tax, FICA, and the state's 4.25% flat tax — before any city tax."
+        "a": "On a $65,000 gross salary, a single filer in Michigan takes home roughly $51,928/year (about $4,327/month) after federal tax, FICA, and the state's 4.25% flat tax \u2014 before any city tax."
       }
     ],
     "filing_status_backfilled": true
@@ -369,7 +369,7 @@
     "source": {
       "agency_name": "California Franchise Tax Board",
       "url": "https://www.ftb.ca.gov/forms/2025/2025-540-tax-rate-schedules.pdf",
-      "statute_ref": "Cal. Rev. & Tax. Code § 17041 — 9-bracket schedule (1%-12.3%) plus 1% Mental Health Services Tax on taxable income over $1,000,000 (top effective rate 13.3%). Thresholds are the 2025 FTB Schedule X figures (2026 schedule not yet published at time of verification)."
+      "statute_ref": "Cal. Rev. & Tax. Code \u00a7 17041 \u2014 9-bracket schedule (1%-12.3%) plus 1% Mental Health Services Tax on taxable income over $1,000,000 (top effective rate 13.3%). Thresholds are the 2025 FTB Schedule X figures (2026 schedule not yet published at time of verification)."
     },
     "params": {
       "standard_deduction": 5706,
@@ -465,29 +465,29 @@
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).",
-        "Subtract California's $5,706 standard deduction from gross wages, then apply the 9-bracket state schedule (1%-12.3%) marginally — plus 1% Mental Health Services Tax on income over $1,000,000.",
-        "Subtract California SDI (1.3% of all wages, no cap in 2026) — a mandatory payroll deduction, not an income tax, but it reduces your paycheck.",
+        "Subtract California's $5,706 standard deduction from gross wages, then apply the 9-bracket state schedule (1%-12.3%) marginally \u2014 plus 1% Mental Health Services Tax on income over $1,000,000.",
+        "Subtract California SDI (1.3% of all wages, no cap in 2026) \u2014 a mandatory payroll deduction, not an income tax, but it reduces your paycheck.",
         "What's left is your net take-home pay."
       ],
       "example": {
         "scenario": "Example: $65,000/year gross salary, single filer, California resident.",
         "calculation": [
           "Federal tax: $5,620",
-          "FICA: $65,000 × 7.65% = $4,972.50",
-          "CA taxable income: $65,000 - $5,706 = $59,294 → marginal CA tax = $2,127.57",
-          "CA SDI: $65,000 × 1.3% = $845",
-          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,127.57 - $845 = $51,434.93 (≈$4,286.24/month)"
+          "FICA: $65,000 \u00d7 7.65% = $4,972.50",
+          "CA taxable income: $65,000 - $5,706 = $59,294 \u2192 marginal CA tax = $2,127.57",
+          "CA SDI: $65,000 \u00d7 1.3% = $845",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,127.57 - $845 = $51,434.93 (\u2248$4,286.24/month)"
         ]
       }
     },
     "faq_extra": [
       {
         "q": "What are California's income tax brackets for 2026?",
-        "a": "California uses 9 marginal brackets from 1% (income up to $11,079) to 12.3% (over $742,953 for single filers), plus a 1% Mental Health Services Tax on taxable income over $1,000,000, for a 13.3% top effective rate. These are the 2025 FTB Schedule X thresholds, the most recent published at time of writing — 2026 thresholds will be slightly higher once the FTB publishes its annual inflation adjustment."
+        "a": "California uses 9 marginal brackets from 1% (income up to $11,079) to 12.3% (over $742,953 for single filers), plus a 1% Mental Health Services Tax on taxable income over $1,000,000, for a 13.3% top effective rate. These are the 2025 FTB Schedule X thresholds, the most recent published at time of writing \u2014 2026 thresholds will be slightly higher once the FTB publishes its annual inflation adjustment."
       },
       {
         "q": "What is California SDI and is it a tax?",
-        "a": "State Disability Insurance (SDI) is a mandatory payroll deduction, not a state income tax — 1.3% of all wages in 2026 with no wage cap. It funds short-term disability and Paid Family Leave benefits and is withheld separately from income tax."
+        "a": "State Disability Insurance (SDI) is a mandatory payroll deduction, not a state income tax \u2014 1.3% of all wages in 2026 with no wage cap. It funds short-term disability and Paid Family Leave benefits and is withheld separately from income tax."
       },
       {
         "q": "How much is take-home pay on $65,000 in California?",
@@ -507,7 +507,7 @@
     "source": {
       "agency_name": "New York State Department of Taxation and Finance",
       "url": "https://www.tax.ny.gov/",
-      "statute_ref": "N.Y. Tax Law § 601 — FY2026 budget cut the bottom five bracket rates 0.1 point starting tax year 2026 (4%→3.9%, 4.5%→4.4%, 5.25%→5.15%, 5.5%→5.4%, 6%→5.9%). Thresholds below are the single-filer schedule — previously this file incorrectly used married-filing-jointly thresholds."
+      "statute_ref": "N.Y. Tax Law \u00a7 601 \u2014 FY2026 budget cut the bottom five bracket rates 0.1 point starting tax year 2026 (4%\u21923.9%, 4.5%\u21924.4%, 5.25%\u21925.15%, 5.5%\u21925.4%, 6%\u21925.9%). Thresholds below are the single-filer schedule \u2014 previously this file incorrectly used married-filing-jointly thresholds."
     },
     "params": {
       "standard_deduction": 8000,
@@ -556,32 +556,32 @@
         "Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).",
         "Subtract New York's $8,000 standard deduction from gross wages, then apply the 9-bracket state schedule (3.9%-10.9%) marginally.",
-        "Subtract New York Paid Family Leave (0.432% of wages, capped at $411.91/year in 2026) — a mandatory payroll deduction, not income tax.",
+        "Subtract New York Paid Family Leave (0.432% of wages, capped at $411.91/year in 2026) \u2014 a mandatory payroll deduction, not income tax.",
         "What's left is your net take-home pay before any New York City or Yonkers resident tax."
       ],
       "example": {
         "scenario": "Example: $65,000/year gross salary, single filer, New York State resident (outside NYC).",
         "calculation": [
           "Federal tax: $5,620",
-          "FICA: $65,000 × 7.65% = $4,972.50",
-          "NY taxable income: $65,000 - $8,000 = $57,000 → marginal NY tax = $2,913.00",
-          "NY PFL: $65,000 × 0.432% = $280.80",
-          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,913.00 - $280.80 = $51,213.70 (≈$4,267.81/month, before NYC/Yonkers tax)"
+          "FICA: $65,000 \u00d7 7.65% = $4,972.50",
+          "NY taxable income: $65,000 - $8,000 = $57,000 \u2192 marginal NY tax = $2,913.00",
+          "NY PFL: $65,000 \u00d7 0.432% = $280.80",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,913.00 - $280.80 = $51,213.70 (\u2248$4,267.81/month, before NYC/Yonkers tax)"
         ]
       }
     },
     "faq_extra": [
       {
         "q": "What are New York's state income tax brackets for 2026?",
-        "a": "New York has 9 brackets for single filers, from 3.9% on income up to $8,500 to 10.9% above $25,000,000. The FY2026 budget cut the bottom five bracket rates by 0.1 point (4%→3.9%, 4.5%→4.4%, 5.25%→5.15%, 5.5%→5.4%, 6%→5.9%)."
+        "a": "New York has 9 brackets for single filers, from 3.9% on income up to $8,500 to 10.9% above $25,000,000. The FY2026 budget cut the bottom five bracket rates by 0.1 point (4%\u21923.9%, 4.5%\u21924.4%, 5.25%\u21925.15%, 5.5%\u21925.4%, 6%\u21925.9%)."
       },
       {
         "q": "Does this calculator include New York City tax?",
-        "a": "Yes — select New York City resident (or Yonkers resident) from the local tax dropdown to include it. NYC resident tax uses 4 brackets from 3.078% to 3.876%; Yonkers resident tax is a 16.75% surcharge on your net NY state tax. Yonkers non-resident earnings tax and the MCTMT (for self-employment income) are not modeled."
+        "a": "Yes \u2014 select New York City resident (or Yonkers resident) from the local tax dropdown to include it. NYC resident tax uses 4 brackets from 3.078% to 3.876%; Yonkers resident tax is a 16.75% surcharge on your net NY state tax. Yonkers non-resident earnings tax and the MCTMT (for self-employment income) are not modeled."
       },
       {
         "q": "What is New York Paid Family Leave (PFL)?",
-        "a": "A mandatory employee payroll deduction — 0.432% of wages in 2026, capped at $411.91/year — that funds paid leave benefits. It is separate from income tax."
+        "a": "A mandatory employee payroll deduction \u2014 0.432% of wages in 2026, capped at $411.91/year \u2014 that funds paid leave benefits. It is separate from income tax."
       }
     ],
     "filing_status_backfilled": false
@@ -597,7 +597,7 @@
     "source": {
       "agency_name": "Ohio Department of Taxation",
       "url": "https://tax.ohio.gov/individual/resources/annual-tax-rates",
-      "statute_ref": "Ohio Rev. Code § 5747.02, as amended by House Bill 96 (FY2026-27 budget) — completion of the multi-year phase-down to a single 2.75% bracket for 2026 (3.5% in 2024, 3.125% in 2025, 2.75% in 2026), with the first $26,050 of nonbusiness income untaxed"
+      "statute_ref": "Ohio Rev. Code \u00a7 5747.02, as amended by House Bill 96 (FY2026-27 budget) \u2014 completion of the multi-year phase-down to a single 2.75% bracket for 2026 (3.5% in 2024, 3.125% in 2025, 2.75% in 2026), with the first $26,050 of nonbusiness income untaxed"
     },
     "params": {
       "standard_deduction": 0,
@@ -617,31 +617,31 @@
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single), apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to $184,500) + 1.45% Medicare (+0.9% above $200,000).",
-        "Ohio taxes the first $26,050 of income at 0%, then a flat 2.75% on everything above that — no separate standard deduction to subtract first.",
+        "Ohio taxes the first $26,050 of income at 0%, then a flat 2.75% on everything above that \u2014 no separate standard deduction to subtract first.",
         "What's left is your net take-home pay before any municipal income tax."
       ],
       "example": {
         "scenario": "Example: $65,000/year gross salary, single filer, Ohio resident.",
         "calculation": [
           "Federal tax: $5,620",
-          "FICA: $65,000 × 7.65% = $4,972.50",
-          "OH state tax: ($65,000 - $26,050) × 2.75% = $38,950 × 2.75% = $1,071.13",
-          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $1,071.13 = $53,336.37 (≈$4,444.70/month, before municipal tax)"
+          "FICA: $65,000 \u00d7 7.65% = $4,972.50",
+          "OH state tax: ($65,000 - $26,050) \u00d7 2.75% = $38,950 \u00d7 2.75% = $1,071.13",
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $1,071.13 = $53,336.37 (\u2248$4,444.70/month, before municipal tax)"
         ]
       }
     },
     "faq_extra": [
       {
         "q": "What is Ohio's state income tax rate in 2026?",
-        "a": "Ohio completed a multi-year phase-down to a single flat rate for 2026: 0% on the first $26,050 of nonbusiness income, then 2.75% on everything above that — down from 3.125% in 2025 and 3.5% in 2024."
+        "a": "Ohio completed a multi-year phase-down to a single flat rate for 2026: 0% on the first $26,050 of nonbusiness income, then 2.75% on everything above that \u2014 down from 3.125% in 2025 and 3.5% in 2024."
       },
       {
         "q": "Does this calculator include Ohio city/municipal income tax?",
-        "a": "No — and this matters a lot in Ohio. Over 600 Ohio municipalities levy their own income tax, typically 1%-3%, with Columbus, Cleveland, and Akron around 2.5%. For many Ohio taxpayers, city tax exceeds state tax. Check your city's rate at your municipality's finance department or RITA/CCA (Ohio's two major municipal tax collection agencies) — it is not included in this estimate."
+        "a": "No \u2014 and this matters a lot in Ohio. Over 600 Ohio municipalities levy their own income tax, typically 1%-3%, with Columbus, Cleveland, and Akron around 2.5%. For many Ohio taxpayers, city tax exceeds state tax. Check your city's rate at your municipality's finance department or RITA/CCA (Ohio's two major municipal tax collection agencies) \u2014 it is not included in this estimate."
       },
       {
         "q": "How much is take-home pay on $65,000 in Ohio?",
-        "a": "On a $65,000 gross salary, a single filer in Ohio takes home roughly $53,368/year (about $4,447/month) after federal tax, FICA, and Ohio's 2.75% state tax — before any city income tax, which can add another 1%-3%."
+        "a": "On a $65,000 gross salary, a single filer in Ohio takes home roughly $53,368/year (about $4,447/month) after federal tax, FICA, and Ohio's 2.75% state tax \u2014 before any city income tax, which can add another 1%-3%."
       }
     ],
     "filing_status_backfilled": true
@@ -653,7 +653,7 @@
     "source": {
       "agency_name": "Alabama Department of Revenue",
       "url": "https://www.revenue.alabama.gov/",
-      "statute_ref": "Ala. Code § 40-18-5 — 3-bracket schedule; § 40-18-15 permits deducting federal income tax paid"
+      "statute_ref": "Ala. Code \u00a7 40-18-5 \u2014 3-bracket schedule; \u00a7 40-18-15 permits deducting federal income tax paid"
     },
     "params": {
       "brackets": [
@@ -691,7 +691,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Alabama state tax: Marginal tax on $56,380 taxable income (after $8,620 deduction incl. federal tax paid) = $2,779",
-          "Net annual pay: $65,000 - $13,371.5 = $51,628.5 (≈$4,302.38/month)"
+          "Net annual pay: $65,000 - $13,371.5 = $51,628.5 (\u2248$4,302.38/month)"
         ]
       }
     },
@@ -702,7 +702,7 @@
       },
       {
         "q": "How much is take-home pay on $65,000 in Alabama?",
-        "a": "On a $65,000 gross salary, a single filer in Alabama takes home roughly $51,628.5/year (about $4,302.38/month) after federal tax, FICA, and state tax — before any local tax."
+        "a": "On a $65,000 gross salary, a single filer in Alabama takes home roughly $51,628.5/year (about $4,302.38/month) after federal tax, FICA, and state tax \u2014 before any local tax."
       },
       {
         "q": "What deductions does Alabama apply before taxing my income?",
@@ -710,7 +710,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Alabama state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Alabama Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Alabama state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Alabama Department of Revenue's married-filing-jointly tables for a precise figure."
       },
       {
         "q": "Does this calculator include Alabama local or city income tax?",
@@ -738,7 +738,7 @@
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
-        "Alaska charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+        "Alaska charges no state income tax \u2014 your paycheck stops there. What's left is your net take-home pay."
       ],
       "example": {
         "scenario": "Example: $65,000/year gross salary, single filer, Alaska resident.",
@@ -746,7 +746,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Alaska state tax: No state income tax.",
-          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"
+          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (\u2248$4,533.96/month)"
         ]
       }
     },
@@ -765,7 +765,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Alaska Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Alaska Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -777,7 +777,7 @@
     "source": {
       "agency_name": "Arizona Department of Revenue",
       "url": "https://azdor.gov/",
-      "statute_ref": "Ariz. Rev. Stat. § 43-1011 — flat 2.5% rate effective 2023"
+      "statute_ref": "Ariz. Rev. Stat. \u00a7 43-1011 \u2014 flat 2.5% rate effective 2023"
     },
     "params": {
       "rate": 0.025,
@@ -800,8 +800,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Arizona state tax: ($65,000 - $16,100 deduction) × 2.50% = $1,222.5",
-          "Net annual pay: $65,000 - $11,815 = $53,185 (≈$4,432.08/month)"
+          "Arizona state tax: ($65,000 - $16,100 deduction) \u00d7 2.50% = $1,222.5",
+          "Net annual pay: $65,000 - $11,815 = $53,185 (\u2248$4,432.08/month)"
         ]
       }
     },
@@ -820,7 +820,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Arizona state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Arizona Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Arizona state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Arizona Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -832,7 +832,7 @@
     "source": {
       "agency_name": "Arkansas Department of Finance and Administration",
       "url": "https://www.dfa.arkansas.gov/",
-      "statute_ref": "Top rate cut to 3.7% retroactive to 2026-01-01"
+      "statute_ref": "Top rate cut to 3.7% retroactive to 2026-01-01; standard deduction $2,470 single"
     },
     "params": {
       "brackets": [
@@ -857,18 +857,18 @@
           "rate": 0.037
         }
       ],
-      "standard_deduction": 0
+      "standard_deduction": 2470
     },
     "abbr": "AR",
     "slug": "arkansas",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-AR-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-AR-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
-        "Subtract Arkansas's apply the 5-bracket state schedule (0%-3.70%) marginally to gross wages.",
+        "Apply Arkansas's 5-bracket state schedule (0%-3.70%) marginally to income after subtracting the $2,470 standard deduction.",
         "What's left is your net take-home pay."
       ],
       "example": {
@@ -876,8 +876,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Arkansas state tax: Marginal tax on $65,000 taxable income (after $0 deduction) = $2,037.84",
-          "Net annual pay: $65,000 - $12,630.34 = $52,369.66 (≈$4,364.14/month)"
+          "Arkansas state tax: Marginal tax on $62,530 taxable income (after $2,470 deduction) = $1,946.45",
+          "Net annual pay: $65,000 - $12,538.95 = $52,461.05 (\u2248$4,371.75/month)"
         ]
       }
     },
@@ -892,11 +892,11 @@
       },
       {
         "q": "What deductions does Arkansas apply before taxing my income?",
-        "a": "Arkansas applies no standard deduction — the full rate applies to gross wages, before its marginal bracket schedule. See the \"How Arkansas Paycheck Tax Is Calculated\" section above for the exact formula."
+        "a": "Arkansas applies no standard deduction \u2014 the full rate applies to gross wages, before its marginal bracket schedule. See the \"How Arkansas Paycheck Tax Is Calculated\" section above for the exact formula."
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Arkansas state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Arkansas Department of Finance and Administration's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Arkansas state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Arkansas Department of Finance and Administration's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -908,7 +908,7 @@
     "source": {
       "agency_name": "Colorado Department of Revenue",
       "url": "https://tax.colorado.gov/",
-      "statute_ref": "Colo. Const. art. X (flat rate mandate) — 4.4% per Proposition 121 (2022)"
+      "statute_ref": "Colo. Const. art. X (flat rate mandate) \u2014 4.4% per Proposition 121 (2022)"
     },
     "params": {
       "rate": 0.044,
@@ -931,8 +931,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Colorado state tax: ($65,000 - $16,100 deduction) × 4.40% = $2,151.6",
-          "Net annual pay: $65,000 - $12,744.1 = $52,255.9 (≈$4,354.66/month)"
+          "Colorado state tax: ($65,000 - $16,100 deduction) \u00d7 4.40% = $2,151.6",
+          "Net annual pay: $65,000 - $12,744.1 = $52,255.9 (\u2248$4,354.66/month)"
         ]
       }
     },
@@ -951,7 +951,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Colorado state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Colorado Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Colorado state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Colorado Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -963,7 +963,7 @@
     "source": {
       "agency_name": "Connecticut Department of Revenue Services",
       "url": "https://portal.ct.gov/drs",
-      "statute_ref": "Conn. Gen. Stat. § 12-700"
+      "statute_ref": "Conn. Gen. Stat. \u00a7 12-700"
     },
     "params": {
       "brackets": [
@@ -1016,7 +1016,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Connecticut state tax: Marginal tax on $50,000 taxable income (after $15,000 deduction) = $2,000",
-          "Net annual pay: $65,000 - $12,592.5 = $52,407.5 (≈$4,367.29/month)"
+          "Net annual pay: $65,000 - $12,592.5 = $52,407.5 (\u2248$4,367.29/month)"
         ]
       }
     },
@@ -1035,7 +1035,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Connecticut state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Connecticut Department of Revenue Services's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Connecticut state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Connecticut Department of Revenue Services's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -1047,7 +1047,7 @@
     "source": {
       "agency_name": "Delaware Division of Revenue",
       "url": "https://revenue.delaware.gov/",
-      "statute_ref": "Del. Code tit. 30 § 1102"
+      "statute_ref": "Del. Code tit. 30 \u00a7 1102"
     },
     "params": {
       "brackets": [
@@ -1100,7 +1100,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Delaware state tax: Marginal tax on $61,750 taxable income (after $3,250 deduction) = $3,059",
-          "Net annual pay: $65,000 - $13,651.5 = $51,348.5 (≈$4,279.04/month)"
+          "Net annual pay: $65,000 - $13,651.5 = $51,348.5 (\u2248$4,279.04/month)"
         ]
       }
     },
@@ -1119,7 +1119,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Delaware state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Delaware Division of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Delaware state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Delaware Division of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -1131,7 +1131,7 @@
     "source": {
       "agency_name": "DC Office of Tax and Revenue",
       "url": "https://otr.cfo.dc.gov/",
-      "statute_ref": "D.C. Code § 47-1806.03"
+      "statute_ref": "D.C. Code \u00a7 47-1806.03 \u2014 7 brackets: 4/6/6.5/8.5/9.25/9.75/10.75%"
     },
     "params": {
       "brackets": [
@@ -1148,12 +1148,16 @@
           "rate": 0.065
         },
         {
-          "upTo": 350000,
+          "upTo": 250000,
           "rate": 0.085
         },
         {
-          "upTo": 1000000,
+          "upTo": 500000,
           "rate": 0.0925
+        },
+        {
+          "upTo": 1000000,
+          "rate": 0.0975
         },
         {
           "upTo": null,
@@ -1164,8 +1168,8 @@
     },
     "abbr": "DC",
     "slug": "district-of-columbia",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-DC-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-DC-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -1180,7 +1184,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "District of Columbia state tax: Marginal tax on $49,300 taxable income (after $15,700 deduction) = $2,804.5",
-          "Net annual pay: $65,000 - $13,397 = $51,603 (≈$4,300.25/month)"
+          "Net annual pay: $65,000 - $13,397 = $51,603 (\u2248$4,300.25/month)"
         ]
       }
     },
@@ -1199,7 +1203,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and District of Columbia state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check DC Office of Tax and Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and District of Columbia state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check DC Office of Tax and Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -1211,7 +1215,7 @@
     "source": {
       "agency_name": "Hawaii Department of Taxation",
       "url": "https://files.hawaii.gov/tax/",
-      "statute_ref": "Haw. Rev. Stat. § 235-51 — 12-bracket schedule"
+      "statute_ref": "Haw. Rev. Stat. \u00a7 235-51 \u2014 12-bracket schedule; standard deduction $8,000 per Act 46 2026 phase-in step"
     },
     "params": {
       "brackets": [
@@ -1264,12 +1268,12 @@
           "rate": 0.11
         }
       ],
-      "standard_deduction": 2200
+      "standard_deduction": 8000
     },
     "abbr": "HI",
     "slug": "hawaii",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-HI-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-HI-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -1283,8 +1287,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Hawaii state tax: Marginal tax on $62,800 taxable income (after $2,200 deduction) = $3,664",
-          "Net annual pay: $65,000 - $14,256.5 = $50,743.5 (≈$4,228.63/month)"
+          "Hawaii state tax: Marginal tax on $57,000 taxable income (after $8,000 deduction) = $3,223.20",
+          "Net annual pay: $65,000 - $13,815.70 = $51,184.30 (\u2248$4,265.36/month)"
         ]
       }
     },
@@ -1303,7 +1307,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Hawaii state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Hawaii Department of Taxation's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Hawaii state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Hawaii Department of Taxation's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -1315,7 +1319,7 @@
     "source": {
       "agency_name": "Idaho State Tax Commission",
       "url": "https://tax.idaho.gov/",
-      "statute_ref": "HB 40 (2025) — flat 5.3% rate"
+      "statute_ref": "HB 40 (2025) \u2014 flat 5.3% rate"
     },
     "params": {
       "rate": 0.053,
@@ -1338,8 +1342,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Idaho state tax: ($65,000 - $16,100 deduction) × 5.30% = $2,591.7",
-          "Net annual pay: $65,000 - $13,184.2 = $51,815.8 (≈$4,317.98/month)"
+          "Idaho state tax: ($65,000 - $16,100 deduction) \u00d7 5.30% = $2,591.7",
+          "Net annual pay: $65,000 - $13,184.2 = $51,815.8 (\u2248$4,317.98/month)"
         ]
       }
     },
@@ -1358,7 +1362,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Idaho state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Idaho State Tax Commission's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Idaho state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Idaho State Tax Commission's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -1370,7 +1374,7 @@
     "source": {
       "agency_name": "Indiana Department of Revenue",
       "url": "https://www.in.gov/dor/",
-      "statute_ref": "Ind. Code § 6-3-2-1 — flat 2.95% for 2026"
+      "statute_ref": "Ind. Code \u00a7 6-3-2-1 \u2014 flat 2.95% for 2026"
     },
     "params": {
       "rate": 0.0295,
@@ -1393,8 +1397,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Indiana state tax: ($65,000 - $0 deduction) × 2.95% = $1,917.5",
-          "Net annual pay: $65,000 - $12,510 = $52,490 (≈$4,374.17/month)"
+          "Indiana state tax: ($65,000 - $0 deduction) \u00d7 2.95% = $1,917.5",
+          "Net annual pay: $65,000 - $12,510 = $52,490 (\u2248$4,374.17/month)"
         ]
       }
     },
@@ -1405,19 +1409,19 @@
       },
       {
         "q": "How much is take-home pay on $65,000 in Indiana?",
-        "a": "On a $65,000 gross salary, a single filer in Indiana takes home roughly $52,490/year (about $4,374.17/month) after federal tax, FICA, and state tax — before any local tax."
+        "a": "On a $65,000 gross salary, a single filer in Indiana takes home roughly $52,490/year (about $4,374.17/month) after federal tax, FICA, and state tax \u2014 before any local tax."
       },
       {
         "q": "What deductions does Indiana apply before taxing my income?",
-        "a": "Indiana applies no standard deduction — the full rate applies to gross wages, before the flat 2.95% rate. See the \"How Indiana Paycheck Tax Is Calculated\" section above for the exact formula."
+        "a": "Indiana applies no standard deduction \u2014 the full rate applies to gross wages, before the flat 2.95% rate. See the \"How Indiana Paycheck Tax Is Calculated\" section above for the exact formula."
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Indiana state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Indiana Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Indiana state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Indiana Department of Revenue's married-filing-jointly tables for a precise figure."
       },
       {
         "q": "Does this calculator include Indiana local or city income tax?",
-        "a": "Indiana's 92 counties each levy their own local income tax (resident-based), ranging 0.50%-3.38% — often larger than any single layer in this calculator's other states. Not computed here; check your county's rate."
+        "a": "Indiana's 92 counties each levy their own local income tax (resident-based), ranging 0.50%-3.38% \u2014 often larger than any single layer in this calculator's other states. Not computed here; check your county's rate."
       }
     ],
     "filing_status_backfilled": false
@@ -1429,7 +1433,7 @@
     "source": {
       "agency_name": "Iowa Department of Revenue",
       "url": "https://revenue.iowa.gov/",
-      "statute_ref": "SF 2442 (2024) — flat 3.8% effective 2026, completing the phase-down from a 6-bracket system topping out at 8.53%"
+      "statute_ref": "SF 2442 (2024) \u2014 flat 3.8% effective 2026, completing the phase-down from a 6-bracket system topping out at 8.53%"
     },
     "params": {
       "rate": 0.038,
@@ -1452,8 +1456,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Iowa state tax: ($65,000 - $16,100 deduction) × 3.80% = $1,858.2",
-          "Net annual pay: $65,000 - $12,450.7 = $52,549.3 (≈$4,379.11/month)"
+          "Iowa state tax: ($65,000 - $16,100 deduction) \u00d7 3.80% = $1,858.2",
+          "Net annual pay: $65,000 - $12,450.7 = $52,549.3 (\u2248$4,379.11/month)"
         ]
       }
     },
@@ -1472,7 +1476,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Iowa state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Iowa Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Iowa state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Iowa Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -1484,17 +1488,17 @@
     "source": {
       "agency_name": "Kansas Department of Revenue",
       "url": "https://www.ksrevenue.gov/",
-      "statute_ref": "Kan. Stat. § 79-32,110"
+      "statute_ref": "Kan. Stat. \u00a7 79-32,110 \u2014 2024 reform: 5.20% up to $23,000 single, 5.58% above"
     },
     "params": {
       "brackets": [
         {
-          "upTo": 30000,
-          "rate": 0.031
+          "upTo": 23000,
+          "rate": 0.052
         },
         {
           "upTo": null,
-          "rate": 0.057
+          "rate": 0.0558
         }
       ],
       "standard_deduction": 3605,
@@ -1502,8 +1506,8 @@
     },
     "abbr": "KS",
     "slug": "kansas",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-KS-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-KS-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -1517,8 +1521,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Kansas state tax: Marginal tax on $52,235 taxable income (after $12,765 deduction) = $2,197.4",
-          "Net annual pay: $65,000 - $12,789.9 = $52,210.1 (≈$4,350.84/month)"
+          "Kansas state tax: Marginal tax on $52,235 taxable income (after $12,765 deduction) = $2,827.31",
+          "Net annual pay: $65,000 - $13,419.81 = $51,580.19 (\u2248$4,298.35/month)"
         ]
       }
     },
@@ -1537,7 +1541,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Kansas state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Kansas Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Kansas state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Kansas Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -1549,16 +1553,16 @@
     "source": {
       "agency_name": "Kentucky Department of Revenue",
       "url": "https://revenue.ky.gov/",
-      "statute_ref": "Ky. Rev. Stat. § 141.020 — cut to 3.5% effective 2026-01-01"
+      "statute_ref": "Ky. Rev. Stat. \u00a7 141.020 \u2014 cut to 3.5% effective 2026-01-01"
     },
     "params": {
       "rate": 0.035,
-      "standard_deduction": 3270
+      "standard_deduction": 3360
     },
     "abbr": "KY",
     "slug": "kentucky",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-KY-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-KY-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -1572,8 +1576,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Kentucky state tax: ($65,000 - $3,270 deduction) × 3.50% = $2,160.55",
-          "Net annual pay: $65,000 - $12,753.05 = $52,246.95 (≈$4,353.91/month)"
+          "Kentucky state tax: ($65,000 - $3,360 deduction) \u00d7 3.50% = $2,157.40",
+          "Net annual pay: $65,000 - $12,749.90 = $52,250.10 (\u2248$4,354.18/month)"
         ]
       }
     },
@@ -1584,7 +1588,7 @@
       },
       {
         "q": "How much is take-home pay on $65,000 in Kentucky?",
-        "a": "On a $65,000 gross salary, a single filer in Kentucky takes home roughly $52,246.95/year (about $4,353.91/month) after federal tax, FICA, and state tax — before any local tax."
+        "a": "On a $65,000 gross salary, a single filer in Kentucky takes home roughly $52,246.95/year (about $4,353.91/month) after federal tax, FICA, and state tax \u2014 before any local tax."
       },
       {
         "q": "What deductions does Kentucky apply before taxing my income?",
@@ -1592,7 +1596,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Kentucky state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Kentucky Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Kentucky state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Kentucky Department of Revenue's married-filing-jointly tables for a precise figure."
       },
       {
         "q": "Does this calculator include Kentucky local or city income tax?",
@@ -1608,16 +1612,16 @@
     "source": {
       "agency_name": "Louisiana Department of Revenue",
       "url": "https://revenue.louisiana.gov/",
-      "statute_ref": "Constitutional Amendment 2 (Nov. 2024) — flat 3% rate replacing the prior 1.85%-4.25% brackets"
+      "statute_ref": "Constitutional Amendment 2 (Nov. 2024) \u2014 flat 3% rate replacing the prior 1.85%-4.25% brackets; standard deduction now inflation-adjusted annually, $12,875 single for 2026"
     },
     "params": {
       "rate": 0.03,
-      "standard_deduction": 12500
+      "standard_deduction": 12875
     },
     "abbr": "LA",
     "slug": "louisiana",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-LA-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-LA-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -1631,8 +1635,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Louisiana state tax: ($65,000 - $12,500 deduction) × 3.00% = $1,575",
-          "Net annual pay: $65,000 - $12,167.5 = $52,832.5 (≈$4,402.71/month)"
+          "Louisiana state tax: ($65,000 - $12,875 deduction) \u00d7 3.00% = $1,563.75",
+          "Net annual pay: $65,000 - $12,156.25 = $52,843.75 (\u2248$4,403.65/month)"
         ]
       }
     },
@@ -1651,7 +1655,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Louisiana state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Louisiana Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Louisiana state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Louisiana Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -1663,7 +1667,7 @@
     "source": {
       "agency_name": "Maine Revenue Services",
       "url": "https://www.maine.gov/revenue/",
-      "statute_ref": "36 M.R.S. § 5111"
+      "statute_ref": "36 M.R.S. \u00a7 5111"
     },
     "params": {
       "brackets": [
@@ -1700,7 +1704,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Maine state tax: Marginal tax on $49,700 taxable income (after $15,300 deduction) = $3,094.45",
-          "Net annual pay: $65,000 - $13,686.95 = $51,313.05 (≈$4,276.09/month)"
+          "Net annual pay: $65,000 - $13,686.95 = $51,313.05 (\u2248$4,276.09/month)"
         ]
       }
     },
@@ -1719,7 +1723,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Maine state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Maine Revenue Services's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Maine state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Maine Revenue Services's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -1731,7 +1735,7 @@
     "source": {
       "agency_name": "Comptroller of Maryland",
       "url": "https://www.marylandtaxes.gov/",
-      "statute_ref": "Md. Code, Tax-General § 10-105 — 2026 budget added a 6.5% top bracket over $1,000,000"
+      "statute_ref": "Md. Code, Tax-General \u00a7 10-105 \u2014 2026 budget act added 6.25% ($500k-$1M) and 6.5% (>$1M) brackets"
     },
     "params": {
       "brackets": [
@@ -1764,8 +1768,12 @@
           "rate": 0.055
         },
         {
-          "upTo": 1000000,
+          "upTo": 500000,
           "rate": 0.0575
+        },
+        {
+          "upTo": 1000000,
+          "rate": 0.0625
         },
         {
           "upTo": null,
@@ -1776,8 +1784,8 @@
     },
     "abbr": "MD",
     "slug": "maryland",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-MD-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-MD-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -1792,7 +1800,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Maryland state tax: Marginal tax on $62,450 taxable income (after $2,550 deduction) = $2,913.88",
-          "Net annual pay: $65,000 - $13,506.38 = $51,493.62 (≈$4,291.14/month)"
+          "Net annual pay: $65,000 - $13,506.38 = $51,493.62 (\u2248$4,291.14/month)"
         ]
       }
     },
@@ -1803,7 +1811,7 @@
       },
       {
         "q": "How much is take-home pay on $65,000 in Maryland?",
-        "a": "On a $65,000 gross salary, a single filer in Maryland takes home roughly $51,493.62/year (about $4,291.14/month) after federal tax, FICA, and state tax — before any local tax."
+        "a": "On a $65,000 gross salary, a single filer in Maryland takes home roughly $51,493.62/year (about $4,291.14/month) after federal tax, FICA, and state tax \u2014 before any local tax."
       },
       {
         "q": "What deductions does Maryland apply before taxing my income?",
@@ -1811,11 +1819,11 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Maryland state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Comptroller of Maryland's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Maryland state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Comptroller of Maryland's married-filing-jointly tables for a precise figure."
       },
       {
         "q": "Does this calculator include Maryland local or city income tax?",
-        "a": "Every Maryland county plus Baltimore City adds a local \"piggyback\" income tax of 1.75%-3.2% on the same return — this is one of the largest local-tax gaps in this calculator. Combined state+local can reach ~8.95%. Not computed here; check your county's rate."
+        "a": "Every Maryland county plus Baltimore City adds a local \"piggyback\" income tax of 1.75%-3.2% on the same return \u2014 this is one of the largest local-tax gaps in this calculator. Combined state+local can reach ~8.95%. Not computed here; check your county's rate."
       }
     ],
     "filing_status_backfilled": false
@@ -1827,7 +1835,7 @@
     "source": {
       "agency_name": "Massachusetts Department of Revenue",
       "url": "https://www.mass.gov/orgs/massachusetts-department-of-revenue",
-      "statute_ref": "Mass. Gen. Laws ch. 62 § 4 — flat 5% plus 4% surtax on income over $1M (2022 ballot amendment)"
+      "statute_ref": "Mass. Gen. Laws ch. 62 \u00a7 4 \u2014 flat 5% plus 4% surtax on income over $1M (2022 ballot amendment)"
     },
     "params": {
       "rate": 0.05,
@@ -1854,8 +1862,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Massachusetts state tax: ($65,000 - $4,400 deduction) × 5.00% = $3,030",
-          "Net annual pay: $65,000 - $13,622.5 = $51,377.5 (≈$4,281.46/month)"
+          "Massachusetts state tax: ($65,000 - $4,400 deduction) \u00d7 5.00% = $3,030",
+          "Net annual pay: $65,000 - $13,622.5 = $51,377.5 (\u2248$4,281.46/month)"
         ]
       }
     },
@@ -1874,7 +1882,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Massachusetts state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Massachusetts Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Massachusetts state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Massachusetts Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -1886,7 +1894,7 @@
     "source": {
       "agency_name": "Minnesota Department of Revenue",
       "url": "https://www.revenue.state.mn.us/",
-      "statute_ref": "Minn. Stat. § 290.06"
+      "statute_ref": "Minn. Stat. \u00a7 290.06"
     },
     "params": {
       "brackets": [
@@ -1927,7 +1935,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Minnesota state tax: Marginal tax on $50,425 taxable income (after $14,575 deduction) = $2,969.4",
-          "Net annual pay: $65,000 - $13,561.9 = $51,438.1 (≈$4,286.51/month)"
+          "Net annual pay: $65,000 - $13,561.9 = $51,438.1 (\u2248$4,286.51/month)"
         ]
       }
     },
@@ -1946,7 +1954,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Minnesota state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Minnesota Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Minnesota state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Minnesota Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -1958,16 +1966,16 @@
     "source": {
       "agency_name": "Mississippi Department of Revenue",
       "url": "https://www.dor.ms.gov/",
-      "statute_ref": "Miss. Code § 27-7-5 — first $10,000 exempt, flat 4.4% above"
+      "statute_ref": "Miss. Code \u00a7 27-7-5 \u2014 first $10,000 exempt, flat 4.00% above (2026 phase-down)"
     },
     "params": {
-      "rate": 0.044,
+      "rate": 0.04,
       "standard_deduction": 10000
     },
     "abbr": "MS",
     "slug": "mississippi",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-MS-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-MS-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -1981,8 +1989,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Mississippi state tax: ($65,000 - $10,000 deduction) × 4.40% = $2,420",
-          "Net annual pay: $65,000 - $13,012.5 = $51,987.5 (≈$4,332.29/month)"
+          "Mississippi state tax: ($65,000 - $10,000 deduction) \u00d7 4.00% = $2,200",
+          "Net annual pay: $65,000 - $12,792.5 = $52,207.5 (\u2248$4,350.63/month)"
         ]
       }
     },
@@ -2001,7 +2009,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Mississippi state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Mississippi Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Mississippi state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Mississippi Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -2013,36 +2021,36 @@
     "source": {
       "agency_name": "Missouri Department of Revenue",
       "url": "https://dor.mo.gov/",
-      "statute_ref": "Mo. Rev. Stat. § 143.011"
+      "statute_ref": "Mo. Rev. Stat. \u00a7 143.011"
     },
     "params": {
       "brackets": [
         {
-          "upTo": 1313,
+          "upTo": 1348,
           "rate": 0
         },
         {
-          "upTo": 2626,
+          "upTo": 2696,
           "rate": 0.02
         },
         {
-          "upTo": 3939,
+          "upTo": 4044,
           "rate": 0.025
         },
         {
-          "upTo": 5252,
+          "upTo": 5392,
           "rate": 0.03
         },
         {
-          "upTo": 6565,
+          "upTo": 6740,
           "rate": 0.035
         },
         {
-          "upTo": 7878,
+          "upTo": 8088,
           "rate": 0.04
         },
         {
-          "upTo": 9191,
+          "upTo": 9436,
           "rate": 0.045
         },
         {
@@ -2054,8 +2062,8 @@
     },
     "abbr": "MO",
     "slug": "missouri",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-MO-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-MO-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -2069,8 +2077,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Missouri state tax: Marginal tax on $49,250 taxable income (after $15,750 deduction) = $2,138.81",
-          "Net annual pay: $65,000 - $12,731.31 = $52,268.69 (≈$4,355.72/month)"
+          "Missouri state tax: Marginal tax on $49,250 taxable income (after $15,750 deduction) = $2,134.12",
+          "Net annual pay: $65,000 - $12,726.62 = $52,273.38 (\u2248$4,356.12/month)"
         ]
       }
     },
@@ -2081,7 +2089,7 @@
       },
       {
         "q": "How much is take-home pay on $65,000 in Missouri?",
-        "a": "On a $65,000 gross salary, a single filer in Missouri takes home roughly $52,268.69/year (about $4,355.72/month) after federal tax, FICA, and state tax — before any local tax."
+        "a": "On a $65,000 gross salary, a single filer in Missouri takes home roughly $52,268.69/year (about $4,355.72/month) after federal tax, FICA, and state tax \u2014 before any local tax."
       },
       {
         "q": "What deductions does Missouri apply before taxing my income?",
@@ -2089,7 +2097,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Missouri state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Missouri Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Missouri state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Missouri Department of Revenue's married-filing-jointly tables for a precise figure."
       },
       {
         "q": "Does this calculator include Missouri local or city income tax?",
@@ -2105,7 +2113,7 @@
     "source": {
       "agency_name": "Montana Department of Revenue",
       "url": "https://mtrevenue.gov/",
-      "statute_ref": "Mont. Code § 15-30-2103"
+      "statute_ref": "Mont. Code \u00a7 15-30-2103"
     },
     "params": {
       "brackets": [
@@ -2138,7 +2146,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Montana state tax: Marginal tax on $59,340 taxable income (after $5,660 deduction), all within the 4.70% bracket (under the $95,000 break) = $2,788.98",
-          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,788.98 = $51,618.52 (≈$4,301.54/month)"
+          "Net annual pay: $65,000 - $5,620 - $4,972.50 - $2,788.98 = $51,618.52 (\u2248$4,301.54/month)"
         ]
       }
     },
@@ -2157,7 +2165,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Montana state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Montana Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Montana state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Montana Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -2169,16 +2177,16 @@
     "source": {
       "agency_name": "Nebraska Department of Revenue",
       "url": "https://revenue.nebraska.gov/",
-      "statute_ref": "Neb. Rev. Stat. § 77-2715.03 — cut to 3-bracket, 4.55% top rate for 2026"
+      "statute_ref": "Neb. Rev. Stat. \u00a7 77-2715.03 \u2014 2026 thresholds $4,130/$24,760; NE-specific standard deduction $8,850 (not federal)"
     },
     "params": {
       "brackets": [
         {
-          "upTo": 2399,
+          "upTo": 4130,
           "rate": 0.0246
         },
         {
-          "upTo": 17999,
+          "upTo": 24760,
           "rate": 0.0351
         },
         {
@@ -2186,12 +2194,12 @@
           "rate": 0.0455
         }
       ],
-      "standard_deduction": 16100
+      "standard_deduction": 8850
     },
     "abbr": "NE",
     "slug": "nebraska",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-NE-v1",
+    "last_verified": "2026-08-19",
+    "guideline_version": "2026-NE-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
@@ -2205,8 +2213,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Nebraska state tax: Marginal tax on $48,900 taxable income (after $16,100 deduction) = $2,012.57",
-          "Net annual pay: $65,000 - $12,605.07 = $52,394.93 (≈$4,366.24/month)"
+          "Nebraska state tax: Marginal tax on $56,150 taxable income (after $8,850 deduction) = $2,253.96",
+          "Net annual pay: $65,000 - $12,846.46 = $52,153.54 (\u2248$4,346.13/month)"
         ]
       }
     },
@@ -2225,7 +2233,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Nebraska state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Nebraska Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Nebraska state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Nebraska Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -2237,7 +2245,7 @@
     "source": {
       "agency_name": "Nevada Department of Taxation",
       "url": "https://tax.nv.gov/",
-      "statute_ref": "Nev. Const. art. 10 — no personal income tax"
+      "statute_ref": "Nev. Const. art. 10 \u2014 no personal income tax"
     },
     "params": {},
     "abbr": "NV",
@@ -2249,7 +2257,7 @@
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
-        "Nevada charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+        "Nevada charges no state income tax \u2014 your paycheck stops there. What's left is your net take-home pay."
       ],
       "example": {
         "scenario": "Example: $65,000/year gross salary, single filer, Nevada resident.",
@@ -2257,7 +2265,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Nevada state tax: No state income tax.",
-          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"
+          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (\u2248$4,533.96/month)"
         ]
       }
     },
@@ -2276,7 +2284,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Nevada Department of Taxation's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Nevada Department of Taxation's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -2288,7 +2296,7 @@
     "source": {
       "agency_name": "New Hampshire Department of Revenue Administration",
       "url": "https://www.revenue.nh.gov/",
-      "statute_ref": "Interest & Dividends Tax fully repealed effective 2025-01-01 — no tax on any personal income including wages"
+      "statute_ref": "Interest & Dividends Tax fully repealed effective 2025-01-01 \u2014 no tax on any personal income including wages"
     },
     "params": {},
     "abbr": "NH",
@@ -2300,7 +2308,7 @@
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
-        "New Hampshire charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+        "New Hampshire charges no state income tax \u2014 your paycheck stops there. What's left is your net take-home pay."
       ],
       "example": {
         "scenario": "Example: $65,000/year gross salary, single filer, New Hampshire resident.",
@@ -2308,7 +2316,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "New Hampshire state tax: No state income tax.",
-          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"
+          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (\u2248$4,533.96/month)"
         ]
       }
     },
@@ -2327,7 +2335,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check New Hampshire Department of Revenue Administration's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check New Hampshire Department of Revenue Administration's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -2339,7 +2347,7 @@
     "source": {
       "agency_name": "New Jersey Division of Taxation",
       "url": "https://www.nj.gov/treasury/taxation/",
-      "statute_ref": "N.J. Stat. § 54A:2-1 — 7-bracket schedule"
+      "statute_ref": "N.J. Stat. \u00a7 54A:2-1 \u2014 7-bracket schedule"
     },
     "params": {
       "brackets": [
@@ -2392,7 +2400,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "New Jersey state tax: Marginal tax on $64,000 taxable income (after $1,000 deduction) = $2,043.5",
-          "Net annual pay: $65,000 - $12,636 = $52,364 (≈$4,363.67/month)"
+          "Net annual pay: $65,000 - $12,636 = $52,364 (\u2248$4,363.67/month)"
         ]
       }
     },
@@ -2411,7 +2419,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and New Jersey state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check New Jersey Division of Taxation's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and New Jersey state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check New Jersey Division of Taxation's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -2423,7 +2431,7 @@
     "source": {
       "agency_name": "New Mexico Taxation and Revenue Department",
       "url": "https://www.tax.newmexico.gov/",
-      "statute_ref": "N.M. Stat. § 7-2-7, as amended by HB 252 (2024)"
+      "statute_ref": "N.M. Stat. \u00a7 7-2-7, as amended by HB 252 (2024)"
     },
     "params": {
       "brackets": [
@@ -2468,7 +2476,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "New Mexico state tax: Marginal tax on $50,400 taxable income (after $14,600 deduction) = $2,090.3",
-          "Net annual pay: $65,000 - $12,682.8 = $52,317.2 (≈$4,359.77/month)"
+          "Net annual pay: $65,000 - $12,682.8 = $52,317.2 (\u2248$4,359.77/month)"
         ]
       }
     },
@@ -2487,7 +2495,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and New Mexico state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check New Mexico Taxation and Revenue Department's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and New Mexico state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check New Mexico Taxation and Revenue Department's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -2499,7 +2507,7 @@
     "source": {
       "agency_name": "North Dakota Office of State Tax Commissioner",
       "url": "https://www.tax.nd.gov/",
-      "statute_ref": "N.D. Cent. Code § 57-38-30.3"
+      "statute_ref": "N.D. Cent. Code \u00a7 57-38-30.3"
     },
     "params": {
       "brackets": [
@@ -2532,7 +2540,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "North Dakota state tax: Marginal tax on $48,900 taxable income (after $16,100 deduction) = $976.51",
-          "Net annual pay: $65,000 - $11,569.01 = $53,430.99 (≈$4,452.58/month)"
+          "Net annual pay: $65,000 - $11,569.01 = $53,430.99 (\u2248$4,452.58/month)"
         ]
       }
     },
@@ -2551,7 +2559,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and North Dakota state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check North Dakota Office of State Tax Commissioner's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and North Dakota state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check North Dakota Office of State Tax Commissioner's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -2563,7 +2571,7 @@
     "source": {
       "agency_name": "Oklahoma Tax Commission",
       "url": "https://oklahoma.gov/tax.html",
-      "statute_ref": "Okla. Stat. tit. 68 § 2355"
+      "statute_ref": "Okla. Stat. tit. 68 \u00a7 2355"
     },
     "params": {
       "brackets": [
@@ -2612,7 +2620,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Oklahoma state tax: Marginal tax on $58,650 taxable income (after $6,350 deduction) = $2,597.38",
-          "Net annual pay: $65,000 - $13,189.88 = $51,810.12 (≈$4,317.51/month)"
+          "Net annual pay: $65,000 - $13,189.88 = $51,810.12 (\u2248$4,317.51/month)"
         ]
       }
     },
@@ -2631,7 +2639,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Oklahoma state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Oklahoma Tax Commission's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Oklahoma state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Oklahoma Tax Commission's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -2643,7 +2651,7 @@
     "source": {
       "agency_name": "Oregon Department of Revenue",
       "url": "https://www.oregon.gov/dor/",
-      "statute_ref": "Or. Rev. Stat. § 316.037"
+      "statute_ref": "Or. Rev. Stat. \u00a7 316.037"
     },
     "params": {
       "brackets": [
@@ -2684,7 +2692,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Oregon state tax: Marginal tax on $62,125 taxable income (after $2,875 deduction) = $5,150.94",
-          "Net annual pay: $65,000 - $15,743.44 = $49,256.56 (≈$4,104.71/month)"
+          "Net annual pay: $65,000 - $15,743.44 = $49,256.56 (\u2248$4,104.71/month)"
         ]
       }
     },
@@ -2703,7 +2711,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Oregon state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Oregon Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Oregon state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Oregon Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -2715,7 +2723,7 @@
     "source": {
       "agency_name": "Rhode Island Division of Taxation",
       "url": "https://tax.ri.gov/",
-      "statute_ref": "R.I. Gen. Laws § 44-30-2.6"
+      "statute_ref": "R.I. Gen. Laws \u00a7 44-30-2.6"
     },
     "params": {
       "brackets": [
@@ -2753,7 +2761,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Rhode Island state tax: Marginal tax on $49,750 taxable income (after $15,250 deduction) = $1,865.63",
-          "Net annual pay: $65,000 - $12,458.13 = $52,541.87 (≈$4,378.49/month)"
+          "Net annual pay: $65,000 - $12,458.13 = $52,541.87 (\u2248$4,378.49/month)"
         ]
       }
     },
@@ -2772,7 +2780,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Rhode Island state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Rhode Island Division of Taxation's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Rhode Island state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Rhode Island Division of Taxation's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -2784,7 +2792,7 @@
     "source": {
       "agency_name": "South Carolina Department of Revenue",
       "url": "https://dor.sc.gov/",
-      "statute_ref": "H.4216 (signed 2026-03-30) — 2-bracket overhaul, 1.99% under $30,000 / 5.21% above, decoupling from the federal standard deduction"
+      "statute_ref": "H.4216 (signed 2026-03-30) \u2014 2-bracket overhaul, 1.99% under $30,000 / 5.21% above, decoupling from the federal standard deduction"
     },
     "params": {
       "brackets": [
@@ -2817,7 +2825,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "South Carolina state tax: Marginal tax on $65,000 taxable income (after $0 deduction) = $2,420.5",
-          "Net annual pay: $65,000 - $13,013 = $51,987 (≈$4,332.25/month)"
+          "Net annual pay: $65,000 - $13,013 = $51,987 (\u2248$4,332.25/month)"
         ]
       }
     },
@@ -2836,7 +2844,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and South Carolina state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check South Carolina Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and South Carolina state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check South Carolina Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -2848,7 +2856,7 @@
     "source": {
       "agency_name": "South Dakota Department of Revenue",
       "url": "https://dor.sd.gov/",
-      "statute_ref": "S.D. Const. art. XI — no personal income tax"
+      "statute_ref": "S.D. Const. art. XI \u2014 no personal income tax"
     },
     "params": {},
     "abbr": "SD",
@@ -2860,7 +2868,7 @@
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
-        "South Dakota charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+        "South Dakota charges no state income tax \u2014 your paycheck stops there. What's left is your net take-home pay."
       ],
       "example": {
         "scenario": "Example: $65,000/year gross salary, single filer, South Dakota resident.",
@@ -2868,7 +2876,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "South Dakota state tax: No state income tax.",
-          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"
+          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (\u2248$4,533.96/month)"
         ]
       }
     },
@@ -2887,7 +2895,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check South Dakota Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check South Dakota Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -2899,7 +2907,7 @@
     "source": {
       "agency_name": "Tennessee Department of Revenue",
       "url": "https://www.tn.gov/revenue",
-      "statute_ref": "Hall Tax (on interest/dividends) fully repealed 2021-01-01 — no tax on any personal income including wages"
+      "statute_ref": "Hall Tax (on interest/dividends) fully repealed 2021-01-01 \u2014 no tax on any personal income including wages"
     },
     "params": {},
     "abbr": "TN",
@@ -2911,7 +2919,7 @@
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
-        "Tennessee charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+        "Tennessee charges no state income tax \u2014 your paycheck stops there. What's left is your net take-home pay."
       ],
       "example": {
         "scenario": "Example: $65,000/year gross salary, single filer, Tennessee resident.",
@@ -2919,7 +2927,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Tennessee state tax: No state income tax.",
-          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"
+          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (\u2248$4,533.96/month)"
         ]
       }
     },
@@ -2938,7 +2946,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Tennessee Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Tennessee Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -2950,7 +2958,7 @@
     "source": {
       "agency_name": "Utah State Tax Commission",
       "url": "https://tax.utah.gov/",
-      "statute_ref": "SB 60 (2026) — flat 4.45% rate, down from 4.5%"
+      "statute_ref": "SB 60 (2026) \u2014 flat 4.45% rate, down from 4.5%"
     },
     "params": {
       "rate": 0.0445,
@@ -2973,8 +2981,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "Utah state tax: ($65,000 - $0 deduction) × 4.45% - $840 credit = $2,052.5",
-          "Net annual pay: $65,000 - $12,645 = $52,355 (≈$4,362.92/month)"
+          "Utah state tax: ($65,000 - $0 deduction) \u00d7 4.45% - $840 credit = $2,052.5",
+          "Net annual pay: $65,000 - $12,645 = $52,355 (\u2248$4,362.92/month)"
         ]
       }
     },
@@ -2993,7 +3001,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Utah state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Utah State Tax Commission's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Utah state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Utah State Tax Commission's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -3005,7 +3013,7 @@
     "source": {
       "agency_name": "Vermont Department of Taxes",
       "url": "https://tax.vermont.gov/",
-      "statute_ref": "32 V.S.A. § 5822"
+      "statute_ref": "32 V.S.A. \u00a7 5822"
     },
     "params": {
       "brackets": [
@@ -3046,7 +3054,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Vermont state tax: Marginal tax on $58,000 taxable income (after $7,000 deduction) = $2,352.5",
-          "Net annual pay: $65,000 - $12,945 = $52,055 (≈$4,337.92/month)"
+          "Net annual pay: $65,000 - $12,945 = $52,055 (\u2248$4,337.92/month)"
         ]
       }
     },
@@ -3065,7 +3073,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Vermont state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Vermont Department of Taxes's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Vermont state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Vermont Department of Taxes's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -3077,7 +3085,7 @@
     "source": {
       "agency_name": "Virginia Department of Taxation",
       "url": "https://www.tax.virginia.gov/",
-      "statute_ref": "Va. Code § 58.1-320"
+      "statute_ref": "Va. Code \u00a7 58.1-320"
     },
     "params": {
       "brackets": [
@@ -3119,7 +3127,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Virginia state tax: Marginal tax on $55,320 taxable income (after $9,680 deduction) = $2,923.4",
-          "Net annual pay: $65,000 - $13,515.9 = $51,484.1 (≈$4,290.34/month)"
+          "Net annual pay: $65,000 - $13,515.9 = $51,484.1 (\u2248$4,290.34/month)"
         ]
       }
     },
@@ -3138,7 +3146,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Virginia state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Virginia Department of Taxation's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Virginia state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Virginia Department of Taxation's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -3162,7 +3170,7 @@
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
-        "Washington charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+        "Washington charges no state income tax \u2014 your paycheck stops there. What's left is your net take-home pay."
       ],
       "example": {
         "scenario": "Example: $65,000/year gross salary, single filer, Washington resident.",
@@ -3170,7 +3178,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Washington state tax: No state income tax.",
-          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"
+          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (\u2248$4,533.96/month)"
         ]
       }
     },
@@ -3189,7 +3197,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Washington Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Washington Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -3201,7 +3209,7 @@
     "source": {
       "agency_name": "West Virginia State Tax Department",
       "url": "https://tax.wv.gov/",
-      "statute_ref": "W. Va. Code § 11-21-4e — rates cut ~5% for 2026"
+      "statute_ref": "W. Va. Code \u00a7 11-21-4e \u2014 rates cut ~5% for 2026"
     },
     "params": {
       "brackets": [
@@ -3246,7 +3254,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "West Virginia state tax: Marginal tax on $65,000 taxable income (after $0 deduction) = $1,869",
-          "Net annual pay: $65,000 - $12,461.5 = $52,538.5 (≈$4,378.21/month)"
+          "Net annual pay: $65,000 - $12,461.5 = $52,538.5 (\u2248$4,378.21/month)"
         ]
       }
     },
@@ -3261,11 +3269,11 @@
       },
       {
         "q": "What deductions does West Virginia apply before taxing my income?",
-        "a": "West Virginia applies no standard deduction — the full rate applies to gross wages, before its marginal bracket schedule. See the \"How West Virginia Paycheck Tax Is Calculated\" section above for the exact formula."
+        "a": "West Virginia applies no standard deduction \u2014 the full rate applies to gross wages, before its marginal bracket schedule. See the \"How West Virginia Paycheck Tax Is Calculated\" section above for the exact formula."
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and West Virginia state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check West Virginia State Tax Department's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and West Virginia state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check West Virginia State Tax Department's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -3277,7 +3285,7 @@
     "source": {
       "agency_name": "Wisconsin Department of Revenue",
       "url": "https://www.revenue.wi.gov/",
-      "statute_ref": "Wis. Stat. § 71.06"
+      "statute_ref": "Wis. Stat. \u00a7 71.06"
     },
     "params": {
       "brackets": [
@@ -3318,7 +3326,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Wisconsin state tax: Marginal tax on $52,240 taxable income (after $12,760 deduction) = $2,423.61",
-          "Net annual pay: $65,000 - $13,016.11 = $51,983.89 (≈$4,331.99/month)"
+          "Net annual pay: $65,000 - $13,016.11 = $51,983.89 (\u2248$4,331.99/month)"
         ]
       }
     },
@@ -3337,7 +3345,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Wisconsin state brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Wisconsin Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Wisconsin state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Wisconsin Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
@@ -3361,7 +3369,7 @@
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
-        "Wyoming charges no state income tax — your paycheck stops there. What's left is your net take-home pay."
+        "Wyoming charges no state income tax \u2014 your paycheck stops there. What's left is your net take-home pay."
       ],
       "example": {
         "scenario": "Example: $65,000/year gross salary, single filer, Wyoming resident.",
@@ -3369,7 +3377,7 @@
           "Federal tax: $5,620",
           "FICA: $4,972.5",
           "Wyoming state tax: No state income tax.",
-          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (≈$4,533.96/month)"
+          "Net annual pay: $65,000 - $10,592.5 = $54,407.5 (\u2248$4,533.96/month)"
         ]
       }
     },
@@ -3388,7 +3396,7 @@
       },
       {
         "q": "Does this estimate change if I'm married or have dependents?",
-        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction — your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Wyoming Department of Revenue's married-filing-jointly tables for a precise figure."
+        "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Wyoming Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
     "filing_status_backfilled": false
