@@ -1100,6 +1100,256 @@ document.addEventListener('DOMContentLoaded', () => { document.getElementById('c
 `;
 }
 
+function renderSalaryConverterPage() {
+    const allRules = {};
+    for (const state of Object.values(states)) {
+        allRules[state.abbr] = loadRules(state.abbr.toLowerCase());
+    }
+    const stateOptions = Object.values(states)
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(s => `<option value="${s.abbr}">${s.name}</option>`)
+        .join('');
+
+    const title = 'Salary Converter — Hourly to Annual, Gross to Net (2026)';
+    const description = 'Convert hourly rate to annual salary, or gross salary to net take-home pay (and back, net to gross) — federal tax, FICA, and optional state tax.';
+
+    const jsonLd = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'WebApplication',
+                name: 'Salary Converter',
+                applicationCategory: 'FinanceApplication',
+                operatingSystem: 'Any',
+                offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+                author: GESMINE_ORG,
+                publisher: GESMINE_ORG
+            },
+            {
+                '@type': 'FAQPage',
+                mainEntity: [
+                    { '@type': 'Question', name: 'How do I convert an hourly rate to an annual salary?', acceptedAnswer: { '@type': 'Answer', text: 'Multiply your hourly rate by hours worked per week, then by 52 weeks (or use this converter, which also accounts for weekly overtime at 1.5x). $25/hour at 40 hours/week is $52,000/year before tax.' } },
+                    { '@type': 'Question', name: 'How do I convert gross salary to net (take-home) pay?', acceptedAnswer: { '@type': 'Answer', text: 'Subtract federal income tax, FICA (Social Security + Medicare), and state income tax (if your state has one) from your gross salary. This converter runs that calculation for you, including an optional state selection.' } },
+                    { '@type': 'Question', name: 'Can I convert net pay back to gross salary?', acceptedAnswer: { '@type': 'Answer', text: 'Yes — this is harder than gross-to-net since tax brackets are non-linear, so this converter solves for it by narrowing down the gross salary that produces your target net figure.' } }
+                ]
+            },
+            GESMINE_ORG
+        ]
+    });
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${title}</title>
+<meta name="description" content="${description}">
+<link rel="canonical" href="${SITE_URL}/salary-converter/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${description}">
+<meta property="og:url" content="${SITE_URL}/salary-converter/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">${jsonLd}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a></p>
+  <h1>Salary Converter</h1>
+  <p class="badge">Hourly ↔ annual, gross ↔ net — federal tax, FICA, and optional state tax</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. Leave state unselected for a federal + FICA-only estimate, or pick your state for a fuller take-home figure. For your exact state's breakdown (SDI, local tax, etc.) use that state's dedicated calculator.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      <label>Convert
+        <select id="direction">
+          <option value="hourlyToAnnual">Hourly rate → Annual salary</option>
+          <option value="grossToNet" selected>Gross salary → Net (take-home) pay</option>
+          <option value="netToGross">Net (take-home) pay → Gross salary</option>
+        </select>
+      </label>
+
+      <div id="hourlyInputs" hidden>
+        <label>Hourly Rate ($)
+          <input type="number" id="hourlyRate" min="0" step="0.25" value="25">
+        </label>
+        <label>Hours per Week
+          <input type="number" id="hoursPerWeek" min="0" max="80" step="1" value="40">
+        </label>
+        <label>Overtime Hours per Week (over 40)
+          <input type="number" id="otHoursPerWeek" min="0" max="80" step="1" value="0">
+        </label>
+      </div>
+
+      <div id="grossInput">
+        <label>Gross Annual Salary ($)
+          <input type="number" id="grossIncome" min="0" step="100" value="65000">
+        </label>
+      </div>
+
+      <div id="netInput" hidden>
+        <label>Target Net Annual Pay ($)
+          <input type="number" id="netIncome" min="0" step="100" value="52000">
+        </label>
+      </div>
+
+      <label>Pay Frequency
+        <select id="payFrequency">
+          <option value="annual">Annual</option>
+          <option value="monthly">Monthly</option>
+          <option value="semimonthly">Semi-Monthly (24/yr)</option>
+          <option value="biweekly" selected>Bi-Weekly (26/yr)</option>
+          <option value="weekly">Weekly</option>
+        </select>
+      </label>
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <label>State (optional — federal + FICA only if left blank)
+        <select id="stateAbbr">
+          <option value="">— No state (federal + FICA only) —</option>
+          ${stateOptions}
+        </select>
+      </label>
+      <button type="submit">Convert →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Gross Annual</span><span class="value" id="result-gross"></span></div>
+        <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
+        <div class="result-item"><span class="label">Hourly Equivalent</span><span class="value" id="result-hourly"></span></div>
+        <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
+        <div class="result-item" id="result-state-row" hidden><span class="label" id="result-state-label">State Tax</span><span class="value" id="result-state"></span></div>
+      </div>
+      <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
+    </div>
+    <p class="cross-link"><a href="/compare/">Comparing two states at the same salary? Try our state comparator →</a></p>
+  </section>
+
+  <section id="worksheet" class="seo-section">
+    <h2>Hourly to Salary, and Gross to Net — How the Conversion Works</h2>
+    <ol>
+      <li><strong>Hourly → Annual:</strong> hourly rate × hours/week × 52, plus 1.5x for any weekly overtime hours entered.</li>
+      <li><strong>Gross → Net:</strong> gross salary minus federal tax (2026 brackets), minus FICA (6.2% Social Security + 1.45%/1.45%+0.9% Medicare), minus state income tax if a state is selected.</li>
+      <li><strong>Net → Gross:</strong> the reverse of gross → net. Since tax brackets are non-linear, there's no single formula — this converter narrows in on the gross salary whose net result matches your target, to the nearest dollar.</li>
+    </ol>
+    <p class="formula-footnote">Federal brackets, standard deductions, and FICA constants sourced from the IRS (Revenue Procedure 2025-32; married-filing-jointly Additional Medicare threshold of $250,000 is a separate, unindexed statutory figure). State tax, where selected, uses that state's dedicated calculator page figures — see <a href="/compare/">state comparator</a> for a full state-by-state breakdown. Guideline version: 2026-v1 · Last verified: 2026-08-26.</p>
+  </section>
+
+  <section id="faq" class="seo-section">
+    <h2>Salary Converter FAQ</h2>
+    <details class="faq-item">
+      <summary>How do I convert an hourly rate to an annual salary?</summary>
+      <p>Multiply your hourly rate by hours worked per week, then by 52 weeks — this converter also factors in weekly overtime at 1.5x if you work any. $25/hour at 40 hours/week is $52,000/year before tax.</p>
+    </details>
+    <details class="faq-item">
+      <summary>How do I convert gross salary to net (take-home) pay?</summary>
+      <p>Subtract federal income tax, FICA, and state income tax (if applicable) from gross salary. This converter runs the full calculation, including an optional state selection for a more precise figure.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Can I convert net pay back to gross salary?</summary>
+      <p>Yes — select "Net → Gross" above. Because tax brackets are non-linear, this is solved by narrowing in on the gross figure that produces your target net pay, rather than a single reverse formula.</p>
+    </details>
+  </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+<script src="/assets/calc-engine.js"></script>
+<script>
+const ALL_STATES = ${JSON.stringify(states)};
+const ALL_RULES = ${JSON.stringify(allRules)};
+
+function stateEntryFor(abbr) {
+    if (!abbr) return { name: 'No state', abbr: '', formula_model: 'no_income_tax', params: {} };
+    return ALL_STATES[abbr.toLowerCase()];
+}
+function rulesFor(abbr) {
+    if (!abbr) return { rounding: 'nearest_cent', extra_payroll_tax: null, local_tax_note: null };
+    return ALL_RULES[abbr];
+}
+
+document.getElementById('direction').addEventListener('change', function () {
+    const d = this.value;
+    document.getElementById('hourlyInputs').hidden = d !== 'hourlyToAnnual';
+    document.getElementById('grossInput').hidden = d === 'netToGross';
+    document.getElementById('netInput').hidden = d !== 'netToGross';
+});
+
+function solveGrossForNet(targetNet, stateEntry, rules, freq, filingStatus) {
+    let lo = 0, hi = targetNet * 3 + 100000;
+    for (let i = 0; i < 40; i++) {
+        const mid = (lo + hi) / 2;
+        const r = calculatePaycheck(stateEntry, rules, mid, 'annual', filingStatus);
+        if (r.netAnnual > targetNet) hi = mid; else lo = mid;
+    }
+    return (lo + hi) / 2;
+}
+
+function runCalculation(e) {
+    e.preventDefault();
+    const direction = document.getElementById('direction').value;
+    const freq = document.getElementById('payFrequency').value;
+    const filingStatus = document.getElementById('filingStatus').value;
+    const abbr = document.getElementById('stateAbbr').value;
+    const stateEntry = stateEntryFor(abbr);
+    const rules = rulesFor(abbr);
+
+    let grossAnnual;
+    if (direction === 'hourlyToAnnual') {
+        const hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
+        const hoursPerWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 0;
+        const otHoursPerWeek = parseFloat(document.getElementById('otHoursPerWeek').value) || 0;
+        grossAnnual = annualizeHourly(hourlyRate, hoursPerWeek, otHoursPerWeek);
+    } else if (direction === 'netToGross') {
+        const targetNet = parseFloat(document.getElementById('netIncome').value) || 0;
+        grossAnnual = solveGrossForNet(targetNet, stateEntry, rules, freq, filingStatus);
+    } else {
+        grossAnnual = parseFloat(document.getElementById('grossIncome').value) || 0;
+    }
+
+    const r = calculatePaycheck(stateEntry, rules, grossAnnual, freq, filingStatus);
+    const freqLabel = { annual: 'Annual', monthly: 'Monthly', semimonthly: 'Semi-Monthly', biweekly: 'Bi-Weekly', weekly: 'Weekly' }[freq];
+
+    document.getElementById('result-amount').textContent = fmtMoney(r.netPerPeriod) + ' / ' + freqLabel.toLowerCase() + ' net';
+    document.getElementById('result-gross').textContent = fmtMoney(r.grossAnnualIncome) + '/yr';
+    document.getElementById('result-net-annual').textContent = fmtMoney(r.netAnnual) + '/yr';
+    document.getElementById('result-hourly').textContent = fmtMoney(r.grossAnnualIncome / 2080) + '/hr (2,080 hrs/yr)';
+    document.getElementById('result-federal').textContent = fmtMoney(r.federalTax);
+    document.getElementById('result-fica').textContent = fmtMoney(r.fica.total);
+
+    const stateRow = document.getElementById('result-state-row');
+    if (abbr) {
+        stateRow.hidden = false;
+        document.getElementById('result-state-label').textContent = stateEntry.name + ' State Tax';
+        document.getElementById('result-state').textContent = fmtMoney(r.stateTax);
+    } else {
+        stateRow.hidden = true;
+    }
+
+    document.getElementById('results-block').hidden = false;
+}
+document.getElementById('calc-form').addEventListener('submit', runCalculation);
+document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+</script>
+</body>
+</html>
+`;
+}
+
 // ---- Build ----
 let built = 0;
 for (const state of Object.values(states)) {
@@ -1140,5 +1390,10 @@ const withholdingCheckupDir = path.join(__dirname, 'withholding-checkup');
 fs.mkdirSync(withholdingCheckupDir, { recursive: true });
 fs.writeFileSync(path.join(withholdingCheckupDir, 'index.html'), renderWithholdingCheckupPage());
 console.log('Generated: withholding-checkup/');
+
+const salaryConverterDir = path.join(__dirname, 'salary-converter');
+fs.mkdirSync(salaryConverterDir, { recursive: true });
+fs.writeFileSync(path.join(salaryConverterDir, 'index.html'), renderSalaryConverterPage());
+console.log('Generated: salary-converter/');
 
 console.log(`\nDone. ${built} state pages built.`);
