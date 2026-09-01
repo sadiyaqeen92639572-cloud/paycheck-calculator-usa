@@ -4,7 +4,13 @@
 
 ## What the site is
 
-A hub with one calculator per state (50 + DC), a parallel set of bonus/supplemental-wage calculators per state, plus shared tools: Compare States, Withholding Checkup, Salary Converter, Changelog, Research, About, Privacy. ~60 sub-paths total.
+A hub with **4 calculator pages per state** (50 + DC = 51 states → ~204 state sub-pages) plus shared tools: Compare States, Withholding Checkup, Salary Converter, Changelog, Research, About, Privacy.
+
+Per state (e.g. `/california/`):
+- `/{state}/` — salary/annual take-home
+- `/{state}/hourly/` — hourly wage take-home, incl. overtime (1.5×)
+- `/{state}/bonus/` — supplemental-wage take-home (flat 22%/37% federal rate)
+- `/{state}/self-employed/` — 1099/self-employment take-home: adds SE tax (15.3% of 92.35% of net self-employment income = SS+Medicare both halves), half of SE tax deductible from federal taxable income
 
 ## How pay is computed
 
@@ -16,12 +22,13 @@ A hub with one calculator per state (50 + DC), a parallel set of bonus/supplemen
   - CA and NY add small mandatory payroll deductions (SDI, Paid Family Leave).
 - **Local/municipal tax:** 8 states have a local-tax selector on their page. NY (NYC, Yonkers) and PA (Philadelphia) fully covered; MO (Kansas City, St. Louis) and AL (6 cities) cover every applicable jurisdiction; OH, IN, KY, MD cover only their largest cities/counties. Smaller jurisdictions in those four, and every municipality in the other 42 states, are not computed — each state page says so explicitly.
 - **Bonus math:** federal supplemental-wage withholding is a flat **22%** (37% on cumulative supplemental wages above $1,000,000/year), separate from regular paycheck math.
+- **Hourly math:** regular pay = hours × rate; overtime = hours over 40/week × rate × 1.5; annualized before running the same federal/state/FICA stack.
+- **Self-employed math:** SE tax = 15.3% of 92.35% of net self-employment income (both employer + employee share of SS up to the wage base + Medicare); half of SE tax is deducted from federal taxable income before applying brackets; no employer FICA withholding since there's no employer.
 
 ## Pages
 
 - [Home / state picker](https://calcpaycheck.com/)
-- `/{state}/` — one per state + DC (e.g. `/california/`, `/texas/`, `/new-york/`, `/district-of-columbia/`): state-specific take-home calculation + coverage notes
-- `/{state}/` bonus calculators — supplemental-wage take-home per state
+- `/{state}/`, `/{state}/hourly/`, `/{state}/bonus/`, `/{state}/self-employed/` — one set of 4 per state + DC (e.g. `/california/`, `/california/hourly/`, `/texas/self-employed/`, `/district-of-columbia/bonus/`)
 - [/compare/](https://calcpaycheck.com/compare/) — compare take-home across states
 - [/withholding-checkup/](https://calcpaycheck.com/withholding-checkup/) — is your W-4 withholding on track
 - [/salary-converter/](https://calcpaycheck.com/salary-converter/) — hourly ↔ weekly ↔ annual
