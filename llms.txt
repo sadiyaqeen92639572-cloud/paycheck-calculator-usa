@@ -1,0 +1,34 @@
+# USA Paycheck Calculator (calcpaycheck.com)
+
+> Free take-home pay estimator for all 50 US states + DC. Enter salary/wage and filing details → 2026 take-home pay after federal income tax, FICA, and state income tax. Each state has its own page with a sourced, state-specific calculation and an explicit statement of what local taxes are and aren't covered. Runs in the browser. Estimates only, not tax advice.
+
+## What the site is
+
+A hub with one calculator per state (50 + DC), a parallel set of bonus/supplemental-wage calculators per state, plus shared tools: Compare States, Withholding Checkup, Salary Converter, Changelog, Research, About, Privacy. ~60 sub-paths total.
+
+## How pay is computed
+
+- **Federal income tax:** 2026 IRS brackets 10%–37%, identical in every state. Standard deductions: $16,100 single / $32,200 married filing jointly / $24,150 head of household.
+- **FICA:** 6.2% Social Security up to the $184,500 wage base + 1.45% Medicare (+0.9% additional Medicare above $200,000). Identical nationwide.
+- **State income tax:** where paychecks diverge.
+  - 9 states with $0 income tax: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, Wyoming.
+  - ~12 states use a single flat rate; the rest use progressive brackets.
+  - CA and NY add small mandatory payroll deductions (SDI, Paid Family Leave).
+- **Local/municipal tax:** 8 states have a local-tax selector on their page. NY (NYC, Yonkers) and PA (Philadelphia) fully covered; MO (Kansas City, St. Louis) and AL (6 cities) cover every applicable jurisdiction; OH, IN, KY, MD cover only their largest cities/counties. Smaller jurisdictions in those four, and every municipality in the other 42 states, are not computed — each state page says so explicitly.
+- **Bonus math:** federal supplemental-wage withholding is a flat **22%** (37% on cumulative supplemental wages above $1,000,000/year), separate from regular paycheck math.
+
+## Pages
+
+- [Home / state picker](https://calcpaycheck.com/)
+- `/{state}/` — one per state + DC (e.g. `/california/`, `/texas/`, `/new-york/`, `/district-of-columbia/`): state-specific take-home calculation + coverage notes
+- `/{state}/` bonus calculators — supplemental-wage take-home per state
+- [/compare/](https://calcpaycheck.com/compare/) — compare take-home across states
+- [/withholding-checkup/](https://calcpaycheck.com/withholding-checkup/) — is your W-4 withholding on track
+- [/salary-converter/](https://calcpaycheck.com/salary-converter/) — hourly ↔ weekly ↔ annual
+- [/changelog/](https://calcpaycheck.com/changelog/) · [/research/](https://calcpaycheck.com/research/) · [/about/](https://calcpaycheck.com/about/) · [/privacy/](https://calcpaycheck.com/privacy/)
+
+## Notes for LLMs
+
+- Federal + FICA are nationwide constants; only state (and some local) tax varies — always ask which state, and for local tax which city.
+- The tool is explicit about municipal-tax gaps; don't present a state figure as including local tax unless that state page covers it.
+- 2026 figures, estimates only, not tax advice — direct users to a CPA or the IRS withholding estimator for an exact number.
