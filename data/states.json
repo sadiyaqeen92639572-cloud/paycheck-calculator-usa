@@ -61,7 +61,7 @@
     "faq_hourly": [
       {
         "q": "What is $20 an hour after taxes in Texas?",
-        "a": "About $36,000-$37,000 net per year for a single full-time worker, since Texas has no state income tax - only federal tax and 7.65% FICA come out."
+        "a": "About $35,000-$36,000 net per year for a single full-time worker, since Texas has no state income tax - only federal tax and 7.65% FICA come out. The calculator above gives your exact figure."
       },
       {
         "q": "Is overtime taxed in Texas?",
@@ -202,7 +202,7 @@
     "faq_hourly": [
       {
         "q": "How do I turn my PA hourly wage into take-home pay?",
-        "a": "Multiply your hourly rate by hours per week, add any overtime at 1.5x, then multiply by 52 for gross annual pay. Subtract federal tax, 7.65% FICA, and Pennsylvania's flat 3.07% state tax. This calculator does that and shows annual, monthly and weekly net figures; a $25/hour full-time job in Pennsylvania nets roughly $41,000-$42,000 a year before any local EIT."
+        "a": "Multiply your hourly rate by hours per week, add any overtime at 1.5x, then multiply by 52 for gross annual pay. Subtract federal tax, 7.65% FICA, and Pennsylvania\u2019s flat 3.07% state tax. This calculator does that and shows annual, monthly and weekly net figures; a $25/hour full-time job in Pennsylvania nets roughly $42,000 a year before any local EIT - use the calculator above for your exact figure."
       },
       {
         "q": "Does Pennsylvania tax overtime differently?",
@@ -220,7 +220,7 @@
       },
       {
         "q": "Do I pay quarterly taxes as a 1099 worker in PA?",
-        "a": "Yes - if you expect to owe $1,000+ in federal tax, the IRS wants estimated payments roughly mid-April, mid-June, mid-September and mid-January. Pennsylvania also requires quarterly estimated payments of its 3.07% tax if you expect to owe more than $246 for the year."
+        "a": "Yes - if you expect to owe $1,000 or more in federal tax, the IRS wants estimated payments roughly mid-April, mid-June, mid-September and mid-January. Pennsylvania also requires quarterly estimated payments of its 3.07% tax once your non-withheld income passes the state\u2019s declaration threshold - check the PA Department of Revenue for the current figure."
       },
       {
         "q": "Does PA give the self-employed a QBI deduction?",
@@ -297,7 +297,7 @@
     "faq_hourly": [
       {
         "q": "What is $20 an hour after taxes in Illinois?",
-        "a": "About $34,000-$35,000 net per year for a single full-time worker after federal tax, 7.65% FICA and Illinois's flat 4.95% state tax."
+        "a": "About $33,000-$34,000 net per year for a single full-time worker after federal tax, 7.65% FICA and Illinois\u2019s flat 4.95% state tax. The calculator above gives your exact figure."
       },
       {
         "q": "Does Illinois have local income tax on wages?",
@@ -315,7 +315,7 @@
       },
       {
         "q": "Do 1099 workers pay quarterly taxes in Illinois?",
-        "a": "Yes - federal estimates if you will owe $1,000+, and Illinois estimates if you expect to owe more than $1,000 in state tax, on the standard mid-April / mid-June / mid-September / mid-January schedule."
+        "a": "Yes - federal estimates if you will owe $1,000 or more, and Illinois estimates once your unpaid state tax passes its threshold (check the Illinois Department of Revenue), on the standard mid-April / mid-June / mid-September / mid-January schedule."
       },
       {
         "q": "Does Illinois have its own self-employment tax?",
@@ -410,7 +410,7 @@
       },
       {
         "q": "Do 1099 workers pay quarterly taxes in Georgia?",
-        "a": "Yes - federal estimates if you will owe $1,000+, and Georgia estimates if you expect to owe more than $500 in state tax, on the mid-April / mid-June / mid-September / mid-January schedule."
+        "a": "Yes - federal estimates if you will owe $1,000 or more, and Georgia estimates once your unpaid state tax passes its threshold (check the Georgia Department of Revenue), on the mid-April / mid-June / mid-September / mid-January schedule."
       },
       {
         "q": "Does Georgia have its own self-employment tax?",
@@ -488,7 +488,7 @@
     "faq_hourly": [
       {
         "q": "What is $20 an hour after taxes in North Carolina?",
-        "a": "About $35,000-$36,000 net per year for a single full-time worker after federal tax, 7.65% FICA and North Carolina's flat 3.99% state tax."
+        "a": "About $34,000-$35,000 net per year for a single full-time worker after federal tax, 7.65% FICA and North Carolina\u2019s flat 3.99% state tax. The calculator above gives your exact figure."
       },
       {
         "q": "Are there local income taxes in North Carolina?",
@@ -506,7 +506,7 @@
       },
       {
         "q": "Do North Carolina freelancers pay quarterly estimated taxes?",
-        "a": "Yes - federal estimates if you will owe $1,000+, and North Carolina estimates if you expect to owe $1,000 or more in state tax, on the standard quarterly schedule."
+        "a": "Yes - federal estimates if you will owe $1,000 or more, and North Carolina estimates once your unpaid state tax passes its threshold (check the NC Department of Revenue), on the standard quarterly schedule."
       },
       {
         "q": "Does North Carolina follow the federal QBI deduction?",
@@ -721,7 +721,7 @@
     "faq_hourly": [
       {
         "q": "What is $25 an hour after taxes in California?",
-        "a": "About $40,000-$41,000 net per year for a single full-time worker after federal tax, 7.65% FICA, California income tax and California SDI. California SDI is a mandatory payroll deduction with no wage cap."
+        "a": "About $42,000 net per year for a single full-time worker after federal tax, 7.65% FICA, California income tax and California SDI. California SDI is a mandatory payroll deduction with no wage cap. Use the calculator above for your exact figure."
       },
       {
         "q": "Does the calculator handle California daily overtime?",
@@ -739,7 +739,7 @@
       },
       {
         "q": "Do I owe California estimated taxes as a 1099 worker?",
-        "a": "Yes - California requires quarterly estimated payments if you will owe $500 or more ($250 if married filing separately), and California front-loads them (30% Q1, 40% Q2, 0% Q3, 30% Q4) rather than four equal payments."
+        "a": "Yes - California requires quarterly estimated payments once your unpaid state tax passes its threshold (check the California Franchise Tax Board), and California front-loads them (30% Q1, 40% Q2, 0% Q3, 30% Q4) rather than four equal payments. The federal rule is $1,000 of expected tax."
       },
       {
         "q": "Does California allow the QBI deduction?",
@@ -854,7 +854,7 @@
     "faq_hourly": [
       {
         "q": "What is $25 an hour after taxes in New York?",
-        "a": "About $39,000-$41,000 net per year for a single full-time worker after federal tax, 7.65% FICA and New York State tax - lower if you live in New York City, which adds its own income tax (roughly 3%-3.9%)."
+        "a": "About $41,000-$42,000 net per year for a single full-time worker after federal tax, 7.65% FICA and New York State tax - lower if you live in New York City, which adds its own income tax (roughly 3%-3.9%). The calculator above handles the NYC option."
       },
       {
         "q": "Does the calculator include NYC or Yonkers tax?",
@@ -872,7 +872,7 @@
       },
       {
         "q": "Do 1099 workers pay quarterly taxes in New York?",
-        "a": "Yes - New York requires quarterly estimated payments if you expect to owe $300 or more in state tax, on the mid-April / mid-June / mid-September / mid-January schedule, in addition to federal estimates."
+        "a": "Yes - New York requires quarterly estimated payments once your unpaid state tax passes its threshold (check the New York State Department of Taxation and Finance), on the mid-April / mid-June / mid-September / mid-January schedule, in addition to federal estimates (the federal rule is $1,000 of expected tax)."
       },
       {
         "q": "Is there a separate NYC self-employment tax?",
@@ -943,11 +943,11 @@
     "faq_bonus": [
       {
         "q": "How much are bonuses taxed in OH?",
-        "a": "Ohio has a flat 3.50% supplemental withholding rate for bonuses paid separately (check the current Ohio Department of Taxation figure), plus the flat 22% federal supplemental rate (37% above $1,000,000/year) and 7.65% FICA. City income tax (up to about 2.5% in Columbus, Cleveland and others) also applies to the bonus."
+        "a": "A separately-paid Ohio bonus has the flat 22% federal supplemental tax withheld (37% above $1,000,000/year) and 7.65% FICA. Ohio has no separate flat supplemental rate, so state withholding on the bonus follows your regular bracket (top rate 2.75%). City income tax - up to about 2.5% in Columbus, Cleveland and others - also applies to the bonus."
       },
       {
         "q": "What is the Ohio bonus tax rate for 2026?",
-        "a": "22% federal + Ohio state supplemental + 7.65% FICA + your city income tax rate. Ohio's own income tax brackets are low (top rate 2.75%), so the municipal tax is often the bigger state-side piece."
+        "a": "22% federal + Ohio income tax at your marginal bracket (top rate 2.75%) + 7.65% FICA + your city income tax rate. Ohio\u2019s state rates are low, so the municipal tax is often the bigger state-side piece."
       },
       {
         "q": "Is my city's tax taken out of an Ohio bonus?",
@@ -957,7 +957,7 @@
     "faq_hourly": [
       {
         "q": "What is $20 an hour after taxes in Ohio?",
-        "a": "About $35,000-$36,000 net per year for a single full-time worker after federal tax, 7.65% FICA and Ohio state tax - less if you work in a city with a 2%-2.5% municipal income tax."
+        "a": "About $35,000 net per year for a single full-time worker after federal tax, 7.65% FICA and Ohio state tax - less if you work in a city with a 2%-2.5% municipal income tax. Select your city in the calculator above."
       },
       {
         "q": "Does the Ohio calculator include city (RITA/CCA) tax?",
@@ -979,7 +979,7 @@
       },
       {
         "q": "Do I make quarterly estimated payments in Ohio?",
-        "a": "Yes - federal estimates if you will owe $1,000+, Ohio estimates if you will owe more than $500 in state tax, and many Ohio cities also require quarterly municipal estimates."
+        "a": "Yes - federal estimates if you will owe $1,000 or more, Ohio estimates once your unpaid state tax passes its threshold, and many Ohio cities also require quarterly municipal estimates. Check the Ohio Department of Taxation and your city / RITA / CCA for current figures."
       }
     ],
     "filing_status_backfilled": true
@@ -1178,7 +1178,7 @@
     "faq_hourly": [
       {
         "q": "What is $18 an hour after taxes in Arizona?",
-        "a": "About $32,000-$33,000 net per year for a single full-time worker after federal tax, 7.65% FICA and Arizona's flat 2.50% state tax - Arizona's low rate keeps take-home relatively high."
+        "a": "About $32,000 net per year for a single full-time worker after federal tax, 7.65% FICA and Arizona\u2019s flat 2.50% state tax - Arizona\u2019s low rate keeps take-home relatively high. Use the calculator above for your exact figure."
       },
       {
         "q": "Are there local income taxes in Arizona?",
@@ -1196,7 +1196,7 @@
       },
       {
         "q": "Do Arizona freelancers pay quarterly estimated taxes?",
-        "a": "Yes - federal estimates if you will owe $1,000+, and Arizona estimates if you expect to owe $1,000 or more in state tax, on the mid-April / mid-June / mid-September / mid-January schedule."
+        "a": "Yes - federal estimates if you will owe $1,000 or more, and Arizona estimates once your unpaid state tax passes its threshold (check the Arizona Department of Revenue), on the mid-April / mid-June / mid-September / mid-January schedule."
       },
       {
         "q": "Does Arizona have its own self-employment tax?",
@@ -1296,7 +1296,7 @@
     "faq_hourly": [
       {
         "q": "What is $18 an hour after taxes in Arkansas?",
-        "a": "About $31,000-$32,000 net per year for a single full-time worker after federal tax, 7.65% FICA and Arkansas income tax (top rate 3.70%)."
+        "a": "About $31,000 net per year for a single full-time worker after federal tax, 7.65% FICA and Arkansas income tax (top rate 3.70%). Use the calculator above for your exact figure."
       },
       {
         "q": "Does Arkansas have local income tax?",
@@ -1314,7 +1314,7 @@
       },
       {
         "q": "Do 1099 workers pay quarterly taxes in Arkansas?",
-        "a": "Yes - federal estimates if you will owe $1,000+, and Arkansas estimates if you expect to owe $1,000 or more in state tax, on the mid-April / mid-June / mid-September / mid-January schedule."
+        "a": "Yes - federal estimates if you will owe $1,000 or more, and Arkansas estimates once your unpaid state tax passes its threshold (check the Arkansas Department of Finance and Administration), on the mid-April / mid-June / mid-September / mid-January schedule."
       },
       {
         "q": "Does Arkansas have a self-employment tax of its own?",
@@ -1393,7 +1393,7 @@
     "faq_hourly": [
       {
         "q": "What is $25 an hour after taxes in Colorado?",
-        "a": "Roughly $42,000-$43,000 net per year for a single full-time worker, after federal tax, 7.65% FICA and Colorado's flat 4.40% state tax."
+        "a": "Roughly $42,000 net per year for a single full-time worker, after federal tax, 7.65% FICA and Colorado\u2019s flat 4.40% state tax. Run the calculator above for your exact numbers."
       },
       {
         "q": "Does Colorado have daily overtime rules?",
@@ -1411,7 +1411,7 @@
       },
       {
         "q": "Do 1099 workers pay quarterly taxes in Colorado?",
-        "a": "Yes - federal estimated payments if you will owe $1,000+, and Colorado estimated payments if you will owe $1,000+ in state tax, on the mid-April / mid-June / mid-September / mid-January schedule."
+        "a": "Yes - federal estimated payments if you will owe $1,000 or more, and Colorado estimated payments once your unpaid state tax passes its threshold (check the Colorado Department of Revenue), on the mid-April / mid-June / mid-September / mid-January schedule."
       },
       {
         "q": "Does Colorado allow the federal QBI deduction for the self-employed?",
@@ -1519,7 +1519,7 @@
     "faq_hourly": [
       {
         "q": "What is $30 an hour after taxes in Connecticut?",
-        "a": "About $48,000-$50,000 net per year for a single full-time worker after federal tax, 7.65% FICA and Connecticut income tax (2.00%-6.99% brackets)."
+        "a": "About $50,000 net per year for a single full-time worker after federal tax, 7.65% FICA and Connecticut income tax (2.00%-6.99% brackets). The calculator above gives your exact figure."
       },
       {
         "q": "Is overtime taxed more in Connecticut?",
@@ -1537,7 +1537,7 @@
       },
       {
         "q": "Do I pay Connecticut estimated taxes as a freelancer?",
-        "a": "Yes - Connecticut requires quarterly estimated payments if you expect to owe $1,000 or more, on the same mid-April / mid-June / mid-September / mid-January schedule as the IRS."
+        "a": "Yes - Connecticut requires quarterly estimated payments once your unpaid state tax passes its threshold (check the Connecticut Department of Revenue Services), on the same mid-April / mid-June / mid-September / mid-January schedule as the IRS $1,000 federal rule."
       },
       {
         "q": "Does Connecticut have a self-employment tax of its own?",
@@ -1947,7 +1947,7 @@
     "faq_hourly": [
       {
         "q": "What is $20 an hour after taxes in Indiana?",
-        "a": "About $34,000-$35,000 net per year for a single full-time worker after federal tax, 7.65% FICA, Indiana's flat 2.95% state tax and your county income tax."
+        "a": "About $34,000 net per year for a single full-time worker after federal tax, 7.65% FICA, Indiana\u2019s flat 2.95% state tax and your county income tax. Select your county in the calculator above."
       },
       {
         "q": "Does the Indiana calculator include county tax?",
@@ -1969,7 +1969,7 @@
       },
       {
         "q": "Do I make quarterly estimated payments in Indiana?",
-        "a": "Yes - federal estimates if you will owe $1,000+, and Indiana estimates (which include the county tax) if you expect to owe $1,000 or more in combined state and county tax."
+        "a": "Yes - federal estimates if you will owe $1,000 or more, and Indiana estimates (which include the county tax) once your unpaid combined state and county tax passes the state threshold (check the Indiana Department of Revenue)."
       }
     ],
     "filing_status_backfilled": false
@@ -2522,7 +2522,7 @@
     "faq_hourly": [
       {
         "q": "What does $20 an hour come to after taxes in Minnesota?",
-        "a": "About $34,000-$35,000 net per year for a single full-time worker (40 hours/week), after federal tax, 7.65% FICA and Minnesota state tax. Minnesota's income tax starts at 5.35%, so take-home is a little lower than in no-income-tax states."
+        "a": "Roughly $34,000 net per year for a single full-time worker (40 hours/week), after federal tax, 7.65% FICA and Minnesota state tax. Minnesota\u2019s income tax starts at 5.35%, so take-home is a little lower than in no-income-tax states. The calculator above gives your exact figure."
       },
       {
         "q": "How is overtime taxed in Minnesota?",
@@ -2540,7 +2540,7 @@
       },
       {
         "q": "Do I need to make quarterly estimated payments in MN?",
-        "a": "Yes if you expect to owe $500 or more in Minnesota tax, or $1,000+ in federal tax. Minnesota's due dates track the federal schedule (mid-April, mid-June, mid-September, mid-January)."
+        "a": "Yes if you expect to owe federal tax of $1,000 or more, and Minnesota expects quarterly estimated payments once your unpaid Minnesota tax passes its own threshold (check the Minnesota Department of Revenue). Minnesota\u2019s due dates track the federal schedule - mid-April, mid-June, mid-September, mid-January."
       },
       {
         "q": "Does Minnesota tax 1099 income differently than W-2 wages?",
@@ -3557,7 +3557,7 @@
     "faq_hourly": [
       {
         "q": "What is $20 an hour after taxes in Tennessee?",
-        "a": "About $36,000-$37,000 net per year for a single full-time worker - Tennessee has no wage income tax, so only federal tax and 7.65% FICA are withheld."
+        "a": "About $35,000-$36,000 net per year for a single full-time worker - Tennessee has no wage income tax, so only federal tax and 7.65% FICA are withheld."
       },
       {
         "q": "Is overtime taxed in Tennessee?",
@@ -3575,7 +3575,7 @@
       },
       {
         "q": "Do 1099 workers in Tennessee pay quarterly taxes?",
-        "a": "Yes, federal ones - estimated payments mid-April, mid-June, mid-September and mid-January if you will owe $1,000 or more. There is no Tennessee state estimated payment on earned income."
+        "a": "Yes, federal ones - estimated payments mid-April, mid-June, mid-September and mid-January if you expect to owe $1,000 or more. There is no Tennessee state estimated payment on earned income."
       },
       {
         "q": "Does Tennessee still have the Hall income tax?",
