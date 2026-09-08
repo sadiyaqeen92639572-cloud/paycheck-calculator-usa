@@ -42,8 +42,11 @@ assertEqual(txBaseline.netAnnual, 54407.5, 'TX baseline net annual');
 
 const caBaseline = engine.calculatePaycheck(states.ca, caRules, 65000, 'biweekly');
 assertEqual(caBaseline.federalTax, 5620, 'CA baseline federal tax @ $65k biweekly single');
-assertEqual(caBaseline.stateTax, 2203.76, 'CA baseline state tax');
-assertEqual(caBaseline.netAnnual, 51358.74, 'CA baseline net annual');
+// $65,000 - $5,706 CA standard deduction = $59,294 taxable; marginal over the 2026-CA-v2
+// Schedule X brackets (fixed in the 2026-08-19 correctness audit, commit 10e976c) = $2,127.57.
+// Net = 65000 - 5620 fed - 4972.50 FICA - 2127.57 CA - 845.00 CA SDI (1.3%, no cap) = 51434.93.
+assertEqual(caBaseline.stateTax, 2127.57, 'CA baseline state tax');
+assertEqual(caBaseline.netAnnual, 51434.93, 'CA baseline net annual');
 
 // --- Phase 1: filing status ---
 const mfjTx = engine.calculatePaycheck(states.tx, txRules, 65000, 'biweekly', 'mfj');
