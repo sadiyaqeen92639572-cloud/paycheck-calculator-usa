@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://calcpaycheck.com/</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://calcpaycheck.com/about/</loc><lastmod>2026-08-26</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://calcpaycheck.com/privacy/</loc><lastmod>2026-08-26</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://calcpaycheck.com/changelog/</loc><lastmod>2026-08-26</lastmod><changefreq>weekly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://calcpaycheck.com/compare/</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calcpaycheck.com/withholding-checkup/</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calcpaycheck.com/salary-converter/</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calcpaycheck.com/</loc><lastmod>2026-09-08</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://calcpaycheck.com/about/</loc><lastmod>2026-09-08</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://calcpaycheck.com/privacy/</loc><lastmod>2026-09-08</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://calcpaycheck.com/changelog/</loc><lastmod>2026-09-08</lastmod><changefreq>weekly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://calcpaycheck.com/compare/</loc><lastmod>2026-09-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calcpaycheck.com/withholding-checkup/</loc><lastmod>2026-09-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calcpaycheck.com/salary-converter/</loc><lastmod>2026-09-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calcpaycheck.com/how-are-bonuses-taxed/</loc><lastmod>2026-09-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://calcpaycheck.com/texas/</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://calcpaycheck.com/texas/hourly/</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://calcpaycheck.com/texas/bonus/</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
@@ -115,10 +116,10 @@
   <url><loc>https://calcpaycheck.com/maryland/hourly/</loc><lastmod>2026-08-19</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://calcpaycheck.com/maryland/bonus/</loc><lastmod>2026-08-19</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://calcpaycheck.com/maryland/self-employed/</loc><lastmod>2026-08-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://calcpaycheck.com/massachusetts/</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://calcpaycheck.com/massachusetts/hourly/</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://calcpaycheck.com/massachusetts/bonus/</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://calcpaycheck.com/massachusetts/self-employed/</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://calcpaycheck.com/massachusetts/</loc><lastmod>2026-08-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://calcpaycheck.com/massachusetts/hourly/</loc><lastmod>2026-08-19</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://calcpaycheck.com/massachusetts/bonus/</loc><lastmod>2026-08-19</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://calcpaycheck.com/massachusetts/self-employed/</loc><lastmod>2026-08-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://calcpaycheck.com/minnesota/</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://calcpaycheck.com/minnesota/hourly/</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://calcpaycheck.com/minnesota/bonus/</loc><lastmod>2026-07-26</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>

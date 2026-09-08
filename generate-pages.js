@@ -2,8 +2,24 @@ const fs = require('fs');
 const path = require('path');
 
 const states = require('./data/states.json');
+const engine = require('./assets/calc-engine.js');
 const SITE_URL = 'https://calcpaycheck.com';
 const YEAR = 2026;
+
+// 2026 federal constants — single source of truth mirrors assets/calc-engine.js
+// (SSA 2026 contribution & benefit base; IRS Rev. Proc. 2025-32). Verified 2026-09-08.
+const SS_WAGE_BASE = 184500;
+const FED_STD_DED = { single: 16100, mfj: 32200, hoh: 24150 };
+
+// States with real GSC bonus/self-employed/hourly impressions — get hand-written per-variant FAQ.
+// Lot 1 gate: assertComplete only requires faq_bonus/faq_hourly/faq_se for these.
+const TIER1 = new Set(['PA', 'MN', 'CO', 'CT', 'CA', 'NY', 'TX', 'OH', 'GA', 'NC', 'AR', 'TN', 'IN', 'IL', 'AZ']);
+
+// Bonus amounts / SE net incomes / hourly rates used in the build-time example tables.
+const BONUS_EXAMPLE_AMOUNTS = [1000, 2500, 5000, 10000, 15000, 25000];
+const SE_EXAMPLE_INCOMES = [20000, 40000, 60000, 80000, 100000];
+const HOURLY_EXAMPLE_RATES = [15, 18, 20, 25, 30, 40, 50];
+const BONUS_BASELINE_SALARY = 65000; // regular salary the bonus sits on top of, single filer
 
 const GESMINE_ORG = {
     '@type': 'Organization',
@@ -20,6 +36,11 @@ function assertComplete(state) {
     if (!state.source || !state.source.agency_name) missing.push('source.agency_name');
     if (!state.last_verified) missing.push('last_verified');
     if (!state.guideline_version) missing.push('guideline_version');
+    if (state.abbr && TIER1.has(state.abbr)) {
+        for (const k of ['faq_bonus', 'faq_hourly', 'faq_se']) {
+            if (!Array.isArray(state[k]) || state[k].length < 3) missing.push(`${k} (Tier 1 state needs >=3 hand-written Q&A)`);
+        }
+    }
     if (missing.length) {
         throw new Error(`State ${state.abbr || '?'} missing required field(s): ${missing.join(', ')} — no page ships without a cited, dated source.`);
     }
@@ -33,6 +54,13 @@ function loadRules(abbr) {
 
 function fmtPct(rate) { return (rate * 100).toFixed(2).replace(/\.00$/, '') + '%'; }
 function fmtMoney(n) { return '$' + Number(n).toLocaleString('en-US'); }
+
+// Trim FAQ/worksheet prose out of the state object before embedding it in a page's inline
+// calculator script — the client engine only reads name/slug/formula_model/params.
+function stateForScript(state) {
+    const { faq_extra, faq_bonus, faq_hourly, faq_se, worksheet, ...rest } = state;
+    return rest;
+}
 
 function formulaSection(state, rules) {
     const { formula_model, params } = state;
@@ -82,13 +110,13 @@ function formulaSection(state, rules) {
       <h3>Federal Tax &amp; FICA (shared across all states)</h3>
       <table>
         <tr><th>Filing status</th><th>Standard deduction</th></tr>
-        <tr><td>Single</td><td>$16,100</td></tr>
-        <tr><td>Married Filing Jointly</td><td>$32,200</td></tr>
-        <tr><td>Head of Household</td><td>$24,150</td></tr>
+        <tr><td>Single</td><td>${fmtMoney(FED_STD_DED.single)}</td></tr>
+        <tr><td>Married Filing Jointly</td><td>${fmtMoney(FED_STD_DED.mfj)}</td></tr>
+        <tr><td>Head of Household</td><td>${fmtMoney(FED_STD_DED.hoh)}</td></tr>
       </table>
       <table>
         <tr><th>Federal brackets (all filing statuses)</th><td>10% / 12% / 22% / 24% / 32% / 35% / 37%</td></tr>
-        <tr><th>Social Security</th><td>6.2% up to $184,500 wage base</td></tr>
+        <tr><th>Social Security</th><td>6.2% up to ${fmtMoney(SS_WAGE_BASE)} wage base</td></tr>
         <tr><th>Medicare</th><td>1.45% on all wages, +0.9% above $200,000 single/HoH, $250,000 MFJ</td></tr>
       </table>
       ${!state.filing_status_backfilled ? `<p class="deviation-note">⚠️ ${state.name}'s married-filing-jointly and head-of-household state brackets have not yet been independently verified against the primary source above — this calculator uses ${state.name}'s single-filer brackets as an estimate when those statuses are selected.</p>` : ''}
@@ -109,15 +137,120 @@ function worksheetSection(state) {
     </section>`;
 }
 
-function faqSection(state) {
-    const items = state.faq_extra.map(f => `
+function m0(n) { return fmtMoney(Math.round(Number(n) || 0)); }
+
+// State-tax clause for the "how bonuses are taxed" direct answer + rate table.
+function bonusStateClause(state) {
+    if (state.formula_model === 'no_income_tax') return `no ${state.name} state income tax on the bonus`;
+    if (state.supplemental_rate) return `a flat ${(state.supplemental_rate * 100).toFixed(2).replace(/\.?0+$/, '')}% ${state.name} state supplemental rate (percentage method)`;
+    if (state.formula_model === 'flat_tax' && state.params && state.params.rate) return `${state.name}'s flat ${(state.params.rate * 100).toFixed(2).replace(/\.?0+$/, '')}% state income tax`;
+    return `${state.name} state income tax at your marginal rate`;
+}
+function bonusStateCell(state) {
+    if (state.formula_model === 'no_income_tax') return 'None — no state income tax';
+    if (state.supplemental_rate) return `${(state.supplemental_rate * 100).toFixed(2).replace(/\.?0+$/, '')}% flat (percentage method)`;
+    if (state.formula_model === 'flat_tax' && state.params && state.params.rate) return `${(state.params.rate * 100).toFixed(2).replace(/\.?0+$/, '')}% flat`;
+    return 'Your marginal bracket rate';
+}
+
+// Direct-answer block for the "[state] bonus tax rate" / "how are bonuses taxed in [state]" intent
+// (these queries trigger an AI Overview — lead with a one-sentence numeric answer + compact rate table).
+// Placed immediately after the calculator, before the deeper formula section.
+function howBonusesTaxedSection(state) {
+    return `
+    <section class="seo-section">
+      <h2>How Bonuses Are Taxed in ${state.name} (${YEAR})</h2>
+      <p><strong>A bonus paid on a separate check in ${state.name} has a flat 22% federal tax withheld (37% on cumulative supplemental wages over $1,000,000 in a year), 7.65% FICA, and ${bonusStateClause(state)}.</strong> Withholding is not a higher tax rate — it is just how much your employer holds back up front; your actual tax on the bonus is settled when you file, and any over-withholding comes back as refund.</p>
+      <table>
+        <tr><th>Component</th><th>Rate on the bonus</th></tr>
+        <tr><td>Federal income tax (supplemental, percentage method)</td><td>22% flat &nbsp;·&nbsp; 37% above $1,000,000/yr</td></tr>
+        <tr><td>Social Security</td><td>6.2% (up to ${m0(SS_WAGE_BASE)} of total wages)</td></tr>
+        <tr><td>Medicare</td><td>1.45% &nbsp;·&nbsp; +0.9% above $200,000</td></tr>
+        <tr><td>${state.name} state tax</td><td>${bonusStateCell(state)}</td></tr>
+      </table>
+      <p>Some employers instead use the <em>aggregate method</em> — adding the bonus to your regular paycheck and withholding as if that were every check — which can withhold more or less than the flat 22%. The calculator above uses the flat-rate (percentage) method.</p>
+    </section>`;
+}
+
+// Build-time pre-computed table: take-home on round bonus amounts, using the shared engine
+// (assets/calc-engine.js) so it can never drift from the live calculator.
+function bonusExamplesSection(state, rules) {
+    const rows = BONUS_EXAMPLE_AMOUNTS.map(amt => {
+        const r = engine.calcBonusPaycheck(state, rules, BONUS_BASELINE_SALARY, amt, 'annual', 'single', null);
+        return `<tr><td class="hl">${m0(amt)}</td><td>${m0(r.bonusFederalTax)}</td><td>${m0(r.bonusFica)}</td><td>${m0(r.bonusStateTax)}</td><td><strong>${m0(r.bonusNet)}</strong></td></tr>`;
+    }).join('');
+    return `
+    <section class="seo-section">
+      <h2>${state.name} Bonus Take-Home by Amount (${YEAR})</h2>
+      <p>Flat-rate (percentage) method, single filer, bonus paid separately on top of a ${m0(BONUS_BASELINE_SALARY)} salary. Enter your own numbers in the calculator above — this table is a starting point.</p>
+      <table>
+        <tr><th>Bonus</th><th>Federal (22%)</th><th>FICA</th><th>${state.name} tax</th><th>Take-home</th></tr>
+        ${rows}
+      </table>
+    </section>`;
+}
+
+function seTaxBreakdownSection(state) {
+    return `
+    <section class="seo-section">
+      <h2>How Self-Employment Tax Works in ${state.name} (${YEAR})</h2>
+      <p><strong>Self-employment tax is 15.3% — 12.4% Social Security plus 2.9% Medicare — applied to 92.35% of your net self-employment income</strong>, on top of federal and ${state.name} income tax. Half of the SE tax (7.65% equivalent) is an above-the-line deduction against your federal taxable income.</p>
+      <table>
+        <tr><th>Piece</th><th>Rate / rule</th></tr>
+        <tr><td>Net earnings subject to SE tax</td><td>92.35% of net profit</td></tr>
+        <tr><td>Social Security portion</td><td>12.4% (up to ${m0(SS_WAGE_BASE)} of net earnings)</td></tr>
+        <tr><td>Medicare portion</td><td>2.9% &nbsp;·&nbsp; +0.9% above $200,000</td></tr>
+        <tr><td>Deductible half of SE tax</td><td>50%, above-the-line on your federal return</td></tr>
+      </table>
+      <p>Estimated payments are due quarterly (roughly mid-April, mid-June, mid-September, and mid-January). The 20% Qualified Business Income deduction (§199A) is not modeled here — it depends on your income level and business type. If you also have W-2 wages, the Social Security cap is measured against your combined earnings, so this estimate runs high.</p>
+    </section>`;
+}
+
+function seExamplesSection(state, rules) {
+    const rows = SE_EXAMPLE_INCOMES.map(inc => {
+        const r = engine.calcSelfEmployedTax(state, rules, inc, 'single');
+        return `<tr><td class="hl">${m0(inc)}</td><td>${m0(r.seTax)}</td><td>${m0(r.federalTax)}</td><td>${m0(r.stateTax)}</td><td><strong>${m0(r.quarterlyEstimate)}</strong></td></tr>`;
+    }).join('');
+    return `
+    <section class="seo-section">
+      <h2>${state.name} Self-Employment Tax by Income (${YEAR})</h2>
+      <p>Single filer, 1099 income is the only earnings for the year. The quarterly figure is an even 4-way split of the annual total.</p>
+      <table>
+        <tr><th>Net 1099 income</th><th>SE tax</th><th>Federal tax</th><th>${state.name} tax</th><th>Quarterly payment</th></tr>
+        ${rows}
+      </table>
+    </section>`;
+}
+
+// Repositions the hourly page onto the "$X/hour after taxes" intent so it stops competing
+// with the state's main /[slug]/ page on the bare "[state] paycheck calculator" head term.
+function hourlyAnnualizationSection(state, rules) {
+    const rows = HOURLY_EXAMPLE_RATES.map(rate => {
+        const gross = engine.annualizeHourly(rate, 40);
+        const r = engine.calculatePaycheck(state, rules, gross, 'annual', 'single', null, null);
+        return `<tr><td class="hl">${m0(rate)}/hr</td><td>${m0(gross)}</td><td><strong>${m0(r.netAnnual)}</strong></td><td>${m0(r.netAnnual / 12)}</td><td>${m0(r.netAnnual / 52)}</td></tr>`;
+    }).join('');
+    return `
+    <section class="seo-section">
+      <h2>$X an Hour Is How Much a Year After Taxes in ${state.name}?</h2>
+      <p>Full-time at 40 hours a week (2,080 hours a year), single filer, after federal tax, FICA${state.formula_model === 'no_income_tax' ? '' : ` and ${state.name} state tax`}. Use the calculator above for other hours, overtime, or filing status.</p>
+      <table>
+        <tr><th>Hourly rate</th><th>Gross / year</th><th>Net / year</th><th>Net / month</th><th>Net / week</th></tr>
+        ${rows}
+      </table>
+    </section>`;
+}
+
+function faqSection(state, list, heading) {
+    const src = (Array.isArray(list) && list.length) ? list : state.faq_extra;
+    const items = src.map(f => `
       <details class="faq-item">
         <summary>${f.q}</summary>
         <p>${f.a}</p>
       </details>`).join('');
     return `
     <section id="faq" class="seo-section">
-      <h2>${state.name} Paycheck Calculator FAQ</h2>
+      <h2>${heading || `${state.name} Paycheck Calculator FAQ`}</h2>
       ${items}
     </section>`;
 }
@@ -138,8 +271,9 @@ function methodologySection(state, rules, opts = {}) {
 }
 
 function jsonLd(state, opts = {}) {
-    const { hourly = false, bonus = false, selfEmployed = false } = opts;
-    const faqEntities = state.faq_extra.map(f => ({
+    const { hourly = false, bonus = false, selfEmployed = false, faq } = opts;
+    const faqSrc = (Array.isArray(faq) && faq.length) ? faq : state.faq_extra;
+    const faqEntities = faqSrc.map(f => ({
         '@type': 'Question',
         name: f.q,
         acceptedAnswer: { '@type': 'Answer', text: f.a }
@@ -311,7 +445,7 @@ function calculatorScript(state, rules, mode = 'salary') {
     <script src="/assets/calc-engine.js"></script>
     <script src="/assets/chart.js"></script>
     <script>
-    const STATE_ENTRY = ${JSON.stringify(state)};
+    const STATE_ENTRY = ${JSON.stringify(stateForScript(state))};
     const RULES = ${JSON.stringify(rules)};
 
     function runCalculation(e) {
@@ -409,7 +543,7 @@ function bonusCalculatorScript(state, rules) {
     <script src="/assets/calc-engine.js"></script>
     <script src="/assets/chart.js"></script>
     <script>
-    const STATE_ENTRY = ${JSON.stringify(state)};
+    const STATE_ENTRY = ${JSON.stringify(stateForScript(state))};
     const RULES = ${JSON.stringify(rules)};
 
     function runCalculation(e) {
@@ -468,7 +602,7 @@ function selfEmployedCalculatorScript(state, rules) {
     <script src="/assets/calc-engine.js"></script>
     <script src="/assets/chart.js"></script>
     <script>
-    const STATE_ENTRY = ${JSON.stringify(state)};
+    const STATE_ENTRY = ${JSON.stringify(stateForScript(state))};
     const RULES = ${JSON.stringify(rules)};
 
     function runCalculation(e) {
@@ -579,8 +713,9 @@ ${calculatorScript(state, rules)}
 function renderHourlyStatePage(state) {
     assertComplete(state);
     const rules = loadRules(state.abbr.toLowerCase());
-    const title = `${state.name} Hourly Paycheck Calculator — Take-Home Pay ${YEAR}`;
-    const description = `Free ${state.name} hourly paycheck calculator. Enter your hourly rate and hours worked to estimate take-home pay after federal tax, FICA, and ${state.name} state tax — updated ${state.last_verified}.`;
+    const faq = state.faq_hourly;
+    const title = `${state.name} Hourly Wage Tax Calculator — Paycheck After Taxes ${YEAR}`;
+    const description = `Turn an hourly rate into ${state.name} take-home pay. Enter your rate and hours (with overtime) to see annual, monthly and weekly net pay after federal tax, FICA${state.formula_model === 'no_income_tax' ? '' : ` and ${state.name} state tax`} — plus a $15–$50/hour after-tax table for ${YEAR}.`;
     const dailyOtStates = new Set(['CA', 'AK', 'CO', 'NV']);
     const dailyOtNote = dailyOtStates.has(state.abbr)
         ? `<p class="deviation-note">⚠️ This calculator models standard weekly overtime (over 40 hours/week) only. ${state.name} has additional daily-overtime rules (e.g. daily hours beyond a state-specific threshold at 1.5x/2x) that this calculator does not yet compute — treat overtime pay as an estimate.</p>`
@@ -600,17 +735,17 @@ function renderHourlyStatePage(state) {
 <meta property="og:description" content="${description}">
 <meta property="og:url" content="${SITE_URL}/${state.slug}/hourly/">
 <meta property="og:type" content="website">
-<script type="application/ld+json">${jsonLd(state, { hourly: true })}</script>
+<script type="application/ld+json">${jsonLd(state, { hourly: true, faq })}</script>
 </head>
 <body>
 <header>
   <p><a href="/">← USA Paycheck Calculator</a> · <a href="/${state.slug}/">${state.name} Paycheck Calculator</a></p>
-  <h1>${state.name} Hourly Paycheck Calculator</h1>
-  <p class="badge">Estimate your ${YEAR} take-home pay after federal tax, FICA${state.formula_model === 'no_income_tax' ? '' : `, and ${state.name} state tax`} from an hourly rate</p>
+  <h1>${state.name} Hourly Wage Tax Calculator</h1>
+  <p class="badge">Convert an hourly rate into ${YEAR} take-home pay after federal tax, FICA${state.formula_model === 'no_income_tax' ? '' : `, and ${state.name} state tax`} — annual, monthly and weekly</p>
 </header>
 
 <div class="disclaimer-banner">
-  Estimate only — not tax advice. Supports single, married-filing-jointly, and head-of-household filing status, plus optional pre-tax 401(k), HSA, and health insurance deductions. Models standard weekly overtime only. See methodology below for source and last-verified date. For your exact withholding, consult a tax professional or your payroll department.
+  Estimate only — not tax advice. Enter your hourly rate, regular hours, and any weekly overtime hours (paid at time-and-a-half); the calculator annualizes that and applies ${YEAR} federal tax, FICA${state.formula_model === 'no_income_tax' ? '' : `, and ${state.name} state tax`}. Supports single, married-filing-jointly and head-of-household, plus optional pre-tax 401(k), HSA and health premiums. Models standard weekly overtime only. See methodology below for source and last-verified date.
 </div>
 
 <main>
@@ -637,14 +772,15 @@ function renderHourlyStatePage(state) {
       <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
     </div>
     <p class="cross-link"><a href="/${state.slug}/">Paid a salary instead? Try our ${state.name} paycheck calculator →</a></p>
-    <p class="cross-link"><a href="/${state.slug}/bonus/">Calculating a bonus? Try our ${state.name} bonus paycheck calculator →</a></p>
+    <p class="cross-link"><a href="/${state.slug}/bonus/">Calculating a bonus? Try our ${state.name} bonus tax calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/self-employed/">1099 or self-employed? Try our ${state.name} self-employment tax calculator →</a></p>
+    <p class="cross-link"><a href="https://sadiyaqeen92639572-cloud.github.io/overtime-pay-calculator/" rel="nofollow">Just need gross overtime pay? Try the overtime pay calculator →</a></p>
   </section>
 
-  ${worksheetSection(state)}
+  ${hourlyAnnualizationSection(state, rules)}
   ${formulaSection(state, rules)}
   ${dailyOtNote}
-  ${faqSection(state)}
+  ${faqSection(state, faq, `${state.name} Hourly Wage Tax FAQ`)}
   ${methodologySection(state, rules)}
 </main>
 
@@ -661,8 +797,9 @@ ${calculatorScript(state, rules, 'hourly')}
 function renderBonusStatePage(state) {
     assertComplete(state);
     const rules = loadRules(state.abbr.toLowerCase());
-    const title = `${state.name} Bonus Calculator — Bonus Tax Rate & Take-Home Pay ${YEAR}`;
-    const description = `Free ${state.name} bonus paycheck calculator. Estimate take-home pay on a bonus using the flat 22% federal supplemental withholding method, plus FICA and ${state.name} state tax — updated ${state.last_verified}.`;
+    const faq = state.faq_bonus;
+    const title = `${state.name} Bonus Tax Calculator ${YEAR} — Take-Home After 22% Federal + State`;
+    const description = `How much of a $1,000, $5,000 or $10,000 bonus you keep in ${state.name} after the flat 22% federal supplemental rate, FICA and state tax. Free ${YEAR} bonus calculator with a take-home-by-amount table.`;
 
     return `<!DOCTYPE html>
 <html lang="en">
@@ -678,7 +815,7 @@ function renderBonusStatePage(state) {
 <meta property="og:description" content="${description}">
 <meta property="og:url" content="${SITE_URL}/${state.slug}/bonus/">
 <meta property="og:type" content="website">
-<script type="application/ld+json">${jsonLd(state, { bonus: true })}</script>
+<script type="application/ld+json">${jsonLd(state, { bonus: true, faq })}</script>
 </head>
 <body>
 <header>
@@ -712,10 +849,13 @@ function renderBonusStatePage(state) {
     </div>
     <p class="cross-link"><a href="/${state.slug}/">Calculating a regular paycheck? Try our ${state.name} paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/hourly/">Paid hourly? Try our ${state.name} hourly paycheck calculator →</a></p>
+    <p class="cross-link"><a href="/how-are-bonuses-taxed/">How bonuses are taxed, state by state →</a></p>
   </section>
 
+  ${howBonusesTaxedSection(state)}
+  ${bonusExamplesSection(state, rules)}
   ${formulaSection(state, rules)}
-  ${faqSection(state)}
+  ${faqSection(state, faq, `${state.name} Bonus Tax FAQ`)}
   ${methodologySection(state, rules, { bonus: true })}
 </main>
 
@@ -732,8 +872,9 @@ ${bonusCalculatorScript(state, rules)}
 function renderSelfEmployedStatePage(state) {
     assertComplete(state);
     const rules = loadRules(state.abbr.toLowerCase());
-    const title = `${state.name} Self-Employment Tax Calculator (1099) — ${YEAR}`;
-    const description = `Free ${state.name} self-employment / 1099 tax calculator. Estimate SE tax (Social Security + Medicare), federal tax, ${state.name} state tax, and a quarterly estimated-payment amount — updated ${state.last_verified}.`;
+    const faq = state.faq_se;
+    const title = `${state.name} Self-Employment Tax Calculator ${YEAR} — 1099 SE Tax + Federal + State`;
+    const description = `Free ${state.name} 1099 / self-employment tax calculator. Estimate the 15.3% SE tax (Social Security + Medicare), federal tax, ${state.name} state tax, and a quarterly payment — with an SE-tax-by-income table for ${YEAR}.`;
 
     return `<!DOCTYPE html>
 <html lang="en">
@@ -749,7 +890,7 @@ function renderSelfEmployedStatePage(state) {
 <meta property="og:description" content="${description}">
 <meta property="og:url" content="${SITE_URL}/${state.slug}/self-employed/">
 <meta property="og:type" content="website">
-<script type="application/ld+json">${jsonLd(state, { selfEmployed: true })}</script>
+<script type="application/ld+json">${jsonLd(state, { selfEmployed: true, faq })}</script>
 </head>
 <body>
 <header>
@@ -779,9 +920,13 @@ function renderSelfEmployedStatePage(state) {
       <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
     </div>
     <p class="cross-link"><a href="/${state.slug}/">Paid a W-2 salary instead? Try our ${state.name} paycheck calculator →</a></p>
+    <p class="cross-link"><a href="/${state.slug}/bonus/">Got a bonus this year? Try our ${state.name} bonus tax calculator →</a></p>
+    <p class="cross-link"><a href="/${state.slug}/hourly/">Paid hourly? Try our ${state.name} hourly wage tax calculator →</a></p>
   </section>
 
-  ${faqSection(state)}
+  ${seTaxBreakdownSection(state)}
+  ${seExamplesSection(state, rules)}
+  ${faqSection(state, faq, `${state.name} Self-Employment Tax FAQ`)}
   ${methodologySection(state, rules, { selfEmployed: true })}
 </main>
 
@@ -790,6 +935,106 @@ function renderSelfEmployedStatePage(state) {
   <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Paycheck Calculator. Estimates only — not tax advice.</p>
 </footer>
 ${selfEmployedCalculatorScript(state, rules)}
+</body>
+</html>
+`;
+}
+
+function renderBonusHubPage() {
+    const title = `How Are Bonuses Taxed? Federal 22% Supplemental Rate + State by State (${YEAR})`;
+    const description = `Bonuses are withheld at a flat 22% for federal tax (37% above $1M), plus 7.65% FICA and your state's rate. ${YEAR} guide with a state-by-state bonus withholding table and per-state calculators.`;
+    const rows = Object.values(states)
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(s => `<tr><td class="hl"><a href="/${s.slug}/bonus/">${s.name}</a></td><td>${bonusStateCell(s)}</td></tr>`)
+        .join('');
+
+    const faq = [
+        { q: 'How are bonuses taxed by the federal government?', a: 'When a bonus is paid separately from regular wages, employers use the flat-rate (percentage) method: a flat 22% federal income tax is withheld, rising to 37% on the portion of cumulative supplemental wages over $1,000,000 in a calendar year. Social Security (6.2%) and Medicare (1.45%, plus 0.9% above $200,000) also apply. This is withholding, not a separate tax rate — your actual tax on the bonus is reconciled when you file.' },
+        { q: 'Why was my bonus taxed so much / at 40%?', a: 'It was withheld, not taxed, at a higher combined rate: 22% federal + 7.65% FICA + your state rate can total 30–40%+. If that withholding exceeds your real marginal rate for the year, the difference comes back as a larger refund (or a smaller balance due) when you file.' },
+        { q: 'What is the aggregate method for bonus withholding?', a: 'Instead of the flat 22%, some employers add the bonus to your most recent regular paycheck and withhold as if that combined amount were your pay every period. This usually withholds more than 22% because it pushes the combined figure into higher withholding brackets. Employers choose which method to use; you cannot pick.' },
+        { q: 'Do you get bonus tax back?', a: 'You get back any amount withheld beyond your actual tax liability for the year, as part of your normal refund. The bonus itself is still taxable income — you do not get the tax on it fully refunded, only any over-withholding.' },
+        { q: 'How are bonuses taxed in Minnesota?', a: 'Minnesota applies a flat 6.25% state supplemental withholding rate to bonuses paid separately, on top of the flat 22% federal rate and 7.65% FICA. See the Minnesota bonus tax calculator for a take-home estimate on a specific amount.' },
+        { q: 'What is the bonus tax rate in states with no income tax?', a: 'In Texas, Florida, Tennessee, Nevada, Washington, Wyoming, South Dakota and Alaska there is no state income tax on a bonus. Only the flat 22% federal supplemental rate (37% above $1M) and 7.65% FICA are withheld.' },
+        { q: 'Is a bonus taxed differently than my salary?', a: 'The final tax is the same — a bonus is ordinary income and lands in the same brackets as salary. Only the up-front withholding differs: separate bonuses use the flat 22% supplemental method rather than the wage-bracket tables used for regular paychecks.' },
+    ];
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${title}</title>
+<meta name="description" content="${description}">
+<link rel="canonical" href="${SITE_URL}/how-are-bonuses-taxed/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${description}">
+<meta property="og:url" content="${SITE_URL}/how-are-bonuses-taxed/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+        { '@type': 'WebPage', name: title, url: `${SITE_URL}/how-are-bonuses-taxed/`, description, author: GESMINE_ORG, publisher: GESMINE_ORG },
+        { '@type': 'FAQPage', mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+        { '@type': 'BreadcrumbList', itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+            { '@type': 'ListItem', position: 2, name: 'How Are Bonuses Taxed', item: `${SITE_URL}/how-are-bonuses-taxed/` }
+        ] },
+        GESMINE_ORG
+    ]
+})}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a></p>
+  <h1>How Are Bonuses Taxed?</h1>
+  <p class="badge">Federal flat 22% supplemental rate · 7.65% FICA · plus your state — ${YEAR}</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate and general information only — not tax advice. Figures describe employer <em>withholding</em> on supplemental wages under the flat-rate (percentage) method (IRS Publication 15). Your actual tax on a bonus is ordinary income tax, settled when you file. State supplemental rates change; check your state's revenue department for the current figure.
+</div>
+
+<main>
+  <section class="seo-section">
+    <h2>The short answer</h2>
+    <p><strong>A bonus paid on its own check has a flat 22% federal income tax withheld (37% on the part of your yearly supplemental wages above $1,000,000), plus 6.2% Social Security, 1.45% Medicare, and your state's rate.</strong> A bonus is not taxed at a higher rate than salary — it is ordinary income in the same brackets. Only the withholding is calculated differently, and any over-withholding returns to you at tax time.</p>
+    <table>
+      <tr><th>Component</th><th>Rate withheld on a separate bonus</th></tr>
+      <tr><td>Federal income tax (supplemental, percentage method)</td><td>22% flat &nbsp;·&nbsp; 37% above $1,000,000/yr</td></tr>
+      <tr><td>Social Security</td><td>6.2% (up to ${m0(SS_WAGE_BASE)} of total wages for the year)</td></tr>
+      <tr><td>Medicare</td><td>1.45% &nbsp;·&nbsp; +0.9% above $200,000</td></tr>
+      <tr><td>State income tax</td><td>Varies — see the table below</td></tr>
+    </table>
+  </section>
+
+  <section class="seo-section">
+    <h2>Percentage method vs aggregate method</h2>
+    <p>The <strong>percentage method</strong> withholds a flat 22% on the bonus alone — simple and predictable. The <strong>aggregate method</strong> lumps the bonus in with your latest regular paycheck and withholds as if that were your pay every period, which usually takes out more. Your employer decides which to use.</p>
+  </section>
+
+  <section class="seo-section">
+    <h2>Bonus State Tax Withholding by State (${YEAR})</h2>
+    <p>State treatment of a separately-paid bonus. "Flat" means a dedicated state supplemental rate; "marginal bracket rate" means the state has no separate supplemental rate, so withholding tracks your regular bracket. Tap a state for a take-home calculator.</p>
+    <table>
+      <tr><th>State</th><th>Bonus state withholding</th></tr>
+      ${rows}
+    </table>
+  </section>
+
+  ${faqSection({ name: 'Bonus Tax', faq_extra: faq }, faq, 'Bonus Tax FAQ')}
+
+  <section id="methodology" class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Federal supplemental withholding rate (22%, 37% above $1,000,000 cumulative supplemental wages/year) per IRS Publication 15 (Circular E), Employer's Tax Guide, ${YEAR} edition. FICA constants (Social Security 6.2% up to ${m0(SS_WAGE_BASE)}, Medicare 1.45% + 0.9% Additional Medicare above $200,000 single) per SSA and IRC §3101. State supplemental rates, where a state publishes a distinct one, are from each state's revenue department withholding guide; states shown as "marginal bracket rate" apply regular withholding to supplemental wages. Verified 2026-09-08.</p>
+  </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
 </body>
 </html>
 `;
@@ -941,7 +1186,7 @@ function renderComparatorPage() {
 </footer>
 <script src="/assets/calc-engine.js"></script>
 <script>
-const ALL_STATES = ${JSON.stringify(states)};
+const ALL_STATES = ${JSON.stringify(Object.fromEntries(Object.entries(states).map(([k,v]) => [k, stateForScript(v)])))};
 const ALL_RULES = ${JSON.stringify(allRules)};
 
 function runCalculation(e) {
@@ -1278,7 +1523,7 @@ function renderSalaryConverterPage() {
 </footer>
 <script src="/assets/calc-engine.js"></script>
 <script>
-const ALL_STATES = ${JSON.stringify(states)};
+const ALL_STATES = ${JSON.stringify(Object.fromEntries(Object.entries(states).map(([k,v]) => [k, stateForScript(v)])))};
 const ALL_RULES = ${JSON.stringify(allRules)};
 
 function stateEntryFor(abbr) {
@@ -1403,5 +1648,10 @@ const salaryConverterDir = path.join(__dirname, 'salary-converter');
 fs.mkdirSync(salaryConverterDir, { recursive: true });
 fs.writeFileSync(path.join(salaryConverterDir, 'index.html'), renderSalaryConverterPage());
 console.log('Generated: salary-converter/');
+
+const bonusHubDir = path.join(__dirname, 'how-are-bonuses-taxed');
+fs.mkdirSync(bonusHubDir, { recursive: true });
+fs.writeFileSync(path.join(bonusHubDir, 'index.html'), renderBonusHubPage());
+console.log('Generated: how-are-bonuses-taxed/');
 
 console.log(`\nDone. ${built} state pages built.`);

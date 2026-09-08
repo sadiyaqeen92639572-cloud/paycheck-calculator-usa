@@ -44,6 +44,48 @@
         "a": "No Texas city or county levies a local income tax. Texas instead relies more heavily on sales tax and property tax to fund state and local government."
       }
     ],
+    "faq_bonus": [
+      {
+        "q": "How much are bonuses taxed in TX?",
+        "a": "Texas has no state income tax, so a bonus paid in Texas only has the flat 22% federal supplemental tax withheld (37% above $1,000,000/year) plus 6.2% Social Security and 1.45% Medicare. Total withholding on a Texas bonus is about 29.65%."
+      },
+      {
+        "q": "What is the Texas bonus tax rate for 2026?",
+        "a": "22% federal + 7.65% FICA, and $0 state tax. A $5,000 Texas bonus has about $1,100 federal and $383 FICA withheld, leaving roughly $3,517."
+      },
+      {
+        "q": "Do I get any Texas bonus tax back?",
+        "a": "There is no state tax to refund. On the federal side, the flat 22% withholding is reconciled against your actual federal bracket when you file - if 22% was more than your rate, the difference is part of your refund."
+      }
+    ],
+    "faq_hourly": [
+      {
+        "q": "What is $20 an hour after taxes in Texas?",
+        "a": "About $36,000-$37,000 net per year for a single full-time worker, since Texas has no state income tax - only federal tax and 7.65% FICA come out."
+      },
+      {
+        "q": "Is overtime taxed in Texas?",
+        "a": "Overtime has federal tax and FICA withheld, but no Texas state tax. Time-and-a-half raises gross pay and can move part of your income into a higher federal bracket."
+      },
+      {
+        "q": "Are there local income taxes in Texas?",
+        "a": "No. No Texas city or county levies an income tax on wages, so the hourly calculator applies federal tax and FICA only."
+      }
+    ],
+    "faq_se": [
+      {
+        "q": "How much is self-employment tax in Texas?",
+        "a": "15.3% federal SE tax on 92.35% of net profit (12.4% Social Security up to $184,500, 2.9% Medicare), plus federal income tax - and no Texas state income tax. Half the SE tax is deductible on your federal return."
+      },
+      {
+        "q": "Do 1099 workers in Texas pay quarterly taxes?",
+        "a": "Yes, federal ones - if you expect to owe $1,000 or more in federal tax, make estimated payments mid-April, mid-June, mid-September and mid-January. There is no Texas state estimated payment because there is no state income tax."
+      },
+      {
+        "q": "Does Texas have a franchise tax for sole proprietors?",
+        "a": "The Texas franchise tax generally does not apply to sole proprietors or most single-member LLCs below the no-tax-due revenue threshold. This calculator covers income and SE tax, not franchise tax."
+      }
+    ],
     "filing_status_backfilled": true
   },
   "fl": {
@@ -143,6 +185,48 @@
         "a": "On a $65,000 gross salary, a single filer in Pennsylvania takes home roughly $52,412/year (about $4,370/month) after federal tax, FICA, and the state's 3.07% flat tax \u2014 before any local EIT."
       }
     ],
+    "faq_bonus": [
+      {
+        "q": "How much are bonuses taxed in PA?",
+        "a": "A bonus paid on a separate check in Pennsylvania has a flat 22% federal income tax withheld (37% on cumulative supplemental wages above $1,000,000 for the year), 6.2% Social Security, 1.45% Medicare, and Pennsylvania's flat 3.07% state income tax. Pennsylvania has no separate supplemental rate - the 3.07% flat rate applies to a bonus the same as to regular wages. Combined withholding is roughly 32-33% before any local Earned Income Tax."
+      },
+      {
+        "q": "What is the PA bonus tax rate for 2026?",
+        "a": "Federal: flat 22% supplemental withholding. State: Pennsylvania's flat 3.07% Personal Income Tax. FICA: 7.65%. If you live or work in Philadelphia, the City Wage Tax (3.735% resident / 3.425% non-resident) also applies to the bonus - select it in the calculator."
+      },
+      {
+        "q": "Will I get some of the PA bonus tax back?",
+        "a": "The 22% federal piece is withholding, not a final tax. Pennsylvania's 3.07% is close to a true flat tax so little changes there, but if 22% federal withholding is more than your actual federal marginal rate for the year, the difference comes back in your refund when you file."
+      }
+    ],
+    "faq_hourly": [
+      {
+        "q": "How do I turn my PA hourly wage into take-home pay?",
+        "a": "Multiply your hourly rate by hours per week, add any overtime at 1.5x, then multiply by 52 for gross annual pay. Subtract federal tax, 7.65% FICA, and Pennsylvania's flat 3.07% state tax. This calculator does that and shows annual, monthly and weekly net figures; a $25/hour full-time job in Pennsylvania nets roughly $41,000-$42,000 a year before any local EIT."
+      },
+      {
+        "q": "Does Pennsylvania tax overtime differently?",
+        "a": "No. Overtime pay is taxed at the same rates as regular hourly pay - flat 3.07% state, plus federal and FICA. The only difference is that time-and-a-half raises your gross, which can nudge you into a higher federal bracket."
+      },
+      {
+        "q": "Is Philadelphia wage tax included in the hourly calculator?",
+        "a": "Yes if you select it. Choose Philadelphia resident (3.735%) or non-resident (3.425%) from the local tax dropdown and it is applied to gross pay. Other Pennsylvania municipalities levy their own Earned Income Tax (often 1%+) that this calculator does not compute."
+      }
+    ],
+    "faq_se": [
+      {
+        "q": "How much is self-employment tax in Pennsylvania?",
+        "a": "Self-employment tax is federal: 15.3% (12.4% Social Security up to $184,500 of net earnings, plus 2.9% Medicare) on 92.35% of your net profit. On top of that, Pennsylvania taxes net self-employment profit at its flat 3.07% rate. Half the SE tax is deductible on your federal return."
+      },
+      {
+        "q": "Do I pay quarterly taxes as a 1099 worker in PA?",
+        "a": "Yes - if you expect to owe $1,000+ in federal tax, the IRS wants estimated payments roughly mid-April, mid-June, mid-September and mid-January. Pennsylvania also requires quarterly estimated payments of its 3.07% tax if you expect to owe more than $246 for the year."
+      },
+      {
+        "q": "Does PA give the self-employed a QBI deduction?",
+        "a": "The 20% Qualified Business Income deduction is a federal deduction (IRC 199A) - Pennsylvania does not follow it and taxes your full net profit at 3.07%. This calculator does not model the federal QBI deduction because it phases out by income and business type."
+      }
+    ],
     "filing_status_backfilled": true
   },
   "il": {
@@ -194,6 +278,48 @@
       {
         "q": "Does Illinois have local income tax?",
         "a": "No. Unlike Pennsylvania or Ohio, no Illinois city or county adds a separate local income tax on top of the state's flat 4.95% rate."
+      }
+    ],
+    "faq_bonus": [
+      {
+        "q": "How much are bonuses taxed in IL?",
+        "a": "An Illinois bonus paid separately has the flat 22% federal supplemental tax withheld (37% above $1,000,000/year), 7.65% FICA, and Illinois's flat 4.95% state income tax. Illinois applies its flat rate to supplemental wages, so combined withholding is roughly 34.6%."
+      },
+      {
+        "q": "What is the Illinois bonus tax rate for 2026?",
+        "a": "22% federal + 4.95% Illinois + 6.2% Social Security + 1.45% Medicare. A $5,000 Illinois bonus has about $1,100 federal, $248 Illinois, and $383 FICA withheld."
+      },
+      {
+        "q": "Is an Illinois bonus taxed at a higher rate than salary?",
+        "a": "No. Illinois's 4.95% is a true flat tax applied identically to a bonus and to regular wages. Only the federal withholding method differs for a separate bonus."
+      }
+    ],
+    "faq_hourly": [
+      {
+        "q": "What is $20 an hour after taxes in Illinois?",
+        "a": "About $34,000-$35,000 net per year for a single full-time worker after federal tax, 7.65% FICA and Illinois's flat 4.95% state tax."
+      },
+      {
+        "q": "Does Illinois have local income tax on wages?",
+        "a": "No Illinois municipality levies a percentage income tax on wages, so the hourly calculator applies state, federal and FICA only."
+      },
+      {
+        "q": "How is overtime taxed in Illinois?",
+        "a": "At the same 4.95% flat state rate as regular pay, plus federal and FICA. Time-and-a-half raises gross pay, which can move part of your income into a higher federal bracket."
+      }
+    ],
+    "faq_se": [
+      {
+        "q": "How much is self-employment tax in Illinois?",
+        "a": "15.3% federal SE tax on 92.35% of net profit (12.4% Social Security up to $184,500, 2.9% Medicare), plus Illinois's flat 4.95% income tax on net profit, plus federal income tax. Half the SE tax is deductible federally."
+      },
+      {
+        "q": "Do 1099 workers pay quarterly taxes in Illinois?",
+        "a": "Yes - federal estimates if you will owe $1,000+, and Illinois estimates if you expect to owe more than $1,000 in state tax, on the standard mid-April / mid-June / mid-September / mid-January schedule."
+      },
+      {
+        "q": "Does Illinois have its own self-employment tax?",
+        "a": "No - the 15.3% SE tax is federal. Illinois taxes your net self-employment profit at its 4.95% flat rate. Illinois does not allow the federal QBI deduction, so full net profit is taxed for state purposes."
       }
     ],
     "filing_status_backfilled": true
@@ -249,6 +375,48 @@
         "a": "No. Georgia counties and cities do not levy separate local income taxes on wages."
       }
     ],
+    "faq_bonus": [
+      {
+        "q": "How much are bonuses taxed in GA?",
+        "a": "A Georgia bonus paid separately has the flat 22% federal supplemental tax withheld (37% above $1,000,000/year), 7.65% FICA, and Georgia's flat 4.99% state income tax. Georgia moved to a flat tax, so the same 4.99% applies to a bonus and to salary. Combined withholding is roughly 34%."
+      },
+      {
+        "q": "What is the Georgia bonus tax rate for 2026?",
+        "a": "22% federal + 4.99% Georgia + 6.2% Social Security + 1.45% Medicare. On a $5,000 bonus that is about $1,100 federal, $250 Georgia, and $383 FICA withheld."
+      },
+      {
+        "q": "Is a Georgia bonus taxed higher than regular pay?",
+        "a": "No. Georgia's 4.99% flat rate applies equally to a bonus and to salary. Only the federal withholding method changes - separate bonuses use the flat 22% supplemental rate."
+      }
+    ],
+    "faq_hourly": [
+      {
+        "q": "What is $18 an hour after taxes in Georgia?",
+        "a": "About $31,000-$32,000 net per year for a single full-time worker after federal tax, 7.65% FICA and Georgia's flat 4.99% state tax."
+      },
+      {
+        "q": "Does Georgia have local income tax on wages?",
+        "a": "No Georgia city or county levies a percentage income tax on wages, so the hourly calculator applies state, federal and FICA only."
+      },
+      {
+        "q": "How is overtime taxed in Georgia?",
+        "a": "At the same rates as regular hourly pay - flat 4.99% state, plus federal and FICA. Extra gross from time-and-a-half can push part of your pay into a higher federal bracket."
+      }
+    ],
+    "faq_se": [
+      {
+        "q": "How much is self-employment tax in Georgia?",
+        "a": "15.3% federal SE tax on 92.35% of net profit (12.4% Social Security up to $184,500, 2.9% Medicare), plus Georgia's flat 4.99% income tax on net profit, plus federal income tax. Half the SE tax is deductible federally."
+      },
+      {
+        "q": "Do 1099 workers pay quarterly taxes in Georgia?",
+        "a": "Yes - federal estimates if you will owe $1,000+, and Georgia estimates if you expect to owe more than $500 in state tax, on the mid-April / mid-June / mid-September / mid-January schedule."
+      },
+      {
+        "q": "Does Georgia have its own self-employment tax?",
+        "a": "No - the 15.3% SE tax is federal. Georgia simply taxes your net self-employment profit at its 4.99% flat rate as ordinary income."
+      }
+    ],
     "filing_status_backfilled": true
   },
   "nc": {
@@ -301,6 +469,48 @@
       {
         "q": "Does North Carolina have local income tax?",
         "a": "No. North Carolina counties and municipalities do not levy separate local income taxes on wages."
+      }
+    ],
+    "faq_bonus": [
+      {
+        "q": "How much are bonuses taxed in NC?",
+        "a": "A North Carolina bonus paid separately has the flat 22% federal supplemental tax withheld (37% above $1,000,000/year), 7.65% FICA, and North Carolina's flat 3.99% state income tax. NC applies its flat rate to supplemental wages, so combined withholding is about 33.6%."
+      },
+      {
+        "q": "What is the North Carolina bonus tax rate for 2026?",
+        "a": "22% federal + 3.99% North Carolina + 6.2% Social Security + 1.45% Medicare. A $5,000 NC bonus has roughly $1,100 federal, $200 state, and $383 FICA withheld."
+      },
+      {
+        "q": "Do I get North Carolina bonus tax back?",
+        "a": "NC's 3.99% is a flat tax close to your true rate, so little changes there. The federal 22% is withholding - if it exceeds your federal marginal rate for the year, the difference is part of your refund."
+      }
+    ],
+    "faq_hourly": [
+      {
+        "q": "What is $20 an hour after taxes in North Carolina?",
+        "a": "About $35,000-$36,000 net per year for a single full-time worker after federal tax, 7.65% FICA and North Carolina's flat 3.99% state tax."
+      },
+      {
+        "q": "Are there local income taxes in North Carolina?",
+        "a": "No. No North Carolina city or county levies an income tax on wages, so the hourly calculator applies state, federal and FICA only."
+      },
+      {
+        "q": "How is overtime taxed in North Carolina?",
+        "a": "At the same rates as regular pay - flat 3.99% state plus federal and FICA. Time-and-a-half raises gross pay, which can push part of your income into a higher federal bracket."
+      }
+    ],
+    "faq_se": [
+      {
+        "q": "How much is self-employment tax in North Carolina?",
+        "a": "15.3% federal SE tax on 92.35% of net profit (12.4% Social Security up to $184,500, 2.9% Medicare), plus North Carolina's flat 3.99% income tax on net profit, plus federal income tax. Half the SE tax is deductible federally."
+      },
+      {
+        "q": "Do North Carolina freelancers pay quarterly estimated taxes?",
+        "a": "Yes - federal estimates if you will owe $1,000+, and North Carolina estimates if you expect to owe $1,000 or more in state tax, on the standard quarterly schedule."
+      },
+      {
+        "q": "Does North Carolina follow the federal QBI deduction?",
+        "a": "No. North Carolina requires adding the federal 20% QBI deduction back, so your full net profit is taxed at 3.99% for state purposes. QBI is not modeled in this calculator."
       }
     ],
     "filing_status_backfilled": true
@@ -494,6 +704,49 @@
         "a": "On a $65,000 gross salary, a single filer in California takes home roughly $51,435/year (about $4,286/month) after federal tax, FICA, state income tax, and SDI."
       }
     ],
+    "faq_bonus": [
+      {
+        "q": "How much are bonuses taxed in CA?",
+        "a": "California withholds a flat 10.23% state rate on bonuses and stock options paid separately (6.6% on other supplemental wages), plus the flat 22% federal supplemental rate (37% above $1,000,000/year) and 7.65% FICA, plus California SDI. Combined withholding on a California bonus is often around 40%."
+      },
+      {
+        "q": "What is the California bonus tax rate for 2026?",
+        "a": "10.23% California (bonus/stock rate) + 22% federal + 6.2% Social Security + 1.45% Medicare + California SDI. On a $10,000 bonus that is roughly $2,200 federal and $1,023 California withheld before FICA and SDI."
+      },
+      {
+        "q": "Why was my California bonus taxed at 40%+ - do I get it back?",
+        "a": "That is withholding, not your final tax. California's 10.23% flat supplemental rate is often higher than the filer's true marginal California rate, and 22% federal may exceed your bracket too - the excess comes back as a larger refund when you file."
+      }
+    ],
+    "faq_hourly": [
+      {
+        "q": "What is $25 an hour after taxes in California?",
+        "a": "About $40,000-$41,000 net per year for a single full-time worker after federal tax, 7.65% FICA, California income tax and California SDI. California SDI is a mandatory payroll deduction with no wage cap."
+      },
+      {
+        "q": "Does the calculator handle California daily overtime?",
+        "a": "It models weekly overtime (over 40 hours) only. California also requires 1.5x for hours over 8 in a day and 2x over 12 - if that applies to you, treat the overtime figure as an estimate."
+      },
+      {
+        "q": "Are there city income taxes in California?",
+        "a": "No California city charges a percentage income tax on wages, so the hourly calculator applies state, federal, FICA and California SDI only."
+      }
+    ],
+    "faq_se": [
+      {
+        "q": "How much is self-employment tax in California?",
+        "a": "15.3% federal SE tax on 92.35% of net profit (12.4% Social Security up to $184,500, 2.9% Medicare), plus California income tax on net profit (1.00%-13.30% brackets), plus federal income tax. Half the SE tax is deductible federally. California self-employed people are generally exempt from California SDI unless they opt in."
+      },
+      {
+        "q": "Do I owe California estimated taxes as a 1099 worker?",
+        "a": "Yes - California requires quarterly estimated payments if you will owe $500 or more ($250 if married filing separately), and California front-loads them (30% Q1, 40% Q2, 0% Q3, 30% Q4) rather than four equal payments."
+      },
+      {
+        "q": "Does California allow the QBI deduction?",
+        "a": "No. California does not conform to the federal 20% Qualified Business Income deduction, so your full net profit is taxed for California purposes. The federal QBI deduction is not modeled here."
+      }
+    ],
+    "supplemental_rate": 0.1023,
     "filing_status_backfilled": false
   },
   "ny": {
@@ -584,6 +837,49 @@
         "a": "A mandatory employee payroll deduction \u2014 0.432% of wages in 2026, capped at $411.91/year \u2014 that funds paid leave benefits. It is separate from income tax."
       }
     ],
+    "faq_bonus": [
+      {
+        "q": "How much are bonuses taxed in NY?",
+        "a": "New York withholds a flat 11.70% state supplemental rate on a separately-paid bonus, plus the flat 22% federal supplemental rate (37% above $1,000,000/year) and 7.65% FICA. New York City residents have an additional city supplemental rate of about 4.25% on top. Combined NYC withholding on a bonus can exceed 43%."
+      },
+      {
+        "q": "What is the New York bonus tax rate for 2026?",
+        "a": "11.70% New York State + 22% federal + 6.2% Social Security + 1.45% Medicare, plus roughly 4.25% for New York City residents. Yonkers residents add a surcharge on the state tax."
+      },
+      {
+        "q": "Why is my NY bonus withholding so high - is it refundable?",
+        "a": "New York's 11.70% supplemental rate is above most filers' true marginal New York rate (which tops out at 10.90%), and the 22% federal is often above your bracket, so a chunk of the withholding typically returns as refund when you file."
+      }
+    ],
+    "faq_hourly": [
+      {
+        "q": "What is $25 an hour after taxes in New York?",
+        "a": "About $39,000-$41,000 net per year for a single full-time worker after federal tax, 7.65% FICA and New York State tax - lower if you live in New York City, which adds its own income tax (roughly 3%-3.9%)."
+      },
+      {
+        "q": "Does the calculator include NYC or Yonkers tax?",
+        "a": "Yes if you select it. Choose New York City or Yonkers from the local tax dropdown; NYC uses its own bracket schedule on your state taxable income and Yonkers adds a surcharge on your New York State tax."
+      },
+      {
+        "q": "Is New York overtime taxed at a higher rate?",
+        "a": "Overtime is taxed at the same rates. Time-and-a-half raises gross pay, so more of your income can land in New York's higher brackets or the federal 22%/24% bracket, making the overtime portion look more heavily taxed."
+      }
+    ],
+    "faq_se": [
+      {
+        "q": "How much is self-employment tax in New York?",
+        "a": "15.3% federal SE tax on 92.35% of net profit (12.4% Social Security up to $184,500, 2.9% Medicare), plus New York State income tax on net profit (3.90%-10.90%), plus New York City tax if you are a city resident, plus federal income tax. Half the SE tax is deductible federally."
+      },
+      {
+        "q": "Do 1099 workers pay quarterly taxes in New York?",
+        "a": "Yes - New York requires quarterly estimated payments if you expect to owe $300 or more in state tax, on the mid-April / mid-June / mid-September / mid-January schedule, in addition to federal estimates."
+      },
+      {
+        "q": "Is there a separate NYC self-employment tax?",
+        "a": "New York City residents who are self-employed pay NYC personal income tax on their net profit. Unincorporated businesses in NYC above $95,000 of income may also owe the separate Unincorporated Business Tax (UBT), which this calculator does not model."
+      }
+    ],
+    "supplemental_rate": 0.117,
     "filing_status_backfilled": false
   },
   "oh": {
@@ -642,6 +938,48 @@
       {
         "q": "How much is take-home pay on $65,000 in Ohio?",
         "a": "On a $65,000 gross salary, a single filer in Ohio takes home roughly $53,368/year (about $4,447/month) after federal tax, FICA, and Ohio's 2.75% state tax \u2014 before any city income tax, which can add another 1%-3%."
+      }
+    ],
+    "faq_bonus": [
+      {
+        "q": "How much are bonuses taxed in OH?",
+        "a": "Ohio has a flat 3.50% supplemental withholding rate for bonuses paid separately (check the current Ohio Department of Taxation figure), plus the flat 22% federal supplemental rate (37% above $1,000,000/year) and 7.65% FICA. City income tax (up to about 2.5% in Columbus, Cleveland and others) also applies to the bonus."
+      },
+      {
+        "q": "What is the Ohio bonus tax rate for 2026?",
+        "a": "22% federal + Ohio state supplemental + 7.65% FICA + your city income tax rate. Ohio's own income tax brackets are low (top rate 2.75%), so the municipal tax is often the bigger state-side piece."
+      },
+      {
+        "q": "Is my city's tax taken out of an Ohio bonus?",
+        "a": "Yes - Ohio municipal income taxes apply to supplemental wages. Select your city (Columbus, Cleveland, Cincinnati, Toledo, Akron and others are supported) in the calculator to include it."
+      }
+    ],
+    "faq_hourly": [
+      {
+        "q": "What is $20 an hour after taxes in Ohio?",
+        "a": "About $35,000-$36,000 net per year for a single full-time worker after federal tax, 7.65% FICA and Ohio state tax - less if you work in a city with a 2%-2.5% municipal income tax."
+      },
+      {
+        "q": "Does the Ohio calculator include city (RITA/CCA) tax?",
+        "a": "Yes if you select a city. Columbus, Cleveland, Cincinnati, Toledo, Akron, Parma and Canton are built in at their current rates; choose 'other' to enter a custom municipal rate."
+      },
+      {
+        "q": "Is Ohio overtime taxed differently?",
+        "a": "No - overtime uses the same state, city, federal and FICA rates. Ohio's state brackets are low, so most of the tax on extra hours is federal plus FICA plus any city tax."
+      }
+    ],
+    "faq_se": [
+      {
+        "q": "How much is self-employment tax in Ohio?",
+        "a": "15.3% federal SE tax on 92.35% of net profit (12.4% Social Security up to $184,500, 2.9% Medicare), plus Ohio income tax on net profit (0%-2.75%), plus any municipal income tax on your net profit, plus federal income tax. Half the SE tax is deductible federally."
+      },
+      {
+        "q": "Do Ohio freelancers owe city tax on 1099 income?",
+        "a": "Usually yes - most Ohio municipalities tax net profit from self-employment for residents, and for non-residents doing work in the city. This calculator applies the selected city's rate to your net profit."
+      },
+      {
+        "q": "Do I make quarterly estimated payments in Ohio?",
+        "a": "Yes - federal estimates if you will owe $1,000+, Ohio estimates if you will owe more than $500 in state tax, and many Ohio cities also require quarterly municipal estimates."
       }
     ],
     "filing_status_backfilled": true
@@ -823,6 +1161,48 @@
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Arizona state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Arizona Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
+    "faq_bonus": [
+      {
+        "q": "How much are bonuses taxed in AZ?",
+        "a": "An Arizona bonus paid separately has the flat 22% federal supplemental tax withheld (37% above $1,000,000/year), 7.65% FICA, and Arizona's flat 2.50% state income tax. Arizona's low flat rate means the state piece on a bonus is small; combined withholding is about 32.2%."
+      },
+      {
+        "q": "What is the Arizona bonus tax rate for 2026?",
+        "a": "22% federal + 2.50% Arizona + 6.2% Social Security + 1.45% Medicare. A $5,000 Arizona bonus has roughly $1,100 federal, $125 Arizona, and $383 FICA withheld, leaving about $3,392."
+      },
+      {
+        "q": "Do I get Arizona bonus tax back?",
+        "a": "Arizona's 2.50% flat rate is close to your true rate, so little changes there. The federal 22% is withholding and is reconciled against your federal bracket at filing - any excess is part of your refund."
+      }
+    ],
+    "faq_hourly": [
+      {
+        "q": "What is $18 an hour after taxes in Arizona?",
+        "a": "About $32,000-$33,000 net per year for a single full-time worker after federal tax, 7.65% FICA and Arizona's flat 2.50% state tax - Arizona's low rate keeps take-home relatively high."
+      },
+      {
+        "q": "Are there local income taxes in Arizona?",
+        "a": "No Arizona city or county levies an income tax on wages, so the hourly calculator applies state, federal and FICA only."
+      },
+      {
+        "q": "How is overtime taxed in Arizona?",
+        "a": "At the same 2.50% flat state rate as regular pay, plus federal and FICA. Time-and-a-half raises gross pay, which can push part of your income into a higher federal bracket."
+      }
+    ],
+    "faq_se": [
+      {
+        "q": "How much is self-employment tax in Arizona?",
+        "a": "15.3% federal SE tax on 92.35% of net profit (12.4% Social Security up to $184,500, 2.9% Medicare), plus Arizona's flat 2.50% income tax on net profit, plus federal income tax. Half the SE tax is deductible federally."
+      },
+      {
+        "q": "Do Arizona freelancers pay quarterly estimated taxes?",
+        "a": "Yes - federal estimates if you will owe $1,000+, and Arizona estimates if you expect to owe $1,000 or more in state tax, on the mid-April / mid-June / mid-September / mid-January schedule."
+      },
+      {
+        "q": "Does Arizona have its own self-employment tax?",
+        "a": "No - the 15.3% SE tax is federal. Arizona taxes your net self-employment profit at its 2.50% flat rate as ordinary income."
+      }
+    ],
     "filing_status_backfilled": false
   },
   "ar": {
@@ -899,6 +1279,48 @@
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Arkansas state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Arkansas Department of Finance and Administration's married-filing-jointly tables for a precise figure."
       }
     ],
+    "faq_bonus": [
+      {
+        "q": "How much are bonuses taxed in AR?",
+        "a": "An Arkansas bonus paid separately has the flat 22% federal supplemental tax withheld (37% above $1,000,000/year), 7.65% FICA, and Arkansas income tax at your marginal bracket (top rate 3.70%). Arkansas has no separate supplemental rate, so state withholding on a bonus follows your regular bracket."
+      },
+      {
+        "q": "What is the Arkansas bonus tax rate for 2026?",
+        "a": "22% federal + Arkansas marginal rate (up to 3.70%) + 6.2% Social Security + 1.45% Medicare. A mid-income $5,000 bonus loses about $1,100 federal, ~$185 Arkansas, and $383 FICA."
+      },
+      {
+        "q": "Why is Arkansas state tax on my bonus shown as an estimate?",
+        "a": "Arkansas publishes no flat supplemental withholding rate, so the calculator estimates the state tax on the bonus as the additional tax your marginal bracket produces on the extra income."
+      }
+    ],
+    "faq_hourly": [
+      {
+        "q": "What is $18 an hour after taxes in Arkansas?",
+        "a": "About $31,000-$32,000 net per year for a single full-time worker after federal tax, 7.65% FICA and Arkansas income tax (top rate 3.70%)."
+      },
+      {
+        "q": "Does Arkansas have local income tax?",
+        "a": "No. No Arkansas city or county levies an income tax on wages, so the hourly calculator applies state, federal and FICA only."
+      },
+      {
+        "q": "How is overtime taxed in Arkansas?",
+        "a": "At the same rates as regular hourly pay. Time-and-a-half raises gross pay, which can move part of your income into a higher Arkansas or federal bracket."
+      }
+    ],
+    "faq_se": [
+      {
+        "q": "How much is self-employment tax in Arkansas?",
+        "a": "15.3% federal SE tax on 92.35% of net profit (12.4% Social Security up to $184,500, 2.9% Medicare), plus Arkansas income tax on net profit (up to 3.70%), plus federal income tax. Half the SE tax is deductible federally."
+      },
+      {
+        "q": "Do 1099 workers pay quarterly taxes in Arkansas?",
+        "a": "Yes - federal estimates if you will owe $1,000+, and Arkansas estimates if you expect to owe $1,000 or more in state tax, on the mid-April / mid-June / mid-September / mid-January schedule."
+      },
+      {
+        "q": "Does Arkansas have a self-employment tax of its own?",
+        "a": "No - the 15.3% SE tax is federal. Arkansas taxes your net self-employment profit as ordinary income at its regular bracket rates."
+      }
+    ],
     "filing_status_backfilled": false
   },
   "co": {
@@ -952,6 +1374,48 @@
       {
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Colorado state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Colorado Department of Revenue's married-filing-jointly tables for a precise figure."
+      }
+    ],
+    "faq_bonus": [
+      {
+        "q": "How much are bonuses taxed in CO?",
+        "a": "A separately-paid Colorado bonus has a flat 22% federal supplemental tax withheld (37% above $1,000,000/year), 7.65% FICA, and Colorado's flat 4.40% state income tax. Colorado does not publish a separate supplemental rate, so 4.40% applies. Combined withholding is roughly 34%."
+      },
+      {
+        "q": "What is the Colorado bonus tax rate for 2026?",
+        "a": "Federal flat 22% + Colorado flat 4.40% + Social Security 6.2% + Medicare 1.45%. On a $5,000 bonus that is about $1,100 federal, $220 Colorado, and $383 FICA withheld."
+      },
+      {
+        "q": "Is a Colorado bonus taxed at a higher rate than salary?",
+        "a": "No. Colorado's 4.40% is a true flat tax that applies to a bonus and to salary identically. Only the federal withholding method differs - separate bonuses use the flat 22% supplemental rate instead of the wage-bracket tables."
+      }
+    ],
+    "faq_hourly": [
+      {
+        "q": "What is $25 an hour after taxes in Colorado?",
+        "a": "Roughly $42,000-$43,000 net per year for a single full-time worker, after federal tax, 7.65% FICA and Colorado's flat 4.40% state tax."
+      },
+      {
+        "q": "Does Colorado have daily overtime rules?",
+        "a": "Yes - Colorado requires overtime for hours over 12 in a day (or over 40 in a week), and this calculator models weekly overtime only, so daily-OT situations should be treated as an estimate."
+      },
+      {
+        "q": "Are there local income taxes in Colorado?",
+        "a": "A few Colorado cities (Denver, Aurora, and others) charge a small flat Occupational Privilege Tax - a few dollars a month, not a percentage of wages - which this calculator does not include. There is no city percentage income tax."
+      }
+    ],
+    "faq_se": [
+      {
+        "q": "How much is self-employment tax in Colorado?",
+        "a": "15.3% federal SE tax on 92.35% of net profit (12.4% Social Security up to $184,500, 2.9% Medicare), plus Colorado's flat 4.40% income tax on net profit, plus federal income tax. Half the SE tax is a federal deduction."
+      },
+      {
+        "q": "Do 1099 workers pay quarterly taxes in Colorado?",
+        "a": "Yes - federal estimated payments if you will owe $1,000+, and Colorado estimated payments if you will owe $1,000+ in state tax, on the mid-April / mid-June / mid-September / mid-January schedule."
+      },
+      {
+        "q": "Does Colorado allow the federal QBI deduction for the self-employed?",
+        "a": "Colorado starts from federal taxable income, so the federal 20% QBI deduction does flow through to your Colorado return. This calculator does not model QBI because it phases out by income and business type."
       }
     ],
     "filing_status_backfilled": false
@@ -1036,6 +1500,48 @@
       {
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Connecticut state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Connecticut Department of Revenue Services's married-filing-jointly tables for a precise figure."
+      }
+    ],
+    "faq_bonus": [
+      {
+        "q": "How much are bonuses taxed in CT?",
+        "a": "A separate Connecticut bonus has 22% federal supplemental tax withheld (37% above $1,000,000/year), 7.65% FICA, and Connecticut income tax at your marginal bracket (2.00% to 6.99%). Connecticut does not use a flat supplemental rate, so bonus state withholding follows your regular bracket."
+      },
+      {
+        "q": "What is the Connecticut bonus tax rate?",
+        "a": "Federal flat 22% + Connecticut 2.00%-6.99% (marginal) + Social Security 6.2% + Medicare 1.45%. A mid-income earner's $5,000 bonus loses about $1,100 federal, ~$250 Connecticut, and $383 FICA."
+      },
+      {
+        "q": "Why is Connecticut state tax on my bonus an estimate?",
+        "a": "Connecticut has no published supplemental withholding rate, so this calculator estimates the state tax on the bonus as the extra tax your marginal bracket produces on the added income. Your employer's actual method (percentage or aggregate) may differ slightly."
+      }
+    ],
+    "faq_hourly": [
+      {
+        "q": "What is $30 an hour after taxes in Connecticut?",
+        "a": "About $48,000-$50,000 net per year for a single full-time worker after federal tax, 7.65% FICA and Connecticut income tax (2.00%-6.99% brackets)."
+      },
+      {
+        "q": "Is overtime taxed more in Connecticut?",
+        "a": "Overtime uses the same rates as regular pay. Because time-and-a-half raises gross pay, a bigger slice can fall in Connecticut's higher brackets or the federal 22%/24% brackets, so the effective rate on the overtime portion can look higher."
+      },
+      {
+        "q": "Does Connecticut have local income tax?",
+        "a": "No. Connecticut has no municipal income tax, so the hourly calculator applies only state plus federal plus FICA."
+      }
+    ],
+    "faq_se": [
+      {
+        "q": "How much is self-employment tax in Connecticut?",
+        "a": "15.3% federal SE tax on 92.35% of net profit (12.4% Social Security up to $184,500, 2.9% Medicare), plus Connecticut income tax on net profit at 2.00%-6.99%, plus federal income tax. Half the SE tax is deductible federally."
+      },
+      {
+        "q": "Do I pay Connecticut estimated taxes as a freelancer?",
+        "a": "Yes - Connecticut requires quarterly estimated payments if you expect to owe $1,000 or more, on the same mid-April / mid-June / mid-September / mid-January schedule as the IRS."
+      },
+      {
+        "q": "Does Connecticut have a self-employment tax of its own?",
+        "a": "No - the 15.3% SE tax is entirely federal. Connecticut just taxes your net self-employment profit as ordinary income at its regular bracket rates."
       }
     ],
     "filing_status_backfilled": false
@@ -1422,6 +1928,48 @@
       {
         "q": "Does this calculator include Indiana local or city income tax?",
         "a": "Indiana's 92 counties each levy their own local income tax (resident-based), ranging 0.50%-3.38% \u2014 often larger than any single layer in this calculator's other states. Not computed here; check your county's rate."
+      }
+    ],
+    "faq_bonus": [
+      {
+        "q": "How much are bonuses taxed in IN?",
+        "a": "An Indiana bonus paid separately has the flat 22% federal supplemental tax withheld (37% above $1,000,000/year), 7.65% FICA, and Indiana's flat 2.95% state income tax, plus your county income tax (roughly 1%-2%). Combined withholding is around 33-35% depending on county."
+      },
+      {
+        "q": "What is the Indiana bonus tax rate for 2026?",
+        "a": "22% federal + 2.95% Indiana state + your county rate + 6.2% Social Security + 1.45% Medicare. Select your county (Marion, Allen, St. Joseph, Elkhart, Hamilton and others are built in) to include the local piece."
+      },
+      {
+        "q": "Is Indiana county tax withheld from a bonus?",
+        "a": "Yes - Indiana county income tax applies to supplemental wages based on your county of residence as of January 1. The calculator adds it when you pick your county."
+      }
+    ],
+    "faq_hourly": [
+      {
+        "q": "What is $20 an hour after taxes in Indiana?",
+        "a": "About $34,000-$35,000 net per year for a single full-time worker after federal tax, 7.65% FICA, Indiana's flat 2.95% state tax and your county income tax."
+      },
+      {
+        "q": "Does the Indiana calculator include county tax?",
+        "a": "Yes if you select a county. Marion (Indianapolis), Allen (Fort Wayne), St. Joseph, Elkhart, Hamilton, Hendricks and Tippecanoe are built in at their current rates; choose 'other' for a custom county rate."
+      },
+      {
+        "q": "How is overtime taxed in Indiana?",
+        "a": "At the same flat state and county rates as regular pay, plus federal and FICA. Time-and-a-half increases gross pay and can push part of it into a higher federal bracket."
+      }
+    ],
+    "faq_se": [
+      {
+        "q": "How much is self-employment tax in Indiana?",
+        "a": "15.3% federal SE tax on 92.35% of net profit (12.4% Social Security up to $184,500, 2.9% Medicare), plus Indiana's flat 2.95% income tax and your county income tax on net profit, plus federal income tax. Half the SE tax is deductible federally."
+      },
+      {
+        "q": "Do Indiana freelancers pay county tax on 1099 income?",
+        "a": "Yes - Indiana county income tax applies to self-employment net profit for residents. This calculator applies the selected county's rate."
+      },
+      {
+        "q": "Do I make quarterly estimated payments in Indiana?",
+        "a": "Yes - federal estimates if you will owe $1,000+, and Indiana estimates (which include the county tax) if you expect to owe $1,000 or more in combined state and county tax."
       }
     ],
     "filing_status_backfilled": false
@@ -1957,6 +2505,49 @@
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal and Minnesota state brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Minnesota Department of Revenue's married-filing-jointly tables for a precise figure."
       }
     ],
+    "faq_bonus": [
+      {
+        "q": "How are bonuses taxed in MN?",
+        "a": "Minnesota applies a flat 6.25% state supplemental withholding rate to a bonus paid separately from your regular paycheck. On top of that comes the flat 22% federal supplemental rate (37% above $1,000,000/year) and 7.65% FICA, so combined withholding on a Minnesota bonus is roughly 36%."
+      },
+      {
+        "q": "What is the bonus tax rate in Minnesota / how much is a bonus taxed in MN?",
+        "a": "6.25% Minnesota + 22% federal + 6.2% Social Security + 1.45% Medicare. A $5,000 bonus therefore has about $1,100 federal, $310 Social Security, $73 Medicare and $310 Minnesota tax withheld, leaving roughly $3,200 in hand - before year-end reconciliation."
+      },
+      {
+        "q": "How much are bonuses taxed in MN after taxes - do I get any back?",
+        "a": "The 6.25% Minnesota and 22% federal figures are withholding rates, not final tax. Minnesota's income tax brackets run 5.35% to 9.85%, so if your marginal rate is below 6.25% you may see some of the state withholding back at filing; likewise for the federal 22%."
+      }
+    ],
+    "faq_hourly": [
+      {
+        "q": "What does $20 an hour come to after taxes in Minnesota?",
+        "a": "About $34,000-$35,000 net per year for a single full-time worker (40 hours/week), after federal tax, 7.65% FICA and Minnesota state tax. Minnesota's income tax starts at 5.35%, so take-home is a little lower than in no-income-tax states."
+      },
+      {
+        "q": "How is overtime taxed in Minnesota?",
+        "a": "At the same rates as regular hourly pay - Minnesota brackets (5.35%-9.85%), federal tax and 7.65% FICA. Time-and-a-half increases gross pay, which can push part of your income into a higher Minnesota or federal bracket."
+      },
+      {
+        "q": "Does Minnesota have any local income tax on wages?",
+        "a": "No. Minnesota has no city or county income tax, so the hourly calculator only applies state plus federal plus FICA."
+      }
+    ],
+    "faq_se": [
+      {
+        "q": "How much is self-employment tax in Minnesota?",
+        "a": "15.3% federal SE tax (12.4% Social Security on 92.35% of net profit up to $184,500, plus 2.9% Medicare), then Minnesota income tax on your net profit at 5.35%-9.85% depending on income, and federal income tax. Half the SE tax is deductible federally."
+      },
+      {
+        "q": "Do I need to make quarterly estimated payments in MN?",
+        "a": "Yes if you expect to owe $500 or more in Minnesota tax, or $1,000+ in federal tax. Minnesota's due dates track the federal schedule (mid-April, mid-June, mid-September, mid-January)."
+      },
+      {
+        "q": "Does Minnesota tax 1099 income differently than W-2 wages?",
+        "a": "No - the income tax rate is the same. The difference is that as a 1099 worker you pay the full 15.3% SE tax yourself instead of splitting FICA with an employer, and you file Minnesota estimated payments quarterly."
+      }
+    ],
+    "supplemental_rate": 0.0625,
     "filing_status_backfilled": false
   },
   "ms": {
@@ -2517,7 +3108,7 @@
       "brackets": [
         {
           "upTo": 48475,
-          "rate": 0.0
+          "rate": 0
         },
         {
           "upTo": 244825,
@@ -2585,7 +3176,7 @@
       "brackets": [
         {
           "upTo": 3750,
-          "rate": 0.0
+          "rate": 0
         },
         {
           "upTo": 4900,
@@ -2947,6 +3538,48 @@
       {
         "q": "Does this estimate change if I'm married or have dependents?",
         "a": "This calculator uses single-filer figures only (v1 scope). Married filing jointly typically uses different federal brackets and a larger standard deduction \u2014 your actual take-home pay will differ. Dependents can also reduce federal withholding via the W-4. Check Tennessee Department of Revenue's married-filing-jointly tables for a precise figure."
+      }
+    ],
+    "faq_bonus": [
+      {
+        "q": "How much are bonuses taxed in TN?",
+        "a": "Tennessee has no state income tax on wages, so a bonus paid in Tennessee only has the flat 22% federal supplemental tax withheld (37% above $1,000,000/year) plus 6.2% Social Security and 1.45% Medicare - about 29.65% total."
+      },
+      {
+        "q": "What is the Tennessee bonus tax rate for 2026?",
+        "a": "22% federal + 7.65% FICA, $0 state. A $5,000 Tennessee bonus has roughly $1,100 federal and $383 FICA withheld, leaving about $3,517."
+      },
+      {
+        "q": "Do I get any Tennessee bonus tax back?",
+        "a": "No state tax to refund. The federal 22% is withholding, reconciled against your actual federal bracket at filing - any over-withholding is part of your refund."
+      }
+    ],
+    "faq_hourly": [
+      {
+        "q": "What is $20 an hour after taxes in Tennessee?",
+        "a": "About $36,000-$37,000 net per year for a single full-time worker - Tennessee has no wage income tax, so only federal tax and 7.65% FICA are withheld."
+      },
+      {
+        "q": "Is overtime taxed in Tennessee?",
+        "a": "Overtime has federal tax and FICA withheld but no Tennessee state tax. Time-and-a-half raises gross pay, which can push part of your income into a higher federal bracket."
+      },
+      {
+        "q": "Are there local income taxes in Tennessee?",
+        "a": "No. No Tennessee city or county taxes wages, so the hourly calculator applies federal tax and FICA only."
+      }
+    ],
+    "faq_se": [
+      {
+        "q": "How much is self-employment tax in Tennessee?",
+        "a": "15.3% federal SE tax on 92.35% of net profit (12.4% Social Security up to $184,500, 2.9% Medicare), plus federal income tax - and no Tennessee state income tax on your profit. Half the SE tax is deductible federally."
+      },
+      {
+        "q": "Do 1099 workers in Tennessee pay quarterly taxes?",
+        "a": "Yes, federal ones - estimated payments mid-April, mid-June, mid-September and mid-January if you will owe $1,000 or more. There is no Tennessee state estimated payment on earned income."
+      },
+      {
+        "q": "Does Tennessee still have the Hall income tax?",
+        "a": "No - Tennessee's Hall tax on interest and dividends was fully repealed in 2021. There is no state tax on self-employment earnings."
       }
     ],
     "filing_status_backfilled": false
