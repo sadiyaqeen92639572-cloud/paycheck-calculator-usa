@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Philadelphia Wage Tax Calculator 2026 — Resident 3.735% / Non-Resident 3.425%</title>
+<meta name="description" content="Estimate Philadelphia City Wage Tax and take-home pay: 3.735% for residents, 3.425% for non-residents who work in Philadelphia, plus federal tax, FICA and Pennsylvania's flat 3.07% state tax.">
+<link rel="canonical" href="https://calcpaycheck.com/pennsylvania/philadelphia/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Philadelphia Wage Tax Calculator 2026 — Resident 3.735% / Non-Resident 3.425%">
+<meta property="og:description" content="Estimate Philadelphia City Wage Tax and take-home pay: 3.735% for residents, 3.425% for non-residents who work in Philadelphia, plus federal tax, FICA and Pennsylvania's flat 3.07% state tax.">
+<meta property="og:url" content="https://calcpaycheck.com/pennsylvania/philadelphia/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Philadelphia Wage Tax Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-07-26","author":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}},"publisher":{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the Philadelphia Wage Tax rate for 2026?","acceptedAnswer":{"@type":"Answer","text":"The Philadelphia City Wage Tax is 3.735% for residents (on all wages, wherever earned) and 3.425% for non-residents on wages earned from work performed in Philadelphia, effective 2026-07-01 as part of a phased reduction. It applies to gross wages with no deductions."}},{"@type":"Question","name":"Do non-residents pay Philadelphia Wage Tax?","acceptedAnswer":{"@type":"Answer","text":"Yes - non-residents pay 3.425% on the portion of wages earned working inside Philadelphia. Employers withhold it automatically; if you work partly outside the city you may be able to file for a partial refund with the Department of Revenue."}},{"@type":"Question","name":"Is the Philadelphia Wage Tax on top of Pennsylvania state tax?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pennsylvania's flat 3.07% Personal Income Tax applies statewide; the Philadelphia Wage Tax is a separate city tax on top of it. Total state + city income tax for a Philadelphia resident is about 6.80%."}},{"@type":"Question","name":"Does the Philadelphia Wage Tax apply to a bonus?","acceptedAnswer":{"@type":"Answer","text":"Yes - the Wage Tax applies to bonuses and other supplemental wages at the same rate as regular pay. Use the Pennsylvania bonus tax calculator for a bonus estimate."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://calcpaycheck.com/"},{"@type":"ListItem","position":2,"name":"Pennsylvania","item":"https://calcpaycheck.com/pennsylvania/"},{"@type":"ListItem","position":3,"name":"Philadelphia","item":"https://calcpaycheck.com/pennsylvania/philadelphia/"}]},{"@type":"Organization","name":"USA Paycheck Calculator","legalName":"Gesmine-Invest Limited","url":"https://calcpaycheck.com/about/","identifier":{"@type":"PropertyValue","propertyID":"UK Company Number","value":"14120136"},"address":{"@type":"PostalAddress","streetAddress":"Hardy House, 269 Poynders Gardens","addressLocality":"London","postalCode":"SW4 8PQ","addressCountry":"GB"}}]}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a> · <a href="/pennsylvania/">Pennsylvania Paycheck Calculator</a></p>
+  <h1>Philadelphia Wage Tax Calculator</h1>
+  <p class="badge">City Wage Tax 3.735% resident / 3.425% non-resident, plus federal, FICA and PA state tax — 2026</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. The Philadelphia City Wage Tax is 3.735% for residents and 3.425% for non-residents on Philadelphia-sourced wages, effective 2026-07-01 (Rate effective 2026-07-01 (part of a 5-year phased reduction plan); cross-checked against a second secondary source 2026-07-29.). This applies it to gross wages alongside 2026 federal tax, FICA, and Pennsylvania's flat 3.07% Personal Income Tax. For your exact withholding, consult a tax professional or your payroll department.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      <label>Gross Annual Salary ($)
+        <input type="number" id="grossIncome" min="0" step="100" value="65000" required>
+      </label>
+      <label>Philadelphia status
+        <select id="phillyStatus">
+          <option value="phila_resident" selected>Philadelphia resident (3.735%)</option>
+          <option value="phila_nonresident">Non-resident working in Philadelphia (3.425%)</option>
+        </select>
+      </label>
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <label>Pay Frequency
+        <select id="payFrequency">
+          <option value="annual">Annual</option>
+          <option value="monthly">Monthly</option>
+          <option value="semimonthly">Semi-Monthly (24/yr)</option>
+          <option value="biweekly" selected>Bi-Weekly (26/yr)</option>
+          <option value="weekly">Weekly</option>
+        </select>
+      </label>
+      <button type="submit">Calculate Philadelphia Take-Home Pay →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
+        <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
+        <div class="result-item"><span class="label">Pennsylvania State Tax (3.07%)</span><span class="value" id="result-state"></span></div>
+        <div class="result-item"><span class="label">Philadelphia Wage Tax</span><span class="value" id="result-local"></span></div>
+      </div>
+      <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
+    </div>
+    <p class="cross-link"><a href="/pennsylvania/">Outside Philadelphia? Use the Pennsylvania paycheck calculator →</a></p>
+    <p class="cross-link"><a href="/pennsylvania/bonus/">Got a bonus? Try the Pennsylvania bonus tax calculator →</a></p>
+  </section>
+
+  <section class="seo-section">
+    <h2>How the Philadelphia Wage Tax Works (2026)</h2>
+    <p>The Wage Tax is a flat percentage of <strong>gross</strong> wages — there is no standard deduction or bracket. Residents pay 3.735% on all wages regardless of where the work is done. Non-residents pay 3.425% on wages for work physically performed in Philadelphia. It is withheld by your employer alongside federal, FICA and Pennsylvania state tax.</p>
+    <table>
+      <tr><th>Who</th><th>Wage Tax rate</th><th>Applies to</th></tr>
+      <tr><td class="hl">Philadelphia resident</td><td>3.735%</td><td>All wages, anywhere</td></tr>
+      <tr><td class="hl">Non-resident working in Philadelphia</td><td>3.425%</td><td>Philadelphia-sourced wages only</td></tr>
+    </table>
+    <p>Rates are on a multi-year phased reduction. The figure above is effective 2026-07-01. Pennsylvania's separate 3.07% Personal Income Tax also applies; the rest of Pennsylvania's ~2,900 municipalities levy their own Earned Income Tax (typically 1%+) which is not computed here.</p>
+  </section>
+
+  
+    <section id="faq" class="seo-section">
+      <h2>Philadelphia Wage Tax FAQ</h2>
+      
+      <details class="faq-item">
+        <summary>What is the Philadelphia Wage Tax rate for 2026?</summary>
+        <p>The Philadelphia City Wage Tax is <strong>3.735%</strong> for residents (on all wages, wherever earned) and <strong>3.425%</strong> for non-residents on wages earned from work performed in Philadelphia, effective 2026-07-01 as part of a phased reduction. It applies to gross wages with no deductions.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do non-residents pay Philadelphia Wage Tax?</summary>
+        <p>Yes - non-residents pay <strong>3.425%</strong> on the portion of wages earned working inside Philadelphia. Employers withhold it automatically; if you work partly outside the city you may be able to file for a partial refund with the Department of Revenue.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is the Philadelphia Wage Tax on top of Pennsylvania state tax?</summary>
+        <p>Yes. Pennsylvania's flat 3.07% Personal Income Tax applies statewide; the Philadelphia Wage Tax is a separate city tax on top of it. Total state + city income tax for a Philadelphia resident is about 6.80%.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does the Philadelphia Wage Tax apply to a bonus?</summary>
+        <p>Yes - the Wage Tax applies to bonuses and other supplemental wages at the same rate as regular pay. Use the <a href="/pennsylvania/bonus/">Pennsylvania bonus tax calculator</a> for a bonus estimate.</p>
+      </details>
+    </section>
+
+  <section id="methodology" class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Philadelphia Wage Tax rates from <strong>City of Philadelphia Department of Revenue — Wage Tax / Earnings Tax rates</strong> (<a href="https://www.phila.gov/services/payments-assistance-taxes/taxes/income-taxes/earnings-tax-employees/" target="_blank" rel="nofollow noopener">https://www.phila.gov/services/payments-assistance-taxes/taxes/income-taxes/earnings-tax-employees/</a>). Rate effective 2026-07-01 (part of a 5-year phased reduction plan); cross-checked against a second secondary source 2026-07-29. Pennsylvania's flat 3.07% Personal Income Tax from the Pennsylvania Department of Revenue (72 P.S. § 7302). Federal brackets, standard deductions and FICA constants from the IRS (Revenue Procedure 2025-32). Wage Tax is computed on gross wages; the Pennsylvania state figure uses the same engine as the <a href="/pennsylvania/">Pennsylvania calculator</a>. Last verified: 2026-07-26.</p>
+  </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; 2026 USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+<script src="/assets/calc-engine.js"></script>
+<script src="/assets/chart.js"></script>
+<script>
+const STATE_ENTRY = {"name":"Pennsylvania","abbr":"PA","slug":"pennsylvania","formula_model":"flat_tax","effective_date":"2004-01-01","last_verified":"2026-07-26","guideline_version":"2026-PA-v1","source":{"agency_name":"Pennsylvania Department of Revenue","url":"https://www.revenue.pa.gov/","statute_ref":"72 P.S. § 7302 — flat 3.07% Personal Income Tax rate, unchanged since 2004"},"params":{"rate":0.0307,"standard_deduction":0,"personal_exemption":0},"filing_status_backfilled":true};
+const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax":{"type":"selectable","source":{"agency_name":"City of Philadelphia Department of Revenue — Wage Tax / Earnings Tax rates","url":"https://www.phila.gov/services/payments-assistance-taxes/taxes/income-taxes/earnings-tax-employees/","note":"Rate effective 2026-07-01 (part of a 5-year phased reduction plan); cross-checked against a second secondary source 2026-07-29."},"options":[{"id":"none","label":"Outside Philadelphia","kind":"none"},{"id":"phila_resident","label":"Philadelphia resident","kind":"flat_rate_on_gross","rate":0.03735},{"id":"phila_nonresident","label":"Philadelphia non-resident (works in Philly)","kind":"flat_rate_on_gross","rate":0.03425}]},"local_tax_note":"This estimate now computes the Philadelphia Wage Tax (3.735% resident / 3.425% non-resident, effective 2026-07-01) when selected above. Every other Pennsylvania municipality and school district's own Earned Income Tax (EIT) — commonly 1%-3.9%+ elsewhere in the state — is still not computed; check your municipality's EIT rate at the PA Department of Community & Economic Development's local tax finder.","deviation_note":"This is an estimate based on standard single-filer federal, FICA, and PA state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, local EIT, and other factors."};
+function runCalculation(e) {
+    e.preventDefault();
+    const gross = parseFloat(document.getElementById('grossIncome').value) || 0;
+    const filingStatus = document.getElementById('filingStatus').value;
+    const freq = document.getElementById('payFrequency').value;
+    const localTaxOption = document.getElementById('phillyStatus').value;
+    const r = calculatePaycheck(STATE_ENTRY, RULES, gross, freq, filingStatus, null, localTaxOption);
+    const freqLabel = { annual: 'annual', monthly: 'month', semimonthly: 'semi-month', biweekly: 'bi-week', weekly: 'week' }[freq];
+    document.getElementById('result-amount').textContent = fmtMoney(r.netPerPeriod) + ' / ' + freqLabel;
+    document.getElementById('result-net-annual').textContent = fmtMoney(r.netAnnual);
+    document.getElementById('result-federal').textContent = fmtMoney(r.federalTax);
+    document.getElementById('result-fica').textContent = fmtMoney(r.fica.total);
+    document.getElementById('result-state').textContent = fmtMoney(r.stateTax);
+    document.getElementById('result-local').textContent = fmtMoney(r.localTax ? r.localTax.amount : 0);
+    document.getElementById('results-block').hidden = false;
+    drawBreakdownChart(document.getElementById('breakdown-chart'), {
+        gross: gross, federalTax: r.federalTax, ficaTotal: r.fica.total, stateTax: r.stateTax,
+        localTax: r.localTax ? r.localTax.amount : 0, extraPayrollTax: 0, netAnnual: r.netAnnual
+    });
+}
+document.getElementById('calc-form').addEventListener('submit', runCalculation);
+document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+</script>
+</body>
+</html>

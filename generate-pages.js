@@ -692,6 +692,8 @@ function renderStatePage(state) {
     <p class="cross-link"><a href="/${state.slug}/hourly/">Paid hourly instead? Try our ${state.name} hourly paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/bonus/">Calculating a bonus? Try our ${state.name} bonus paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/self-employed/">1099 or self-employed? Try our ${state.name} self-employment tax calculator →</a></p>
+    <p class="cross-link"><a href="/salary-converter/">Converting an hourly rate or gross↔net? Try the salary converter →</a></p>
+    ${state.abbr === 'PA' ? `<p class="cross-link"><a href="/pennsylvania/philadelphia/">Live or work in Philadelphia? Try the Philadelphia Wage Tax calculator →</a></p>` : ''}
   </section>
 
   ${worksheetSection(state)}
@@ -774,6 +776,7 @@ function renderHourlyStatePage(state) {
     <p class="cross-link"><a href="/${state.slug}/">Paid a salary instead? Try our ${state.name} paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/bonus/">Calculating a bonus? Try our ${state.name} bonus tax calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/self-employed/">1099 or self-employed? Try our ${state.name} self-employment tax calculator →</a></p>
+    <p class="cross-link"><a href="/salary-converter/">Want a plain hourly↔annual or gross↔net conversion? Try the salary converter →</a></p>
     <p class="cross-link"><a href="https://sadiyaqeen92639572-cloud.github.io/overtime-pay-calculator/" rel="nofollow">Just need gross overtime pay? Try the overtime pay calculator →</a></p>
   </section>
 
@@ -850,6 +853,7 @@ function renderBonusStatePage(state) {
     <p class="cross-link"><a href="/${state.slug}/">Calculating a regular paycheck? Try our ${state.name} paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/hourly/">Paid hourly? Try our ${state.name} hourly paycheck calculator →</a></p>
     <p class="cross-link"><a href="/how-are-bonuses-taxed/">How bonuses are taxed, state by state →</a></p>
+    ${state.abbr === 'PA' ? `<p class="cross-link"><a href="/pennsylvania/philadelphia/">Philadelphia resident or non-resident? Include the City Wage Tax →</a></p>` : ''}
   </section>
 
   ${howBonusesTaxedSection(state)}
@@ -938,6 +942,24 @@ ${selfEmployedCalculatorScript(state, rules)}
 </body>
 </html>
 `;
+}
+
+// Common hourly -> annual -> after-tax conversions (federal + FICA only, single filer).
+function salaryConversionTable() {
+    const rows = [15, 18, 20, 25, 30, 35, 40, 50, 60, 75].map(rate => {
+        const gross = engine.annualizeHourly(rate, 40);
+        const r = engine.calculatePaycheck({ formula_model: 'no_income_tax', params: {}, name: 'US' }, { extra_payroll_tax: null }, gross, 'annual', 'single', null, null);
+        return `<tr><td class="hl">${m0(rate)}/hr</td><td>${m0(gross)}</td><td>${m0(r.netAnnual)}</td><td>${m0(r.netAnnual / 12)}</td></tr>`;
+    }).join('');
+    return `
+    <section class="seo-section">
+      <h2>$X an Hour Is How Much a Year (Before &amp; After Taxes)?</h2>
+      <p>Full-time at 40 hours a week (2,080 hours a year). Net is after federal income tax and FICA only, single filer — add your state's tax with the state selector in the converter above, or your state's own calculator.</p>
+      <table>
+        <tr><th>Hourly rate</th><th>Gross / year</th><th>Net / year (fed + FICA)</th><th>Net / month</th></tr>
+        ${rows}
+      </table>
+    </section>`;
 }
 
 function renderBonusHubPage() {
@@ -1035,6 +1057,163 @@ function renderBonusHubPage() {
   <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
   <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Paycheck Calculator. Estimates only — not tax advice.</p>
 </footer>
+</body>
+</html>
+`;
+}
+
+function renderPhiladelphiaPage() {
+    const state = states.pa;
+    const rules = loadRules('pa');
+    const res = rules.local_tax.options.find(o => o.id === 'phila_resident');
+    const non = rules.local_tax.options.find(o => o.id === 'phila_nonresident');
+    const resPct = (res.rate * 100).toFixed(3).replace(/0+$/, '');
+    const nonPct = (non.rate * 100).toFixed(3).replace(/0+$/, '');
+    const title = `Philadelphia Wage Tax Calculator ${YEAR} — Resident ${resPct}% / Non-Resident ${nonPct}%`;
+    const description = `Estimate Philadelphia City Wage Tax and take-home pay: ${resPct}% for residents, ${nonPct}% for non-residents who work in Philadelphia, plus federal tax, FICA and Pennsylvania's flat 3.07% state tax.`;
+    const faq = [
+        { q: 'What is the Philadelphia Wage Tax rate for 2026?', a: `The Philadelphia City Wage Tax is <strong>${resPct}%</strong> for residents (on all wages, wherever earned) and <strong>${nonPct}%</strong> for non-residents on wages earned from work performed in Philadelphia, effective 2026-07-01 as part of a phased reduction. It applies to gross wages with no deductions.` },
+        { q: 'Do non-residents pay Philadelphia Wage Tax?', a: `Yes - non-residents pay <strong>${nonPct}%</strong> on the portion of wages earned working inside Philadelphia. Employers withhold it automatically; if you work partly outside the city you may be able to file for a partial refund with the Department of Revenue.` },
+        { q: 'Is the Philadelphia Wage Tax on top of Pennsylvania state tax?', a: `Yes. Pennsylvania's flat 3.07% Personal Income Tax applies statewide; the Philadelphia Wage Tax is a separate city tax on top of it. Total state + city income tax for a Philadelphia resident is about ${(3.07 + res.rate * 100).toFixed(2)}%.` },
+        { q: 'Does the Philadelphia Wage Tax apply to a bonus?', a: 'Yes - the Wage Tax applies to bonuses and other supplemental wages at the same rate as regular pay. Use the ' + '<a href="/pennsylvania/bonus/">Pennsylvania bonus tax calculator</a> for a bonus estimate.' },
+    ];
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${title}</title>
+<meta name="description" content="${description}">
+<link rel="canonical" href="${SITE_URL}/pennsylvania/philadelphia/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${description}">
+<meta property="og:url" content="${SITE_URL}/pennsylvania/philadelphia/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+        { '@type': 'WebApplication', name: 'Philadelphia Wage Tax Calculator', applicationCategory: 'FinanceApplication', operatingSystem: 'Any', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, dateModified: state.last_verified, author: GESMINE_ORG, publisher: GESMINE_ORG },
+        { '@type': 'FAQPage', mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/<[^>]+>/g, '') } })) },
+        { '@type': 'BreadcrumbList', itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+            { '@type': 'ListItem', position: 2, name: 'Pennsylvania', item: `${SITE_URL}/pennsylvania/` },
+            { '@type': 'ListItem', position: 3, name: 'Philadelphia', item: `${SITE_URL}/pennsylvania/philadelphia/` }
+        ] },
+        GESMINE_ORG
+    ]
+})}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a> · <a href="/pennsylvania/">Pennsylvania Paycheck Calculator</a></p>
+  <h1>Philadelphia Wage Tax Calculator</h1>
+  <p class="badge">City Wage Tax ${resPct}% resident / ${nonPct}% non-resident, plus federal, FICA and PA state tax — ${YEAR}</p>
+</header>
+
+<div class="disclaimer-banner">
+  Estimate only — not tax advice. The Philadelphia City Wage Tax is ${resPct}% for residents and ${nonPct}% for non-residents on Philadelphia-sourced wages, effective 2026-07-01 (${rules.local_tax.source.note || 'per the City of Philadelphia Department of Revenue'}). This applies it to gross wages alongside 2026 federal tax, FICA, and Pennsylvania's flat 3.07% Personal Income Tax. For your exact withholding, consult a tax professional or your payroll department.
+</div>
+
+<main>
+  <section id="calculator">
+    <form id="calc-form">
+      <label>Gross Annual Salary ($)
+        <input type="number" id="grossIncome" min="0" step="100" value="65000" required>
+      </label>
+      <label>Philadelphia status
+        <select id="phillyStatus">
+          <option value="phila_resident" selected>Philadelphia resident (${resPct}%)</option>
+          <option value="phila_nonresident">Non-resident working in Philadelphia (${nonPct}%)</option>
+        </select>
+      </label>
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <label>Pay Frequency
+        <select id="payFrequency">
+          <option value="annual">Annual</option>
+          <option value="monthly">Monthly</option>
+          <option value="semimonthly">Semi-Monthly (24/yr)</option>
+          <option value="biweekly" selected>Bi-Weekly (26/yr)</option>
+          <option value="weekly">Weekly</option>
+        </select>
+      </label>
+      <button type="submit">Calculate Philadelphia Take-Home Pay →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <canvas id="breakdown-chart" data-chart-height="40"></canvas>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Net Annual</span><span class="value" id="result-net-annual"></span></div>
+        <div class="result-item"><span class="label">Federal Tax</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
+        <div class="result-item"><span class="label">Pennsylvania State Tax (3.07%)</span><span class="value" id="result-state"></span></div>
+        <div class="result-item"><span class="label">Philadelphia Wage Tax</span><span class="value" id="result-local"></span></div>
+      </div>
+      <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
+    </div>
+    <p class="cross-link"><a href="/pennsylvania/">Outside Philadelphia? Use the Pennsylvania paycheck calculator →</a></p>
+    <p class="cross-link"><a href="/pennsylvania/bonus/">Got a bonus? Try the Pennsylvania bonus tax calculator →</a></p>
+  </section>
+
+  <section class="seo-section">
+    <h2>How the Philadelphia Wage Tax Works (${YEAR})</h2>
+    <p>The Wage Tax is a flat percentage of <strong>gross</strong> wages — there is no standard deduction or bracket. Residents pay ${resPct}% on all wages regardless of where the work is done. Non-residents pay ${nonPct}% on wages for work physically performed in Philadelphia. It is withheld by your employer alongside federal, FICA and Pennsylvania state tax.</p>
+    <table>
+      <tr><th>Who</th><th>Wage Tax rate</th><th>Applies to</th></tr>
+      <tr><td class="hl">Philadelphia resident</td><td>${resPct}%</td><td>All wages, anywhere</td></tr>
+      <tr><td class="hl">Non-resident working in Philadelphia</td><td>${nonPct}%</td><td>Philadelphia-sourced wages only</td></tr>
+    </table>
+    <p>Rates are on a multi-year phased reduction. The figure above is effective 2026-07-01. Pennsylvania's separate 3.07% Personal Income Tax also applies; the rest of Pennsylvania's ~2,900 municipalities levy their own Earned Income Tax (typically 1%+) which is not computed here.</p>
+  </section>
+
+  ${faqSection({ name: 'Philadelphia Wage Tax', faq_extra: faq }, faq, 'Philadelphia Wage Tax FAQ')}
+
+  <section id="methodology" class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Philadelphia Wage Tax rates from <strong>${rules.local_tax.source.agency_name}</strong> (<a href="${rules.local_tax.source.url}" target="_blank" rel="nofollow noopener">${rules.local_tax.source.url}</a>). ${rules.local_tax.source.note} Pennsylvania's flat 3.07% Personal Income Tax from the Pennsylvania Department of Revenue (72 P.S. § 7302). Federal brackets, standard deductions and FICA constants from the IRS (Revenue Procedure 2025-32). Wage Tax is computed on gross wages; the Pennsylvania state figure uses the same engine as the <a href="/pennsylvania/">Pennsylvania calculator</a>. Last verified: ${state.last_verified}.</p>
+  </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+<script src="/assets/calc-engine.js"></script>
+<script src="/assets/chart.js"></script>
+<script>
+const STATE_ENTRY = ${JSON.stringify(stateForScript(state))};
+const RULES = ${JSON.stringify(rules)};
+function runCalculation(e) {
+    e.preventDefault();
+    const gross = parseFloat(document.getElementById('grossIncome').value) || 0;
+    const filingStatus = document.getElementById('filingStatus').value;
+    const freq = document.getElementById('payFrequency').value;
+    const localTaxOption = document.getElementById('phillyStatus').value;
+    const r = calculatePaycheck(STATE_ENTRY, RULES, gross, freq, filingStatus, null, localTaxOption);
+    const freqLabel = { annual: 'annual', monthly: 'month', semimonthly: 'semi-month', biweekly: 'bi-week', weekly: 'week' }[freq];
+    document.getElementById('result-amount').textContent = fmtMoney(r.netPerPeriod) + ' / ' + freqLabel;
+    document.getElementById('result-net-annual').textContent = fmtMoney(r.netAnnual);
+    document.getElementById('result-federal').textContent = fmtMoney(r.federalTax);
+    document.getElementById('result-fica').textContent = fmtMoney(r.fica.total);
+    document.getElementById('result-state').textContent = fmtMoney(r.stateTax);
+    document.getElementById('result-local').textContent = fmtMoney(r.localTax ? r.localTax.amount : 0);
+    document.getElementById('results-block').hidden = false;
+    drawBreakdownChart(document.getElementById('breakdown-chart'), {
+        gross: gross, federalTax: r.federalTax, ficaTotal: r.fica.total, stateTax: r.stateTax,
+        localTax: r.localTax ? r.localTax.amount : 0, extraPayrollTax: 0, netAnnual: r.netAnnual
+    });
+}
+document.getElementById('calc-form').addEventListener('submit', runCalculation);
+document.addEventListener('DOMContentLoaded', () => { document.getElementById('calc-form').dispatchEvent(new Event('submit')); });
+</script>
 </body>
 </html>
 `;
@@ -1490,6 +1669,8 @@ function renderSalaryConverterPage() {
     <p class="cross-link"><a href="/compare/">Comparing two states at the same salary? Try our state comparator →</a></p>
   </section>
 
+  ${salaryConversionTable()}
+
   <section id="worksheet" class="seo-section">
     <h2>Hourly to Salary, and Gross to Net — How the Conversion Works</h2>
     <ol>
@@ -1653,5 +1834,10 @@ const bonusHubDir = path.join(__dirname, 'how-are-bonuses-taxed');
 fs.mkdirSync(bonusHubDir, { recursive: true });
 fs.writeFileSync(path.join(bonusHubDir, 'index.html'), renderBonusHubPage());
 console.log('Generated: how-are-bonuses-taxed/');
+
+const phillyDir = path.join(__dirname, 'pennsylvania', 'philadelphia');
+fs.mkdirSync(phillyDir, { recursive: true });
+fs.writeFileSync(path.join(phillyDir, 'index.html'), renderPhiladelphiaPage());
+console.log('Generated: pennsylvania/philadelphia/');
 
 console.log(`\nDone. ${built} state pages built.`);

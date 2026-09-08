@@ -16,6 +16,7 @@ urls.push({ loc: `${DOMAIN}/compare/`, lastmod: today, changefreq: 'monthly', pr
 urls.push({ loc: `${DOMAIN}/withholding-checkup/`, lastmod: today, changefreq: 'monthly', priority: '0.7' });
 urls.push({ loc: `${DOMAIN}/salary-converter/`, lastmod: today, changefreq: 'monthly', priority: '0.7' });
 urls.push({ loc: `${DOMAIN}/how-are-bonuses-taxed/`, lastmod: today, changefreq: 'monthly', priority: '0.7' });
+urls.push({ loc: `${DOMAIN}/pennsylvania/philadelphia/`, lastmod: today, changefreq: 'monthly', priority: '0.6' });
 
 Object.values(states).forEach(state => {
   if (!fs.existsSync(path.join(__dirname, state.slug, 'index.html'))) return;
