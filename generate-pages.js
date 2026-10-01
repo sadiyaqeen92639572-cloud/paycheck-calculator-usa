@@ -852,7 +852,7 @@ function renderBonusStatePage(state) {
     </div>
     <p class="cross-link"><a href="/${state.slug}/">Calculating a regular paycheck? Try our ${state.name} paycheck calculator →</a></p>
     <p class="cross-link"><a href="/${state.slug}/hourly/">Paid hourly? Try our ${state.name} hourly paycheck calculator →</a></p>
-    <p class="cross-link"><a href="/how-are-bonuses-taxed/">How bonuses are taxed, state by state →</a></p>
+    <p class="cross-link"><a href="/how-are-bonuses-taxed/">${state.abbr === 'AR' ? 'Bonus tax calculator for all 50 states + how bonuses are taxed' : 'How bonuses are taxed, state by state'} →</a></p>
     ${state.abbr === 'PA' ? `<p class="cross-link"><a href="/pennsylvania/philadelphia/">Philadelphia resident or non-resident? Include the City Wage Tax →</a></p>` : ''}
   </section>
 
@@ -954,7 +954,7 @@ function salaryConversionTable() {
     return `
     <section class="seo-section">
       <h2>$X an Hour Is How Much a Year (Before &amp; After Taxes)?</h2>
-      <p>Full-time at 40 hours a week (2,080 hours a year). Net is after federal income tax and FICA only, single filer — add your state's tax with the state selector in the converter above, or your state's own calculator.</p>
+      <p>Full-time at 40 hours a week (2,080 paid hours a year — see <a href="/work-days-in-a-year/">how many work days and hours are in a year</a> for paid vs worked hours). Net is after federal income tax and FICA only, single filer — add your state's tax with the state selector in the converter above, or your state's own calculator.</p>
       <table>
         <tr><th>Hourly rate</th><th>Gross / year</th><th>Net / year (fed + FICA)</th><th>Net / month</th></tr>
         ${rows}
@@ -963,8 +963,13 @@ function salaryConversionTable() {
 }
 
 function renderBonusHubPage() {
-    const title = `How Are Bonuses Taxed? Federal 22% Supplemental Rate + State by State (${YEAR})`;
-    const description = `Bonuses are withheld at a flat 22% for federal tax (37% above $1M), plus 7.65% FICA and your state's rate. ${YEAR} guide with a state-by-state bonus withholding table and per-state calculators.`;
+    const title = `Bonus Tax Calculator ${YEAR}: How Are Bonuses Taxed? (22% Federal + State)`;
+    const description = `Free bonus tax calculator for all 50 states + DC: see your net bonus after the flat 22% federal rate (37% above $1M), 7.65% FICA and state tax. ${YEAR} guide, state-by-state table and per-state calculators.`;
+    const exampleTx = engine.calcBonusPaycheck({ formula_model: 'no_income_tax', params: {}, name: 'US' }, { extra_payroll_tax: null }, 65000, 5000, 'biweekly', 'single', null);
+    const exampleStateOptions = Object.values(states)
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(s => `<option value="${s.slug}"${s.slug === 'california' ? ' selected' : ''}>${s.name}</option>`)
+        .join('');
     const rows = Object.values(states)
         .sort((a, b) => a.name.localeCompare(b.name))
         .map(s => `<tr><td class="hl"><a href="/${s.slug}/bonus/">${s.name}</a></td><td>${bonusStateCell(s)}</td></tr>`)
@@ -1010,7 +1015,7 @@ function renderBonusHubPage() {
 <body>
 <header>
   <p><a href="/">← USA Paycheck Calculator</a></p>
-  <h1>How Are Bonuses Taxed?</h1>
+  <h1>Bonus Tax Calculator — How Are Bonuses Taxed?</h1>
   <p class="badge">Federal flat 22% supplemental rate · 7.65% FICA · plus your state — ${YEAR}</p>
 </header>
 
@@ -1019,9 +1024,45 @@ function renderBonusHubPage() {
 </div>
 
 <main>
+  <section id="calculator">
+    <h2>Bonus Tax Calculator</h2>
+    <form id="calc-form">
+      <label>State
+        <select id="stateSlug">${exampleStateOptions}</select>
+      </label>
+      <label>Regular Annual Salary ($)
+        <input type="number" id="regularAnnualGross" min="0" step="100" value="65000" required>
+      </label>
+      <label>Bonus Amount ($)
+        <input type="number" id="bonusAmount" min="0" step="50" value="5000" required>
+      </label>
+      <label>Filing Status
+        <select id="filingStatus">
+          <option value="single" selected>Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </label>
+      <button type="submit">Calculate Bonus Take-Home Pay →</button>
+    </form>
+    <div id="results-block" hidden>
+      <div class="result-amount" id="result-amount"></div>
+      <div class="result-grid">
+        <div class="result-item"><span class="label">Bonus Amount</span><span class="value" id="result-bonus-gross"></span></div>
+        <div class="result-item"><span class="label">Federal Tax (22% flat)</span><span class="value" id="result-federal"></span></div>
+        <div class="result-item"><span class="label">FICA</span><span class="value" id="result-fica"></span></div>
+        <div class="result-item"><span class="label" id="result-state-label">State Tax</span><span class="value" id="result-state"></span></div>
+        <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
+      </div>
+      <p class="cross-link"><a id="result-state-link" href="/california/bonus/">Open the state bonus calculator (city/local tax, take-home table) →</a></p>
+    </div>
+    <p class="privacy-note">Estimate only. Federal tax uses the flat 22% method; the aggregate method some employers use is not modeled. State tax on the bonus is a marginal-bracket estimate, not necessarily a special state supplemental rate, and city/local taxes are not included here — use the state calculator for those.</p>
+  </section>
+
   <section class="seo-section">
     <h2>The short answer</h2>
     <p><strong>A bonus paid on its own check has a flat 22% federal income tax withheld (37% on the part of your yearly supplemental wages above $1,000,000), plus 6.2% Social Security, 1.45% Medicare, and your state's rate.</strong> A bonus is not taxed at a higher rate than salary — it is ordinary income in the same brackets. Only the withholding is calculated differently, and any over-withholding returns to you at tax time.</p>
+    <p>Example: a ${m0(exampleTx.bonusAmount)} bonus in a state with no income tax is cut by ${m0(exampleTx.bonusFederalTax)} federal (22%) and ${fmtMoney(exampleTx.bonusFica)} FICA (7.65%) — you take home ${fmtMoney(exampleTx.bonusNet)}. If your employer uses the aggregate method instead, the bonus is added to your latest regular paycheck and withheld at that combined rate, which often takes out more up front. FICA is the same either way: Social Security stops once your year's wages pass ${m0(SS_WAGE_BASE)}, so a bonus on a high salary can escape the 6.2%.</p>
     <table>
       <tr><th>Component</th><th>Rate withheld on a separate bonus</th></tr>
       <tr><td>Federal income tax (supplemental, percentage method)</td><td>22% flat &nbsp;·&nbsp; 37% above $1,000,000/yr</td></tr>
@@ -1057,6 +1098,37 @@ function renderBonusHubPage() {
   <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
   <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Paycheck Calculator. Estimates only — not tax advice.</p>
 </footer>
+<script src="/assets/calc-engine.js"></script>
+<script src="/assets/bonus-hub-data.js"></script>
+<script>
+(function () {
+  function run(e) {
+    if (e) e.preventDefault();
+    var slug = document.getElementById('stateSlug').value;
+    var d = window.BONUS_HUB_STATES[slug];
+    var regular = parseFloat(document.getElementById('regularAnnualGross').value) || 0;
+    var bonus = parseFloat(document.getElementById('bonusAmount').value) || 0;
+    var fs = document.getElementById('filingStatus').value;
+    var r = calcBonusPaycheck(d.entry, d.rules, regular, bonus, 'annual', fs, null);
+    document.getElementById('result-amount').textContent = fmtMoney(r.bonusNet) + ' net bonus';
+    document.getElementById('result-bonus-gross').textContent = fmtMoney(r.bonusAmount);
+    document.getElementById('result-federal').textContent = fmtMoney(r.bonusFederalTax);
+    document.getElementById('result-fica').textContent = fmtMoney(r.bonusFica);
+    document.getElementById('result-state-label').textContent = d.entry.name + ' State Tax';
+    document.getElementById('result-state').textContent = fmtMoney(r.bonusStateTax);
+    var extraRow = document.getElementById('result-extra-row');
+    if (r.bonusExtraPayrollTax > 0) {
+      extraRow.hidden = false;
+      document.getElementById('result-extra-label').textContent = (d.rules.extra_payroll_tax && d.rules.extra_payroll_tax.name) || 'Extra payroll tax';
+      document.getElementById('result-extra').textContent = fmtMoney(r.bonusExtraPayrollTax);
+    } else { extraRow.hidden = true; }
+    document.getElementById('result-state-link').href = '/' + slug + '/bonus/';
+    document.getElementById('results-block').hidden = false;
+  }
+  document.getElementById('calc-form').addEventListener('submit', run);
+  document.addEventListener('DOMContentLoaded', run);
+})();
+</script>
 </body>
 </html>
 `;
@@ -1531,6 +1603,183 @@ document.addEventListener('DOMContentLoaded', () => { document.getElementById('c
 `;
 }
 
+// ---- Work days in a year (U.S. federal holiday calendar, OPM / 5 U.S.C. 6103) ----
+const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const iso = d => d.toISOString().slice(0, 10);
+function utc(y, m, d) { return new Date(Date.UTC(y, m, d)); }
+function nthWeekday(y, m, weekday, n) {
+    const first = utc(y, m, 1);
+    const offset = (weekday - first.getUTCDay() + 7) % 7;
+    return utc(y, m, 1 + offset + (n - 1) * 7);
+}
+function lastWeekday(y, m, weekday) {
+    const last = utc(y, m + 1, 0);
+    return utc(y, m, last.getUTCDate() - ((last.getUTCDay() - weekday + 7) % 7));
+}
+// Saturday -> preceding Friday, Sunday -> following Monday (5 U.S.C. 6103(b), EO 11582).
+function observedDate(d) {
+    const dow = d.getUTCDay();
+    if (dow === 6) return utc(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() - 1);
+    if (dow === 0) return utc(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1);
+    return d;
+}
+function federalHolidayList(y) {
+    return [
+        { name: "New Year's Day", date: utc(y, 0, 1) },
+        { name: 'Birthday of Martin Luther King, Jr.', date: nthWeekday(y, 0, 1, 3) },
+        { name: "Washington's Birthday (Presidents Day)", date: nthWeekday(y, 1, 1, 3) },
+        { name: 'Memorial Day', date: lastWeekday(y, 4, 1) },
+        { name: 'Juneteenth National Independence Day', date: utc(y, 5, 19) },
+        { name: 'Independence Day', date: utc(y, 6, 4) },
+        { name: 'Labor Day', date: nthWeekday(y, 8, 1, 1) },
+        { name: 'Columbus Day', date: nthWeekday(y, 9, 1, 2) },
+        { name: 'Veterans Day', date: utc(y, 10, 11) },
+        { name: 'Thanksgiving Day', date: nthWeekday(y, 10, 4, 4) },
+        { name: 'Christmas Day', date: utc(y, 11, 25) }
+    ].map(h => ({ ...h, observed: observedDate(h.date) }));
+}
+// Holidays whose OBSERVED date lands in year y (New Year's Day of y+1 can be observed on Dec 31 of y).
+function observedHolidaysIn(y) {
+    return federalHolidayList(y).concat(federalHolidayList(y + 1).slice(0, 1))
+        .filter(h => h.observed.getUTCFullYear() === y);
+}
+function workDayStats(y) {
+    const holidays = observedHolidaysIn(y);
+    const holidaySet = new Set(holidays.map(h => iso(h.observed)));
+    const months = MONTH_NAMES.map(() => ({ weekdays: 0, holidays: 0 }));
+    let weekdays = 0;
+    for (let d = utc(y, 0, 1); d.getUTCFullYear() === y; d = utc(y, d.getUTCMonth(), d.getUTCDate() + 1)) {
+        const dow = d.getUTCDay();
+        if (dow === 0 || dow === 6) continue;
+        weekdays++;
+        months[d.getUTCMonth()].weekdays++;
+        if (holidaySet.has(iso(d))) months[d.getUTCMonth()].holidays++;
+    }
+    const calendarDays = (utc(y + 1, 0, 1) - utc(y, 0, 1)) / 86400000;
+    return { year: y, calendarDays, weekdays, holidays, workDays: weekdays - holidays.length, months };
+}
+
+function renderWorkDaysPage() {
+    const hrs = n => Math.round(n).toLocaleString('en-US');
+    const years = [2026, 2027, 2028].map(workDayStats);
+    const [y26, y27, y28] = years;
+    const title = `How Many Work Days Are in a Year? ${y26.workDays} in ${y26.year}, ${y27.workDays} in ${y27.year} (Hours Too)`;
+    const description = `${y26.year} has ${y26.workDays} work days and ${y27.year} has ${y27.workDays} after U.S. federal holidays (${y26.weekdays} and ${y27.weekdays} weekdays). Month-by-month table, 2,080 vs 2,000 hours explained, and what changes in a leap year.`;
+    const fmtDate = d => `${MONTH_NAMES[d.getUTCMonth()]} ${d.getUTCDate()}`;
+    const dayName = d => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][d.getUTCDay()];
+
+    const summaryRows = years.map(y => `<tr><td class="hl">${y.year}</td><td>${y.calendarDays}</td><td>${y.weekdays}</td><td>${y.holidays.length}</td><td><strong>${y.workDays}</strong></td><td>${hrs(y.workDays * 8)}</td></tr>`).join('');
+    const holidayTables = [y26, y27].map(y => `
+    <h3>${y.year} federal holidays (observed dates)</h3>
+    <table>
+      <tr><th>Holiday</th><th>Falls on</th><th>Observed</th></tr>
+      ${y.holidays.map(h => `<tr><td class="hl">${h.name}${h.date.getUTCFullYear() !== y.year ? ` (${h.date.getUTCFullYear()})` : ''}</td><td>${dayName(h.date)}, ${fmtDate(h.date)}${h.date.getUTCFullYear() !== y.year ? ', ' + h.date.getUTCFullYear() : ''}</td><td>${dayName(h.observed)}, ${fmtDate(h.observed)}</td></tr>`).join('')}
+    </table>`).join('');
+    const monthRows = MONTH_NAMES.map((mn, i) => `<tr><td class="hl">${mn}</td><td>${y26.months[i].weekdays - y26.months[i].holidays}</td><td>${y27.months[i].weekdays - y27.months[i].holidays}</td></tr>`).join('');
+    const avgMonth = (y26.workDays / 12).toFixed(1);
+    const dec31Note = y27.holidays.some(h => h.date.getUTCFullYear() === 2028)
+        ? `${y27.year} has one more observed holiday than ${y26.year} because New Year's Day ${y27.year + 1} falls on a Saturday, so the federal holiday is observed on Friday, December 31, ${y27.year}.`
+        : '';
+
+    const faq = [
+        { q: 'How many work days are in a year?', a: `A normal year has 365 days and 52 weeks plus one day, which gives ${y26.weekdays} weekdays (Monday to Friday) in ${y26.year} and ${y27.weekdays} in ${y27.year}. Counting out the U.S. federal holidays, that is ${y26.workDays} work days in ${y26.year} and ${y27.workDays} in ${y27.year}. If your employer pays for holidays you can still call it about 260 paid days.` },
+        { q: `How many work days are in ${y26.year}?`, a: `${y26.year} has ${y26.weekdays} weekdays and ${y26.holidays.length} federal holidays that land on a weekday, so ${y26.workDays} work days, or ${hrs(y26.workDays * 8)} hours at 8 hours a day.` },
+        { q: `How many work days are in ${y27.year}?`, a: `${y27.year} has ${y27.weekdays} weekdays and ${y27.holidays.length} observed federal holidays, so ${y27.workDays} work days (${hrs(y27.workDays * 8)} hours at 8 hours a day). ${dec31Note}` },
+        { q: 'How many working hours are in a year?', a: `A full-time salary is usually figured on 2,080 paid hours (52 weeks × 40 hours), which includes paid holidays. Hours actually worked are lower: ${y26.workDays} work days × 8 = ${hrs(y26.workDays * 8)} in ${y26.year}, and ${hrs(y27.workDays * 8)} in ${y27.year}, before any vacation or sick leave.` },
+        { q: 'Is a work year 2,080 hours or 2,000 hours?', a: `Both, for different questions. 2,080 is paid hours (52 × 40) and is what payroll uses to turn an hourly rate into an annual salary. About 2,000 is hours worked once you take out roughly 10 paid holidays. Use 2,080 to convert pay, and use the work-day count here to plan project time or count billable days.` },
+        { q: 'How many work days are in a month?', a: `On average ${avgMonth} work days in ${y26.year} (${y26.workDays} ÷ 12). A single month ranges from about 19 to 23 depending on how the weekends and holidays fall; the month-by-month table above lists each one.` },
+        { q: 'Do private employers have to follow the federal holidays?', a: 'No. Federal law does not require private employers to give any paid holidays. The federal list is the common baseline, but many private employers observe fewer (often 6 to 10) and some use different observed dates, so check your own handbook. Using the federal calendar here is a standard, sourced reference point, not a rule for every workplace.' },
+        { q: 'How many work days are in a leap year?', a: `A leap year has 366 days, but the extra day only adds a work day when it lands on a weekday. ${y28.year} is a leap year that starts on a Saturday, so it has ${y28.weekdays} weekdays and ${y28.workDays} work days after ${y28.holidays.length} federal holidays.` },
+    ];
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${title}</title>
+<meta name="description" content="${description}">
+<link rel="canonical" href="${SITE_URL}/work-days-in-a-year/">
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${description}">
+<meta property="og:url" content="${SITE_URL}/work-days-in-a-year/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+        { '@type': 'WebPage', name: title, url: `${SITE_URL}/work-days-in-a-year/`, description, author: GESMINE_ORG, publisher: GESMINE_ORG },
+        { '@type': 'FAQPage', mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+        { '@type': 'BreadcrumbList', itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+            { '@type': 'ListItem', position: 2, name: 'Work Days in a Year', item: `${SITE_URL}/work-days-in-a-year/` }
+        ] },
+        GESMINE_ORG
+    ]
+})}</script>
+</head>
+<body>
+<header>
+  <p><a href="/">← USA Paycheck Calculator</a></p>
+  <h1>How Many Work Days Are in a Year?</h1>
+  <p class="badge">${y26.year}: ${y26.workDays} work days · ${y27.year}: ${y27.workDays} work days · U.S. federal holidays</p>
+</header>
+
+<div class="disclaimer-banner">
+  Reference information, not legal or payroll advice. Counts use Monday-to-Friday weeks and the U.S. federal holiday calendar published by the Office of Personnel Management. Private employers choose their own paid holidays, so your workplace may differ.
+</div>
+
+<main>
+  <section class="seo-section">
+    <h2>The short answer</h2>
+    <p><strong>${y26.year} has ${y26.workDays} work days: ${y26.weekdays} weekdays minus ${y26.holidays.length} federal holidays. ${y27.year} has ${y27.workDays}: ${y27.weekdays} weekdays minus ${y27.holidays.length} holidays.</strong> Ignoring holidays, a standard year has ${y26.weekdays} weekdays (260 or 261, depending on the calendar).</p>
+    <table>
+      <tr><th>Year</th><th>Calendar days</th><th>Weekdays (Mon–Fri)</th><th>Federal holidays on a weekday</th><th>Work days</th><th>Hours at 8/day</th></tr>
+      ${summaryRows}
+    </table>
+    <p>${dec31Note}</p>
+  </section>
+
+  <section class="seo-section">
+    <h2>Work days per month, ${y26.year} and ${y27.year}</h2>
+    <p>Weekdays minus the federal holidays observed that month.</p>
+    <table>
+      <tr><th>Month</th><th>${y26.year}</th><th>${y27.year}</th></tr>
+      ${monthRows}
+      <tr><td class="hl">Total</td><td><strong>${y26.workDays}</strong></td><td><strong>${y27.workDays}</strong></td></tr>
+    </table>
+  </section>
+
+  <section class="seo-section">
+    <h2>Federal holidays and when they are observed</h2>
+    <p>When a federal holiday falls on a Saturday, the Friday before is the observed holiday; when it falls on a Sunday, the Monday after is observed.</p>
+    ${holidayTables}
+  </section>
+
+  <section class="seo-section">
+    <h2>2,080 hours or 2,000 hours? Paid vs worked</h2>
+    <p><strong>2,080 is paid hours</strong> (52 weeks × 40), and holidays are inside that number. It is the figure to use when turning an hourly rate into a salary: $25/hr × 2,080 = $52,000. <strong>About 2,000 is hours worked</strong> once the roughly ${y26.holidays.length} holidays come out (${y26.workDays} × 8 = ${hrs(y26.workDays * 8)} in ${y26.year}). Take another 10 vacation days and you are at ${y26.workDays - 10} days, or ${hrs((y26.workDays - 10) * 8)} hours worked.</p>
+    <p>Want the take-home number for a specific rate? Use the <a href="/salary-converter/">hourly, weekly and annual salary converter</a>, or see <a href="/how-are-bonuses-taxed/">how bonuses are taxed</a>.</p>
+  </section>
+
+  ${faqSection({ name: 'Work Days', faq_extra: faq }, faq, 'Work Days in a Year FAQ')}
+
+  <section id="methodology" class="methodology">
+    <h2>Methodology &amp; Source</h2>
+    <p>Weekdays are counted from the calendar. Holidays follow the U.S. federal holiday schedule from the Office of Personnel Management (opm.gov/policy-data-oversight/pay-leave/federal-holidays/) under 5 U.S.C. 6103, with Saturday holidays observed on the preceding Friday and Sunday holidays on the following Monday (Executive Order 11582). A holiday is counted in the year of its observed date, so New Year's Day ${y27.year + 1} counts toward ${y27.year} when it is observed on December 31. Verified 2026-10-01.</p>
+  </section>
+</main>
+
+<footer>
+  <p>USA Paycheck Calculator is part of Gesmine-Invest Limited, registered UK company number 14120136, registered office address at Hardy House, 269 Poynders Gardens, London, London, United Kingdom, SW4 8PQ.</p>
+  <p><a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/changelog/">Changelog</a> · &copy; ${YEAR} USA Paycheck Calculator. Estimates only — not tax advice.</p>
+</footer>
+</body>
+</html>
+`;
+}
+
 function renderSalaryConverterPage() {
     const allRules = {};
     for (const state of Object.values(states)) {
@@ -1830,10 +2079,23 @@ fs.mkdirSync(salaryConverterDir, { recursive: true });
 fs.writeFileSync(path.join(salaryConverterDir, 'index.html'), renderSalaryConverterPage());
 console.log('Generated: salary-converter/');
 
+const workDaysDir = path.join(__dirname, 'work-days-in-a-year');
+fs.mkdirSync(workDaysDir, { recursive: true });
+fs.writeFileSync(path.join(workDaysDir, 'index.html'), renderWorkDaysPage());
+console.log('Generated: work-days-in-a-year/');
+
 const bonusHubDir = path.join(__dirname, 'how-are-bonuses-taxed');
 fs.mkdirSync(bonusHubDir, { recursive: true });
 fs.writeFileSync(path.join(bonusHubDir, 'index.html'), renderBonusHubPage());
 console.log('Generated: how-are-bonuses-taxed/');
+
+const bonusHubData = {};
+Object.values(states).forEach(s => {
+    const rules = loadRules(s.abbr.toLowerCase());
+    bonusHubData[s.slug] = { entry: stateForScript(s), rules: { extra_payroll_tax: rules.extra_payroll_tax || null } };
+});
+fs.writeFileSync(path.join(__dirname, 'assets', 'bonus-hub-data.js'), `window.BONUS_HUB_STATES = ${JSON.stringify(bonusHubData)};\n`);
+console.log('Generated: assets/bonus-hub-data.js');
 
 const phillyDir = path.join(__dirname, 'pennsylvania', 'philadelphia');
 fs.mkdirSync(phillyDir, { recursive: true });

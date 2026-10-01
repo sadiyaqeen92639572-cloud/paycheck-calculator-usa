@@ -32,6 +32,8 @@ Per state (e.g. `/california/`):
 - [/compare/](https://calcpaycheck.com/compare/) — compare take-home across states
 - [/withholding-checkup/](https://calcpaycheck.com/withholding-checkup/) — is your W-4 withholding on track
 - [/salary-converter/](https://calcpaycheck.com/salary-converter/) — hourly ↔ weekly ↔ annual
+- [/how-are-bonuses-taxed/](https://calcpaycheck.com/how-are-bonuses-taxed/) — bonus tax calculator (all states) + 22% federal supplemental rate explained
+- [/work-days-in-a-year/](https://calcpaycheck.com/work-days-in-a-year/) — work days and hours per year (2026–2028), U.S. federal holidays
 - [/changelog/](https://calcpaycheck.com/changelog/) · [/research/](https://calcpaycheck.com/research/) · [/about/](https://calcpaycheck.com/about/) · [/privacy/](https://calcpaycheck.com/privacy/)
 
 ## Notes for LLMs

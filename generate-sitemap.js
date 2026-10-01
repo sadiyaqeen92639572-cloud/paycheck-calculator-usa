@@ -15,6 +15,7 @@ urls.push({ loc: `${DOMAIN}/changelog/`, lastmod: today, changefreq: 'weekly', p
 urls.push({ loc: `${DOMAIN}/compare/`, lastmod: today, changefreq: 'monthly', priority: '0.7' });
 urls.push({ loc: `${DOMAIN}/withholding-checkup/`, lastmod: today, changefreq: 'monthly', priority: '0.7' });
 urls.push({ loc: `${DOMAIN}/salary-converter/`, lastmod: today, changefreq: 'monthly', priority: '0.7' });
+urls.push({ loc: `${DOMAIN}/work-days-in-a-year/`, lastmod: today, changefreq: 'monthly', priority: '0.7' });
 urls.push({ loc: `${DOMAIN}/how-are-bonuses-taxed/`, lastmod: today, changefreq: 'monthly', priority: '0.7' });
 urls.push({ loc: `${DOMAIN}/pennsylvania/philadelphia/`, lastmod: today, changefreq: 'monthly', priority: '0.6' });
 
