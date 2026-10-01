@@ -106,3 +106,6 @@ details.faq-item p { margin: 8px 0 0; color: var(--muted); }
   .formula-code { font-size: .82rem; }
   .formula-footnote { font-size: .78rem; }
 }
+
+/* Wide reference tables (work-days page): scroll sideways on small screens instead of overflowing */
+@media (max-width: 600px) { table.wd-wide { display: block; overflow-x: auto; } }

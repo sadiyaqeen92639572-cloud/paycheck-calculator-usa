@@ -1734,9 +1734,9 @@ function renderWorkDaysPage() {
 <main>
   <section class="seo-section">
     <h2>The short answer</h2>
-    <p><strong>${y26.year} has ${y26.workDays} work days: ${y26.weekdays} weekdays minus ${y26.holidays.length} federal holidays. ${y27.year} has ${y27.workDays}: ${y27.weekdays} weekdays minus ${y27.holidays.length} holidays.</strong> Ignoring holidays, a standard year has ${y26.weekdays} weekdays (260 or 261, depending on the calendar).</p>
-    <table>
-      <tr><th>Year</th><th>Calendar days</th><th>Weekdays (Mon–Fri)</th><th>Federal holidays on a weekday</th><th>Work days</th><th>Hours at 8/day</th></tr>
+    <p><strong>${y26.year} has ${y26.workDays} work days: ${y26.weekdays} weekdays minus ${y26.holidays.length} federal holidays. ${y27.year} has ${y27.workDays}: ${y27.weekdays} weekdays minus ${y27.holidays.length} holidays.</strong> Ignoring holidays, a standard year has ${y26.weekdays} weekdays (260 or 261, depending on the calendar). In the table: days = calendar days, weekdays = Monday to Friday, holidays = federal holidays observed on a weekday, hours = work days × 8.</p>
+    <table class="wd-wide">
+      <tr><th>Year</th><th>Days</th><th>Weekdays</th><th>Holidays</th><th>Work days</th><th>Hours</th></tr>
       ${summaryRows}
     </table>
     <p>${dec31Note}</p>
