@@ -3753,6 +3753,8 @@
     "slug": "virginia",
     "last_verified": "2026-07-26",
     "guideline_version": "2026-VA-v1",
+    "supplemental_rate": 0.0575,
+    "supplemental_source": {"agency_name": "Virginia Department of Taxation (Virginia Administrative Code)", "url": "https://law.lis.virginia.gov/admincode/title23/agency10/chapter140/section60/", "doc": "23VAC10-140-60, supplemental wages", "note": "Where tax is withheld from regular wages, the employer may withhold on supplemental wages at a flat 5.75%, without allowance for exemptions; otherwise supplemental wages are aggregated with regular wages. Verified 2026-10-01."},
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",

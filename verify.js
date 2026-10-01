@@ -80,6 +80,7 @@ assertTrue(bonusCa.bonusStateTax > 0, 'CA bonus state tax delta > 0 for a progre
 //   NY 11.70% = 585.00 (NYS-50-T-NYS 2026) + PFL 0.432% = 21.60     -> net 2,910.90
 //   MN 6.25%  = 312.50 (MN DOR Supplemental Payments)                -> net 3,205.00
 //   OR 8%     = 400.00 (OR 150-206-430 2026)                         -> net 3,117.50
+//   VA 5.75%  = 287.50 (23VAC10-140-60)                              -> net 3,230.00
 //   PA 3.07% flat income tax = 153.50 (no supplemental rate set)     -> net 3,364.00
 //   NJ: no flat rate (graduated tables) -> marginal estimate, 5.525% bracket = 276.25 -> net 3,241.25
 const bonusCases = [
@@ -87,6 +88,7 @@ const bonusCases = [
     ['ny', 585, 'supplemental', 2910.9],
     ['mn', 312.5, 'supplemental', 3205],
     ['or', 400, 'supplemental', 3117.5],
+    ['va', 287.5, 'supplemental', 3230],
     ['pa', 153.5, 'marginal', 3364],
     ['nj', 276.25, 'marginal', 3241.25],
     ['tx', 0, 'marginal', 3517.5]

@@ -175,7 +175,7 @@
     <script src="/assets/calc-engine.js"></script>
     <script src="/assets/chart.js"></script>
     <script>
-    const STATE_ENTRY = {"name":"Virginia","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"Virginia Department of Taxation","url":"https://www.tax.virginia.gov/","statute_ref":"Va. Code § 58.1-320"},"params":{"brackets":[{"upTo":3000,"rate":0.02},{"upTo":5000,"rate":0.03},{"upTo":17000,"rate":0.05},{"upTo":null,"rate":0.0575}],"standard_deduction":8750,"personal_exemption":930},"abbr":"VA","slug":"virginia","last_verified":"2026-07-26","guideline_version":"2026-VA-v1","filing_status_backfilled":false};
+    const STATE_ENTRY = {"name":"Virginia","formula_model":"progressive_brackets","effective_date":"2026-01-01","source":{"agency_name":"Virginia Department of Taxation","url":"https://www.tax.virginia.gov/","statute_ref":"Va. Code § 58.1-320"},"params":{"brackets":[{"upTo":3000,"rate":0.02},{"upTo":5000,"rate":0.03},{"upTo":17000,"rate":0.05},{"upTo":null,"rate":0.0575}],"standard_deduction":8750,"personal_exemption":930},"abbr":"VA","slug":"virginia","last_verified":"2026-07-26","guideline_version":"2026-VA-v1","supplemental_rate":0.0575,"filing_status_backfilled":false};
     const RULES = {"rounding":"nearest_cent","extra_payroll_tax":null,"local_tax_note":null,"deviation_note":"This is an estimate based on standard single-filer federal, FICA, and VA state calculations. Actual withholding may differ based on your W-4 elections, pre-tax deductions, and other factors."};
 
     function runCalculation(e) {
