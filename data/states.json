@@ -3382,7 +3382,7 @@
     "effective_date": "2026-01-01",
     "source": {
       "agency_name": "South Carolina Department of Revenue",
-      "url": "https://dor.sc.gov/",
+      "url": "https://www.dor.sc.gov/news/information-about-h-4216",
       "statute_ref": "H.4216 (signed 2026-03-30) \u2014 2-bracket overhaul, 1.99% under $30,000 / 5.21% above, decoupling from the federal standard deduction"
     },
     "params": {
@@ -3396,18 +3396,20 @@
           "rate": 0.0521
         }
       ],
-      "standard_deduction": 15000
-    },
+      "standard_deduction": 15000,
+    "standard_deduction_mfj": 30000,
+    "standard_deduction_hoh": 22500
+  },
     "abbr": "SC",
     "slug": "south-carolina",
-    "last_verified": "2026-07-26",
-    "guideline_version": "2026-SC-v1",
+    "last_verified": "2026-10-01",
+    "guideline_version": "2026-SC-v2",
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
         "Subtract the 2026 federal standard deduction ($16,100 single) to get taxable income, then apply the 2026 federal brackets (10%-37%).",
         "Subtract FICA: 6.2% Social Security (up to the $184,500 wage base) + 1.45% Medicare (all wages, +0.9% above $200,000).",
-        "Subtract South Carolina's apply the 2-bracket state schedule (1.99%-5.21%) marginally to gross wages.",
+        "Subtract the South Carolina Income Adjusted Deduction (SCIAD: $15,000 single, $22,500 head of household, $30,000 married filing jointly), then apply the 2-bracket state schedule (1.99% up to $30,000, 5.21% above) to the rest.",
         "What's left is your net take-home pay."
       ],
       "example": {
@@ -3415,8 +3417,8 @@
         "calculation": [
           "Federal tax: $5,620",
           "FICA: $4,972.5",
-          "South Carolina state tax: Marginal tax on $65,000 taxable income (after $0 deduction) = $2,420.5",
-          "Net annual pay: $65,000 - $13,013 = $51,987 (\u2248$4,332.25/month)"
+          "South Carolina state tax: Marginal tax on $50,000 taxable income (after $15,000 SCIAD deduction) = $1,639",
+          "Net annual pay: $65,000 - $12,231.50 = $52,768.50 (\u2248$4,397.38/month)"
         ]
       }
     },
@@ -3427,7 +3429,7 @@
       },
       {
         "q": "How much is take-home pay on $65,000 in South Carolina?",
-        "a": "On a $65,000 gross salary, a single filer in South Carolina takes home roughly $51,987/year (about $4,332.25/month) after federal tax, FICA, and state tax."
+        "a": "On a $65,000 gross salary, a single filer in South Carolina takes home roughly $52,768.50/year (about $4,397.38/month) after federal tax, FICA, and state tax."
       },
       {
         "q": "What deductions does South Carolina apply before taxing my income?",
