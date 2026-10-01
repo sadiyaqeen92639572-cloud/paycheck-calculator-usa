@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const states = require('./data/states.json');
+const CONFIRMED_SUPP_NAMES = Object.values(states).filter(s => s.supplemental_rate).map(s => s.name).join(', ');
 const engine = require('./assets/calc-engine.js');
 const SITE_URL = 'https://calcpaycheck.com';
 const YEAR = 2026;
@@ -58,7 +59,7 @@ function fmtMoney(n) { return '$' + Number(n).toLocaleString('en-US'); }
 // Trim FAQ/worksheet prose out of the state object before embedding it in a page's inline
 // calculator script — the client engine only reads name/slug/formula_model/params.
 function stateForScript(state) {
-    const { faq_extra, faq_bonus, faq_hourly, faq_se, worksheet, ...rest } = state;
+    const { faq_extra, faq_bonus, faq_hourly, faq_se, worksheet, supplemental_source, ...rest } = state;
     return rest;
 }
 
@@ -144,13 +145,13 @@ function bonusStateClause(state) {
     if (state.formula_model === 'no_income_tax') return `no ${state.name} state income tax on the bonus`;
     if (state.supplemental_rate) return `a flat ${(state.supplemental_rate * 100).toFixed(2).replace(/\.?0+$/, '')}% ${state.name} state supplemental rate (percentage method)`;
     if (state.formula_model === 'flat_tax' && state.params && state.params.rate) return `${state.name}'s flat ${(state.params.rate * 100).toFixed(2).replace(/\.?0+$/, '')}% state income tax`;
-    return `${state.name} state income tax at your marginal rate`;
+    return `${state.name} state income tax estimated at your marginal bracket rate`;
 }
 function bonusStateCell(state) {
     if (state.formula_model === 'no_income_tax') return 'None — no state income tax';
     if (state.supplemental_rate) return `${(state.supplemental_rate * 100).toFixed(2).replace(/\.?0+$/, '')}% flat (percentage method)`;
     if (state.formula_model === 'flat_tax' && state.params && state.params.rate) return `${(state.params.rate * 100).toFixed(2).replace(/\.?0+$/, '')}% flat`;
-    return 'Your marginal bracket rate';
+    return 'Marginal bracket rate (estimate)';
 }
 
 // Direct-answer block for the "[state] bonus tax rate" / "how are bonuses taxed in [state]" intent
@@ -262,7 +263,7 @@ function methodologySection(state, rules, opts = {}) {
       <h2>Methodology &amp; Source</h2>
       <p>${state.name} state tax figures sourced from <strong>${state.source.agency_name}</strong> (<a href="${state.source.url}" target="_blank" rel="nofollow noopener">${state.source.url}</a>), citing ${state.source.statute_ref}. Federal brackets, standard deductions (single/MFJ/HoH), and FICA constants sourced from the IRS (Revenue Procedure 2025-32; married-filing-jointly Additional Medicare threshold of $250,000 is a separate, unindexed statutory figure). ${state.filing_status_backfilled ? `${state.name}'s married-filing-jointly and head-of-household figures have been independently verified against the source above.` : `${state.name}'s married-filing-jointly and head-of-household figures are not yet independently verified and currently fall back to single-filer brackets — see the caveat in the formula section above.`}</p>
       ${rules.local_tax ? `<p>Local tax figures sourced from <strong>${rules.local_tax.source.agency_name}</strong>${rules.local_tax.source.url ? ` (<a href="${rules.local_tax.source.url}" target="_blank" rel="nofollow noopener">${rules.local_tax.source.url}</a>)` : ''}. ${rules.local_tax.source.note}</p>` : ''}
-      ${bonus ? `<p>Bonus federal withholding uses the flat supplemental-wage rate (22%, 37% above $1,000,000 cumulative supplemental wages/year), per IRS Publication 15 (Circular E), Employer's Tax Guide, 2026 edition — the alternative "aggregate method" is not modeled. ${state.supplemental_rate ? `${state.name}'s ${(state.supplemental_rate * 100).toFixed(2).replace(/\.?0+$/, '')}% state supplemental withholding rate cited on this page is from the ${state.source.agency_name} employer withholding guide and is a withholding figure, not a separate income-tax rate — the calculator estimates the state tax on the bonus from your marginal bracket, which is what actually determines your liability.` : `${state.name} publishes no separate supplemental withholding rate, so the calculator estimates the state tax on the bonus from your marginal bracket.`}</p>` : ''}
+      ${bonus ? `<p>Bonus federal withholding uses the flat supplemental-wage rate (22%, 37% above $1,000,000 cumulative supplemental wages/year), per IRS Publication 15 (Circular E), Employer's Tax Guide, 2026 edition — the alternative "aggregate method" is not modeled. ${state.supplemental_rate ? `${state.name}'s ${(state.supplemental_rate * 100).toFixed(2).replace(/\.?0+$/, '')}% state supplemental withholding rate is from the ${state.supplemental_source.agency_name} (<a href="${state.supplemental_source.url}" target="_blank" rel="nofollow noopener">${state.supplemental_source.doc}</a>): ${state.supplemental_source.note} The calculator applies it to the bonus, matching the up-front withholding; your actual tax on the bonus is settled when you file.` : `For ${state.name} the calculator estimates the state tax on the bonus from your marginal bracket — an estimate of tax liability, not a confirmed state withholding rate, because no supplemental rate has been confirmed from the state's own employer withholding guide.`}</p>` : ''}
       ${selfEmployed ? `<p>Self-employment tax uses the statutory 15.3% rate (12.4% Social Security + 2.9% Medicare) on 92.35% of net self-employment income, with half of the SE tax deducted from federal taxable income above-the-line — per IRS Schedule SE (Form 1040) instructions, IRC §1401 and §164(f), 2026 edition. The 20% Qualified Business Income deduction (IRC §199A) is not modeled — it phases out by income and business type and is too state/entity-dependent to compute generically. This assumes the self-employment income is your only earnings for the year; if you also have W-2 wages, the Social Security wage-base cap and Additional Medicare threshold are actually based on your combined earnings, so this will overstate SE tax if you have significant wage income too.</p>` : ''}
       <p class="deviation-note">${rules.deviation_note}</p>
       ${rules.extra_payroll_tax ? `<p>Pre-tax deductions assumption: HSA and health insurance premium contributions are assumed to also reduce the ${rules.extra_payroll_tax.name} wage base, consistent with their FICA wage treatment. This is a reasonable default, not independently verified against ${state.name}'s specific ${rules.extra_payroll_tax.name} statute.</p>` : ''}
@@ -828,7 +829,7 @@ function renderBonusStatePage(state) {
 </header>
 
 <div class="disclaimer-banner">
-  Estimate only — not tax advice. Federal tax on the bonus uses the flat 22% supplemental withholding rate (37% on cumulative supplemental wages over $1,000,000/year) — the alternative "aggregate method" some employers use instead is not modeled. FICA and any state SDI/PFL are computed as the difference between your regular income with and without the bonus added, so the Social Security wage cap applies correctly. State tax on the bonus is a marginal-bracket estimate, not necessarily any special state supplemental rate. See methodology below for source and last-verified date.
+  Estimate only — not tax advice. Federal tax on the bonus uses the flat 22% supplemental withholding rate (37% on cumulative supplemental wages over $1,000,000/year) — the alternative "aggregate method" some employers use instead is not modeled. FICA and any state SDI/PFL are computed as the difference between your regular income with and without the bonus added, so the Social Security wage cap applies correctly. ${state.supplemental_rate ? `State tax uses ${state.name}'s ${(state.supplemental_rate * 100).toFixed(2).replace(/\.?0+$/, '')}% flat supplemental withholding rate (employers may instead use the aggregate method, which can withhold more or less).` : `State tax on the bonus is a marginal-bracket estimate, not a confirmed state withholding rate.`} See methodology below for source and last-verified date.
 </div>
 
 <main>
@@ -847,7 +848,7 @@ function renderBonusStatePage(state) {
         <div class="result-item" id="result-extra-row" hidden><span class="label" id="result-extra-label"></span><span class="value" id="result-extra"></span></div>
         <div class="result-item" id="result-local-tax-row" hidden><span class="label" id="result-local-tax-label"></span><span class="value" id="result-local-tax"></span></div>
       </div>
-      ${localTaxResultNote(rules, ' Bonus state-tax and local-tax figures are marginal-bracket estimates, not necessarily any special supplemental rate your state or city may apply to bonus payments specifically.')}
+      ${localTaxResultNote(rules, state.supplemental_rate ? ' Local-tax figures are marginal-bracket estimates, not necessarily any special supplemental rate your city may apply to bonus payments.' : ' Bonus state-tax and local-tax figures are marginal-bracket estimates, not necessarily any special supplemental rate your state or city may apply to bonus payments specifically.')}
       <button type="button" class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF →</button>
     </div>
     <p class="cross-link"><a href="/${state.slug}/">Calculating a regular paycheck? Try our ${state.name} paycheck calculator →</a></p>
@@ -1056,7 +1057,7 @@ function renderBonusHubPage() {
       </div>
       <p class="cross-link"><a id="result-state-link" href="/california/bonus/">Open the state bonus calculator (city/local tax, take-home table) →</a></p>
     </div>
-    <p class="privacy-note">Estimate only. Federal tax uses the flat 22% method; the aggregate method some employers use is not modeled. State tax on the bonus is a marginal-bracket estimate, not necessarily a special state supplemental rate, and city/local taxes are not included here — use the state calculator for those.</p>
+    <p class="privacy-note">Estimate only. Federal tax uses the flat 22% method; the aggregate method some employers use is not modeled. State tax uses the state's flat supplemental withholding rate only where it is confirmed from the state's own employer guide (${CONFIRMED_SUPP_NAMES}); everywhere else it is a marginal-bracket estimate. City/local taxes are not included here — use the state calculator for those.</p>
   </section>
 
   <section class="seo-section">
@@ -1079,7 +1080,7 @@ function renderBonusHubPage() {
 
   <section class="seo-section">
     <h2>Bonus State Tax Withholding by State (${YEAR})</h2>
-    <p>State treatment of a separately-paid bonus. "Flat" means a dedicated state supplemental rate; "marginal bracket rate" means the state has no separate supplemental rate, so withholding tracks your regular bracket. Tap a state for a take-home calculator.</p>
+    <p>State treatment of a separately-paid bonus. "Flat" means a dedicated state supplemental rate; "marginal bracket rate (estimate)" means we have not yet confirmed a flat supplemental rate from that state's own employer guide, so the figure is an estimate based on your regular bracket, not a verified withholding rate. Tap a state for a take-home calculator.</p>
     <table>
       <tr><th>State</th><th>Bonus state withholding</th></tr>
       ${rows}
@@ -1090,7 +1091,7 @@ function renderBonusHubPage() {
 
   <section id="methodology" class="methodology">
     <h2>Methodology &amp; Source</h2>
-    <p>Federal supplemental withholding rate (22%, 37% above $1,000,000 cumulative supplemental wages/year) per IRS Publication 15 (Circular E), Employer's Tax Guide, ${YEAR} edition. FICA constants (Social Security 6.2% up to ${m0(SS_WAGE_BASE)}, Medicare 1.45% + 0.9% Additional Medicare above $200,000 single) per SSA and IRC §3101. State supplemental rates, where a state publishes a distinct one, are from each state's revenue department withholding guide; states shown as "marginal bracket rate" apply regular withholding to supplemental wages. Verified 2026-09-08.</p>
+    <p>Federal supplemental withholding rate (22%, 37% above $1,000,000 cumulative supplemental wages/year) per IRS Publication 15 (Circular E), Employer's Tax Guide, ${YEAR} edition. FICA constants (Social Security 6.2% up to ${m0(SS_WAGE_BASE)}, Medicare 1.45% + 0.9% Additional Medicare above $200,000 single) per SSA and IRC §3101. State supplemental rates are shown only where confirmed from the state's own employer withholding guide (${CONFIRMED_SUPP_NAMES}), and each is cited on that state's bonus page; every other state is shown as a marginal bracket estimate. Verified 2026-10-01.</p>
   </section>
 </main>
 

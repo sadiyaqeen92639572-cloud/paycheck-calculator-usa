@@ -336,9 +336,11 @@ function calculatePaycheck(stateEntry, rules, grossAnnualIncome, payFrequency, f
  * above). FICA and state SDI/PFL are computed as a delta — calc(regular + bonus) - calc(regular)
  * — rather than calling calcFICA(bonusAmount) directly, so the Social Security wage cap (and any
  * payroll-tax wage cap) prorates correctly against wages already earned in the year instead of
- * re-applying from zero. State income tax is likewise a marginal-bracket delta, which approximates
- * actual liability but is not necessarily the flat supplemental rate some states (e.g. CA, NY)
- * apply to bonus payments specifically — a known scope limitation, not modeled here.
+ * re-applying from zero. State income tax: where stateEntry.supplemental_rate is set (only when confirmed from the state's own
+ * employer withholding guide — see stateEntry.supplemental_source) the bonus is withheld at that flat
+ * state supplemental rate, consistent with the flat 22% federal method. Every other state falls back to
+ * a marginal-bracket delta, calc(regular + bonus) - calc(regular), an estimate of liability rather than
+ * of any specific employer withholding method. The result's stateMethod says which one was used.
  * No pre-tax deductions (401k/HSA) support in the bonus flow — out of scope for this calculator.
  */
 function calcBonusPaycheck(stateEntry, rules, regularAnnualGross, bonusAmount, payFrequency, filingStatus = 'single', localTaxOptionId = null) {
@@ -359,7 +361,10 @@ function calcBonusPaycheck(stateEntry, rules, regularAnnualGross, bonusAmount, p
     const stateFn = FORMULA_DISPATCH[stateEntry.formula_model];
     const stateResultAtRegular = stateFn(regularAnnualGross, stateEntry, federalAtRegular, filingStatus);
     const stateResultAtCombined = stateFn(combinedGross, stateEntry, federalAtCombined, filingStatus);
-    const bonusStateTax = round2(stateResultAtCombined.stateTax - stateResultAtRegular.stateTax);
+    const useSupplementalRate = stateEntry.formula_model !== 'no_income_tax' && Number(stateEntry.supplemental_rate) > 0;
+    const bonusStateTax = useSupplementalRate
+        ? round2(bonusAmount * stateEntry.supplemental_rate)
+        : round2(stateResultAtCombined.stateTax - stateResultAtRegular.stateTax);
 
     const extraAtRegular = calcExtraPayrollTax(regularAnnualGross, rules).amount;
     const extraAtCombined = calcExtraPayrollTax(combinedGross, rules).amount;
@@ -383,6 +388,7 @@ function calcBonusPaycheck(stateEntry, rules, regularAnnualGross, bonusAmount, p
         bonusFederalTax,
         bonusFica,
         bonusStateTax,
+        stateMethod: useSupplementalRate ? 'supplemental' : 'marginal',
         bonusExtraPayrollTax,
         bonusLocalTax,
         bonusNet,

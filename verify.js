@@ -74,6 +74,37 @@ assertEqual(bonusTx.bonusFederalTax, 1100, 'TX bonus federal tax = 22% flat on $
 assertEqual(bonusTx.bonusFica, 382.5, 'TX bonus FICA = delta method, 7.65% of $5,000 (regular income well under SS cap)');
 const bonusCa = engine.calcBonusPaycheck(states.ca, caRules, 65000, 5000, 'biweekly', 'single');
 assertTrue(bonusCa.bonusStateTax > 0, 'CA bonus state tax delta > 0 for a progressive-bracket state');
+// --- Bonus state withholding: flat supplemental rate where confirmed from the state's own guide ---
+// Hand-computed on a $65,000 salary + $5,000 bonus, single (federal 22% = 1,100; FICA 7.65% = 382.50):
+//   CA 10.23% = 511.50 (EDD DE 44 Rev. 52) + SDI 1.3% = 65.00        -> net 2,941.00
+//   NY 11.70% = 585.00 (NYS-50-T-NYS 2026) + PFL 0.432% = 21.60     -> net 2,910.90
+//   MN 6.25%  = 312.50 (MN DOR Supplemental Payments)                -> net 3,205.00
+//   OR 8%     = 400.00 (OR 150-206-430 2026)                         -> net 3,117.50
+//   PA 3.07% flat income tax = 153.50 (no supplemental rate set)     -> net 3,364.00
+//   NJ: no flat rate (graduated tables) -> marginal estimate, 5.525% bracket = 276.25 -> net 3,241.25
+const bonusCases = [
+    ['ca', 511.5, 'supplemental', 2941],
+    ['ny', 585, 'supplemental', 2910.9],
+    ['mn', 312.5, 'supplemental', 3205],
+    ['or', 400, 'supplemental', 3117.5],
+    ['pa', 153.5, 'marginal', 3364],
+    ['nj', 276.25, 'marginal', 3241.25],
+    ['tx', 0, 'marginal', 3517.5]
+];
+for (const [abbr, stateTax, method, net] of bonusCases) {
+    const r = engine.calcBonusPaycheck(states[abbr], require(`./data/rules/${abbr}.json`), 65000, 5000, 'biweekly', 'single');
+    assertEqual(r.bonusStateTax, stateTax, `${abbr.toUpperCase()} $5,000 bonus state tax`);
+    assertEqual(r.stateMethod, method, `${abbr.toUpperCase()} bonus state method`);
+    assertEqual(r.bonusNet, net, `${abbr.toUpperCase()} $5,000 bonus net`);
+}
+// Table-vs-calculator consistency: any state that shows a flat supplemental rate must carry a cited
+// primary source, and the calculator must apply exactly that rate.
+for (const [abbr, s] of Object.entries(states)) {
+    if (!s.supplemental_rate) continue;
+    assertTrue(!!(s.supplemental_source && s.supplemental_source.url && s.supplemental_source.doc), `${abbr.toUpperCase()} supplemental_rate has a cited primary source`);
+    const r = engine.calcBonusPaycheck(s, require(`./data/rules/${abbr}.json`), 65000, 5000, 'biweekly', 'single');
+    assertEqual(Math.round(r.bonusStateTax / 5000 * 10000) / 10000, s.supplemental_rate, `${abbr.toUpperCase()} calculator applies the supplemental rate shown on the page`);
+}
 // SS wage cap proration check: regular income already at/above the cap means the bonus itself
 // should add ~0 additional Social Security (only Medicare + Additional Medicare apply).
 const bonusAtCap = engine.calcBonusPaycheck(states.tx, txRules, 184500, 10000, 'biweekly', 'single');

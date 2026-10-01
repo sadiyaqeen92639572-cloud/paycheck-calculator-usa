@@ -747,6 +747,7 @@
       }
     ],
     "supplemental_rate": 0.1023,
+    "supplemental_source": {"agency_name": "California Employment Development Department", "url": "https://edd.ca.gov/pdf_pub_ctr/de44.pdf", "doc": "California Employer's Guide (DE 44) 2026, Rev. 52 (4-26), \"How to Withhold PIT on Supplemental Wages\"", "note": "10.23% on bonuses and stock options (6.6% on other supplemental wages), without withholding allowances; optional vs the aggregate method when the supplemental wage is not paid with regular wages. Verified 2026-10-01."},
     "filing_status_backfilled": false
   },
   "ny": {
@@ -880,6 +881,7 @@
       }
     ],
     "supplemental_rate": 0.117,
+    "supplemental_source": {"agency_name": "New York State Department of Taxation and Finance", "url": "https://www.tax.ny.gov/pdf/publications/withholding/nys50_t_nys.pdf", "doc": "Publication NYS-50-T-NYS, effective January 1, 2026 - December 31, 2026, \"Supplemental wage payment withholding rates\"", "note": "11.70% New York State supplemental rate, optional vs adding supplemental and regular wages and subtracting tax already withheld. Verified 2026-10-01."},
     "filing_status_backfilled": false
   },
   "oh": {
@@ -2548,6 +2550,7 @@
       }
     ],
     "supplemental_rate": 0.0625,
+    "supplemental_source": {"agency_name": "Minnesota Department of Revenue", "url": "https://www.revenue.state.mn.us/mndor-pp/1546?type=html", "doc": "Supplemental Payments (page updated 2025-12-26)", "note": "6.25% flat method for supplemental pay made separately from regular wages; aggregate method otherwise. Verified 2026-10-01."},
     "filing_status_backfilled": false
   },
   "ms": {
@@ -3269,6 +3272,8 @@
     "slug": "oregon",
     "last_verified": "2026-07-26",
     "guideline_version": "2026-OR-v1",
+    "supplemental_rate": 0.08,
+    "supplemental_source": {"agency_name": "Oregon Department of Revenue", "url": "https://www.oregon.gov/dor/forms/FormsPubs/withholding-tax-tables_206-430_2026.pdf", "doc": "Oregon Withholding Tax Formulas and Tables 150-206-430 (2026, revised 2025-12-18)", "note": "Employers may use an 8% flat rate for supplemental wages paid at a different time than the regular payday. Verified 2026-10-01."},
     "worksheet": {
       "steps": [
         "Start with your gross annual salary.",
